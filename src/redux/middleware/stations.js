@@ -3,8 +3,6 @@ import { API_ERROR, API_SUCCESS, apiRequest } from "../actions/api";
 import { setLoader } from "../actions/ui";
 import { setNotification } from "../actions/notifications";
 
-// const STATIONS_URL = 'https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,50';
-
 export const stationsMiddleware = () => (next) => (action) => {
     next(action);
 
