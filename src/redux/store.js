@@ -6,7 +6,7 @@ import { stationsMiddleware } from './middleware/stations';
 import { apiMiddleware } from './middleware/api';
 import { uiReducer } from "./reducers/uiReducer";
 import { notificationsReducer } from "./reducers/notificationsReducer";
-// import { normalizeMiddleware } from "./middleware/normalize";
+import { normalizeMiddleware } from "./middleware/normalize";
 import { notificationMiddleware } from "./middleware/notifications";
 // import { loggerMiddleware } from "./middleware/logger";
 import { actionSplitterMiddleware } from "./middleware/actionSplitter";
@@ -27,7 +27,7 @@ const featureMiddleware = [
 const coreMiddleware = [
     actionSplitterMiddleware,
     apiMiddleware,
-    // normalizeMiddleware,
+    normalizeMiddleware,
     notificationMiddleware
 ];
 
