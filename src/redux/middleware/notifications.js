@@ -9,7 +9,7 @@ export const notificationMiddleware = () => (next) => (action) => {
         // enrich the original payload with an id
         const notification = {
             id,
-            massage: payload
+            message: payload
         };
 
         // fire a new action with the enriched payload
