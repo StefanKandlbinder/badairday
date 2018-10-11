@@ -10,20 +10,20 @@ export const stationsMiddleware = () => (next) => (action) => {
 
         case FETCH_STATIONS:
             next([
-                apiRequest({ body: null, method: 'GET', url: action.payload, feature: STATIONS }),
+                apiRequest({ body: null, method: 'GET', url: action.payload, feature: STATIONS, provider: action.meta.provider }),
                 setLoader({ state: true, feature: STATIONS })
             ]);
             break;
         
         case ADD_STATION:
             next([
-                // setNotification({ message: action.payload.id, feature: STATIONS }),
+                // setNotification({ message: action.payload.id, feature: STATIONS }),  
             ]);
             break;
 
         case `${STATIONS} ${API_SUCCESS}`:
             next([
-                setStations({ stations: action.payload, provider: action.meta }),
+                setStations({ stations: action.payload, provider: action.meta.provider }),
                 setLoader({ state: false, feature: STATIONS })
             ]);
             break;

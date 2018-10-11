@@ -12,8 +12,10 @@ export const normalizeMiddleware = ({ dispatch }) => (next) => (action) => {
         })
     }
 
+    console.log(action);
+
     // filter both by action type and metadata content
-    if (action.type.includes('SET') && action.meta.provider) {
+    if (action.type.includes('SET') && action.meta.provider === "luftdaten") {
 
         // notify about the transformation
         dispatch(dataNormalized({ feature: action.meta.feature }));
@@ -24,7 +26,7 @@ export const normalizeMiddleware = ({ dispatch }) => (next) => (action) => {
             return acc;
         }, {}); */
 
-        next(addStations(action.payload, "luftdaten"));
+        next(addStations(action.payload, action.meta.provider));
 
         // fire the books document action
         // next(setStations({ stations, normalizeKey: null }));

@@ -10,7 +10,7 @@ export const ADD_STATION = `${STATIONS} ADD`;
 export const fetchStations = (url, provider) => ({
     type: FETCH_STATIONS,
     payload: url,
-    meta: provider
+    meta: { feature: STATIONS, provider: provider }
 });
 
 export const setStations = ({ stations, provider }) => ({
