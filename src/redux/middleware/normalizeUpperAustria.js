@@ -3,10 +3,24 @@ import { addStation } from "../actions/stations";
 
 import Station from "../models/station";
 
-export const normalizeMiddleware = ({ dispatch }) => (next) => (action) => {
+export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (action) => {
     const addStations = (stations, provider) => {
         stations.map(station => {
-            let stationModel = new Station(provider, station.id, "", station.timestamp, station.location.longitude, station.location.latitude, station.sensordatavalues);
+            let components = station.sensordatavalues.map(component => {
+                return {
+                    type: component.value_type === "P1" ? "P10" : "P25",
+                    value: parseFloat(component.value)
+                }
+            });
+            
+            let stationModel = new Station(provider, 
+                station.id,
+                "Luftdatenstation: " + station.sensor.id,
+                station.timestamp, 
+                parseFloat(station.location.longitude),
+                parseFloat(station.location.latitude),
+                components,
+                parseFloat(station.sensordatavalues[0].value));
 
             return dispatch(addStation({ station: stationModel, provider: provider }))
         })

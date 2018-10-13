@@ -6,7 +6,8 @@ import { stationsMiddleware } from './middleware/stations';
 import { apiMiddleware } from './middleware/api';
 import { uiReducer } from "./reducers/uiReducer";
 import { notificationsReducer } from "./reducers/notificationsReducer";
-import { normalizeMiddleware } from "./middleware/normalize";
+import { normalizeLuftdatenMiddleware } from "./middleware/normalizeLuftdaten";
+import { normalizeUpperAustriaMiddleware } from "./middleware/normalizeUpperAustria";
 import { notificationMiddleware } from "./middleware/notifications";
 // import { loggerMiddleware } from "./middleware/logger";
 import { actionSplitterMiddleware } from "./middleware/actionSplitter";
@@ -27,7 +28,8 @@ const featureMiddleware = [
 const coreMiddleware = [
     actionSplitterMiddleware,
     apiMiddleware,
-    normalizeMiddleware,
+    normalizeLuftdatenMiddleware,
+    normalizeUpperAustriaMiddleware,
     notificationMiddleware
 ];
 
