@@ -26,13 +26,12 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (acti
         })
     }
 
-    console.log(action);
-
     // filter both by action type and metadata content
-    if (action.type.includes('SET') && action.meta.provider === "luftdaten") {
+    if (action.type.includes('SET') && action.meta.provider === "upperaustria") {
+        console.log(action.payload);
 
         // notify about the transformation
-        dispatch(dataNormalized({ feature: action.meta.feature }));
+        // dispatch(dataNormalized({ feature: action.meta.feature }));
 
         // transform the data structure
         /* const stations = action.payload.reduce((acc, item) => {

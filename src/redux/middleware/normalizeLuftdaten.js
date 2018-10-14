@@ -17,7 +17,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch }) => (next) => (action)
 
             let name = {};
 
-            ReverseGeocode.geocodeService().reverse()
+            /* ReverseGeocode.geocodeService().reverse()
                 .latlng([station.location.latitude, station.location.longitude])
                 .distance(10)
                 .run(function (error, result) {
@@ -28,7 +28,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch }) => (next) => (action)
                         name.value = result.address.ShortLabel;
                     }
                     // console.log(element, result);
-                });
+                }); */
             
             let stationModel = new Station(provider, 
                 station.id,

@@ -10,9 +10,10 @@ const upperAustriaURL = "https://www2.land-oberoesterreich.gv.at/imm/jaxrs/messw
 const upperAustriaProvider = "upperaustria";
 
 class App extends Component {
+  
   onFetchStations = () => {
     this.props.onFetchStations(luftdatenURL, luftdatenProvider);
-    // this.props.onFetchStations(upperAustriaURL, upperAustriaProvider);
+    this.props.onFetchStations(upperAustriaURL, upperAustriaProvider);
   }
 
   render() {
