@@ -18,8 +18,6 @@ export const apiMiddleware = ({ dispatch }) => (next) => (action) => {
 
         let url = getUpperAustriaURL(action.meta.url);
 
-        console.log(url);
-
         fetch(url, { body, method })
             .then(response => response.json())
             .then(response => dispatch(apiSuccess({ response, feature, provider })))

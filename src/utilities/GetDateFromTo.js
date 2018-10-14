@@ -2,8 +2,29 @@ export default class GetDateFromTo {
     constructor() {
         this.dateFrom = new Date();
         this.dateTo = new Date();
-        
-        this.dateFrom.setMinutes(this.dateFrom.getMinutes() - 100);
+
+        // Summertime
+        this.dateFrom.setHours(this.dateFrom.getHours() - 1);
+        this.dateTo.setHours(this.dateTo.getHours() - 1);
+
+        console.log(this.dateFrom.getMinutes());
+
+        if (this.dateFrom.getMinutes() > 10 && this.dateFrom.getMinutes() < 40) {
+            this.dateFrom.setMinutes(0);
+            this.dateTo.setMinutes(10);
+        }
+
+        else if (this.dateFrom.getMinutes() > 40 || this.dateFrom.getMinutes() <= 60) {
+            this.dateFrom.setMinutes(30);
+            this.dateTo.setMinutes(40);
+        }
+
+        else if (this.dateFrom.getMinutes() >= 0 || this.dateFrom.getMinutes() <= 10) {
+            this.dateFrom.setHours(this.dateFrom.getHours() - 1);
+            this.dateTo.setHours(this.dateTo.getHours() - 1);
+            this.dateFrom.setMinutes(30);
+            this.dateTo.setMinutes(40);
+        }
     }
 
     stringDateFrom() {
