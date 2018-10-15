@@ -21,20 +21,16 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (acti
         console.log(filteredStations);
 
         Object.values(filteredStations).forEach(element => {
-            let mood = [];
+            let mood = 0;
 
             mood = element.filter(filteredElement => {
                 return filteredElement.komponente === "PM10kont";
-                console.log(mood);
             });
 
             if (mood.length) {
-                mood = parseFloat(mood[0].messwert.replace(",", ".")) * 1000;
+                mood = parseFloat((mood[0].messwert.replace(",", ".")) * 1000).toFixed(2);
             }
-            else {
-                mood = 0;
-            }
-
+            
             stationsObject.stationen.forEach(station => {
                 if (station.code === element[0].station) {
                     let stationModel = new Station("upperaustria",

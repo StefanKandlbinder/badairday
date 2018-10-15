@@ -7,8 +7,6 @@ export default class GetDateFromTo {
         this.dateFrom.setHours(this.dateFrom.getHours() - 1);
         this.dateTo.setHours(this.dateTo.getHours() - 1);
 
-        console.log(this.dateFrom.getMinutes());
-
         if (this.dateFrom.getMinutes() > 10 && this.dateFrom.getMinutes() < 40) {
             this.dateFrom.setMinutes(0);
             this.dateTo.setMinutes(10);
