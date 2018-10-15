@@ -10,7 +10,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch }) => (next) => (action)
         stations.map(station => {
             let components = station.sensordatavalues.map(component => {
                 return {
-                    type: component.value_type === "P1" ? "P10" : "P25",
+                    type: component.value_type === "P1" ? "PM10" : "PM25",
                     value: parseFloat(component.value)
                 }
             });

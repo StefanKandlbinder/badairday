@@ -14,7 +14,7 @@ export default class GetDateFromTo {
             this.dateTo.setMinutes(10);
         }
 
-        else if (this.dateFrom.getMinutes() > 40 || this.dateFrom.getMinutes() <= 60) {
+        else if (this.dateFrom.getMinutes() > 40 && this.dateFrom.getMinutes() <= 60) {
             this.dateFrom.setMinutes(30);
             this.dateTo.setMinutes(40);
         }

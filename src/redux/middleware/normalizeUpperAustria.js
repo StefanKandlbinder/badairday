@@ -4,6 +4,7 @@ import { dataNormalized } from "../actions/data";
 import { addStation } from "../actions/stations";
 
 import Station from "../models/station";
+import * as stationsObject from './stations.json';
 import getStringDate from '../../utilities/getStringDate';
 
 export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (action) => {
@@ -16,8 +17,6 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (acti
         });
 
         filteredStations = groupBy(filteredStations, 'station');
-
-        console.log(filteredStations);
 
         Object.values(filteredStations).forEach(element => {
             let mood = [];
@@ -33,7 +32,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (acti
                 mood = 0;
             }
 
-            /* stationsObject.stationen.forEach(station => {
+            stationsObject.stationen.forEach(station => {
                 if (station.code === element[0].station) {
                     let stationModel = new Station("upperaustria",
                         element[0].station,
@@ -46,34 +45,12 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (acti
 
                     return dispatch(addStation({ station: stationModel, provider: provider }))
                 }
-            }) */
+            })
         });
-
-        /* stations.map(station => {
-            let components = station.sensordatavalues.map(component => {
-                return {
-                    type: component.value_type === "P1" ? "P10" : "P25",
-                    value: parseFloat(component.value)
-                }
-            });
-
-            let stationModel = new Station(provider,
-                station.id,
-                "Luftdatenstation: " + station.sensor.id,
-                station.timestamp,
-                parseFloat(station.location.longitude),
-                parseFloat(station.location.latitude),
-                components,
-                parseFloat(station.sensordatavalues[0].value));
-
-            return dispatch(addStation({ station: stationModel, provider: provider }))
-        }) */
     }
 
     // filter both by action type and metadata content
     if (action.type.includes('SET') && action.meta.provider === "upperaustria") {
-        // console.log(action.payload);
-
         dispatch(dataNormalized({ feature: action.meta.feature }));
         next(addStations(action.payload.messwerte, action.meta.provider));
     } else {
