@@ -18,11 +18,14 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (acti
 
         filteredStations = groupBy(filteredStations, 'station');
 
+        console.log(filteredStations);
+
         Object.values(filteredStations).forEach(element => {
             let mood = [];
 
             mood = element.filter(filteredElement => {
                 return filteredElement.komponente === "PM10kont";
+                console.log(mood);
             });
 
             if (mood.length) {
