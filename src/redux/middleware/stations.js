@@ -16,7 +16,6 @@ export const stationsMiddleware = () => (next) => (action) => {
             break;
         
         case UPDATE_STATIONS:
-            console.log(action);
             next([
                 apiRequest({ body: null, method: 'GET', url: action.payload, feature: STATIONS, provider: action.meta.provider }),
                 setLoader({ state: true, feature: STATIONS })
