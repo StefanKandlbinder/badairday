@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStations } from "../../redux/actions/stations";
+
+import { fetchStations, updateStations } from "../../redux/actions/stations";
 import Notifications from "../Notifications/Notifications";
+import Button from "../Button/Button";
 import './App.css';
 
 const luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,10";
@@ -14,6 +16,11 @@ class App extends Component {
   onFetchStations = () => {
     this.props.onFetchStations(luftdatenURL, luftdatenProvider);
     this.props.onFetchStations(upperAustriaURL, upperAustriaProvider);
+  }
+
+  onUpdateStations = () => {
+    this.props.onUpdateStations(luftdatenURL, luftdatenProvider);
+    this.props.onUpdateStations(upperAustriaURL, upperAustriaProvider);
   }
 
   render() {
@@ -31,11 +38,16 @@ class App extends Component {
     return (
       <div className="App">
         {loading}
-        <button
-          className="dispatch-button"
-          onClick={() => this.onFetchStations()}>
+        <Button
+          className="air__button"
+          clicked={() => this.onFetchStations()}>
           FETCH STATIONS
-        </button>
+        </Button>
+        <Button
+          className="air__button"
+          clicked={() => this.onUpdateStations()}>
+          UPDATE STATIONS
+        </Button>
         {notifications}
       </div>
     );
@@ -51,7 +63,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchStations: (url, luftdatenProvider) => dispatch(fetchStations(url, luftdatenProvider))
+    onFetchStations: (url, luftdatenProvider) => dispatch(fetchStations(url, luftdatenProvider)),
+    onUpdateStations: (url, luftdatenProvider) => dispatch(updateStations(url, luftdatenProvider))
   }
 }
 

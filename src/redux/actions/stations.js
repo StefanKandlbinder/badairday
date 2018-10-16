@@ -7,6 +7,7 @@ export const FETCH_STATIONS = `${STATIONS} FETCH`;
 export const SET_STATIONS = `${STATIONS} SET`;
 export const ADD_STATION = `${STATION} ADD`;
 export const ADD_STATIONS = `${STATIONS} ADD`;
+export const UPDATE_STATIONS = `${STATIONS} UPDATE`;
 
 // action creators
 export const fetchStations = (url, provider) => ({
@@ -24,6 +25,12 @@ export const setStations = ({ stations, provider }) => ({
 export const addStations = ({ stations, provider }) => ({
     type: ADD_STATIONS,
     payload: stations,
+    meta: { feature: STATIONS, provider: provider }
+});
+
+export const updateStations = (url, provider) => ({
+    type: UPDATE_STATIONS,
+    payload: url,
     meta: { feature: STATIONS, provider: provider }
 });
 

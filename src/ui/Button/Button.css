@@ -1,0 +1,24 @@
+.air__button,
+.air__button:focus,
+.air__button:active {
+    box-sizing: border-box;    
+    padding: 4px 8px;
+    margin-top: 12px;
+    min-height: 32px;
+    min-width: 32px;
+    border: 1px solid white;
+    border-radius: 0px;
+    background: rgba(122, 122, 23, 1);
+    color: white;
+    box-shadow: 0;
+    outline: 0;
+    display: block;
+    width: 100%;;
+}
+
+.air__button--naked,
+.air__button--naked:focus,
+.air__button--naked:active {
+    border: 0;
+    box-shadow: 0;
+}

@@ -19,8 +19,6 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (acti
 
             filteredStations = groupBy(filteredStations, 'station');
 
-            console.log(filteredStations);
-
             Object.values(filteredStations).forEach(element => {
                 let mood = 0;
 
