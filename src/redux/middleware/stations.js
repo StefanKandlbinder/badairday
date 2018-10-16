@@ -1,4 +1,4 @@
-import { STATIONS, FETCH_STATIONS, ADD_STATION, setStations } from "../actions/stations";
+import { STATIONS, FETCH_STATIONS, ADD_STATION, ADD_STATIONS, addStations } from "../actions/stations";
 import { API_ERROR, API_SUCCESS, apiRequest } from "../actions/api";
 import { setLoader } from "../actions/ui";
 import { setNotification } from "../actions/notifications";
@@ -23,12 +23,13 @@ export const stationsMiddleware = () => (next) => (action) => {
 
         case `${STATIONS} ${API_SUCCESS}`:
             next([
-                setStations({ stations: action.payload, provider: action.meta.provider }),
+                addStations({ stations: action.payload, provider: action.meta.provider }),
                 setLoader({ state: false, feature: STATIONS })
             ]);
             break;
 
         case `${STATIONS} ${API_ERROR}`:
+            console.log(action.payload);
             next([
                 setNotification({ message: action.payload.message, feature: STATIONS }),
                 setLoader({ state: false, feature: STATIONS })

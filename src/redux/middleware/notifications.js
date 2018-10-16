@@ -6,6 +6,8 @@ export const notificationMiddleware = () => (next) => (action) => {
         const { payload, meta } = action;
         const id = new Date().getMilliseconds();
 
+        console.log(payload);
+
         // enrich the original payload with an id
         const notification = {
             id,

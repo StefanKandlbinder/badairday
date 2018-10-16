@@ -2,7 +2,9 @@ import { API_REQUEST, apiError, apiSuccess } from "../actions/api";
 import getUpperAustriaURL from "../../utilities/getUpperAustriaURL";
 
 export const apiMiddleware = ({ dispatch }) => (next) => (action) => {
-    next(action);    
+    next(action);
+
+    console.log(action.type);
 
     if (action.type.includes(API_REQUEST) && action.meta.provider === "luftdaten") {
         const { body, url, method, feature, provider } = action.meta;
