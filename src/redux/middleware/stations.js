@@ -42,5 +42,7 @@ export const stationsMiddleware = () => (next) => (action) => {
                 setLoader({ state: false, feature: STATIONS })
             ]);
             break;
+        
+        default:
     }
 };

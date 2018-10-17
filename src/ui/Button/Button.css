@@ -3,12 +3,11 @@
 .air__button:active {
     box-sizing: border-box;    
     padding: 4px 8px;
-    margin-top: 12px;
     min-height: 32px;
     min-width: 32px;
     border: 1px solid white;
     border-radius: 0px;
-    background: rgba(122, 122, 23, 1);
+    background: rgb(46, 196, 216);
     color: white;
     box-shadow: 0;
     outline: 0;

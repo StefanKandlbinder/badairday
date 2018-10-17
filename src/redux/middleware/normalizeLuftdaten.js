@@ -2,6 +2,7 @@
 
 import { dataNormalized } from "../actions/data";
 import { addStation, ADD_STATIONS } from "../actions/stations";
+import getStringDateLuftdaten from '../../utilities/getStringDateLuftdaten';
 
 import Station from "../models/station";
 
@@ -35,7 +36,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch }) => (next) => (action)
                 let stationModel = new Station(provider, 
                     station.id,
                     name,
-                    station.timestamp, 
+                    getStringDateLuftdaten(station.timestamp), 
                     parseFloat(station.location.longitude),
                     parseFloat(station.location.latitude),
                     components,
