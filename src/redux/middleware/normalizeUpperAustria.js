@@ -35,7 +35,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (acti
                         let stationModel = new Station("upperaustria",
                             element[0].station,
                             station.kurzname,
-                            getStringDate(element[0].zeitpunkt),
+                            getStringDate(element[0].zeitpunkt + 3600000),
                             station.geoBreite,
                             station.geoLaenge,
                             element,
