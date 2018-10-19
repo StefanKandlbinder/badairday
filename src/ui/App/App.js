@@ -14,13 +14,13 @@ const upperAustriaProvider = "upperaustria";
 class App extends Component {
   
   onFetchStations = () => {
-    this.props.onFetchStations(luftdatenURL, luftdatenProvider);
-    this.props.onFetchStations(upperAustriaURL, upperAustriaProvider);
+    this.props.onFetchStations(luftdatenURL, luftdatenProvider, "FETCH");
+    // this.props.onFetchStations(upperAustriaURL, upperAustriaProvider);
   }
 
   onUpdateStations = () => {
-    this.props.onUpdateStations(luftdatenURL, luftdatenProvider);
-    this.props.onUpdateStations(upperAustriaURL, upperAustriaProvider);
+    this.props.onFetchStations(luftdatenURL, luftdatenProvider, "UPDATE");
+    // this.props.onUpdateStations(upperAustriaURL, upperAustriaProvider);
   }
 
   render() {
@@ -63,8 +63,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchStations: (url, luftdatenProvider) => dispatch(fetchStations(url, luftdatenProvider)),
-    onUpdateStations: (url, luftdatenProvider) => dispatch(updateStations(url, luftdatenProvider))
+    onFetchStations: (url, luftdatenProvider, method) => dispatch(fetchStations(url, luftdatenProvider, method)),
+    onUpdateStations: (url, luftdatenProvider, method) => dispatch(updateStations(url, luftdatenProvider, method))
   }
 }
 

@@ -1,4 +1,4 @@
-import { STATIONS, FETCH_STATIONS, ADD_STATION, UPDATE_STATIONS, addStations } from "../actions/stations";
+import { STATIONS, FETCH_STATIONS, ADD_STATION, UPDATE_STATIONS, addStations, updateStations } from "../actions/stations";
 import { API_ERROR, API_SUCCESS, apiRequest } from "../actions/api";
 import { setLoader } from "../actions/ui";
 import { setNotification } from "../actions/notifications";
@@ -10,14 +10,14 @@ export const stationsMiddleware = () => (next) => (action) => {
 
         case FETCH_STATIONS:
             next([
-                apiRequest({ body: null, method: 'GET', url: action.payload, feature: STATIONS, provider: action.meta.provider }),
+                apiRequest({ body: null, method: 'GET', url: action.payload, feature: STATIONS, provider: action.meta.provider, update: action.meta.method }),
                 setLoader({ state: true, feature: STATIONS })
             ]);
             break;
         
         case UPDATE_STATIONS:
             next([
-                apiRequest({ body: null, method: 'GET', url: action.payload, feature: STATIONS, provider: action.meta.provider }),
+                apiRequest({ body: null, method: 'GET', url: action.payload, feature: STATIONS, provider: action.meta.provider, update: action.meta.method }),
                 setLoader({ state: true, feature: STATIONS })
             ]);
             break;
@@ -28,9 +28,16 @@ export const stationsMiddleware = () => (next) => (action) => {
             ]);
             break;
 
-        case `${STATIONS} ${API_SUCCESS}`:
+        case `${STATIONS} ${API_SUCCESS} FETCH`:
             next([
                 addStations({ stations: action.payload, provider: action.meta.provider }),
+                setLoader({ state: false, feature: STATIONS })
+            ]);
+            break;
+        
+        case `${STATIONS} ${API_SUCCESS} UPDATE`:
+            next([
+                updateStations({ stations: action.payload, provider: action.meta.provider }),
                 setLoader({ state: false, feature: STATIONS })
             ]);
             break;
@@ -44,5 +51,6 @@ export const stationsMiddleware = () => (next) => (action) => {
             break;
         
         default:
+            break;
     }
 };

@@ -3,8 +3,8 @@
 .air__button:active {
     box-sizing: border-box;    
     padding: 4px 8px;
-    min-height: 32px;
-    min-width: 32px;
+    min-height: 36px;
+    min-width: 36px;
     border: 1px solid white;
     border-radius: 0px;
     background: rgb(46, 196, 216);

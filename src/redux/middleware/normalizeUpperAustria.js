@@ -29,7 +29,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (acti
                 if (mood.length) {
                     mood = parseFloat((mood[0].messwert.replace(",", ".")) * 1000).toFixed(2);
                 }
-                
+
                 stationsObject.stationen.forEach(station => {
                     if (station.code === element[0].station) {
                         let stationModel = new Station("upperaustria",
@@ -40,7 +40,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (acti
                             station.geoLaenge,
                             element,
                             mood);
-                            
+
                         return dispatch(addStation({ station: stationModel, provider: provider }))
                     }
                 })
