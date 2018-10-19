@@ -15,7 +15,7 @@ class App extends Component {
   
   onFetchStations = () => {
     this.props.onFetchStations(luftdatenURL, luftdatenProvider, "FETCH");
-    // this.props.onFetchStations(upperAustriaURL, upperAustriaProvider);
+    // this.props.onFetchStations(upperAustriaURL, upperAustriaProvider, "FETCH");
   }
 
   onUpdateStations = () => {

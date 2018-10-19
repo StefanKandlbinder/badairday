@@ -7,8 +7,6 @@ import getStringDateLuftdaten from '../../utilities/getStringDateLuftdaten';
 import Station from "../models/station";
 
 export const normalizeLuftdatenMiddleware = ({ dispatch }) => (next) => (action) => {
-    console.log(action);
-
     const addStations = (stations, provider) => {
         if (stations) {
             stations.map(station => {
@@ -98,7 +96,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch }) => (next) => (action)
     // filter both by action type and metadata content
     if (action.type.includes(ADD_STATIONS) && action.meta.provider === "luftdaten") {
         addStations(action.payload, action.meta.provider);
-    } 
+    }
 
     else if (action.type.includes(UPDATE_STATIONS) && action.meta.provider === "luftdaten") {
         updateStations(action.payload, action.meta.provider);

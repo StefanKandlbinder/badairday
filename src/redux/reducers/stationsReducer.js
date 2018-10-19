@@ -1,4 +1,4 @@
-import { SET_STATIONS, ADD_STATION, UPDATE_STATIONS } from "../actions/stations";
+import { SET_STATIONS, ADD_STATION, UPDATE_STATION } from "../actions/stations";
 
 const initState = [];
 
@@ -11,7 +11,7 @@ export const stationsReducer = (stations = initState, action) => {
         case ADD_STATION:
             return [...stations, action.payload];
         
-        case UPDATE_STATIONS:
+        case UPDATE_STATION:
             return [];
 
         default:
