@@ -6,7 +6,7 @@ import Notifications from "../Notifications/Notifications";
 import Button from "../Button/Button";
 import './App.css';
 
-const luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,10";
+const luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,1";
 const luftdatenProvider = "luftdaten";
 const upperAustriaURL = "https://www2.land-oberoesterreich.gv.at/imm/jaxrs/messwerte/json?";
 const upperAustriaProvider = "upperaustria";
