@@ -12,7 +12,23 @@ export const stationsReducer = (stations = initState, action) => {
             return [...stations, action.payload];
 
         case UPDATE_STATION:
-            updateStation(stations, action.payload);
+            // console.log(stations, action);
+
+            return stations.map((station) => {
+                if (station.id === action.payload.id) {
+                    return {
+                        ...station, 
+                        date: action.payload.date,
+                        components: {
+                            ...station.components,
+                            ...action.payload.components },
+                        mood: action.payload.mood
+                    }
+                }
+        
+                // This isn't the item we care about - keep it as-is
+                return station;        
+            });
 
         default:
             return stations;
@@ -20,13 +36,12 @@ export const stationsReducer = (stations = initState, action) => {
 };
 
 function updateStation(stations, action) {
-
     return stations.map((station) => {
         if (station.id === action.id) {
+            // console.log(station, action);
             return {
-                ...station,
-                ...action.payload
-            };
+                ...action
+            }
         }
 
         else {

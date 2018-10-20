@@ -34,7 +34,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     }); */
                 
                 let stationModel = new Station(provider, 
-                    station.id,
+                    station.sensor.id,
                     name,
                     getStringDateLuftdaten(station.timestamp), 
                     parseFloat(station.location.longitude),
@@ -76,7 +76,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     }); */
                 
                 let stationModel = new Station(provider, 
-                    station.id,
+                    station.sensor.id,
                     name,
                     getStringDateLuftdaten(station.timestamp), 
                     parseFloat(station.location.longitude),
@@ -89,9 +89,14 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
 
                 let filteredStation = getState().stations.filter(station => station.id === stationModel.id)
 
-                // console.log(filteredStation);
-                if (filteredStation.length && getUnixDateFromLuftdaten(filteredStation[0].date) < getUnixDateFromLuftdaten(stationModel.date)) {
-                    return dispatch(updateStation({ station: stationModel, provider: provider })) 
+                if (filteredStation.length) {
+                    if (getUnixDateFromLuftdaten(filteredStation[0].date) < getUnixDateFromLuftdaten(stationModel.date)) {
+                        console.log(filteredStation[0].components[0].value, stationModel.components[0].value)
+
+                        return dispatch(updateStation({ station: stationModel, provider: provider }))
+                    }
+                    else
+                        return false
                 }
 
                 else {
