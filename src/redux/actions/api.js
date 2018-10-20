@@ -5,7 +5,7 @@ export const API_ERROR = 'API_ERROR';
 
 // action creators
 export const apiRequest = ({ body, method, url, feature, provider, update }) => ({
-    type: `${feature} ${API_REQUEST}`,
+    type: `${feature} ${API_REQUEST} ${update}`,
     payload: body,
     meta: { method, url, feature, provider, update }
 });

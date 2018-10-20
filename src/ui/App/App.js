@@ -25,10 +25,15 @@ class App extends Component {
 
   render() {
     let loading = null;
+    let updating = null;
     let notifications = null;
 
     if (this.props.loading) {
       loading = <div>Loading...</div>
+    }
+
+    if (this.props.updating) {
+      updating = <div>Updating...</div>
     }
 
     if (this.props.notification.length) {
@@ -38,6 +43,7 @@ class App extends Component {
     return (
       <div className="App">
         {loading}
+        {updating}
         <Button
           className="air__button"
           clicked={() => this.onFetchStations()}>
@@ -57,6 +63,7 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.ui.loading,
+    updating: state.ui.updating,
     notification: state.notification,
     update: state.update
   };

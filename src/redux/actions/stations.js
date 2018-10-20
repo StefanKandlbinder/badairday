@@ -12,7 +12,7 @@ export const UPDATE_STATION = `${STATION} UPDATE`;
 
 // action creators
 export const fetchStations = (url, provider, method) => ({
-    type: FETCH_STATIONS,
+    type: FETCH_STATIONS + " " + method,
     payload: url,
     meta: { feature: STATIONS, provider: provider, method: method }
 });

@@ -19,9 +19,7 @@ export const stationsReducer = (stations = initState, action) => {
                     return {
                         ...station, 
                         date: action.payload.date,
-                        components: {
-                            ...station.components,
-                            ...action.payload.components },
+                        ...action.payload.components,
                         mood: action.payload.mood
                     }
                 }
@@ -33,20 +31,4 @@ export const stationsReducer = (stations = initState, action) => {
         default:
             return stations;
     }
-};
-
-function updateStation(stations, action) {
-    return stations.map((station) => {
-        if (station.id === action.id) {
-            // console.log(station, action);
-            return {
-                ...action
-            }
-        }
-
-        else {
-            // This isn't the item we care about - keep it as-is
-            return station;
-        }
-    });
 }
