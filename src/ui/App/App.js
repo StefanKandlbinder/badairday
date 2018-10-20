@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchStations, updateStations } from "../../redux/actions/stations";
+import { fetchStations } from "../../redux/actions/stations";
 import Notifications from "../Notifications/Notifications";
 import Button from "../Button/Button";
 import './App.css';
@@ -71,8 +71,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchStations: (url, luftdatenProvider, method) => dispatch(fetchStations(url, luftdatenProvider, method)),
-    onUpdateStations: (url, luftdatenProvider, method) => dispatch(updateStations(url, luftdatenProvider, method))
+    onFetchStations: (url, luftdatenProvider, method) => dispatch(fetchStations(url, luftdatenProvider, method))
   }
 }
 

@@ -6,8 +6,6 @@ import { setNotification } from "../actions/notifications";
 export const stationsMiddleware = () => (next) => (action) => {
     next(action);
 
-    console.log(action.type);
-
     switch (action.type) {
 
         case FETCH_STATIONS + " FETCH":

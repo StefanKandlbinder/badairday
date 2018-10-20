@@ -12,15 +12,17 @@ export const stationsReducer = (stations = initState, action) => {
             return [...stations, action.payload];
 
         case UPDATE_STATION:
-            // console.log(stations, action);
-
             return stations.map((station) => {
                 if (station.id === action.payload.id) {
                     return {
                         ...station, 
                         date: action.payload.date,
-                        ...action.payload.components,
-                        mood: action.payload.mood
+                        mood: action.payload.mood,
+                        components: {
+                            ...station.components,
+                            ...action.payload.components
+
+                        }
                     }
                 }
         

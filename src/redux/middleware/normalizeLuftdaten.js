@@ -1,4 +1,4 @@
-// import ReverseGeocode from 'esri-leaflet-geocoder';
+import ReverseGeocode from 'esri-leaflet-geocoder';
 
 import { dataNormalized } from "../actions/data";
 import { addStation, updateStation, ADD_STATIONS, UPDATE_STATIONS } from "../actions/stations";
@@ -20,7 +20,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
 
                 let name = {};
 
-                /* ReverseGeocode.geocodeService().reverse()
+                ReverseGeocode.geocodeService().reverse()
                     .latlng([station.location.latitude, station.location.longitude])
                     .distance(10)
                     .run(function (error, result) {
@@ -31,7 +31,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                             name.value = result.address.ShortLabel;
                         }
                         // console.log(element, result);
-                    }); */
+                    });
                 
                 let stationModel = new Station(provider, 
                     station.sensor.id,
@@ -61,19 +61,6 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                 });
 
                 let name = {};
-
-                /* ReverseGeocode.geocodeService().reverse()
-                    .latlng([station.location.latitude, station.location.longitude])
-                    .distance(10)
-                    .run(function (error, result) {
-                        if (error) {
-                            name.value = "Luftdatensensor: " + station.id;
-                        }
-                        if (result) {
-                            name.value = result.address.ShortLabel;
-                        }
-                        // console.log(element, result);
-                    }); */
                 
                 let stationModel = new Station(provider, 
                     station.sensor.id,
