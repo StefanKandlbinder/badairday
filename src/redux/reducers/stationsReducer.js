@@ -1,5 +1,4 @@
 import { SET_STATIONS, ADD_STATION, UPDATE_STATION } from "../actions/stations";
-import { setNotification } from "../actions/notifications";
 
 const initState = [];
 
@@ -24,8 +23,6 @@ function updateStation(stations, action) {
 
     return stations.map((station) => {
         if (station.id === action.id) {
-            console.log(station, action);
-
             return {
                 ...station,
                 ...action.payload

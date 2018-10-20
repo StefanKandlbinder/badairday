@@ -3,10 +3,11 @@
 import { dataNormalized } from "../actions/data";
 import { addStation, updateStation, ADD_STATIONS, UPDATE_STATIONS } from "../actions/stations";
 import getStringDateLuftdaten from '../../utilities/getStringDateLuftdaten';
+import getUnixDateFromLuftdaten from '../../utilities/getUnixDateFromLuftdaten';
 
 import Station from "../models/station";
 
-export const normalizeLuftdatenMiddleware = ({ dispatch }) => (next) => (action) => {
+export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) => (action) => {
     const addStations = (stations, provider) => {
         if (stations) {
             stations.map(station => {
@@ -50,8 +51,6 @@ export const normalizeLuftdatenMiddleware = ({ dispatch }) => (next) => (action)
     }
 
     const updateStations = (stations, provider) => {
-        console.log("UPDATE");
-
         if (stations) {
             stations.map(station => {
                 let components = station.sensordatavalues.map(component => {
@@ -85,7 +84,19 @@ export const normalizeLuftdatenMiddleware = ({ dispatch }) => (next) => (action)
                     components,
                     parseFloat(station.sensordatavalues[0].value));
 
-                return dispatch(updateStation({ station: stationModel, provider: provider }))
+                
+                // console.log(getState().stations[0].id, stationModel.date);
+
+                let filteredStation = getState().stations.filter(station => station.id === stationModel.id)
+
+                // console.log(filteredStation);
+                if (filteredStation.length && getUnixDateFromLuftdaten(filteredStation[0].date) < getUnixDateFromLuftdaten(stationModel.date)) {
+                    return dispatch(updateStation({ station: stationModel, provider: provider })) 
+                }
+
+                else {
+                    return false
+                }
             })
 
             // notify about the transformation

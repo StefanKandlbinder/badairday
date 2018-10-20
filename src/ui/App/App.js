@@ -20,7 +20,7 @@ class App extends Component {
 
   onUpdateStations = () => {
     this.props.onFetchStations(luftdatenURL, luftdatenProvider, "UPDATE");
-    // this.props.onUpdateStations(upperAustriaURL, upperAustriaProvider);
+    // this.props.onFetchStations(upperAustriaURL, upperAustriaProvider, "UPDATE");
   }
 
   render() {
@@ -57,7 +57,8 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.ui.loading,
-    notification: state.notification
+    notification: state.notification,
+    update: state.update
   };
 }
 

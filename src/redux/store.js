@@ -8,6 +8,7 @@ import { loadState, saveState } from './localStorage';
 import { stationsMiddleware } from './middleware/stations';
 import { apiMiddleware } from './middleware/api';
 import { uiReducer } from "./reducers/uiReducer";
+import { updateReducer } from "./reducers/updateReducer";
 import { notificationsReducer } from "./reducers/notificationsReducer";
 import { normalizeLuftdatenMiddleware } from "./middleware/normalizeLuftdaten";
 import { normalizeUpperAustriaMiddleware } from "./middleware/normalizeUpperAustria";
@@ -20,7 +21,8 @@ const configureStore = () => {
     const rootReducer = combineReducers({
         stations: stationsReducer,
         ui: uiReducer,
-        notification: notificationsReducer
+        notification: notificationsReducer,
+        update: updateReducer
     });
 
     // create the feature middleware array
