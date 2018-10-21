@@ -1,4 +1,5 @@
 import ReverseGeocode from 'esri-leaflet-geocoder';
+import find from 'lodash/find';
 
 import { dataNormalized } from "../actions/data";
 import { addStation, updateStation, ADD_STATIONS, UPDATE_STATIONS } from "../actions/stations";
@@ -41,8 +42,23 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     parseFloat(station.location.latitude),
                     components,
                     parseFloat(station.sensordatavalues[0].value));
+                
+                let persistedStations = getState().stations;
 
-                return dispatch(addStation({ station: stationModel, provider: provider }))
+                if (persistedStations.length) {
+                    if (find(persistedStations, ['id', stationModel.id]) !== undefined) {
+                        console.log(persistedStations);
+                        return false
+                    }
+                    else {
+                        dispatch(addStation({ station: stationModel, provider: provider }))
+                    }
+                }
+                else {
+                    return dispatch(addStation({ station: stationModel, provider: provider })) 
+                }
+
+                // return dispatch(addStation({ station: stationModel, provider: provider }))
             })
 
             // notify about the transformation
