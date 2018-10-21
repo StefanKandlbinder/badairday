@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import { fetchStations } from "../../redux/actions/stations";
 import Notifications from "../Notifications/Notifications";
 import Button from "../Button/Button";
+import getMood from '../../utilities/GetMood';
 import './App.css';
 
 const luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,5";
 const luftdatenProvider = "luftdaten";
-const upperAustriaURL = "https://www2.land-oberoesterreich.gv.at/imm/jaxrs/messwerte/json?";
-const upperAustriaProvider = "upperaustria";
+// const upperAustriaURL = "https://www2.land-oberoesterreich.gv.at/imm/jaxrs/messwerte/json?";
+// const upperAustriaProvider = "upperaustria";
 
 class App extends Component {
   
@@ -40,6 +41,30 @@ class App extends Component {
       notifications = <Notifications notifications={this.props.notification} />
     }
 
+    function Station(props) {
+      let moodStyle = {
+        backgroundColor: getMood(props.station.mood, 0.7)
+      }
+
+      return <li className="station" style={moodStyle}>
+          <div className="station__name">{props.station.name.value}</div>
+          <div className="station__mood">{props.station.mood}</div>
+        </li>
+    }
+
+    function Stations(props) {
+      const stations = props.stations;
+      return (
+        <ul className="stations">
+          {stations.map((station) =>
+            <Station 
+              key={station.id}
+              station={station} />
+          )}
+        </ul>
+      );
+    }
+
     return (
       <div className="App">
         {loading}
@@ -54,6 +79,7 @@ class App extends Component {
           clicked={() => this.onUpdateStations()}>
           UPDATE STATIONS
         </Button>
+        <Stations stations = {this.props.stations}/>
         {notifications}
       </div>
     );
@@ -65,7 +91,8 @@ const mapStateToProps = state => {
     loading: state.ui.loading,
     updating: state.ui.updating,
     notification: state.notification,
-    update: state.update
+    update: state.update,
+    stations: state.stations
   };
 }
 
