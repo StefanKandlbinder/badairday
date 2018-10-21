@@ -42,12 +42,16 @@ class App extends Component {
     }
 
     function Station(props) {
+
       let moodStyle = {
-        backgroundColor: getMood(props.station.mood, 0.7)
+        backgroundColor: getMood(props.station.mood, 0.65),
+        borderColor: getMood(props.station.mood, 0.4)
       }
 
       return <li className="station" style={moodStyle}>
-          <div className="station__name">{props.station.name.value}</div>
+          <div className="station__name">{props.station.name.value}
+          <div className="station__date">{props.station.date}</div>
+          </div>
           <div className="station__mood">{props.station.mood}</div>
         </li>
     }
@@ -72,12 +76,12 @@ class App extends Component {
         <Button
           className="air__button"
           clicked={() => this.onFetchStations()}>
-          FETCH STATIONS
+          FETCH
         </Button>
         <Button
           className="air__button"
           clicked={() => this.onUpdateStations()}>
-          UPDATE STATIONS
+          UPDATE
         </Button>
         <Stations stations = {this.props.stations}/>
         {notifications}

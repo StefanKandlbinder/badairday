@@ -1,4 +1,4 @@
-// import ReverseGeocode from 'esri-leaflet-geocoder';
+import ReverseGeocode from 'esri-leaflet-geocoder';
 import find from 'lodash/find';
 
 import { dataNormalized } from "../actions/data";
@@ -19,9 +19,9 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     }
                 });
 
-                let name = {};
+                let name = { value: "Lufdatensensor: " + station.sensor.id };
 
-                /* ReverseGeocode.geocodeService().reverse()
+                ReverseGeocode.geocodeService().reverse()
                     .latlng([station.location.latitude, station.location.longitude])
                     .distance(10)
                     .run(function (error, result) {
@@ -32,7 +32,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                             name.value = result.address.ShortLabel;
                         }
                         // console.log(element, result);
-                    }); */
+                    });
                 
                 let stationModel = new Station(provider, 
                     station.sensor.id,
@@ -41,13 +41,12 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     parseFloat(station.location.longitude),
                     parseFloat(station.location.latitude),
                     components,
-                    parseFloat(station.sensordatavalues[0].value));
+                    parseFloat(station.sensordatavalues[0].value).toFixed(2));
                 
                 let persistedStations = getState().stations;
 
                 if (persistedStations.length) {
                     if (find(persistedStations, ['id', stationModel.id]) !== undefined) {
-                        console.log(persistedStations);
                         return false
                     }
                     else {
@@ -77,7 +76,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     }
                 });
 
-                let name = {};
+                let name = { value: "Lufdatensensor: " + station.sensor.id };
                 
                 let stationModel = new Station(provider, 
                     station.sensor.id,
@@ -86,7 +85,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     parseFloat(station.location.longitude),
                     parseFloat(station.location.latitude),
                     components,
-                    parseFloat(station.sensordatavalues[0].value));
+                    parseFloat(station.sensordatavalues[0].value).toFixed(2));
 
                 
                 // console.log(getState().stations[0].id, stationModel.date);
