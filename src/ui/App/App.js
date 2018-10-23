@@ -15,7 +15,7 @@ const luftdatenProvider = "luftdaten";
 class Stations extends React.Component {
   render() {
     return (
-      <ul className="stations">
+      <ul className="air__stations">
         {this.props.stations.map((station) =>
           <Station 
             key={station.id}
@@ -29,16 +29,31 @@ class Stations extends React.Component {
 class Station extends React.Component {
   render() {
     let moodStyle = {
-      backgroundColor: getMood(this.props.station.mood, 0.65),
+      backgroundColor: getMood(this.props.station.mood, 0.75),
       borderColor: getMood(this.props.station.mood, 0.4)
     }
 
-    return <li className="station" style={moodStyle}>
-            <div className="station__name">{this.props.station.name.value}
-            <div className="station__date">{this.props.station.date}</div>
+    return <li className="air__station" style={moodStyle}>
+            <div className="air__station-name">{this.props.station.name.value}
+            <div className="air__station-date">{this.props.station.date}</div>
             </div>
-            <div className="station__mood">{this.props.station.mood}</div>
+            <div className="air__station-mood">
+              <div className="air__station-mood-main">{this.props.station.components[0].value.toFixed(2)}</div>
+              <div className="air__station-mood-sub">{this.props.station.components[1].value.toFixed(2)}</div>
+            </div>
           </li>
+  }
+}
+
+class Updating extends React.Component {
+  render() {
+    return <div className="air__updating">Updating ...</div>
+  }
+}
+
+class Loading extends React.Component {
+  render() {
+    return <div className="air__loading">Fetching ...</div>
   }
 }
 
@@ -60,11 +75,11 @@ class App extends Component {
     let notifications = null;
 
     if (this.props.loading) {
-      loading = <div>Loading...</div>
+      loading = <Loading />
     }
 
     if (this.props.updating) {
-      updating = <div>Updating...</div>
+      updating = <Updating />
     }
 
     if (this.props.notification.length) {
@@ -73,19 +88,21 @@ class App extends Component {
 
     return (
       <div className="App">
+        <div className="air__button-group">
+          <Button
+            className="air__button"
+            clicked={() => this.onFetchStations()}>
+            FETCH
+          </Button>
+          <Button
+            className="air__button"
+            clicked={() => this.onUpdateStations()}>
+            UPDATE
+          </Button>
+        </ div>
+        <Stations stations = {this.props.stations}/>
         {loading}
         {updating}
-        <Button
-          className="air__button"
-          clicked={() => this.onFetchStations()}>
-          FETCH
-        </Button>
-        <Button
-          className="air__button"
-          clicked={() => this.onUpdateStations()}>
-          UPDATE
-        </Button>
-        <Stations stations = {this.props.stations}/>
         {notifications}
       </div>
     );

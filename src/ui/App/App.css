@@ -1,5 +1,12 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   text-align: center;
+  padding-bottom: 36px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .App-logo {
@@ -31,35 +38,64 @@
   }
 }
 
-.stations {
+.air__stations {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
-.station {
+.air__station {
   padding: 12px 18px;
-  margin-bottom: 12px;
-  border-radius: 6px;
   text-align: left;
-  border: 3px solid transparent;
-  box-shadow: 3px 6px 6px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 1);
   color: rgba(255, 255, 255, 1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 12px;
   text-transform: uppercase;
   display: flex;
   justify-content: space-between;
   background-color: transparent;
   will-change: opacity, transform, box-shadow, background-color;
-  transition: background-color 2000ms ease-out;
+  transition: background-color 300ms ease-out;
   -webkit-user-select: none;  /* Chrome all / Safari all */
   -moz-user-select: none;     /* Firefox all */
   -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  user-select: none;          /* Likely future */
 }
 
-.station__date {
+.air__station-date {
   font-size: 11px;
-  margin-top: 3px;
-  color: rgba(255, 255, 255, 0.7)
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 60px;
+}
+
+.air__station-mood {
+  font-size: 22px;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: right;
+}
+
+.air__station-mood-sub {
+  font-size: 12px;
+}
+
+.air__button-group {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+  width: 100%;
+}
+
+.air__updating,
+.air__loading {
+  position: fixed;
+  top: calc(50% - 8px);
+  width: 100%;
+  text-align: center;
+  color: rgba(255, 255, 255, 1);
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
 }
