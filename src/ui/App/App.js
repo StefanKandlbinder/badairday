@@ -12,6 +12,36 @@ const luftdatenProvider = "luftdaten";
 // const upperAustriaURL = "https://www2.land-oberoesterreich.gv.at/imm/jaxrs/messwerte/json?";
 // const upperAustriaProvider = "upperaustria";
 
+class Stations extends React.Component {
+  render() {
+    return (
+      <ul className="stations">
+        {this.props.stations.map((station) =>
+          <Station 
+            key={station.id}
+            station={station} />
+        )}
+      </ul>
+    );
+  }
+}
+
+class Station extends React.Component {
+  render() {
+    let moodStyle = {
+      backgroundColor: getMood(this.props.station.mood, 0.65),
+      borderColor: getMood(this.props.station.mood, 0.4)
+    }
+
+    return <li className="station" style={moodStyle}>
+            <div className="station__name">{this.props.station.name.value}
+            <div className="station__date">{this.props.station.date}</div>
+            </div>
+            <div className="station__mood">{this.props.station.mood}</div>
+          </li>
+  }
+}
+
 class App extends Component {
   
   onFetchStations = () => {
@@ -39,34 +69,6 @@ class App extends Component {
 
     if (this.props.notification.length) {
       notifications = <Notifications notifications={this.props.notification} />
-    }
-
-    function Station(props) {
-
-      let moodStyle = {
-        backgroundColor: getMood(props.station.mood, 0.65),
-        borderColor: getMood(props.station.mood, 0.4)
-      }
-
-      return <li className="station" style={moodStyle}>
-          <div className="station__name">{props.station.name.value}
-          <div className="station__date">{props.station.date}</div>
-          </div>
-          <div className="station__mood">{props.station.mood}</div>
-        </li>
-    }
-
-    function Stations(props) {
-      const stations = props.stations;
-      return (
-        <ul className="stations">
-          {stations.map((station) =>
-            <Station 
-              key={station.id}
-              station={station} />
-          )}
-        </ul>
-      );
     }
 
     return (

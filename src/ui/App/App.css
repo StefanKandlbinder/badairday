@@ -51,11 +51,15 @@
   justify-content: space-between;
   background-color: transparent;
   will-change: opacity, transform, box-shadow, background-color;
-  transition: background-color 300ms ease-out;
+  transition: background-color 2000ms ease-out;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */      
 }
 
 .station__date {
-  font-size: 10px;
+  font-size: 11px;
   margin-top: 3px;
   color: rgba(255, 255, 255, 0.7)
 }
