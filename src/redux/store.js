@@ -9,6 +9,7 @@ import { stationsMiddleware } from './middleware/stations';
 import { apiMiddleware } from './middleware/api';
 import { uiReducer } from "./reducers/uiReducer";
 import { updateReducer } from "./reducers/updateReducer";
+import { optionsReducer } from "./reducers/optionsReducer";
 import { notificationsReducer } from "./reducers/notificationsReducer";
 import { normalizeLuftdatenMiddleware } from "./middleware/normalizeLuftdaten";
 import { normalizeUpperAustriaMiddleware } from "./middleware/normalizeUpperAustria";
@@ -22,7 +23,8 @@ const configureStore = () => {
         stations: stationsReducer,
         ui: uiReducer,
         notification: notificationsReducer,
-        update: updateReducer
+        update: updateReducer,
+        options: optionsReducer
     });
 
     // create the feature middleware array

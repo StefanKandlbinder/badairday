@@ -21,18 +21,20 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
 
                 let name = { value: "Lufdatensensor: " + station.sensor.id };
 
-                ReverseGeocode.geocodeService().reverse()
-                    .latlng([station.location.latitude, station.location.longitude])
-                    .distance(10)
-                    .run(function (error, result) {
-                        if (error) {
-                            name.value = "Luftdatensensor: " + station.id;
-                        }
-                        if (result) {
-                            name.value = result.address.ShortLabel;
-                        }
-                        // console.log(element, result);
-                    });
+                if (getState().options.reversegeo) {
+                    ReverseGeocode.geocodeService().reverse()
+                        .latlng([station.location.latitude, station.location.longitude])
+                        .distance(10)
+                        .run(function (error, result) {
+                            if (error) {
+                                name.value = "Luftdatensensor: " + station.id;
+                            }
+                            if (result) {
+                                name.value = result.address.ShortLabel;
+                            }
+                            // console.log(element, result);
+                        });
+                }
                 
                 let stationModel = new Station(provider, 
                     station.sensor.id,

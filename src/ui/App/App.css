@@ -4,12 +4,21 @@ body {
   padding: 0;
 }
 
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 .App {
   padding: 0;
   margin: 0;
   text-align: center;
-  padding-bottom: 36px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .App-logo {
@@ -45,6 +54,8 @@ body {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .air__station {
@@ -63,12 +74,29 @@ body {
   -moz-user-select: none;     /* Firefox all */
   -ms-user-select: none;      /* IE 10+ */
   user-select: none;          /* Likely future */
+  flex-grow: 1;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+@media (min-width: 530px) {
+  .air__station {
+    width: 50%;
+  }
+}
+
+@media (min-width: 795px) {
+  .air__station {
+    width: calc(100% / 3);
+  }
 }
 
 .air__station-date {
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.7);
-  max-width: 60px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 1);
+  max-width: 85px;
+  margin-top: 2px;
 }
 
 .air__station-mood {
@@ -84,11 +112,20 @@ body {
 
 .air__button-group {
   display: flex;
+  justify-content: space-between;
   position: fixed;
-  bottom: 0;
+  bottom: 12px;
+  right: calc(50% - 80px);
   z-index: 10;
-  width: 100%;
+  width: 160px;
   height: 38px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 3px 3px 6px rgba(0, 121, 107, 1);
+}
+
+.air__button-group .air__button {
+  width: calc(50% - 0.5px);
 }
 
 .air__updating,
@@ -108,4 +145,9 @@ body {
   text-shadow: rgba(0, 0, 0, 0.3) 1px 1px 10px; 
   line-height: 1;
   display: inline-block;
+}
+
+.air__spacer {
+  flex-grow: 1;
+  background: rgba(0, 121, 107, 0.75)
 }

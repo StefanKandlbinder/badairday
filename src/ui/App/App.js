@@ -7,7 +7,7 @@ import Button from "../Button/Button";
 import getMood from '../../utilities/GetMood';
 import './App.css';
 
-const luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,5";
+const luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,10";
 const luftdatenProvider = "luftdaten";
 // const upperAustriaURL = "https://www2.land-oberoesterreich.gv.at/imm/jaxrs/messwerte/json?";
 // const upperAustriaProvider = "upperaustria";
@@ -59,6 +59,33 @@ class Loading extends React.Component {
 
 class App extends Component {
   
+
+  componentDidMount() {
+    if (this.props.options.autoupdating)
+      this.activateAutoupdater();
+  }
+
+  componentWillUnmount() {
+    this.clearAutoupdater();
+  }
+  
+  activateAutoupdater = () => {
+    this.updateTimer = setInterval(
+      () => this.update(),
+      1000 * 60 * 3
+    );
+  }
+
+  clearAutoupdater = () => {
+    if (this.props.options.autoupdating) 
+      clearInterval(this.updateTimer);
+  }
+
+  update() {
+    console.log("AUTOUPDATING");
+    this.onUpdateStations();
+  }
+
   onFetchStations = () => {
     this.props.onFetchStations(luftdatenURL, luftdatenProvider, "FETCH");
     // this.props.onFetchStations(upperAustriaURL, upperAustriaProvider, "FETCH");
@@ -101,6 +128,7 @@ class App extends Component {
           </Button>
         </ div>
         <Stations stations = {this.props.stations}/>
+        <div className="air__spacer"></div>
         {loading}
         {updating}
         {notifications}
@@ -115,7 +143,8 @@ const mapStateToProps = state => {
     updating: state.ui.updating,
     notification: state.notification,
     update: state.update,
-    stations: state.stations
+    stations: state.stations,
+    options: state.options
   };
 }
 
