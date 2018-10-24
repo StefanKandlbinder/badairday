@@ -118,7 +118,6 @@ html {
   right: calc(50% - 80px);
   z-index: 10;
   width: 160px;
-  height: 38px;
   border-radius: 4px;
   overflow: hidden;
   box-shadow: 3px 3px 6px rgba(0, 121, 107, 1);
