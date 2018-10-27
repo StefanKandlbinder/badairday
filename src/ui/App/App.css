@@ -67,6 +67,7 @@ html {
   text-transform: uppercase;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: transparent;
   will-change: opacity, transform, box-shadow, background-color;
   transition: background-color 300ms ease-out;
@@ -77,6 +78,7 @@ html {
   flex-grow: 1;
   flex-shrink: 0;
   width: 100%;
+  min-height: 70px;
 }
 
 @media (min-width: 530px) {
@@ -95,15 +97,16 @@ html {
   font-size: 11px;
   font-weight: 300;
   color: rgba(255, 255, 255, 1);
-  max-width: 85px;
+  max-width: 65px;
   margin-top: 2px;
 }
 
 .air__station-mood {
   font-size: 22px;
+  display: flex;
   flex-direction: column;
-  justify-content: space-between;
   text-align: right;
+  height: 100%;
 }
 
 .air__station-mood-sub {
@@ -115,16 +118,16 @@ html {
   justify-content: space-between;
   position: fixed;
   bottom: 12px;
-  right: calc(50% - 80px);
+  right: calc(50% - 120px);
   z-index: 10;
-  width: 160px;
+  width: 240px;
   border-radius: 4px;
   overflow: hidden;
   box-shadow: 3px 3px 6px rgba(0, 121, 107, 1);
 }
 
 .air__button-group .air__button {
-  width: calc(50% - 0.5px);
+  width: calc(33.3% - 0.5px);
 }
 
 .air__updating,
@@ -149,4 +152,16 @@ html {
 .air__spacer {
   flex-grow: 1;
   background: rgba(0, 121, 107, 0.75)
+}
+
+.air__update-bar {
+  position: fixed;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.75);
+  z-index: 10;
+  will-change: transform;
+  transition: transform 1000ms linear;
+  transform-origin: left;
 }

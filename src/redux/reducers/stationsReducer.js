@@ -18,6 +18,7 @@ export const stationsReducer = (stations = initState, action) => {
                         ...station, 
                         date: action.payload.date,
                         mood: action.payload.mood,
+                        name: action.payload.name !== null ? action.payload.name : station.name,
                         components: {
                             ...station.components,
                             ...action.payload.components

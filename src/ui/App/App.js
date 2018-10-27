@@ -5,19 +5,20 @@ import { fetchStations } from "../../redux/actions/stations";
 import Notifications from "../Notifications/Notifications";
 import Button from "../Button/Button";
 import getMood from '../../utilities/GetMood';
+import { clearState } from '../../redux/localStorage';
 import './App.css';
 
-const luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,10";
+const luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,20";
 const luftdatenProvider = "luftdaten";
 // const upperAustriaURL = "https://www2.land-oberoesterreich.gv.at/imm/jaxrs/messwerte/json?";
 // const upperAustriaProvider = "upperaustria";
 
-class Stations extends React.Component {
+class Stations extends Component {
   render() {
     return (
       <ul className="air__stations">
         {this.props.stations.map((station) =>
-          <Station 
+          <Station
             key={station.id}
             station={station} />
         )}
@@ -26,7 +27,7 @@ class Stations extends React.Component {
   }
 }
 
-class Station extends React.Component {
+class Station extends Component {
   render() {
     let moodStyle = {
       backgroundColor: getMood(this.props.station.mood, 0.75),
@@ -34,56 +35,92 @@ class Station extends React.Component {
     }
 
     return <li className="air__station" style={moodStyle}>
-            <div className="air__station-name">{this.props.station.name.value}
-            <div className="air__station-date">{this.props.station.date}</div>
-            </div>
-            <div className="air__station-mood">
-              <div className="air__station-mood-main">{this.props.station.components[0].value.toFixed(2)}</div>
-              <div className="air__station-mood-sub">{this.props.station.components[1].value.toFixed(2)}</div>
-            </div>
-          </li>
+      <div className="air__station-name">{this.props.station.name.value}
+        <div className="air__station-date">{this.props.station.date}</div>
+      </div>
+      <div className="air__station-mood">
+        <div className="air__station-mood-main">{this.props.station.components[0].value.toFixed(2)}</div>
+        <div className="air__station-mood-sub">{this.props.station.components[1].value.toFixed(2)}</div>
+      </div>
+    </li>
   }
 }
 
-class Updating extends React.Component {
+class Updating extends Component {
   render() {
     return <div className="air__updating">Updating ...</div>
   }
 }
 
-class Loading extends React.Component {
+class Loading extends Component {
   render() {
     return <div className="air__loading">Fetching ...</div>
   }
 }
 
+class UpdateBar extends Component {  
+  render() {
+    
+    let style = { transform: `scaleX(${ (this.props.counter / this.props.interval) })`  };
+
+    return <div style={style} className="air__update-bar"></div>
+  }
+}
+
 class App extends Component {
-  
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      counter: 0,
+      updateInterval: 120
+    }
+  }
 
   componentDidMount() {
     if (this.props.options.autoupdating)
       this.activateAutoupdater();
+    
+    if (!this.props.stations.length) {
+      this.onFetchStations();
+    }
+    else {
+      this.onUpdateStations();
+    }
   }
 
   componentWillUnmount() {
     this.clearAutoupdater();
   }
-  
+
   activateAutoupdater = () => {
     this.updateTimer = setInterval(
       () => this.update(),
-      1000 * 60 * 3
+      1000
     );
   }
 
   clearAutoupdater = () => {
-    if (this.props.options.autoupdating) 
+    if (this.props.options.autoupdating)
       clearInterval(this.updateTimer);
   }
 
   update() {
-    console.log("AUTOUPDATING");
-    this.onUpdateStations();
+    this.setState({
+      counter: this.state.counter + 1
+    })
+
+    if (this.state.counter === this.state.updateInterval) {
+      this.setState({
+        counter: 0
+      })
+      this.onUpdateStations();
+    }
+  }
+
+  clearStorage() {
+    clearState();
+    window.location.reload();
   }
 
   onFetchStations = () => {
@@ -126,12 +163,18 @@ class App extends Component {
             clicked={() => this.onUpdateStations()}>
             UPDATE
           </Button>
+          <Button
+            className="air__button"
+            clicked={() => this.clearStorage()}>
+            CLEAR
+          </Button>
         </ div>
-        <Stations stations = {this.props.stations}/>
+        <Stations stations={this.props.stations} />
         <div className="air__spacer"></div>
         {loading}
         {updating}
         {notifications}
+        <UpdateBar counter={this.state.counter} interval={this.state.updateInterval} />
       </div>
     );
   }

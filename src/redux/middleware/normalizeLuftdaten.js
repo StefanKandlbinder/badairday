@@ -31,6 +31,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                             }
                             if (result) {
                                 name.value = result.address.ShortLabel;
+                                dispatch(updateStation({ station: stationModel, provider: provider }))
                             }
                             // console.log(element, result);
                         });
@@ -78,7 +79,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     }
                 });
 
-                let name = { value: "Lufdatensensor: " + station.sensor.id };
+                let name = null;
                 
                 let stationModel = new Station(provider, 
                     station.sensor.id,
