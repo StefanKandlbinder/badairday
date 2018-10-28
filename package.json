@@ -5,6 +5,7 @@
   "dependencies": {
     "d3-scale": "^2.1.2",
     "esri-leaflet-geocoder": "^2.2.9",
+    "node-sass": "^4.9.4",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-page-visibility": "^3.0.0",
