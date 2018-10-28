@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PageVisibility from 'react-page-visibility';
 
 import { fetchStations } from "../../redux/actions/stations";
 import Notifications from "../Notifications/Notifications";
@@ -133,6 +134,10 @@ class App extends Component {
     // this.props.onFetchStations(upperAustriaURL, upperAustriaProvider, "UPDATE");
   }
 
+  handleVisibilityChange = isVisible => {
+    this.onUpdateStations();
+  }
+
   render() {
     let loading = null;
     let updating = null;
@@ -151,31 +156,33 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
-        <div className="air__button-group">
-          <Button
-            className="air__button"
-            clicked={() => this.onFetchStations()}>
-            FETCH
-          </Button>
-          <Button
-            className="air__button"
-            clicked={() => this.onUpdateStations()}>
-            UPDATE
-          </Button>
-          <Button
-            className="air__button"
-            clicked={() => this.clearStorage()}>
-            CLEAR
-          </Button>
-        </ div>
-        <Stations stations={this.props.stations} />
-        <div className="air__spacer"></div>
-        {loading}
-        {updating}
-        {notifications}
-        <UpdateBar counter={this.state.counter} interval={this.state.updateInterval} />
-      </div>
+      <PageVisibility onChange={this.handleVisibilityChange}>
+        <div className="App">
+          <div className="air__button-group">
+            <Button
+              className="air__button"
+              clicked={() => this.onFetchStations()}>
+              FETCH
+            </Button>
+            <Button
+              className="air__button"
+              clicked={() => this.onUpdateStations()}>
+              UPDATE
+            </Button>
+            <Button
+              className="air__button"
+              clicked={() => this.clearStorage()}>
+              CLEAR
+            </Button>
+          </ div>
+          <Stations stations={this.props.stations} />
+          <div className="air__spacer"></div>
+          {loading}
+          {updating}
+          {notifications}
+          <UpdateBar counter={this.state.counter} interval={this.state.updateInterval} />
+        </div>
+      </PageVisibility>
     );
   }
 }

@@ -4,8 +4,12 @@ export default class GetDateFromTo {
         this.dateTo = new Date();
 
         // Summertime
-        this.dateFrom.setHours(this.dateFrom.getHours() - 1);
-        this.dateTo.setHours(this.dateTo.getHours() - 1);
+        // this.dateFrom.setHours(this.dateFrom.getHours() - 1);
+        // this.dateTo.setHours(this.dateTo.getHours() - 1);
+
+        // Wintertime
+        this.dateFrom.setHours(this.dateFrom.getHours());
+        this.dateTo.setHours(this.dateTo.getHours());
 
         if (this.dateFrom.getMinutes() > 10 && this.dateFrom.getMinutes() < 40) {
             this.dateFrom.setMinutes(0);
