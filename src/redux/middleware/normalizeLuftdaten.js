@@ -12,12 +12,17 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
     const addStations = (stations, provider) => {
         if (stations) {
             stations.map(station => {
-                let components = station.sensordatavalues.map(component => {
-                    return {
-                        type: component.value_type === "P1" ? "PM10" : "PM25",
-                        value: parseFloat(component.value)
-                    }
-                });
+                let components = {};
+
+                station.sensordatavalues.forEach(component => {
+                    let type = component.value_type === "P1" ? "PM10" : "PM25";
+                    
+                    components[type] = {
+                        type: type,
+                        value: parseFloat(component.value),
+                        unit: "µg/m³"
+                    };
+                })
 
                 let name = { value: "Lufdatensensor: " + station.sensor.id };
 
@@ -36,16 +41,16 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                             // console.log(element, result);
                         });
                 }
-                
-                let stationModel = new Station(provider, 
+
+                let stationModel = new Station(provider,
                     station.sensor.id,
                     name,
-                    getStringDateLuftdaten(station.timestamp), 
+                    getStringDateLuftdaten(station.timestamp),
                     parseFloat(station.location.longitude),
                     parseFloat(station.location.latitude),
                     components,
                     parseFloat(station.sensordatavalues[0].value).toFixed(2));
-                
+
                 let persistedStations = getState().stations;
 
                 if (persistedStations.length) {
@@ -57,11 +62,12 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     }
                 }
                 else {
-                    return dispatch(addStation({ station: stationModel, provider: provider })) 
+                    return dispatch(addStation({ station: stationModel, provider: provider }))
                 }
 
                 // return dispatch(addStation({ station: stationModel, provider: provider }))
                 return false
+                // return dispatch(addStation({ station: stationModel, provider: provider }))
             })
 
             // notify about the transformation
@@ -72,25 +78,30 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
     const updateStations = (stations, provider) => {
         if (stations) {
             stations.map(station => {
-                let components = station.sensordatavalues.map(component => {
-                    return {
-                        type: component.value_type === "P1" ? "PM10" : "PM25",
-                        value: parseFloat(component.value)
-                    }
-                });
+                let components = {};
+
+                station.sensordatavalues.forEach(component => {
+                    let type = component.value_type === "P1" ? "PM10" : "PM25";
+                    
+                    components[type] = {
+                        type: type,
+                        value: parseFloat(component.value),
+                        unit: "µg/m³"
+                    };
+                })
 
                 let name = null;
-                
-                let stationModel = new Station(provider, 
+
+                let stationModel = new Station(provider,
                     station.sensor.id,
                     name,
-                    getStringDateLuftdaten(station.timestamp), 
+                    getStringDateLuftdaten(station.timestamp),
                     parseFloat(station.location.longitude),
                     parseFloat(station.location.latitude),
                     components,
                     parseFloat(station.sensordatavalues[0].value).toFixed(2));
 
-                
+
                 // console.log(getState().stations[0].id, stationModel.date);
 
                 let filteredStation = getState().stations.filter(station => station.id === stationModel.id)

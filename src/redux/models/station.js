@@ -1,5 +1,5 @@
 export default class StationModel {
-    constructor(provider="", id=0, name="Messstation", date="", longitude = 0, latitude = 0, components=[], mood=0, marker={}) {
+    constructor(provider="", id=0, name="Messstation", date="", longitude = 0, latitude = 0, components={}, mood=0, marker={}) {
         this.provider = provider;
         this.id = id;
         this.name = name;

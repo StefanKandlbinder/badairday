@@ -19,6 +19,8 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (acti
 
             filteredStations = groupBy(filteredStations, 'station');
 
+            console.log(filteredStations);
+
             Object.values(filteredStations).forEach(element => {
                 let mood = 0;
 
@@ -95,10 +97,10 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (acti
 
     // filter both by action type and metadata content
     if (action.type.includes(ADD_STATIONS) && action.meta.provider === "upperaustria") {
+        console.log(action);
         addStations(action.payload.messwerte, action.meta.provider);
     }
     else if (action.type.includes(UPDATE_STATIONS) && action.meta.provider === "upperaustria") {
-        console.log(action);
         updateStations(action.payload.messwerte, action.meta.provider);
     } 
     else {

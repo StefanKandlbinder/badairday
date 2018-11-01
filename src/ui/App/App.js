@@ -40,8 +40,8 @@ class Station extends Component {
         <div className="air__station-date">{this.props.station.date}</div>
       </div>
       <div className="air__station-mood">
-        <div className="air__station-mood-main">{this.props.station.components[0].value.toFixed(2)}</div>
-        <div className="air__station-mood-sub">{this.props.station.components[1].value.toFixed(2)}</div>
+        <div className="air__station-mood-main">{this.props.station.components.PM10.value.toFixed(2)}</div>
+        <div className="air__station-mood-sub">{this.props.station.components.PM25.value.toFixed(2)}</div>
       </div>
     </li>
   }
@@ -59,29 +59,53 @@ class Loading extends Component {
   }
 }
 
-class UpdateBar extends Component {  
+class UpdateBar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      // counter: 0,
+      progress: 0
+    }
+  }
+
+  componentDidMount() {
+    this.animate();
+  }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this.rafId);
+  }
+
+  animate() {
+    // if (this.props.animate) {
+      let start = null;
+      let step = timestamp => {
+        if (!start) start = timestamp;
+        
+        let progress = timestamp - start;
+        this.setState({ progress });
+
+        if (progress > this.props.interval) {
+          this.props.update();
+          start = null;
+        }
+
+        this.rafId = requestAnimationFrame(step);
+      };
+      this.rafId = requestAnimationFrame(step);
+    // }
+  }
+
   render() {
-    
-    let style = { transform: `scaleX(${ (this.props.counter / this.props.interval) })`  };
+    let style = { transform: `scaleX(${(this.state.progress / this.props.interval)})` };
 
     return <div style={style} className="air__update-bar"></div>
   }
 }
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-      counter: 0,
-      updateInterval: 120
-    }
-  }
-
   componentDidMount() {
-    if (this.props.options.autoupdating)
-      this.activateAutoupdater();
-    
     if (!this.props.stations.length) {
       this.onFetchStations();
     }
@@ -91,32 +115,6 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    this.clearAutoupdater();
-  }
-
-  activateAutoupdater = () => {
-    this.updateTimer = setInterval(
-      () => this.update(),
-      1000
-    );
-  }
-
-  clearAutoupdater = () => {
-    if (this.props.options.autoupdating)
-      clearInterval(this.updateTimer);
-  }
-
-  update() {
-    this.setState({
-      counter: this.state.counter + 1
-    })
-
-    if (this.state.counter === this.state.updateInterval) {
-      this.setState({
-        counter: 0
-      })
-      this.onUpdateStations();
-    }
   }
 
   clearStorage() {
@@ -142,6 +140,7 @@ class App extends Component {
     let loading = null;
     let updating = null;
     let notifications = null;
+    let updateBar = null;
 
     if (this.props.loading) {
       loading = <Loading />
@@ -149,6 +148,10 @@ class App extends Component {
 
     if (this.props.updating) {
       updating = <Updating />
+    }
+
+    if (this.props.options.autoupdating) {
+      updateBar = <UpdateBar interval={30 * 1000} update={this.onUpdateStations} />
     }
 
     if (this.props.notification.length) {
@@ -180,7 +183,7 @@ class App extends Component {
           {loading}
           {updating}
           {notifications}
-          <UpdateBar counter={this.state.counter} interval={this.state.updateInterval} />
+          {updateBar}
         </div>
       </PageVisibility>
     );

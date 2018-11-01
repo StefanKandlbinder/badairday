@@ -22,7 +22,6 @@ export const stationsReducer = (stations = initState, action) => {
                         components: {
                             ...station.components,
                             ...action.payload.components
-
                         }
                     }
                 }
