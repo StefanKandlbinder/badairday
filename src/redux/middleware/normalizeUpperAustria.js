@@ -1,4 +1,5 @@
 import groupBy from 'lodash/groupBy';
+import find from 'lodash/find';
 
 import { dataNormalized } from "../actions/data";
 import { addStation, updateStation, ADD_STATIONS, UPDATE_STATIONS } from "../actions/stations";
@@ -9,7 +10,7 @@ import getStringDate from '../../utilities/getStringDate';
 import Station from "../models/station";
 import Component from "../models/component";
 
-export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (action) => {
+export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next) => (action) => {
 
     const addStations = (stations, provider) => {
         let filteredStations = null;
@@ -39,13 +40,28 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (acti
                         let stationModel = new Station("upperaustria",
                             element[0].station,
                             station.kurzname,
-                            getStringDate(element[0].zeitpunkt + 3600000),
+                            getStringDate(element[0].zeitpunkt),
                             station.geoBreite,
                             station.geoLaenge,
                             components,
                             mood);
 
-                        return dispatch(addStation({ station: stationModel, provider: provider }))
+                        let persistedStations = getState().stations;
+
+                        if (persistedStations.length) {
+                            if (find(persistedStations, ['id', stationModel.id]) !== undefined) {
+                                return false
+                            }
+                            else {
+                                dispatch(addStation({ station: stationModel, provider: provider }))
+                            }
+                        }
+                        else {
+                            return dispatch(addStation({ station: stationModel, provider: provider }))
+                        }
+
+                        // return dispatch(addStation({ station: stationModel, provider: provider }))
+                        return false
                     }
                 })
             });
@@ -83,13 +99,25 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (acti
                         let stationModel = new Station("upperaustria",
                             element[0].station,
                             station.kurzname,
-                            getStringDate(element[0].zeitpunkt + 3600000),
+                            getStringDate(element[0].zeitpunkt),
                             station.geoBreite,
                             station.geoLaenge,
                             components,
                             mood);
 
-                        return dispatch(updateStation({ station: stationModel, provider: provider }))
+                        let filteredStation = getState().stations.filter(station => station.id === stationModel.id)
+
+                        if (filteredStation.length) {
+                            //if (getUnixDateFromLuftdaten(filteredStation[0].date) < getUnixDateFromLuftdaten(stationModel.date)) {
+                                return dispatch(updateStation({ station: stationModel, provider: provider }))
+                            //}
+                            //else
+                                //return false
+                        }
+
+                        else {
+                            return false
+                        }
                     }
                 })
             });

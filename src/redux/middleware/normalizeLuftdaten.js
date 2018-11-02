@@ -21,7 +21,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     components[type] = new Component(type, parseFloat(component.value), "µg/m³");
                 })
 
-                let name = "Lufdatensensor: " + station.sensor.id;
+                let name =  "Lufdatensensor: " + station.sensor.id;
 
                 if (getState().options.reversegeo) {
                     ReverseGeocode.geocodeService().reverse()
@@ -29,10 +29,20 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                         .distance(10)
                         .run(function (error, result) {
                             if (error) {
-                                name.value = "Luftdatensensor: " + station.id;
+                                name = "Luftdatensensor: " + station.id;
                             }
                             if (result) {
                                 name = result.address.ShortLabel;
+
+                                let stationModel = new Station(provider,
+                                    station.sensor.id,
+                                    name,
+                                    getStringDateLuftdaten(station.timestamp),
+                                    parseFloat(station.location.longitude),
+                                    parseFloat(station.location.latitude),
+                                    components,
+                                    parseFloat(station.sensordatavalues[0].value).toFixed(2));                
+                                    
                                 dispatch(updateStation({ station: stationModel, provider: provider }))
                             }
                             // console.log(element, result);
@@ -49,8 +59,6 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     parseFloat(station.sensordatavalues[0].value).toFixed(2));
 
                 let persistedStations = getState().stations;
-
-                console.log(stationModel);
 
                 if (persistedStations.length) {
                     if (find(persistedStations, ['id', stationModel.id]) !== undefined) {

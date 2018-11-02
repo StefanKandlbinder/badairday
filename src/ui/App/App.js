@@ -9,7 +9,7 @@ import getMood from '../../utilities/GetMood';
 import { clearState } from '../../redux/localStorage';
 import './App.css';
 
-const luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,50";
+const luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,10";
 const luftdatenProvider = "luftdaten";
 const upperAustriaURL = "https://www2.land-oberoesterreich.gv.at/imm/jaxrs/messwerte/json?";
 const upperAustriaProvider = "upperaustria";
@@ -119,7 +119,7 @@ class App extends Component {
 
   clearStorage() {
     clearState();
-    window.location.reload();
+    window.location.reload(true);
   }
 
   onFetchStations = () => {
@@ -129,7 +129,7 @@ class App extends Component {
 
   onUpdateStations = () => {
     this.props.onFetchStations(luftdatenURL, luftdatenProvider, "UPDATE");
-    // this.props.onFetchStations(upperAustriaURL, upperAustriaProvider, "UPDATE");
+    this.props.onFetchStations(upperAustriaURL, upperAustriaProvider, "UPDATE");
   }
 
   handleVisibilityChange = isVisible => {
