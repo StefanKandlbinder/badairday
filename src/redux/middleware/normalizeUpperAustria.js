@@ -3,9 +3,11 @@ import groupBy from 'lodash/groupBy';
 import { dataNormalized } from "../actions/data";
 import { addStation, updateStation, ADD_STATIONS, UPDATE_STATIONS } from "../actions/stations";
 
-import Station from "../models/station";
 import * as stationsObject from './stations.json';
 import getStringDate from '../../utilities/getStringDate';
+
+import Station from "../models/station";
+import Component from "../models/component";
 
 export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (action) => {
 
@@ -18,8 +20,6 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (acti
             });
 
             filteredStations = groupBy(filteredStations, 'station');
-
-            console.log(filteredStations);
 
             Object.values(filteredStations).forEach(element => {
                 let mood = 0;
@@ -34,13 +34,15 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (acti
 
                 stationsObject.stationen.forEach(station => {
                     if (station.code === element[0].station) {
+                        let components = normalizeComponents(element);
+
                         let stationModel = new Station("upperaustria",
                             element[0].station,
                             station.kurzname,
                             getStringDate(element[0].zeitpunkt + 3600000),
                             station.geoBreite,
                             station.geoLaenge,
-                            element,
+                            components,
                             mood);
 
                         return dispatch(addStation({ station: stationModel, provider: provider }))
@@ -76,13 +78,15 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (acti
 
                 stationsObject.stationen.forEach(station => {
                     if (station.code === element[0].station) {
+                        let components = normalizeComponents(element);
+
                         let stationModel = new Station("upperaustria",
                             element[0].station,
                             station.kurzname,
                             getStringDate(element[0].zeitpunkt + 3600000),
                             station.geoBreite,
                             station.geoLaenge,
-                            element,
+                            components,
                             mood);
 
                         return dispatch(updateStation({ station: stationModel, provider: provider }))
@@ -95,14 +99,56 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch }) => (next) => (acti
         }
     }
 
+    const normalizeComponents = (element) => {
+        let components = {};
+
+        element.forEach(component => {
+            let type = "";
+            let value = 0;
+            let unit = component.einheit;
+
+            switch (component.komponente) {
+                case "PM10kont":
+                    type = "PM10";
+                    break;
+
+                case "PM25kont":
+                    type = "PM25";
+                    break;
+
+                default:
+                    type = component.komponente
+            }
+
+            switch (component.einheit) {
+                case "mg/m3":
+                    unit = "µg/m³";
+                    value = parseFloat(component.messwert.replace(",", ".")) * 1000;
+                    break;
+
+                case "m/s":
+                    unit = "km/h";
+                    value = parseFloat(component.messwert.replace(",", ".")) * 3.6;
+                    break;
+
+                default:
+                    unit = component.einheit
+                    value = parseFloat(component.messwert.replace(",", "."));
+            }
+
+            components[type] = new Component(type, value, unit);
+        })
+
+        return components;
+    }
+
     // filter both by action type and metadata content
     if (action.type.includes(ADD_STATIONS) && action.meta.provider === "upperaustria") {
-        console.log(action);
         addStations(action.payload.messwerte, action.meta.provider);
     }
     else if (action.type.includes(UPDATE_STATIONS) && action.meta.provider === "upperaustria") {
         updateStations(action.payload.messwerte, action.meta.provider);
-    } 
+    }
     else {
         next(action);
     }

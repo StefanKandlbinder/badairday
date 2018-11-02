@@ -2,7 +2,7 @@ import { SET_OPTION_REVERSEGEO, SET_OPTION_AUTOUPDATING, SET_OPTION_RUNAWAYS } f
 
 const initState = {
     reversegeo: true,
-    autoupdating: true,
+    autoupdating: false,
     runaways: false
 };
 

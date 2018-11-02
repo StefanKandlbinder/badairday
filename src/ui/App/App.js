@@ -11,8 +11,8 @@ import './App.css';
 
 const luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,50";
 const luftdatenProvider = "luftdaten";
-// const upperAustriaURL = "https://www2.land-oberoesterreich.gv.at/imm/jaxrs/messwerte/json?";
-// const upperAustriaProvider = "upperaustria";
+const upperAustriaURL = "https://www2.land-oberoesterreich.gv.at/imm/jaxrs/messwerte/json?";
+const upperAustriaProvider = "upperaustria";
 
 class Stations extends Component {
   render() {
@@ -36,12 +36,12 @@ class Station extends Component {
     }
 
     return <li className="air__station" style={moodStyle}>
-      <div className="air__station-name">{this.props.station.name.value}
+      <div className="air__station-name">{this.props.station.name}
         <div className="air__station-date">{this.props.station.date}</div>
       </div>
       <div className="air__station-mood">
-        <div className="air__station-mood-main">{this.props.station.components.PM10.value.toFixed(2)}</div>
-        <div className="air__station-mood-sub">{this.props.station.components.PM25.value.toFixed(2)}</div>
+        <div className="air__station-mood-main">{this.props.station.components.PM10 ? this.props.station.components.PM10.value.toFixed(2) : 0}</div>
+        <div className="air__station-mood-sub">{this.props.station.components.PM25 ? this.props.station.components.PM25.value.toFixed(2) : 0}</div>
       </div>
     </li>
   }
@@ -124,7 +124,7 @@ class App extends Component {
 
   onFetchStations = () => {
     this.props.onFetchStations(luftdatenURL, luftdatenProvider, "FETCH");
-    // this.props.onFetchStations(upperAustriaURL, upperAustriaProvider, "FETCH");
+    this.props.onFetchStations(upperAustriaURL, upperAustriaProvider, "FETCH");
   }
 
   onUpdateStations = () => {

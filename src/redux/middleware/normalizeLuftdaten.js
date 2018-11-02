@@ -7,6 +7,7 @@ import getStringDateLuftdaten from '../../utilities/getStringDateLuftdaten';
 import getUnixDateFromLuftdaten from '../../utilities/getUnixDateFromLuftdaten';
 
 import Station from "../models/station";
+import Component from "../models/component";
 
 export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) => (action) => {
     const addStations = (stations, provider) => {
@@ -17,14 +18,10 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                 station.sensordatavalues.forEach(component => {
                     let type = component.value_type === "P1" ? "PM10" : "PM25";
                     
-                    components[type] = {
-                        type: type,
-                        value: parseFloat(component.value),
-                        unit: "µg/m³"
-                    };
+                    components[type] = new Component(type, parseFloat(component.value), "µg/m³");
                 })
 
-                let name = { value: "Lufdatensensor: " + station.sensor.id };
+                let name = "Lufdatensensor: " + station.sensor.id;
 
                 if (getState().options.reversegeo) {
                     ReverseGeocode.geocodeService().reverse()
@@ -35,7 +32,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                                 name.value = "Luftdatensensor: " + station.id;
                             }
                             if (result) {
-                                name.value = result.address.ShortLabel;
+                                name = result.address.ShortLabel;
                                 dispatch(updateStation({ station: stationModel, provider: provider }))
                             }
                             // console.log(element, result);
@@ -52,6 +49,8 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     parseFloat(station.sensordatavalues[0].value).toFixed(2));
 
                 let persistedStations = getState().stations;
+
+                console.log(stationModel);
 
                 if (persistedStations.length) {
                     if (find(persistedStations, ['id', stationModel.id]) !== undefined) {
@@ -83,11 +82,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                 station.sensordatavalues.forEach(component => {
                     let type = component.value_type === "P1" ? "PM10" : "PM25";
                     
-                    components[type] = {
-                        type: type,
-                        value: parseFloat(component.value),
-                        unit: "µg/m³"
-                    };
+                    components[type] = new Component(type, parseFloat(component.value), "µg/m³");
                 })
 
                 let name = null;
