@@ -1,0 +1,70 @@
+.air__station {
+    padding: calc(var(--margin) * 2) calc(var(--margin) * 3);
+    text-align: left;
+    /* border-bottom: 1px solid rgba(255, 255, 255, 1); */
+    color: rgba(255, 255, 255, 1);
+    font-size: 12px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    will-change: opacity, transform, box-shadow, background-color;
+    transition: background-color 300ms ease-out;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */
+    flex-grow: 1;
+    flex-shrink: 0;
+    width: 100%;
+    min-height: 61px;
+  }
+  
+  @media (min-width: 530px) {
+    .air__station {
+      width: 50%;
+    }
+  }
+  
+  @media (min-width: 795px) {
+    .air__station {
+      width: calc(100% / 3);
+    }
+  }
+
+  .air__station-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      height: 100%;
+      line-height: 1;
+  }
+
+  .air__station--description {
+      flex-grow: 1;
+  }
+  
+  .air__station-favorized {
+      padding: 0 calc(var(--margin) * 2);
+  }
+
+  .air__station-date {
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 1);
+    max-width: 65px;
+    margin-top: calc(var(--margin) / 2);
+  }
+  
+  .air__station-item--mood {
+    font-size: 22px;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    min-width: 72px;
+  }
+  
+  .air__station-mood-sub {
+    font-size: 12px;
+  }

@@ -2,6 +2,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  font-size: 12px;
 }
 
 html {
@@ -11,7 +12,16 @@ html {
   box-sizing: inherit;
 }
 
-.App {
+/*
+ * CUSTOM PROPERTIES
+ */
+
+:root {
+  --margin: 0.5rem;
+  --borderRadius: calc(var(--margin) / 2);
+}
+
+.air {
   padding: 0;
   margin: 0;
   text-align: center;
@@ -19,35 +29,6 @@ html {
   display: flex;
   flex-direction: column;
   height: 100vh;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .air__stations {
@@ -58,70 +39,15 @@ html {
   flex-wrap: wrap;
 }
 
-.air__station {
-  padding: 12px 18px;
-  text-align: left;
-  border-bottom: 1px solid rgba(255, 255, 255, 1);
-  color: rgba(255, 255, 255, 1);
-  font-size: 12px;
-  text-transform: uppercase;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: transparent;
-  will-change: opacity, transform, box-shadow, background-color;
-  transition: background-color 300ms ease-out;
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */
-  flex-grow: 1;
-  flex-shrink: 0;
-  width: 100%;
-  min-height: 70px;
-}
-
-@media (min-width: 530px) {
-  .air__station {
-    width: 50%;
-  }
-}
-
-@media (min-width: 795px) {
-  .air__station {
-    width: calc(100% / 3);
-  }
-}
-
-.air__station-date {
-  font-size: 11px;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 1);
-  max-width: 65px;
-  margin-top: 2px;
-}
-
-.air__station-mood {
-  font-size: 22px;
-  display: flex;
-  flex-direction: column;
-  text-align: right;
-  height: 100%;
-}
-
-.air__station-mood-sub {
-  font-size: 12px;
-}
-
 .air__button-group {
   display: flex;
   justify-content: space-between;
   position: fixed;
-  bottom: 12px;
+  bottom: calc(var(--margin) * 2);
   right: calc(50% - 120px);
   z-index: 10;
   width: 240px;
-  border-radius: 4px;
+  border-radius: var(--borderRadius);
   overflow: hidden;
   box-shadow: 3px 3px 6px rgba(0, 121, 107, 1);
 }
@@ -140,7 +66,7 @@ html {
   color: rgba(255, 255, 255, 1);
   background-color: rgba(248, 248, 248, 0.3);
   padding: 8px;
-  border-radius: 4px;
+  border-radius: var(--borderRadius);
   text-transform: uppercase;
   font-size: 16px;
   font-weight: bold;
@@ -157,7 +83,7 @@ html {
 .air__update-bar {
   position: fixed;
   bottom: 0;
-  height: 4px;
+  height: calc(var(--margin) / 2);
   width: 100%;
   background: rgba(255, 255, 255, 0.75);
   z-index: 10;

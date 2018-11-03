@@ -5,7 +5,8 @@
     background: rgba(221, 44, 0, 0.9);
     color: white;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    bottom: 56px;
+    left: 8px;
+    border-radius: 4px;
+    width: calc(100% - 16px);
 }

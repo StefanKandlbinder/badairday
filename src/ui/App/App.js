@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import PageVisibility from 'react-page-visibility';
 
 import { fetchStations } from "../../redux/actions/stations";
+import { clearState } from '../../redux/localStorage';
+
+import Station from "../Station/Station";
 import Notifications from "../Notifications/Notifications";
 import Button from "../Button/Button";
-import getMood from '../../utilities/GetMood';
-import { clearState } from '../../redux/localStorage';
 import './App.css';
 
 const luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,10";
@@ -25,25 +26,6 @@ class Stations extends Component {
         )}
       </ul>
     );
-  }
-}
-
-class Station extends Component {
-  render() {
-    let moodStyle = {
-      backgroundColor: getMood(this.props.station.mood, 0.75),
-      borderColor: getMood(this.props.station.mood, 0.4)
-    }
-
-    return <li className="air__station" style={moodStyle}>
-      <div className="air__station-name">{this.props.station.name}
-        <div className="air__station-date">{this.props.station.date}</div>
-      </div>
-      <div className="air__station-mood">
-        <div className="air__station-mood-main">{this.props.station.components.PM10 ? this.props.station.components.PM10.value.toFixed(2) : 0}</div>
-        <div className="air__station-mood-sub">{this.props.station.components.PM25 ? this.props.station.components.PM25.value.toFixed(2) : 0}</div>
-      </div>
-    </li>
   }
 }
 
@@ -114,8 +96,7 @@ class App extends Component {
     }
   }
 
-  componentWillUnmount() {
-  }
+  componentWillUnmount() {}
 
   clearStorage() {
     clearState();
@@ -160,7 +141,7 @@ class App extends Component {
 
     return (
       <PageVisibility onChange={this.handleVisibilityChange}>
-        <div className="App">
+        <div className="air">
           <div className="air__button-group">
             <Button
               className="air__button"

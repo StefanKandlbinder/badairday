@@ -1,14 +1,24 @@
 export default class StationModel {
-    constructor(provider="", id=0, name="Messstation", date="", longitude = 0, latitude = 0, components={}, mood=0, marker={}) {
-        this.provider = provider;
-        this.id = id;
-        this.name = name;
-        this.date = date;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.components = components;
-        this.mood = mood;
-        this.marker = marker;
+    constructor(provider = "",
+        id = 0,
+        name = "Messstation",
+        date = "",
+        longitude = 0,
+        latitude = 0,
+        components = {},
+        mood = 0,
+        marker = {},
+        favorized = false) {
+            this.provider   = provider;
+            this.id         = id;
+            this.name       = name;
+            this.date       = date;
+            this.longitude  = longitude;
+            this.latitude   = latitude;
+            this.components = components;
+            this.mood       = mood;
+            this.marker     = marker;
+            this.favorized  = favorized
     }
 
     set setProvider(provider) {
@@ -22,7 +32,7 @@ export default class StationModel {
     set setName(name) {
         this.name = name;
     }
-    
+
     set setLongitude(longitude) {
         this.longitude = longitude;
     }

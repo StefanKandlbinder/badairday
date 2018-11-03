@@ -35,28 +35,27 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                                 name = result.address.ShortLabel;
 
                                 let stationModel = new Station(provider,
-                                    station.sensor.id,
+                                    station.sensor.id.toString(),
                                     name,
                                     getStringDateLuftdaten(station.timestamp),
                                     parseFloat(station.location.longitude),
                                     parseFloat(station.location.latitude),
                                     components,
-                                    parseFloat(station.sensordatavalues[0].value).toFixed(2));                
+                                    components.PM10 ? components.PM10.value.toFixed(2) : 0);                
                                     
                                 dispatch(updateStation({ station: stationModel, provider: provider }))
                             }
-                            // console.log(element, result);
                         });
                 }
 
                 let stationModel = new Station(provider,
-                    station.sensor.id,
+                    station.sensor.id.toString(),
                     name,
                     getStringDateLuftdaten(station.timestamp),
                     parseFloat(station.location.longitude),
                     parseFloat(station.location.latitude),
                     components,
-                    parseFloat(station.sensordatavalues[0].value).toFixed(2));
+                    components.PM10 ? components.PM10.value.toFixed(2) : 0);
 
                 let persistedStations = getState().stations;
 
@@ -96,13 +95,13 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                 let name = null;
 
                 let stationModel = new Station(provider,
-                    station.sensor.id,
+                    station.sensor.id.toString(),
                     name,
                     getStringDateLuftdaten(station.timestamp),
                     parseFloat(station.location.longitude),
                     parseFloat(station.location.latitude),
                     components,
-                    parseFloat(station.sensordatavalues[0].value).toFixed(2));
+                    components.PM10 ? components.PM10.value.toFixed(2) : 0);
 
 
                 // console.log(getState().stations[0].id, stationModel.date);

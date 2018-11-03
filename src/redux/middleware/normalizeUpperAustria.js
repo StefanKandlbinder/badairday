@@ -23,16 +23,6 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
             filteredStations = groupBy(filteredStations, 'station');
 
             Object.values(filteredStations).forEach(element => {
-                let mood = 0;
-
-                mood = element.filter(filteredElement => {
-                    return filteredElement.komponente === "PM10kont";
-                });
-
-                if (mood.length) {
-                    mood = parseFloat((mood[0].messwert.replace(",", ".")) * 1000).toFixed(2);
-                }
-
                 stationsObject.stationen.forEach(station => {
                     if (station.code === element[0].station) {
                         let components = normalizeComponents(element);
@@ -44,7 +34,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                             station.geoBreite,
                             station.geoLaenge,
                             components,
-                            mood);
+                            components.PM10 ? components.PM10.value.toFixed(2) : 0);
 
                         let persistedStations = getState().stations;
 
@@ -82,16 +72,6 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
             filteredStations = groupBy(filteredStations, 'station');
 
             Object.values(filteredStations).forEach(element => {
-                let mood = 0;
-
-                mood = element.filter(filteredElement => {
-                    return filteredElement.komponente === "PM10kont";
-                });
-
-                if (mood.length) {
-                    mood = parseFloat((mood[0].messwert.replace(",", ".")) * 1000).toFixed(2);
-                }
-
                 stationsObject.stationen.forEach(station => {
                     if (station.code === element[0].station) {
                         let components = normalizeComponents(element);
@@ -103,16 +83,16 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                             station.geoBreite,
                             station.geoLaenge,
                             components,
-                            mood);
+                            components.PM10 ? components.PM10.value.toFixed(2) : 0);
 
                         let filteredStation = getState().stations.filter(station => station.id === stationModel.id)
 
                         if (filteredStation.length) {
                             //if (getUnixDateFromLuftdaten(filteredStation[0].date) < getUnixDateFromLuftdaten(stationModel.date)) {
-                                return dispatch(updateStation({ station: stationModel, provider: provider }))
+                            return dispatch(updateStation({ station: stationModel, provider: provider }))
                             //}
                             //else
-                                //return false
+                            //return false
                         }
 
                         else {
