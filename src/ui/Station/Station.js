@@ -8,7 +8,7 @@ import './Station.css';
 class Station extends Component {
 
     onToggleFavorized = (id) => {
-        this.props.onFavorizeStation(id);
+        !this.props.station.favorized ? this.props.onFavorizeStation(id) : this.props.onUnfavorizeStation(id);
     }
 
     render() {
@@ -17,13 +17,19 @@ class Station extends Component {
             borderColor: getMood(this.props.station.mood, 0.4)
         }
 
-        return <li className="air__station" style={moodStyle} onClick={() => this.onToggleFavorized(this.props.station.id)}>
+        let airStationClasses = "air__station";
+        
+        if (this.props.station.favorized) {
+            airStationClasses += " air__station--favorized";
+        }
+        else {
+            airStationClasses = "air__station";
+        }
+
+        return <li className={airStationClasses} style={moodStyle} onClick={() => this.onToggleFavorized(this.props.station.id)}>
             <div className="air__station-item air__station--description">
                 <div className="air__station-name">{this.props.station.name} {this.props.station.provider === "upperaustria" ? "[AUT]" : ""}</div>
                 <div className="air__station-date">{this.props.station.date}</div>
-            </div>
-            <div className="air__station-item">
-                <div className="air__station-favorized">{this.props.station.favorized ? "FAV" : ""}</div>
             </div>
             <div className="air__station-item air__station-item--mood">
                 <div className="air__station-mood-main">{this.props.station.components.PM10 ? this.props.station.components.PM10.value.toFixed(2) : 0}</div>
