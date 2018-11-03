@@ -41,7 +41,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                                     parseFloat(station.location.longitude),
                                     parseFloat(station.location.latitude),
                                     components,
-                                    components.PM10 ? components.PM10.value.toFixed(2) : 0);                
+                                    components.PM10 ? parseFloat(components.PM10.value) : 0);                
                                     
                                 dispatch(updateStation({ station: stationModel, provider: provider }))
                             }
@@ -55,19 +55,21 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     parseFloat(station.location.longitude),
                     parseFloat(station.location.latitude),
                     components,
-                    components.PM10 ? components.PM10.value.toFixed(2) : 0);
+                    components.PM10 ? parseFloat(components.PM10.value) : 0);
 
                 let persistedStations = getState().stations;
 
                 if (persistedStations.length) {
-                    if (find(persistedStations, ['id', stationModel.id]) !== undefined) {
+                    console.log(stationModel.mood);
+                    
+                    if (find(persistedStations, ['id', stationModel.id]) !== undefined || stationModel.mood > 1900) {
                         return false
                     }
                     else {
                         dispatch(addStation({ station: stationModel, provider: provider }))
                     }
                 }
-                else {
+                else if (stationModel.mood < 1900) {
                     return dispatch(addStation({ station: stationModel, provider: provider }))
                 }
 
@@ -101,7 +103,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     parseFloat(station.location.longitude),
                     parseFloat(station.location.latitude),
                     components,
-                    components.PM10 ? components.PM10.value.toFixed(2) : 0);
+                    components.PM10 ? parseFloat(components.PM10.value) : 0);
 
 
                 // console.log(getState().stations[0].id, stationModel.date);

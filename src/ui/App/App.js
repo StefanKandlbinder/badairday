@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PageVisibility from 'react-page-visibility';
+import sortBy from 'lodash/sortBy';
 
 import { fetchStations } from "../../redux/actions/stations";
 import { clearState } from '../../redux/localStorage';
@@ -17,9 +18,11 @@ const upperAustriaProvider = "upperaustria";
 
 class Stations extends Component {
   render() {
+    let stations = sortBy(this.props.stations, ['mood']).reverse();
+
     return (
       <ul className="air__stations">
-        {this.props.stations.map((station) =>
+        {stations.map((station) =>
           <Station
             key={station.id}
             station={station} />

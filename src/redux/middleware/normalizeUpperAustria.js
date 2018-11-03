@@ -34,7 +34,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                             station.geoBreite,
                             station.geoLaenge,
                             components,
-                            components.PM10 ? components.PM10.value.toFixed(2) : 0);
+                            components.PM10 ? parseFloat(components.PM10.value) : 0);
 
                         let persistedStations = getState().stations;
 
@@ -83,7 +83,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                             station.geoBreite,
                             station.geoLaenge,
                             components,
-                            components.PM10 ? components.PM10.value.toFixed(2) : 0);
+                            components.PM10 ? parseFloat(components.PM10.value) : 0);
 
                         let filteredStation = getState().stations.filter(station => station.id === stationModel.id)
 
