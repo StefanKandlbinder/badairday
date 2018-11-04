@@ -1,36 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PageVisibility from 'react-page-visibility';
-import sortBy from 'lodash/sortBy';
 
 import { fetchStations } from "../../redux/actions/stations";
 import { clearState } from '../../redux/localStorage';
 
-import Station from "../Station/Station";
-import Notifications from "../Notifications/Notifications";
-import Button from "../Button/Button";
+import Stations from "../../components/Stations/Stations";
+import Notifications from "../../ui/Notifications/Notifications";
+import Button from "../../ui/Button/Button";
 import './App.css';
 
 const luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,10";
 const luftdatenProvider = "luftdaten";
 const upperAustriaURL = "https://www2.land-oberoesterreich.gv.at/imm/jaxrs/messwerte/json?";
 const upperAustriaProvider = "upperaustria";
-
-class Stations extends Component {
-  render() {
-    let stations = sortBy(this.props.stations, ['mood']).reverse();
-
-    return (
-      <ul className="air__stations">
-        {stations.map((station) =>
-          <Station
-            key={station.id}
-            station={station} />
-        )}
-      </ul>
-    );
-  }
-}
 
 class Updating extends Component {
   render() {

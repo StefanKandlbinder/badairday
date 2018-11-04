@@ -1,9 +1,10 @@
-import { SET_OPTION_REVERSEGEO, SET_OPTION_AUTOUPDATING, SET_OPTION_RUNAWAYS } from "../actions/options";
+import { SET_OPTION_REVERSEGEO, SET_OPTION_AUTOUPDATING, SET_OPTION_RUNAWAYS, SET_OPTION_SORT } from "../actions/options";
 
 const initState = {
     reversegeo: true,
     autoupdating: false,
-    runaways: false
+    runaways: false,
+    sort: true
 };
 
 export const optionsReducer = (options = initState, action) => {
@@ -17,6 +18,9 @@ export const optionsReducer = (options = initState, action) => {
         
         case action.type.includes(SET_OPTION_RUNAWAYS):
             return { ...options, runaways: action.payload };
+
+        case action.type.includes(SET_OPTION_SORT):
+            return { ...options, sort: action.payload };
 
         default:
             return options;

@@ -31,14 +31,6 @@ html {
   height: 100vh;
 }
 
-.air__stations {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .air__button-group {
   display: flex;
   justify-content: space-between;
