@@ -8,6 +8,7 @@ import { clearState } from '../../redux/localStorage';
 import Stations from "../../components/Stations/Stations";
 import Notifications from "../../ui/Notifications/Notifications";
 import Button from "../../ui/Button/Button";
+import Updatebar from "../../ui/Updatebar/Updatebar";
 import './App.css';
 
 const luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,10";
@@ -24,51 +25,6 @@ class Updating extends Component {
 class Loading extends Component {
   render() {
     return <div className="air__loading">Fetching ...</div>
-  }
-}
-
-class UpdateBar extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      // counter: 0,
-      progress: 0
-    }
-  }
-
-  componentDidMount() {
-    this.animate();
-  }
-
-  componentWillUnmount() {
-    cancelAnimationFrame(this.rafId);
-  }
-
-  animate() {
-    // if (this.props.animate) {
-      let start = null;
-      let step = timestamp => {
-        if (!start) start = timestamp;
-        
-        let progress = timestamp - start;
-        this.setState({ progress });
-
-        if (progress > this.props.interval) {
-          this.props.update();
-          start = null;
-        }
-
-        this.rafId = requestAnimationFrame(step);
-      };
-      this.rafId = requestAnimationFrame(step);
-    // }
-  }
-
-  render() {
-    let style = { transform: `scaleX(${(this.state.progress / this.props.interval)})` };
-
-    return <div style={style} className="air__update-bar"></div>
   }
 }
 
@@ -119,7 +75,7 @@ class App extends Component {
     }
 
     if (this.props.options.autoupdating) {
-      updateBar = <UpdateBar interval={60 * 5 * 1000} update={this.onUpdateStations} />
+      updateBar = <Updatebar interval={60 * 5 * 1000} update={this.onUpdateStations} />
     }
 
     if (this.props.notification.length) {

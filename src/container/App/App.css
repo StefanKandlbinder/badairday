@@ -71,14 +71,3 @@ html {
   flex-grow: 1;
   background: rgba(0, 121, 107, 0.75)
 }
-
-.air__update-bar {
-  position: fixed;
-  bottom: 0;
-  height: calc(var(--margin) / 2);
-  width: 100%;
-  background: rgba(255, 255, 255, 0.75);
-  z-index: 10;
-  will-change: transform; 
-  transform-origin: left;
-}
