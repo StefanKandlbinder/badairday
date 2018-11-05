@@ -49,7 +49,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     parseFloat(station.location.longitude),
                     parseFloat(station.location.latitude),
                     components,
-                    components.PM10 ? components.PM10.value : "-")
+                    components.PM10 ? components.PM10.value : 0)
 
                 let persistedStations = getState().stations;
 
@@ -91,7 +91,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     parseFloat(station.location.longitude),
                     parseFloat(station.location.latitude),
                     components,
-                    components.PM10 ? components.PM10.value : "-")
+                    components.PM10 ? components.PM10.value : 0)
 
 
                 // console.log(getState().stations[0].id, stationModel.date);

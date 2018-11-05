@@ -7,8 +7,8 @@ import './Station.css';
 
 class Sample extends Component {
     render() {
-      return <div className="air__station-component">
-                <div className="air__station-component-type">{this.props.component.type}</div>
+      return <div className={this.props.classes}>
+                <div className="air__station-component-type">{this.props.component.type}:</div>
                 <div className="air__station-component-value">{this.props.component.value}
                 </div>
             </div>
@@ -34,15 +34,15 @@ class Station extends Component {
         let pm25 = null;
 
         if (this.props.station.components.NO2) {
-            no2 = <Sample component={this.props.station.components.NO2}></Sample>
+            no2 = <Sample classes="air__station-component" component={this.props.station.components.NO2}></Sample>
         }
 
         if (this.props.station.components.PM10) {
-            pm10 = <Sample component={this.props.station.components.PM10}></Sample>
+            pm10 = <Sample classes="air__station-component air__station-component--main" component={this.props.station.components.PM10}></Sample>
         }
 
         if (this.props.station.components.PM25) {
-            pm25 = <Sample component={this.props.station.components.PM25}></Sample>
+            pm25 = <Sample classes="air__station-component" component={this.props.station.components.PM25}></Sample>
         }
         
         if (this.props.station.favorized) {
@@ -58,8 +58,8 @@ class Station extends Component {
                 <div className="air__station-date">{this.props.station.date}</div>
             </div>
             <div className="air__station-item air__station-item--component">
-                {no2}
                 {pm10}
+                {no2}
                 {pm25}
             </div>
         </li>

@@ -64,8 +64,13 @@
       line-height: 1;
   }
 
+  .air__station-name {
+    font-size: 16px;
+  }
+
   .air__station--description {
       flex-grow: 1;
+      padding-right: var(--margin);
   }
 
   .air__station-date {
@@ -92,10 +97,10 @@
     margin-top: calc(var(--margin) / 2);
   }
 
-  .air__station-component-value {
-    min-width: 36px;
+  .air__station-component--main {
+    font-size: 16px;
   }
-  
-  .air__station-mood-sub {
-    font-size: 12px;
+
+  .air__station-component-value {
+    min-width: 52px;
   }
