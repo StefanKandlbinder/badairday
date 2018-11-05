@@ -9,7 +9,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: transparent;
-    will-change: opacity, transform, box-shadow, background-color;
+    will-change: border-color, background-color;
     transition: background-color 300ms ease-out 300ms;
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
