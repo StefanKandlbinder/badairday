@@ -108,6 +108,7 @@ class App extends Component {
     let updating = null;
     let notifications = null;
     let updateBar = null;
+    let stations = null;
 
     if (this.props.loading) {
       loading = <Loading />
@@ -118,11 +119,15 @@ class App extends Component {
     }
 
     if (this.props.options.autoupdating) {
-      updateBar = <UpdateBar interval={30 * 1000} update={this.onUpdateStations} />
+      updateBar = <UpdateBar interval={60 * 5 * 1000} update={this.onUpdateStations} />
     }
 
     if (this.props.notification.length) {
       notifications = <Notifications notifications={this.props.notification} />
+    }
+
+    if (this.props) {
+      stations = <Stations stations={this.props.stations} options={this.props.options}/>;
     }
 
     return (
@@ -145,7 +150,7 @@ class App extends Component {
               CLEAR
             </Button>
           </ div>
-          <Stations stations={this.props.stations} />
+          {stations}
           <div className="air__spacer"></div>
           {loading}
           {updating}

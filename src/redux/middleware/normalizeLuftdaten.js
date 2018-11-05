@@ -13,13 +13,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
     const addStations = (stations, provider) => {
         if (stations) {
             stations.map(station => {
-                let components = {};
-
-                station.sensordatavalues.forEach(component => {
-                    let type = component.value_type === "P1" ? "PM10" : "PM25";
-                    
-                    components[type] = new Component(type, parseFloat(component.value), "µg/m³");
-                })
+                let components = normalizeComponents(station.sensordatavalues);
 
                 let name =  "Lufdatensensor: " + station.sensor.id;
 
@@ -55,7 +49,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     parseFloat(station.location.longitude),
                     parseFloat(station.location.latitude),
                     components,
-                    components.PM10 ? parseFloat(components.PM10.value) : 0);
+                    components.PM10 ? components.PM10.value : "-")
 
                 let persistedStations = getState().stations;
 
@@ -86,13 +80,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
     const updateStations = (stations, provider) => {
         if (stations) {
             stations.map(station => {
-                let components = {};
-
-                station.sensordatavalues.forEach(component => {
-                    let type = component.value_type === "P1" ? "PM10" : "PM25";
-                    
-                    components[type] = new Component(type, parseFloat(component.value), "µg/m³");
-                })
+                let components = normalizeComponents(station.sensordatavalues);
 
                 let name = null;
 
@@ -103,7 +91,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     parseFloat(station.location.longitude),
                     parseFloat(station.location.latitude),
                     components,
-                    components.PM10 ? parseFloat(components.PM10.value) : 0);
+                    components.PM10 ? components.PM10.value : "-")
 
 
                 // console.log(getState().stations[0].id, stationModel.date);
@@ -126,6 +114,18 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
             // notify about the transformation
             dispatch(dataNormalized({ feature: action.meta.feature }));
         }
+    }
+
+    const normalizeComponents = (element) => {
+        let components = {};
+
+        element.forEach(component => {
+            let type = component.value_type === "P1" ? "PM10" : "PM25";
+            
+            components[type] = new Component(type, parseFloat(component.value), "µg/m³");
+        });
+
+        return components;
     }
 
     // filter both by action type and metadata content

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import sortBy from 'lodash/sortBy';
 
 import Station from "../../components/Station/Station";
@@ -25,15 +24,4 @@ class Stations extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        stations: state.stations,
-        options: state.options
-    };
-}
-
-const mapDispatchToProps = dispatch => {
-    return {}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Stations);
+export default Stations;

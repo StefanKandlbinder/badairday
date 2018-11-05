@@ -10,7 +10,7 @@
     align-items: center;
     background-color: transparent;
     will-change: opacity, transform, box-shadow, background-color;
-    transition: background-color 300ms ease-out;
+    transition: background-color 300ms ease-out 300ms;
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
@@ -76,12 +76,24 @@
     margin-top: calc(var(--margin) / 2);
   }
   
-  .air__station-item--mood {
-    font-size: 22px;
+  .air__station-item--component {
     display: flex;
     flex-direction: column;
     text-align: right;
     min-width: 72px;
+  }
+
+  .air__station-component {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .air__station-component:not(:first-child) {
+    margin-top: calc(var(--margin) / 2);
+  }
+
+  .air__station-component-value {
+    min-width: 36px;
   }
   
   .air__station-mood-sub {

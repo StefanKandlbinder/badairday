@@ -5,6 +5,16 @@ import { favorizeStation, unfavorizeStation } from "../../redux/actions/stations
 import getMood from '../../utilities/GetMood';
 import './Station.css';
 
+class Sample extends Component {
+    render() {
+      return <div className="air__station-component">
+                <div className="air__station-component-type">{this.props.component.type}</div>
+                <div className="air__station-component-value">{this.props.component.value}
+                </div>
+            </div>
+    }
+  }
+
 class Station extends Component {
 
     onToggleFavorized = (id) => {
@@ -18,6 +28,22 @@ class Station extends Component {
         }
 
         let airStationClasses = "air__station";
+
+        let no2 = null;
+        let pm10 = null;
+        let pm25 = null;
+
+        if (this.props.station.components.NO2) {
+            no2 = <Sample component={this.props.station.components.NO2}></Sample>
+        }
+
+        if (this.props.station.components.PM10) {
+            pm10 = <Sample component={this.props.station.components.PM10}></Sample>
+        }
+
+        if (this.props.station.components.PM25) {
+            pm25 = <Sample component={this.props.station.components.PM25}></Sample>
+        }
         
         if (this.props.station.favorized) {
             airStationClasses += " air__station--favorized";
@@ -31,18 +57,13 @@ class Station extends Component {
                 <div className="air__station-name">{this.props.station.name} {this.props.station.provider === "upperaustria" ? "[AUT]" : ""}</div>
                 <div className="air__station-date">{this.props.station.date}</div>
             </div>
-            <div className="air__station-item air__station-item--mood">
-                <div className="air__station-mood-main">{this.props.station.components.PM10 ? this.props.station.components.PM10.value.toFixed(2) : 0}</div>
-                <div className="air__station-mood-sub">{this.props.station.components.PM25 ? this.props.station.components.PM25.value.toFixed(2) : 0}</div>
+            <div className="air__station-item air__station-item--component">
+                {no2}
+                {pm10}
+                {pm25}
             </div>
         </li>
     }
-}
-
-const mapStateToProps = state => {
-    return {
-        stations: state.stations
-    };
 }
 
 const mapDispatchToProps = dispatch => {
@@ -52,4 +73,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Station);
+export default connect(null, mapDispatchToProps)(Station);

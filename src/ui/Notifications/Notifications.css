@@ -9,5 +9,5 @@
     bottom: 56px;
     left: 8px;
     border-radius: var(--margin);
-    width: calc(100% - calc(var(--margin) * 2));
+    max-width: calc(320px - calc(var(--margin) * 2));
 }
