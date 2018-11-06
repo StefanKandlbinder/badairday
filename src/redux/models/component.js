@@ -1,8 +1,9 @@
 export default class Component {
-    constructor(type = "", value = 0, unit = "") {
+    constructor(type = "", value = 0, unit = "", update=true) {
         this.type = type;
         this.value = parseFloat(value.toFixed(2));
         this.unit = unit;
+        this.update = update;
     }
 
     set setType(type) {
@@ -27,5 +28,13 @@ export default class Component {
 
     get getUnit() {
         return this.unit;
+    }
+    
+    set setUpdate(update) {
+        this.update = update;
+    }
+
+    get getUpdate() {
+        return this.update;
     }
 }

@@ -7,13 +7,12 @@ import './Station.css';
 
 class Sample extends Component {
     render() {
-      return <div className={this.props.classes}>
-                <div className="air__station-component-type">{this.props.component.type}:</div>
-                <div className="air__station-component-value">{this.props.component.value}
-                </div>
-            </div>
+        return <div className={this.props.classes}>
+            <div className="air__station-component-type">{this.props.component.type}:</div>
+            <div className="air__station-component-value">{this.props.component.update ? this.props.component.value : "-"}</div>
+        </div>
     }
-  }
+}
 
 class Station extends Component {
 
@@ -44,7 +43,7 @@ class Station extends Component {
         if (this.props.station.components.PM25) {
             pm25 = <Sample classes="air__station-component" component={this.props.station.components.PM25}></Sample>
         }
-        
+
         if (this.props.station.favorized) {
             airStationClasses += " air__station--favorized";
         }

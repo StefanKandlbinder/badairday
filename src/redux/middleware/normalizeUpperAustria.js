@@ -39,7 +39,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                         let persistedStations = getState().stations;
 
                         if (persistedStations.length) {
-                            if (find(persistedStations, ['id', stationModel.id]) !== undefined ) {
+                            if (find(persistedStations, ['id', stationModel.id]) !== undefined) {
                                 return false
                             }
                             else {
@@ -109,19 +109,29 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
 
     const normalizeComponents = (element) => {
         let components = {};
+        let PM10 = false;
+        let PM25 = false;
+        let NO2 = false;
 
         element.forEach(component => {
             let type = "";
             let value = 0;
             let unit = component.einheit;
+            let update = component.update;
 
             switch (component.komponente) {
                 case "PM10kont":
                     type = "PM10";
+                    PM10 = true;
                     break;
 
                 case "PM25kont":
                     type = "PM25";
+                    PM10 = true;
+                    break;
+
+                case "NO2":
+                    NO2 = true;
                     break;
 
                 default:
@@ -144,8 +154,20 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                     value = parseFloat(component.messwert.replace(",", "."));
             }
 
-            components[type] = new Component(type, value, unit);
+            components[type] = new Component(type, value, unit, update);
         })
+
+        if (!PM10) {
+            components["PM10"] = new Component("PM10", 0, "µg/m³", false);
+        }
+
+        if (!PM25) {
+            components["PM25"] = new Component("PM25", 0, "µg/m³", false);
+        }
+
+        if (!NO2) {
+            components["NO2"] = new Component("NO2", 0, "µg/m³", false);
+        }
 
         return components;
     }
