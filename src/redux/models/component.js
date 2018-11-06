@@ -1,7 +1,7 @@
 export default class Component {
     constructor(type = "", value = 0, unit = "", update=true) {
         this.type = type;
-        this.value = parseFloat(value.toFixed(2));
+        this.value = Number(value.toFixed(2));
         this.unit = unit;
         this.update = update;
     }

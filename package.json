@@ -5,13 +5,11 @@
   "dependencies": {
     "d3-scale": "^2.1.2",
     "esri-leaflet-geocoder": "^2.2.9",
-    "node-sass": "^4.9.4",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-page-visibility": "^3.0.0",
     "react-redux": "^5.0.7",
     "react-scripts": "2.0.4",
-    "recompose": "^0.30.0",
     "redux": "^4.0.1",
     "redux-devtools": "^3.4.1"
   },
@@ -31,6 +29,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "redux-devtools-extension": "^2.13.5"
+    "redux-devtools-extension": "^2.13.5",
+    "node-sass": "^4.9.4"
   }
 }
