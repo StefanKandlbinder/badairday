@@ -84,7 +84,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                             station.geoLaenge,
                             components,
                             components.PM10 ? components.PM10.value : 0);
-
+                        
                         let filteredStation = getState().stations.filter(station => station.id === stationModel.id)
 
                         if (filteredStation.length) {
@@ -114,10 +114,10 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
         let NO2 = false;
 
         element.forEach(component => {
-            let type = "";
+            let type = component.komponente;
             let value = 0;
             let unit = component.einheit;
-            let update = component.update;
+            let update = true;
 
             switch (component.komponente) {
                 case "PM10kont":
@@ -127,7 +127,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
 
                 case "PM25kont":
                     type = "PM25";
-                    PM10 = true;
+                    PM25 = true;
                     break;
 
                 case "NO2":
@@ -150,13 +150,14 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                     break;
 
                 default:
-                    unit = component.einheit
+                    unit = component.einheit;
                     value = parseFloat(component.messwert.replace(",", "."));
             }
 
             components[type] = new Component(type, value, unit, update);
         })
 
+        // if there is no update available, set the components to 0
         if (!PM10) {
             components["PM10"] = new Component("PM10", 0, "µg/m³", false);
         }
