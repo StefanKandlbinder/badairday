@@ -1,5 +1,5 @@
-import ReverseGeocode from 'esri-leaflet-geocoder';
 import find from 'lodash/find';
+import ReverseGeocode from 'esri-leaflet-geocoder';
 
 import { dataNormalized } from "../actions/data";
 import { addStation, updateStation, ADD_STATIONS, UPDATE_STATIONS } from "../actions/stations";
@@ -11,13 +11,15 @@ import Component from "../models/component";
 
 export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) => (action) => {
     const addStations = (stations, provider) => {
+        console.log(ReverseGeocode);
+        
         if (stations) {
             stations.map(station => {
                 let components = normalizeComponents(station.sensordatavalues);
 
                 let name =  "Lufdatensensor: " + station.sensor.id;
 
-                if (getState().options.reversegeo) {
+                if (getState().options.reversegeo && ReverseGeocode !== undefined) {
                     ReverseGeocode.geocodeService().reverse()
                         .latlng([station.location.latitude, station.location.longitude])
                         .distance(10)
@@ -54,8 +56,6 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                 let persistedStations = getState().stations;
 
                 if (persistedStations.length) {
-                    console.log(stationModel.mood);
-                    
                     if (find(persistedStations, ['id', stationModel.id]) !== undefined || stationModel.mood > 1900) {
                         return false
                     }

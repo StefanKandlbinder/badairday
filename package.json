@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "d3-scale": "^2.1.2",
-    "esri-leaflet-geocoder": "^2.2.9",
+    "esri-leaflet-geocoder": "^2.2.13",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-page-visibility": "^3.0.0",
@@ -29,7 +29,6 @@
   ],
   "devDependencies": {
     "redux-devtools": "^3.4.1",
-    "redux-devtools-extension": "^2.13.5",
-    "node-sass": "^4.9.4"
+    "redux-devtools-extension": "^2.13.5"
   }
 }
