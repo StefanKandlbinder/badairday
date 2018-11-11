@@ -1,6 +1,6 @@
 // import { DevTools } from '../ui/DevTool'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import throttle from 'lodash/throttle';
 
 import { stationsReducer } from './reducers/stationsReducer';
@@ -55,13 +55,26 @@ const configureStore = () => {
 
     const persistedState = loadState();
 
-    const store = createStore(
-        rootReducer,
-        persistedState,
-        composeEnhancers(
-        enhancer
-        // other store enhancers if any
-    ));
+    let store = null;
+    
+    if (process.env.NODE_ENV !== 'production') {
+        store = createStore(
+            rootReducer,
+            persistedState,
+            composeEnhancers(
+            enhancer
+            // other store enhancers if any
+        ));    
+    }
+    else {
+        store = createStore(
+            rootReducer,
+            persistedState,    
+            enhancer
+            // other store enhancers if any
+        );
+    }
+    
 
     store.subscribe(throttle(() => {
         saveState({
