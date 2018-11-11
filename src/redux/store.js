@@ -1,6 +1,6 @@
 // import { DevTools } from '../ui/DevTool'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
 import throttle from 'lodash/throttle';
 
 import { stationsReducer } from './reducers/stationsReducer';
