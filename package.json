@@ -10,8 +10,7 @@
     "react-page-visibility": "^3.0.0",
     "react-redux": "^5.0.7",
     "react-scripts": "2.0.4",
-    "redux": "^4.0.1",
-    "redux-devtools": "^3.4.1"
+    "redux": "^4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -29,6 +28,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "redux-devtools": "^3.4.1",
     "redux-devtools-extension": "^2.13.5",
     "node-sass": "^4.9.4"
   }

@@ -55,26 +55,13 @@ const configureStore = () => {
 
     const persistedState = loadState();
 
-    let store = null;
-    
-    if (process.env.NODE_ENV !== 'production') {
-        store = createStore(
-            rootReducer,
-            persistedState,
-            composeEnhancers(
-            enhancer
-            // other store enhancers if any
-        ));    
-    }
-    else {
-        store = createStore(
-            rootReducer,
-            persistedState,    
-            enhancer
-            // other store enhancers if any
-        );
-    }
-    
+    const store = createStore(
+        rootReducer,
+        persistedState,
+        composeEnhancers(
+        enhancer
+        // other store enhancers if any
+    ));
 
     store.subscribe(throttle(() => {
         saveState({
