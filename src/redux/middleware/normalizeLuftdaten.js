@@ -11,8 +11,6 @@ import Component from "../models/component";
 
 export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) => (action) => {
     const addStations = (stations, provider) => {
-        console.log(ReverseGeocode);
-        
         if (stations) {
             stations.map(station => {
                 let components = normalizeComponents(station.sensordatavalues);
