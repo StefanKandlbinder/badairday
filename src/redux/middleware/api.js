@@ -10,7 +10,7 @@ export const apiMiddleware = ({ dispatch }) => (next) => (action) => {
         fetch(url, { body, method })
             .then(response => response.json())
             .then(response => dispatch(apiSuccess({ response, feature, provider, update })))
-            .catch(error => dispatch(apiError({ error: error, feature, provider })))
+            .catch(error => dispatch(apiError({ error: error.message, feature, provider })))
     }
 
     if (action.type.includes(API_REQUEST) && action.meta.provider === "upperaustria") {
@@ -21,6 +21,6 @@ export const apiMiddleware = ({ dispatch }) => (next) => (action) => {
         fetch(url, { body, method })
             .then(response => response.json())
             .then(response => dispatch(apiSuccess({ response, feature, provider, update })))
-            .catch(error => dispatch(apiError({ error: error, feature, provider })))
+            .catch(error => dispatch(apiError({ error: error.message, feature, provider })))
     }
 };

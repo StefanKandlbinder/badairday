@@ -10,6 +10,12 @@ class Stations extends Component {
 
         if (this.props.options.sort) {
           stations = sortBy(this.props.stations, ['mood']).reverse();
+          stations.forEach((station, i) => {
+            if (station.favorized) {
+                stations.splice(i, 1);
+                stations.unshift(station);
+            }
+          })
         }
 
         return (

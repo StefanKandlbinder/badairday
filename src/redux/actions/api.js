@@ -16,8 +16,8 @@ export const apiSuccess = ({ response, feature, provider, update }) => ({
     meta: { feature, provider, update }
 });
 
-export const apiError = ({ error, feature }) => ({
+export const apiError = ({ error, feature, provider }) => ({
     type: `${feature} ${API_ERROR}`,
     payload: error,
-    meta: { feature }
+    meta: { feature, provider }
 });
