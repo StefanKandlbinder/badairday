@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "d3-scale": "^2.1.2",
-    "esri-leaflet-geocoder": "^2.2.13",
+    "esri-leaflet-geocoder": "2.2.9",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-page-visibility": "^3.0.0",
