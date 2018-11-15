@@ -78,8 +78,8 @@ class App extends Component {
       updateBar = <Updatebar interval={60 * 5 * 1000} update={this.onUpdateStations} />
     }
 
-    if (this.props.notification.length) {
-      notifications = <Notifications notifications={this.props.notification} />
+    if (this.props.notifications.length) {
+      notifications = <Notifications notifications={this.props.notifications} />
     }
 
     if (this.props) {
@@ -122,7 +122,7 @@ const mapStateToProps = state => {
   return {
     loading: state.ui.loading,
     updating: state.ui.updating,
-    notification: state.notification,
+    notifications: state.notifications,
     update: state.update,
     stations: state.stations,
     options: state.options

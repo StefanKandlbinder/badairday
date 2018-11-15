@@ -22,7 +22,7 @@ const configureStore = () => {
     const rootReducer = combineReducers({
         stations: stationsReducer,
         ui: uiReducer,
-        notification: notificationsReducer,
+        notifications: notificationsReducer,
         update: updateReducer,
         options: optionsReducer
     });
