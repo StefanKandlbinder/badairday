@@ -25,11 +25,19 @@ class Notifications extends Component {
   }
 
   setNotification = () => {
-    this.props.onRemoveNotification(this.props.notifications[0].id);
 
-    if (this.props.notifications.length) {
+    if (this.props.notifications.length > 1) {
+      this.props.onRemoveNotification(this.props.notifications[0].id);
+      
       this.setState({
         notification: this.props.notifications[0].message
+      })
+    }
+    else if (this.props.notifications.length === 1) {
+      this.setState({
+        notification: this.props.notifications[0].message
+      }, () => {
+        this.props.onRemoveNotification(this.props.notifications[0].id);
       })
     }
   }
