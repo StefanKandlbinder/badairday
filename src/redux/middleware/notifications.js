@@ -1,4 +1,4 @@
-import { removeNotification, SET_NOTIFICATION, setNotification } from "../actions/notifications";
+import { SET_NOTIFICATION, setNotification } from "../actions/notifications";
 
 export const notificationMiddleware = () => (next) => (action) => {
 
@@ -15,11 +15,6 @@ export const notificationMiddleware = () => (next) => (action) => {
         // fire a new action with the enriched payload
         // note: the payload is an object
         next(setNotification({ message: notification, feature: meta.feature }));
-
-        // dispatch a clear action after a given time
-        /* setTimeout(() => {
-            next(removeNotification({ notificationId: id, feature: meta.feature }))
-        }, 4000) */
 
     } else {
         next(action)
