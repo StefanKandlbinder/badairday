@@ -78,7 +78,8 @@ class Station extends Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.station.id !== prevProps.station.id) {
-            this.setState({ comps: this.getAirComps() })
+            this.setState({ comps: this.getAirComps() });
+            change.play();
         }
 
         if (this.props.station.provider !== "luftdaten" && prevProps.station.provider === "luftdaten") {
@@ -89,7 +90,9 @@ class Station extends Component {
             this.state.animationHexagon.beginElement();
         }
 
-        change.play();
+        if (this.props.station.favorized !== prevProps.station.favorized) {
+            change.play();
+        }
     }
 
     onAddStation = () => {
@@ -171,14 +174,9 @@ class Station extends Component {
         let name = "Station";
         let x = "center";
         let y = "center";
-
-        // console.log(this.isFavorized());
-
         
         name = this.props.station.name;
         dateElement = <div className="air__station-date">{this.props.station.date}</div>;
-        // this.setState({ mood: getMood.getRGBA(this.state.stationData.mood) })
-        
 
         if (this.props.location.state !== undefined) {
             let innerWidth = window.innerWidth;
@@ -223,7 +221,7 @@ class Station extends Component {
         }
 
         let moodStyle = {
-            fill: getMood(this.props.station.mood, .75)
+            fill: this.props.station.components.PM10.update ? getMood(this.props.station.mood, .75) : "rgba(70,70,70,0.75)"
         }
 
         let transStyle = {

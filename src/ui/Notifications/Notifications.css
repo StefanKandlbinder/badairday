@@ -1,14 +1,15 @@
 .Notifications {
+    font-size: 12px;
     list-style: none;
     margin: 0 auto;
-    padding: calc(var(--margin) * 2) calc(var(--margin) * 3);
+    padding: var(--margin) calc(var(--margin) * 2);
     background: rgba(221, 44, 0, 0.9);
     color: white;
     line-height: 1.2;
     position: fixed;
     bottom: 56px;
     left: calc(50% - 150px);
-    border-radius: var(--margin);
+    border-radius: var(--border-radius);
     width: 300px;
     z-index: 100;
 }

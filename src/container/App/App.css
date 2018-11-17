@@ -10,7 +10,7 @@
   --color-text: rgba(255, 255, 255, 0.9);
   --color-text-weak: rgba(255, 255, 255, 0.3);
   --margin: 0.5rem;
-  --borderRadius: calc(var(--margin) / 3);
+  --border-radius: calc(var(--margin) / 3);
 }
 
 .air {

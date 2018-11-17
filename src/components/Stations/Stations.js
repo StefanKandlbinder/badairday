@@ -95,7 +95,7 @@ class Stations extends Component {
                 marker = L.divIcon({
                     html: `<svg xmlns="http://www.w3.org/2000/svg" 
                         class="" viewBox="0 0 600 600" 
-                        style="fill: ${getMood(element.mood, .75)}">
+                        style="fill: ${element.components.PM10.update ? getMood(element.mood, .75) : "rgba(70,70,70,0.75)"}">
                         <path d="M41.1,165.29V434.71a25.57,25.57,0,0,0,12.78,22.15L287.21,591.57a25.58,25.58,0,0,0,25.58,0L546.12,456.86a25.57,25.57,0,0,0,12.78-22.15V165.29a25.57,25.57,0,0,0-12.78-22.15L312.79,8.43a25.58,25.58,0,0,0-25.58,0L53.88,143.14A25.57,25.57,0,0,0,41.1,165.29Z"/>
                         </svg>`,
                     className: "air__stations-luftdaten-marker",
@@ -108,7 +108,7 @@ class Stations extends Component {
                 marker = L.divIcon({
                     html: `<svg xmlns="http://www.w3.org/2000/svg" 
                         class="" viewBox="0 0 600 600" 
-                        style="fill: ${getMood(element.mood, .75)}">
+                        style="fill: ${element.components.PM10.update ? getMood(element.mood, .75) : "rgba(70,70,70,0.75)"}">
                         <path d="M5,300H5A295,295,0,0,0,152.5,555.48h0a295,295,0,0,0,295,0h0A295,295,0,0,0,595,300h0A295,295,0,0,0,447.5,44.52h0a295,295,0,0,0-295,0h0A295,295,0,0,0,5,300Z"/>
                         </svg>`,
                     className: "air__stations-upperaustria-marker-wrapper",
