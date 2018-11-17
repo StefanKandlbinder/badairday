@@ -1,0 +1,112 @@
+.air__legend {
+    /* --color-stop-opacity: 1;
+    --color-stop-0: rgba(0,121,107,var(--color-stop-opacity));
+    --color-stop-1: rgba(0,121,107,var(--color-stop-opacity));
+    --color-stop-2: rgba(249,168,37,var(--color-stop-opacity));
+    --color-stop-3: rgba(230,81,0,var(--color-stop-opacity));
+    --color-stop-4: rgba(221,44,0,var(--color-stop-opacity));
+    --color-stop-5: rgba(218, 148, 131, var(--color-stop-opacity));
+    --color-stop-6: rgba(140,0,132,var(--color-stop-opacity)); */
+
+    --color-stop-0: #00796b;
+    --color-stop-1: #00796b;
+    --color-stop-2: #f9a825;
+    --color-stop-3: #e65100;
+    --color-stop-4: #dd2c00;
+    --color-stop-5: #dd2c00;
+    --color-stop-6: #8c0084;
+
+    --height: 250px;
+    
+    
+    width: 12px;
+    height: var(--height);
+    display: block;
+    position: fixed;
+    bottom: 56px;
+    left: 12px;
+    z-index: 50;
+    opacity: 0.75;
+    background: linear-gradient(to top, 
+        var(--color-stop-0) 0%, 
+        var(--color-stop-1) 16%, 
+        var(--color-stop-2) 32%,   
+        var(--color-stop-3) 48%, 
+        var(--color-stop-4) 72%, 
+        var(--color-stop-5) 80%,
+        var(--color-stop-6) 100%); 
+        
+}
+
+.air__legend-scale {
+    position: absolute;
+    bottom: 0;
+    left: 12px;
+    height: 100%;
+    width: 52px;
+    padding-left: 4px;
+    background: rgba(255,255,255,0.75);
+}
+
+.air__legend-scale-stop {
+    position: absolute;
+    font-size: 11px;
+    text-align: left;
+}
+
+.air__legend-scale-stop:after {
+    content: "";
+    background: rgba(255,255,255,0.75);
+    position: absolute;
+    width: 12px;
+    height: 1px;
+    left: -16px;
+    bottom: 0;
+}
+
+.air__legend-scale-stop:first-child:after,
+.air__legend-scale-stop:last-child:after {
+    display: none;
+}
+
+.air__legend-scale-stop--0 {
+    bottom: 0;
+    white-space: nowrap;
+}
+
+.air__legend-scale-stop--1 {
+    bottom: 20%;
+}
+
+.air__legend-scale-stop--2 {
+    bottom: 40%;
+}
+
+.air__legend-scale-stop--3 {
+    bottom: 60%;
+}
+
+.air__legend-scale-stop--4 {
+    bottom: 80%;
+}
+
+.air__legend-scale-stop--5 {
+    bottom: calc(100% -12px);
+}
+
+.air__legend-scale--limit {
+    color: rgba(255,0,0,1);
+    font-weight: bold;
+}
+
+.air__legend-scale--limit-text {
+    position: absolute;
+    top: -14px;
+}
+
+.air__legend-scale--limit.air__legend-scale-stop:after {
+    background: rgba(255,0,0,0.5);
+    height: 2px;
+    left: -18px;
+    width: 16px;
+}

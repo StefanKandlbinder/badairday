@@ -2,21 +2,27 @@
 .air__button:focus,
 .air__button:active {
     box-sizing: border-box;    
-    padding: 8px 8px;
-    min-width: 36px;
-    border: 0;
-    border-radius: 0px;
+    padding: 4px 8px;
+    min-height: 32px;
+    min-width: 32px;
+    border: 1px solid white;
+    border-radius: 6px;
     background: rgba(255, 255, 255, 0.9);
     color: rgba(0, 121, 107, 1);
     box-shadow: 0;
     outline: 0;
-    display: block;
-    width: 100%;;
 }
 
 .air__button--naked,
 .air__button--naked:focus,
 .air__button--naked:active {
     border: 0;
+    border-radius: 0;
     box-shadow: 0;
+}
+
+.air__button--ghost,
+.air__button--ghost:focus,
+.air__button--ghost:active {
+    background: transparent;
 }

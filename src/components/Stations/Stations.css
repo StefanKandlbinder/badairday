@@ -1,7 +1,70 @@
 .air__stations {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    height: 100vh;
+    z-index: 50;
+    /* filter: grayscale(0.6); */
+    --shadow: rgba(0, 0, 0, 0.5);
+}
+
+.air__stations-marker-cluster {
+    background: var(--color-secondary-weak);
+    border-radius: 50%;
+    color: #ededed;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    width: 40px;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+.air__stations-upperaustria-marker-wrapper {
+    border: 0;
+    background: transparent;
+}
+
+.air__stations-upperaustria-marker {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+/* ------- */
+/* LEAFLET */
+/* ------- */
+
+.leaflet-left .leaflet-control {
+    margin-left: 12px;
+    margin-top: 12px;
+}
+
+.leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
     display: flex;
-    flex-wrap: wrap;
-  }
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    background: transparent;
+    box-shadow: 2px 4px 20px var(--shadow);
+}
+
+.leaflet-touch .leaflet-bar a {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.leaflet-touch .leaflet-bar a:first-child,
+.leaflet-touch .leaflet-bar a:last-child {
+    border-radius: 0;
+}
+
+.leaflet-control-attribution {
+    position: fixed;
+    top: -16px;
+    right: 0;
+    background: rgba(255,255,255,0.5);
+    transform: rotate(-90deg);
+    transform-origin: bottom right;
+    text-align: right;
+}

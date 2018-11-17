@@ -10,4 +10,5 @@
     left: calc(50% - 150px);
     border-radius: var(--margin);
     width: 300px;
+    z-index: 100;
 }

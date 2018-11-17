@@ -26,7 +26,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                 stationsObject.stationen.forEach(station => {
                     if (station.code === element[0].station) {
                         let components = normalizeComponents(element);
-
+                        
                         let stationModel = new Station("upperaustria",
                             element[0].station,
                             station.kurzname,

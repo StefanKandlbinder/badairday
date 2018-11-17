@@ -1,0 +1,53 @@
+.air__comp {
+    display: flex;
+    justify-content: center;
+    color: var(--color-text);
+    line-height: 1.35;
+}
+
+.air__comp--dust .air__comp-title,
+.air__comp--dust .air__comp-value {
+    width: 90px;
+}
+
+.air__comp--dust .air__comp-title {
+    text-align: right;
+}
+
+.air__comp--dust .air__comp-value {
+    text-align: left;
+    margin-left: 4px;
+}
+
+.air__comp--dust-PM10kont {
+    font-size: 16px !important;
+}
+
+.air__comp-wind-direction {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--color-text);
+    line-height: 1.2;
+    transition: transform 500ms ease-out;
+    transform-origin: center center;
+    will-change: transform;
+}
+
+.air__comp-wind-direction-svg {
+    width: 18px;
+    height: 18px;
+}
+
+.air__comp-wind-direction-svg path {
+    fill: var(--color-text);
+}
+
+.air__comp-wind-force {
+    font-size: 12px;
+    color: var(--color-text);
+    line-height: 1.2;
+}
+
+.air__comp--temp {
+    order: 1;
+}

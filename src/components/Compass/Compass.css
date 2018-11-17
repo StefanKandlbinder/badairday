@@ -1,0 +1,126 @@
+.air__compass {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    color: var(--color-text);
+}
+
+.air__compass:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    border: 1px dashed var(--color-text-weak);
+    top: 22px;
+    bottom: 22px;
+    right: 22px;
+    left: 22px;
+}
+
+.air__compass-wind {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    will-change: transform;
+    transition: transform ease-out 150ms;
+}
+
+.air__compass-wind-svg {
+    transform: rotate(90deg) matrix(-1, 0, 0, 1, 0, 0) translatex(16px);
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: 42px;
+}
+
+.air__compass-wind-svg path {
+    fill: rgba(255, 255, 255, 0.75);
+}
+
+.air__compass-grid {
+    will-change: transform;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    will-change: transform;
+    transition: transform ease-out 150ms;
+    color: var(--color-text);
+}
+
+.air__compass-grid-n {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 0;
+    right: calc(50% - 10px);
+    will-change: transform;
+    transition: transform ease-out 150ms;
+}
+
+.air__compass-grid-o {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: calc(50% - 10px);
+    right: 0;
+    will-change: transform;
+    transition: transform ease-out 150ms;
+}
+
+.air__compass-grid-s {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    bottom: 0px;
+    right: calc(50% - 10px);
+    will-change: transform;
+    transition: transform ease-out 150ms;
+}
+
+.air__compass-grid-w {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: calc(50% - 10px);
+    left: 0;
+    will-change: transform;
+    transition: transform ease-out 150ms;
+}
+
+.air__compass-grid-n-line,
+.air__compass-grid-o-line,
+.air__compass-grid-s-line,
+.air__compass-grid-w-line {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    height: 100%;
+    background: var(--color-text-weak);
+    will-change: transform;
+    transition: transform ease-out 150ms;
+}

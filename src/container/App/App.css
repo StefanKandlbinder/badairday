@@ -1,35 +1,92 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
-  font-size: 12px;
-}
-
-html {
-  box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
 /*
  * CUSTOM PROPERTIES
  */
 
 :root {
+  --color-primary: rgba(0, 121, 107, 0.75);
+  --color-primary-active: rgba(0, 121, 107, 0.9);
+  --color-secondary: rgba(37, 113, 199, 0.9);
+  --color-secondary-weak: rgba(37, 113, 199, 0.5);
+  --color-text: rgba(255, 255, 255, 0.9);
+  --color-text-weak: rgba(255, 255, 255, 0.3);
   --margin: 0.5rem;
-  --borderRadius: calc(var(--margin) / 2);
+  --borderRadius: calc(var(--margin) / 3);
 }
 
 .air {
-  padding: 0;
-  margin: 0;
-  text-align: center;
-  font-family: 'Josefin Sans', sans-serif;
+  height: inherit;
+  width: inherit;
+  /* padding-top: 32px; */
+  overflow: hidden;
+}
+
+.air__background {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.2;
+  z-index: -1;
 }
+
+.air__background svg {
+  width: 50%;
+  height: 50%;
+  transform: rotate(36deg);
+}
+
+.air__background path {
+  fill: rgba(120, 120, 120, 0.3)
+}
+
+.air__logo {
+  font-size: 10px;
+  color: var(--color-primary);
+  /* background: var(--color-text-weak); */
+  /* padding: 4px 0; */
+  position: absolute;
+  right: 12px;
+  bottom: 56px;
+  width: 56px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.air__logo-svg {
+  width: 12px;
+  height: 12px;
+  margin-right: 1px;
+  margin-top: -1px;
+  background: var(--color-primary);
+  /* padding: 3px; */
+  border-radius: 15%;
+}
+
+.air__logo-svg path {
+  fill: var(--color-text);
+}
+
+.air__station-date + .air__comp-wind {
+  margin-top: 0;
+}
+
+.air__footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 44px;
+  transition: transform 300ms ease-out;
+  will-change: transform;
+  z-index: 50;
+}
+
+/* ################################### */
 
 .air__button-group {
   display: flex;
@@ -37,7 +94,7 @@ html {
   position: fixed;
   bottom: calc(var(--margin) * 2);
   right: calc(50% - 120px);
-  z-index: 10;
+  z-index: 100;
   width: 240px;
   border-radius: var(--borderRadius);
   overflow: hidden;
@@ -55,16 +112,18 @@ html {
   top: calc(50% - 8px);
   left: calc(50% - 70px);
   text-align: center;
-  color: rgba(255, 255, 255, 1);
-  background-color: rgba(248, 248, 248, 0.3);
+  color: var(--color-text);
+  background-color: var(--color-primary);
   padding: 8px;
+  border: 1px solid var(--color-text);
   border-radius: var(--borderRadius);
   text-transform: uppercase;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   text-shadow: rgba(0, 0, 0, 0.3) 1px 1px 10px; 
   line-height: 1;
   display: inline-block;
+  z-index: 100;
 }
 
 .air__spacer {

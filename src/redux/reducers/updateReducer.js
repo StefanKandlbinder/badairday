@@ -6,9 +6,8 @@ const initState = {
 
 export const updateReducer = (update = initState, action) => {
     switch (action.type) {
-
-        case action.type.includes(SET_UPDATE):
-            return { ...update, update: action.payload };
+        case SET_UPDATE:
+            return { ...update, timestamp: action.payload };
 
         default:
             return update;

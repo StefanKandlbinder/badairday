@@ -3,8 +3,8 @@
     bottom: 0;
     height: calc(var(--margin) / 2);
     width: 100%;
-    background: rgba(255, 255, 255, 0.75);
-    z-index: 10;
+    background: rgba(0, 121, 107, 0.75);
+    z-index: 100;
     will-change: transform; 
     transform-origin: left;
   }

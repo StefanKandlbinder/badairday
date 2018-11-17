@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import { Route } from 'react-router-dom';
 import PageVisibility from 'react-page-visibility';
 
 import { fetchStations } from "../../redux/actions/stations";
 import { clearState } from '../../redux/localStorage';
 
-import Stations from "../../components/Stations/Stations";
+// import Stations from "../../components/dashboard/Stations/Stations";
+import Stations from '../../components/Stations/Stations';
+import Station from '../../components/Station/Station';
 import Notifications from "../../ui/Notifications/Notifications";
-import Button from "../../ui/Button/Button";
+import Button from "../../components/UI/Button/Button";
+import Legend from '../../components/UI/Legend/Legend';
 import Updatebar from "../../ui/Updatebar/Updatebar";
 import './App.css';
 
@@ -60,11 +65,18 @@ class App extends Component {
   }
 
   render() {
+    let stations = null;
+    let station = null;
     let loading = null;
     let updating = null;
     let notifications = null;
     let updateBar = null;
-    let stations = null;
+
+    stations = <Stations />
+
+    station = <Route
+      path="/station/:provider/:id"
+      render={() => <Station />} />
 
     if (this.props.loading) {
       loading = <Loading />
@@ -75,7 +87,7 @@ class App extends Component {
     }
 
     if (this.props.options.autoupdating) {
-      updateBar = <Updatebar interval={60 * 5 * 1000} update={this.onUpdateStations} />
+      updateBar = <Updatebar interval={60 * 3 * 1000} update={this.onUpdateStations} />
     }
 
     if (this.props.notifications.length) {
@@ -83,31 +95,38 @@ class App extends Component {
     }
 
     if (this.props) {
-      stations = <Stations stations={this.props.stations} options={this.props.options}/>;
+      stations = <Stations stations={this.props.stations} options={this.props.options} />;
     }
 
     return (
       <PageVisibility onChange={this.handleVisibilityChange}>
         <div className="air">
+          <div className="air__background">
+            <svg className="air__background-svg" xmlns="http://www.w3.org/2000/svg" version="1.1" id="Layer_1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 600 600">
+              <path d="M289.3 103.1L98.7 484.2c-5.2 10.3 5.8 21.3 16.1 16.1l179.8-89.9c3.4-1.7 7.4-1.7 10.7 0l179.8 89.9c10.3 5.2 21.3-5.8 16.1-16.1L310.7 103.1c-4.4-8.9-17-8.9-21.4 0zm4.1 276.4l-117.2 58.6c-10.3 5.2-21.3-5.8-16.1-16.1l117.2-234.3c5.7-11.3 22.7-7.3 22.7 5.4v175.8c0 4.4-2.6 8.6-6.6 10.6z" fill="#fff" /></svg>
+          </div>
+
+          {station}
+          {stations}
+
           <div className="air__button-group">
             <Button
-              className="air__button"
+              className="air__button air__button--naked"
               clicked={() => this.onFetchStations()}>
               FETCH
             </Button>
             <Button
-              className="air__button"
+              className="air__button air__button--naked"
               clicked={() => this.onUpdateStations()}>
               UPDATE
             </Button>
             <Button
-              className="air__button"
+              className="air__button air__button--naked"
               clicked={() => this.clearStorage()}>
               CLEAR
             </Button>
           </ div>
-          {stations}
-          <div className="air__spacer"></div>
+          <Legend />
           {loading}
           {updating}
           {notifications}
@@ -135,4 +154,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

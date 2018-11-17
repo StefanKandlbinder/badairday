@@ -1,4 +1,5 @@
 import { STATIONS, FETCH_STATIONS, ADD_STATION, UPDATE_STATIONS, addStations, updateStations } from "../actions/stations";
+import { setUpdate } from "../actions/update";
 import { API_ERROR, API_SUCCESS, apiRequest } from "../actions/api";
 import { setLoader, setUpdater } from "../actions/ui";
 import { setNotification } from "../actions/notifications";
@@ -44,6 +45,7 @@ export const stationsMiddleware = () => (next) => (action) => {
         
         case `${STATIONS} ${API_SUCCESS} UPDATE`:
             next([
+                setUpdate({ update: Date.now() }),
                 updateStations({ stations: action.payload, provider: action.meta.provider }),
                 setUpdater({ state: false, feature: STATIONS })
             ]);

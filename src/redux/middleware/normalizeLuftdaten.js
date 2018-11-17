@@ -14,7 +14,6 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
         if (stations) {
             stations.map(station => {
                 let components = normalizeComponents(station.sensordatavalues);
-
                 let name =  "Lufdatensensor: " + station.sensor.id;
 
                 if (getState().options.reversegeo && ReverseGeocode !== undefined) {
@@ -32,8 +31,8 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                                     station.sensor.id.toString(),
                                     name,
                                     getStringDateLuftdaten(station.timestamp),
-                                    parseFloat(station.location.longitude),
                                     parseFloat(station.location.latitude),
+                                    parseFloat(station.location.longitude),
                                     components,
                                     components.PM10 ? parseFloat(components.PM10.value) : 0);                
                                     
@@ -46,8 +45,8 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     station.sensor.id.toString(),
                     name,
                     getStringDateLuftdaten(station.timestamp),
-                    parseFloat(station.location.longitude),
                     parseFloat(station.location.latitude),
+                    parseFloat(station.location.longitude),
                     components,
                     components.PM10 ? components.PM10.value : 0)
 
@@ -79,20 +78,16 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
         if (stations) {
             stations.map(station => {
                 let components = normalizeComponents(station.sensordatavalues);
-
                 let name = null;
 
                 let stationModel = new Station(provider,
                     station.sensor.id.toString(),
                     name,
                     getStringDateLuftdaten(station.timestamp),
-                    parseFloat(station.location.longitude),
                     parseFloat(station.location.latitude),
+                    parseFloat(station.location.longitude),
                     components,
                     components.PM10 ? components.PM10.value : 0)
-
-
-                // console.log(getState().stations[0].id, stationModel.date);
 
                 let filteredStation = getState().stations.filter(station => station.id === stationModel.id)
 

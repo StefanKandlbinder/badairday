@@ -1,0 +1,111 @@
+.air__tabbar {
+    --color-red-channel: 0;
+    --color-green-channel: 0;
+    --color-blue-channel: 0;
+    --opacity-channel: 1;
+    
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 22px;
+    color: var(--color-text);
+    background: rgba(255, 255, 255, 0.75);
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+}
+
+.air__tabbar-item {
+    flex-grow: 1;
+    flex-shrink: 0;
+    min-width: 30%;
+}
+
+@media (min-width: 330px) {
+    .air__tabbar-item {
+        min-width: 44px;
+    }
+}
+
+.air__tabbar-icon {
+    height: 16px;
+}
+
+.air__tabbar-link,
+.air__tabbar-link:link,
+.air__tabbar-link:hover,
+.air__tabbar-link:focus,
+.air__tabbar-link:visited {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    color: var(--color-text);
+    font-size: 12px;
+    background: var(--color-primary);
+    
+    /* background: rgba(var(--color-red-channel), var(--color-green-channel), var(--color-blue-channel), var(--opacity-channel)); */
+    transition: opacity 300ms ease-out;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 12px;
+    height: 100%;
+    min-height: 44px;
+    opacity: 0.75;
+}
+
+.air__tabbar-link.active,
+.air__tabbar-link:hover {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: var(--color-primary-active);
+    opacity: 1;
+}
+
+.air__tabbar-link.active {
+    pointer-events: none;
+}
+
+.air__tabbar-item--home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0;
+    width: 44px;
+}
+
+.air__tabbar-item--home:hover {
+    cursor: pointer;
+}
+
+.air__tabbar-scroll {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto;
+    /* overscroll-behavior-y: none; */
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+.air__tabbar-item {
+    transition: transform 300ms ease-out;
+    will-change: transform;
+    transform-origin: left;
+}
+
+.a-tabbar-enter {
+    transform: scaleX(0);
+}
+
+.a-tabbar-enter.a-tabbar-enter-active {
+    transform: scaleX(1);
+}
+
+.a-tabbar-leave {
+    transform: scaleX(1);
+}
+
+.a-tabbar-leave.a-tabbar-leave-active {
+    transform: scaleX(0);
+}
