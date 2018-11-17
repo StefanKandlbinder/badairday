@@ -15,12 +15,14 @@ class Aircomp extends Component {
             case "PM25":
                 let classes = "air__comp air__comp--dust air__comp--dust-" + this.props.component;
 
-                element = (
-                    <div className={classes}>
-                        <div className="air__comp-title">{this.props.component}:</div>
-                        <div className="air__comp-value">{this.props.value === 0 ? "-" : this.props.value}<span className="air__comp-unit">&nbsp;{this.props.unit}</span></div>
-                    </div>
-                )
+                if(this.props.value > 0) {
+                    element = (
+                        <div className={classes}>
+                            <div className="air__comp-title">{this.props.component}:</div>
+                            <div className="air__comp-value">{this.props.value === 0 ? "-" : this.props.value}<span className="air__comp-unit">&nbsp;{this.props.unit}</span></div>
+                        </div>
+                    )
+                }
 
                 break;
 
