@@ -28,6 +28,11 @@
     border-radius: 50%;
 }
 
+.air__stations-upperaustria-marker svg,
+.air__stations-luftdaten-marker svg {
+    transition: fill 3s ease-out;
+}
+
 /* ------- */
 /* LEAFLET */
 /* ------- */

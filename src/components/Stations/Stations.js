@@ -137,18 +137,25 @@ class Stations extends Component {
         let myStations = [];
 
         myStations = this.state.myStations.map(station => {
-            let html = station.props.icon.options.html;
-            html = html.replace(/style=".*"/g, 'style="fill: ' + getMood(100, .75) + '"');
-            station.props.icon.options.html = html;
-        
-            return station    
+            this.props.stations.forEach(newStation => {
+                if (station.key === newStation.id ) {
+                    let html = station.props.icon.options.html;
+                    html = html.replace(/style=".*"/g, 'style="fill: ' + getMood(100, .75) + '"');
+                    station.props.icon.options.html = html;
+                
+                    return station
+                }
+            })
+            return station
         })
 
-        this.setState({
-            myStations: myStations
-        })
-
-        console.log(this.refs.map.props);
+        if (this.state.myStations.length === this.props.stations.length) {
+            console.log("UPDAAAAAATE");
+            
+            this.setState({
+                myStations: [...this.state.myStations, myStations]
+            })
+        }
     }
 
     render() {
