@@ -152,8 +152,11 @@ class Stations extends Component {
                 // onLocationfound={this.handleLocationFound}
                 ref="map">
                 <TileLayer
+                    // https://wiki.openstreetmap.org/wiki/Tile_servers
+                    // https://leaflet-extras.github.io/leaflet-providers/preview/
                     attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                    url="https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png"
+                    // url="https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png"
+                    url = "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png"
                 />
                 {location}
                 {this.state.myStations}
