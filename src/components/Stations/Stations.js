@@ -130,7 +130,7 @@ class Stations extends Component {
                 if (station.key === newStation.id ) {
                     let markerID = '[data-marker-id="' + newStation.id + '"]';
                     let marker = document.querySelector(markerID);
-                    marker.setAttribute("style", 'fill: ' + getMood(newStation.mood, .75));
+                    marker.setAttribute("style", 'fill: ' + (newStation.components.PM10.update ? getMood(newStation.mood, .75) : "rgba(70,70,70,0.75)"));
                 }
             })
         })

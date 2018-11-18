@@ -221,7 +221,7 @@ class Station extends Component {
         }
 
         let moodStyle = {
-            fill: this.props.station.components.PM10.update ? getMood(this.props.station.mood, .75) : "rgba(70,70,70,0.)"
+            fill: this.props.station.components.PM10.update ? getMood(this.props.station.mood, .75) : "rgba(70,70,70,0.75)"
         }
 
         let transStyle = {
