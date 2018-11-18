@@ -10,7 +10,7 @@
     align-items: center;
     background-color: transparent;
     will-change: border-color, background-color;
-    transition: background-color 300ms ease-out 300ms;
+    transition: background-color var(--animation-duration) var(--animation-timing) var(--animation-duration);
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
@@ -29,7 +29,7 @@
     --position: calc((var(--size) / 2)  * -1);
 
     opacity: 0;
-    transition: opacity 300ms ease-out;
+    transition: opacity var(--animation-duration) var(--animation-timing);
     content: " ";
     width: var(--size);
     height: var(--size);

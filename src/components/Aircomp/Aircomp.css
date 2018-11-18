@@ -28,7 +28,7 @@
     font-size: 12px;
     color: var(--color-text);
     line-height: 1.2;
-    transition: transform 500ms ease-out;
+    transition: transform var(--animation-duration) var(--animation-timing);
     transform-origin: center center;
     will-change: transform;
 }

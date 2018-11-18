@@ -13,7 +13,7 @@
 
 .a-spinner-appear {
   opacity: 0;
-  transition: opacity 300ms ease-out;
+  transition: opacity var(--animation-duration) var(--animation-timing);
 }
 
 .a-spinner-appear.a-spinner-appear-active {
@@ -26,7 +26,7 @@
 
 .a-spinner-leave.a-spinner-leave-active {
   opacity: 0;
-  transition: opacity 1000ms ease-out;
+  transition: opacity 1000ms var(--animation-timing);
 }
 
 .spinner__backdrop {

@@ -18,7 +18,7 @@
     left: var(--offset);
     z-index: 100;
     will-change: opacity, transform, box-shadow, background-color;
-    transition: background-color 200ms ease-out;
+    transition: background-color var(--animation-duration) var(--animation-timing);
     /* box-shadow: 5px 10px 30px var(--shadow); */
 }
 
@@ -37,7 +37,7 @@
     top: 0;
     z-index: -1;
     will-change: fill;
-    transition: fill 200ms ease-out;
+    transition: fill var(--animation-duration) var(--animation-timing);
     transform: scale(calc(600 / 590));
     /* clip-path: circle(180px); */
 }
@@ -50,7 +50,7 @@
 .a-station-appear.a-station-appear-active {
     /* opacity: 1; */
     transform: scale(1);
-    transition: transform 200ms ease-out, opacity 200ms ease-out;
+    transition: transform var(--animation-duration) var(--animation-timing), opacity var(--animation-duration) var(--animation-timing)
 }
 
 .a-station-leave {
@@ -58,7 +58,7 @@
 }
 
 .a-station-leave.a-station-leave-active {
-    transition: opacity 300ms ease-out;
+    transition: opacity var(--animation-duration) var(--animation-timing);
 }
 
 .air__station-header {
@@ -125,7 +125,7 @@
 }
 
 .air__station-button-icon path {
-    transition: fill 300ms ease-out;
+    transition: fill var(--animation-duration) var(--animation-timing);
     will-change: fill;
 }
 

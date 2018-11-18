@@ -42,7 +42,7 @@
     background: var(--color-primary);
     
     /* background: rgba(var(--color-red-channel), var(--color-green-channel), var(--color-blue-channel), var(--opacity-channel)); */
-    transition: opacity 300ms ease-out;
+    transition: opacity var(--animation-duration) var(--animation-timing);
     text-decoration: none;
     display: flex;
     justify-content: center;
@@ -89,7 +89,7 @@
 }
 
 .air__tabbar-item {
-    transition: transform 300ms ease-out;
+    transition: transform var(--animation-duration) var(--animation-timing);
     will-change: transform;
     transform-origin: left;
 }
