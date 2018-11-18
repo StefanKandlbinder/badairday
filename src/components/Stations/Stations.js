@@ -156,7 +156,7 @@ class Stations extends Component {
                     // https://leaflet-extras.github.io/leaflet-providers/preview/
                     attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                     // url="https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png"
-                    url = "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png"
+                    url = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
                 />
                 {location}
                 {this.state.myStations}

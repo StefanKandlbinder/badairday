@@ -3,8 +3,6 @@ import ReverseGeocode from 'esri-leaflet-geocoder';
 
 import { dataNormalized } from "../actions/data";
 import { addStation, updateStation, ADD_STATIONS, UPDATE_STATIONS } from "../actions/stations";
-import { setUpdate } from "../actions/update";
-
 import getStringDateLuftdaten from '../../utilities/getStringDateLuftdaten';
 import getUnixDateFromLuftdaten from '../../utilities/getUnixDateFromLuftdaten';
 
@@ -73,7 +71,6 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
 
             // notify about the transformation
             dispatch(dataNormalized({ feature: action.meta.feature }));
-            dispatch(setUpdate({ update: Date.now() }));
         }
     }
 
@@ -109,7 +106,6 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
 
             // notify about the transformation
             dispatch(dataNormalized({ feature: action.meta.feature }));
-            dispatch(setUpdate({ update: Date.now() }));
         }
     }
 

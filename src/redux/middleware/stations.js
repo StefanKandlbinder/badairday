@@ -45,9 +45,9 @@ export const stationsMiddleware = () => (next) => (action) => {
         
         case `${STATIONS} ${API_SUCCESS} UPDATE`:
             next([
-                setUpdate({ update: Date.now() }),
                 updateStations({ stations: action.payload, provider: action.meta.provider }),
-                setUpdater({ state: false, feature: STATIONS })
+                setUpdater({ state: false, feature: STATIONS }),
+                setUpdate({ update: Date.now() })
             ]);
             break;
 

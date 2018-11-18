@@ -3,7 +3,6 @@ import find from 'lodash/find';
 
 import { dataNormalized } from "../actions/data";
 import { addStation, updateStation, ADD_STATIONS, UPDATE_STATIONS } from "../actions/stations";
-import { setUpdate } from "../actions/update";
 
 import * as stationsObject from './stations.json';
 import getStringDate from '../../utilities/getStringDate';
@@ -59,7 +58,6 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
 
             // notify about the transformation
             dispatch(dataNormalized({ feature: action.meta.feature }));
-            dispatch(setUpdate({ update: Date.now() }));
         }
     }
 
@@ -106,7 +104,6 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
 
             // notify about the transformation
             dispatch(dataNormalized({ feature: action.meta.feature }));
-            dispatch(setUpdate({ update: Date.now() }));
         }
     }
 
