@@ -55,7 +55,7 @@
     width: 32px;
     height: 32px;
     line-height: 32px;
-    background: rgba(255, 255, 255, 0.5);
+    background-color: var(--color-text);
     color: var(--color-primary-active);
 }
 
