@@ -13,6 +13,7 @@
   --border-radius: calc(var(--margin) / 3);
   --shadow: rgba(0, 0, 0, 0.5);
   --animation-duration: 300ms;
+  --animation-duration-crunchy: calc(var(--animation-duration) / 2);
   --animation-timing: ease-out;
 }
 

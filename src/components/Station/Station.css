@@ -50,7 +50,7 @@
 .a-station-appear.a-station-appear-active {
     /* opacity: 1; */
     transform: scale(1);
-    transition: transform var(--animation-duration) var(--animation-timing), opacity var(--animation-duration) var(--animation-timing)
+    transition: transform var(--animation-duration-crunchy) var(--animation-timing), opacity var(--animation-duration-crunchy) var(--animation-timing)
 }
 
 .a-station-leave {
