@@ -10,7 +10,6 @@ import { getStationByID } from "../../redux/filters/getStationByID";
 import Aircomp from '../../components/Aircomp/Aircomp';
 import Compass from '../../components/Compass/Compass';
 import Button from '../../components/UI/Button/Button';
-import getMood from '../../utilities/GetMood';
 import './Station.css';
 
 // http://facebook.design/soundkit#scroll
@@ -221,7 +220,7 @@ class Station extends Component {
         }
 
         let moodStyle = {
-            fill: this.props.station.components.PM10.update ? getMood(this.props.station.mood, .75) : "rgba(70,70,70,0.75)"
+            fill: this.props.station.components.PM10.update ? this.props.station.moodRGBA : "rgba(70,70,70,0.75)"
         }
 
         let transStyle = {

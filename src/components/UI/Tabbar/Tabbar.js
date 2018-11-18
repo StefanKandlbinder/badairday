@@ -57,7 +57,7 @@ class Tabbar extends Component {
                     if (station.id === item.id) {
                         tabItems.unshift(<div key={item.id} className="air__tabbar-item">
                             <NavLink
-                                style={{ background: getMood(station.mood, "1") }}
+                                style={{ background: station.moodRGBA }}
                                 className="air__tabbar-link"
                                 to={"/station/" + item.provider + "/" + item.id}>{item.name}</NavLink>
                         </div>);

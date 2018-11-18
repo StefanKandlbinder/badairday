@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import L from 'leaflet';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 
-import getMood from '../../utilities/GetMood';
 import './Stations.css';
 
 class Stations extends Component {
@@ -85,7 +84,7 @@ class Stations extends Component {
                     html: `<svg xmlns="http://www.w3.org/2000/svg" 
                         class="" viewBox="0 0 600 600"
                         data-marker-id="${element.id}"
-                        style="fill: ${element.components.PM10.update ? getMood(element.mood, .75) : "rgba(70,70,70,0.75)"}">
+                        style="fill: ${element.components.PM10.update ? element.moodRGBA : "rgba(70,70,70,0.75)"}">
                         <path d="M41.1,165.29V434.71a25.57,25.57,0,0,0,12.78,22.15L287.21,591.57a25.58,25.58,0,0,0,25.58,0L546.12,456.86a25.57,25.57,0,0,0,12.78-22.15V165.29a25.57,25.57,0,0,0-12.78-22.15L312.79,8.43a25.58,25.58,0,0,0-25.58,0L53.88,143.14A25.57,25.57,0,0,0,41.1,165.29Z"/>
                         </svg>`,
                     className: "air__stations-luftdaten-marker",
@@ -99,7 +98,7 @@ class Stations extends Component {
                     html: `<svg xmlns="http://www.w3.org/2000/svg" 
                         class="" viewBox="0 0 600 600"
                         data-marker-id="${element.id}"
-                        style="fill: ${element.components.PM10.update ? getMood(element.mood, .75) : "rgba(70,70,70,0.75)"}">
+                        style="fill: ${element.components.PM10.update ? element.moodRGBA : "rgba(70,70,70,0.75)"}">
                         <path d="M5,300H5A295,295,0,0,0,152.5,555.48h0a295,295,0,0,0,295,0h0A295,295,0,0,0,595,300h0A295,295,0,0,0,447.5,44.52h0a295,295,0,0,0-295,0h0A295,295,0,0,0,5,300Z"/>
                         </svg>`,
                     className: "air__stations-upperaustria-marker-wrapper",
@@ -130,7 +129,7 @@ class Stations extends Component {
                 if (station.key === newStation.id ) {
                     let markerID = '[data-marker-id="' + newStation.id + '"]';
                     let marker = document.querySelector(markerID);
-                    marker.setAttribute("style", 'fill: ' + (newStation.components.PM10.update ? getMood(newStation.mood, .75) : "rgba(70,70,70,0.75)"));
+                    marker.setAttribute("style", 'fill: ' + (newStation.components.PM10.update ? newStation.moodRGBA : "rgba(70,70,70,0.75)"));
                 }
             })
         })

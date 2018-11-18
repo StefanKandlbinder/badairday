@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import getMood from '../../utilities/GetMood';
 import './Compass.css';
 
 class Compass extends Component {
@@ -73,7 +72,7 @@ class Compass extends Component {
                         x="0px" y="0px"
                         width="24px" height="24px"
                         viewBox="0 0 512 512">
-                        <path fill={getMood(this.props.mood, 0.75)} d="M348.219,256l92.219,184.438L71.563,256 M512,0L0,256l512,256L384,256L512,0L512,0z" />
+                        <path fill={this.props.moodRGBA} d="M348.219,256l92.219,184.438L71.563,256 M512,0L0,256l512,256L384,256L512,0L512,0z" />
                     </svg>
                 </div>
                 <div style={gridStyle} className="air__compass-grid">

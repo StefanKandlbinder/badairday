@@ -1,3 +1,5 @@
+import getMood from '../../utilities/GetMood';
+
 export default class StationModel {
     constructor(provider = "",
         id = 0,
@@ -7,6 +9,7 @@ export default class StationModel {
         latitude = 0,
         components = {},
         mood = 0,
+        moodRGBA = "rgba(70, 70, 70, 0.75)",
         marker = {},
         favorized = false) {
             this.provider   = provider;
@@ -17,6 +20,7 @@ export default class StationModel {
             this.latitude   = latitude;
             this.components = components;
             this.mood       = mood;
+            this.moodRGBA   = getMood(mood, 0.75);
             this.marker     = marker;
             this.favorized  = favorized
     }
@@ -49,6 +53,10 @@ export default class StationModel {
         this.mood = mood;
     }
 
+    set setMoodRGBA(moodRGBA) {
+        this.moodRGBA = moodRGBA;
+    }
+
     set setDate(date) {
         this.date = date;
     }
@@ -75,6 +83,10 @@ export default class StationModel {
 
     get getMood() {
         return this.mood;
+    }
+
+    get getMoodRGBA() {
+        return this.moodRGBA;
     }
 
     get getDate() {

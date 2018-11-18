@@ -23,8 +23,7 @@ class Station extends Component {
 
     render() {
         let moodStyle = {
-            backgroundColor: this.props.station.components["PM10"].update ? getMood(this.props.station.mood, 0.75) : "rgba(70, 70, 70, 0.75)"
-            // borderColor: getMood(this.props.station.mood, 0.4)
+            backgroundColor: this.props.station.components["PM10"].update ? this.props.station.moodRGBA : "rgba(70, 70, 70, 0.75)"
         }
 
         let airStationClasses = "air__station";
