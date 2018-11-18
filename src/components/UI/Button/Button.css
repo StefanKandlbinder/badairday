@@ -7,7 +7,7 @@
     min-width: 32px;
     border: 1px solid white;
     border-radius: 6px;
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--color-text);
     color: rgba(0, 121, 107, 1);
     box-shadow: 0;
     outline: 0;
