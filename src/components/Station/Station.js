@@ -81,6 +81,10 @@ class Station extends Component {
             change.play();
         }
 
+        if (this.props.update.timestamp > prevProps.update.timestamp) {
+            this.setState({ comps: this.getAirComps() });
+        }
+
         if (this.props.station.provider !== "luftdaten" && prevProps.station.provider === "luftdaten") {
             this.state.animationCircle.beginElement();
         }
@@ -286,6 +290,7 @@ const mapStateToProps = (state, ownProps) => {
             state.stations,
             ownProps.match.params.id
         ),
+        update: state.update,
         favorizedStations: state.favorizedStations
     };
 }
