@@ -41,8 +41,8 @@ class Stations extends Component {
 
 
         if (this.props.update.timestamp > prevProps.update.timestamp) {
-            // this.updateStations();
-            this.getStations();
+            this.updateStations();
+            // this.getStations();
         }
     }
 
@@ -60,17 +60,6 @@ class Stations extends Component {
     // go back to the main route
     handleClickMap = () => {
         this.props.history.push("/");
-    }
-
-    // forward to the luftdaten station when clicking on the corresponding placeholder on the map
-    handleClickLuftdatenMarker = (marker) => {
-        this.props.history.push({
-            pathname: "/station/luftdaten/" + marker.options.title,
-            state: {
-                x: marker._icon._leaflet_pos.x,
-                y: marker._icon._leaflet_pos.y
-            }
-        });
     }
 
     handleLocationFound = e => {
@@ -94,7 +83,8 @@ class Stations extends Component {
             if (element.provider === "luftdaten") {
                 marker = L.divIcon({
                     html: `<svg xmlns="http://www.w3.org/2000/svg" 
-                        class="" viewBox="0 0 600 600" 
+                        class="" viewBox="0 0 600 600"
+                        data-marker-id="${element.id}"
                         style="fill: ${element.components.PM10.update ? getMood(element.mood, .75) : "rgba(70,70,70,0.75)"}">
                         <path d="M41.1,165.29V434.71a25.57,25.57,0,0,0,12.78,22.15L287.21,591.57a25.58,25.58,0,0,0,25.58,0L546.12,456.86a25.57,25.57,0,0,0,12.78-22.15V165.29a25.57,25.57,0,0,0-12.78-22.15L312.79,8.43a25.58,25.58,0,0,0-25.58,0L53.88,143.14A25.57,25.57,0,0,0,41.1,165.29Z"/>
                         </svg>`,
@@ -107,7 +97,8 @@ class Stations extends Component {
             if (element.provider === "upperaustria") {
                 marker = L.divIcon({
                     html: `<svg xmlns="http://www.w3.org/2000/svg" 
-                        class="" viewBox="0 0 600 600" 
+                        class="" viewBox="0 0 600 600"
+                        data-marker-id="${element.id}"
                         style="fill: ${element.components.PM10.update ? getMood(element.mood, .75) : "rgba(70,70,70,0.75)"}">
                         <path d="M5,300H5A295,295,0,0,0,152.5,555.48h0a295,295,0,0,0,295,0h0A295,295,0,0,0,595,300h0A295,295,0,0,0,447.5,44.52h0a295,295,0,0,0-295,0h0A295,295,0,0,0,5,300Z"/>
                         </svg>`,
@@ -134,28 +125,15 @@ class Stations extends Component {
     }
 
     updateStations = () => {
-        let myStations = [];
-
-        myStations = this.state.myStations.map(station => {
+        this.state.myStations.forEach(station => {
             this.props.stations.forEach(newStation => {
                 if (station.key === newStation.id ) {
-                    let html = station.props.icon.options.html;
-                    html = html.replace(/style=".*"/g, 'style="fill: ' + getMood(100, .75) + '"');
-                    station.props.icon.options.html = html;
-                
-                    return station
+                    let markerID = '[data-marker-id="' + newStation.id + '"]';
+                    let marker = document.querySelector(markerID);
+                    marker.setAttribute("style", 'fill: ' + getMood(newStation.mood, .75));
                 }
             })
-            return station
         })
-
-        if (this.state.myStations.length === this.props.stations.length) {
-            console.log("UPDAAAAAATE");
-            
-            this.setState({
-                myStations: [...this.state.myStations, myStations]
-            })
-        }
     }
 
     render() {
