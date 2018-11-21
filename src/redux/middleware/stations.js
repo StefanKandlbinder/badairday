@@ -52,7 +52,7 @@ export const stationsMiddleware = () => (next) => (action) => {
             break;
 
         case `${STATIONS} ${API_ERROR}`:
-            let message = "Oh je, ";
+            let message = "Oh Nein! ";
             switch (action.meta.provider) {
                 case "luftdaten":
                     message += "Luftdaten"
