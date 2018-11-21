@@ -36,6 +36,10 @@
 /* LEAFLET */
 /* ------- */
 
+.leaflet-tile-pane {
+    opacity: 0.75;
+}
+
 .leaflet-left .leaflet-control {
     margin-left: 12px;
     margin-top: 12px;
