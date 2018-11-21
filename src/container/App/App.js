@@ -139,19 +139,18 @@ class App extends Component {
             </Button>
             </ div>
             <Legend />
-
-            <CSSTransitionGroup
-              transitionName="air__animation-fade-crunchy"
-              transitionAppear={true}
-              transitionAppearTimeout={150}
-              transitionEnter={false}
-              transitionLeave={true}
-              transitionLeaveTimeout={150}>
-              {loading}
-              {updating}
-              {notifications}
-            </ CSSTransitionGroup>
             {updateBar}
+          </ CSSTransitionGroup>
+          <CSSTransitionGroup
+            transitionName="air__animation-fade-crunchy"
+            transitionAppear={true}
+            transitionAppearTimeout={150}
+            transitionEnter={false}
+            transitionLeave={true}
+            transitionLeaveTimeout={150}>
+            {loading}
+            {updating}
+            {notifications}
           </ CSSTransitionGroup>
         </div>
       </PageVisibility>
