@@ -62,6 +62,8 @@ export const stationsMiddleware = () => (next) => (action) => {
                     message += " ist leider gerade nicht erreichbar!"
                     break;
                 default:
+                    message += " ist leider gerade nicht erreichbar!";
+                    break;
             }
 
             next([
