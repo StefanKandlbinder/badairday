@@ -44,11 +44,14 @@ class App extends Component {
     }
   }
 
-  componentWillUnmount() { }
+  componentWillUnmount() {
+    window.clearTimeout(this.timeoutID);
+  }
 
   clearStorage() {
     clearState();
-    window.location.reload(true);
+
+    this.timeoutID = window.setTimeout(window.location.reload(true), 1000);
   }
 
   onFetchStations = () => {
