@@ -56,6 +56,9 @@ export const stationsMiddleware = () => (next) => (action) => {
 
             switch (action.payload.status) {
                 case 400:
+                case 403:
+                case 404:
+                case 405:
                     message += " ist leider gerade nicht erreichbar!"
                     break;
                 default:
