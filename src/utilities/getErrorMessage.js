@@ -1,5 +1,5 @@
 export default function getErrorMessage(status, provider) {
-    let message = "OH NO! ";
+    let message = "¯\\_(ツ)_/¯ ";
 
     switch (provider) {
         case "luftdaten":
