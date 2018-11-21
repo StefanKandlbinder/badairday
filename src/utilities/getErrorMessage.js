@@ -1,5 +1,5 @@
 export default function getErrorMessage(status, provider) {
-    let message = "Oh Nein! ";
+    let message = "OH NO! ";
 
     switch (provider) {
         case "luftdaten":
@@ -17,10 +17,10 @@ export default function getErrorMessage(status, provider) {
         case 403:
         case 404:
         case 405:
-            message += " ist leider gerade nicht erreichbar!"
+            message += " liefert derzeit keine aktuellen Daten!"
             break;
         default:
-            message += " ist leider gerade nicht erreichbar!";
+            message += " liefert derzeit keine aktuellen Daten";
             break;
     }
 
