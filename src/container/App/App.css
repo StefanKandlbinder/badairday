@@ -134,3 +134,21 @@
   flex-grow: 1;
   background: rgba(0, 121, 107, 0.75)
 }
+
+.air__animation-fade-appear {
+  opacity: 0;
+  transition: opacity var(--animation-duration) var(--animation-timing);
+}
+
+.air__animation-fade-appear.air__animation-fade-appear-active {
+  opacity: 1;
+}
+
+.air__animation-fade-leave {
+  opacity: 1;
+}
+
+.air__animation-fade-leave.air__animation-fade-leave-active {
+  opacity: 0;
+  transition: opacity 1000ms var(--animation-timing);
+}

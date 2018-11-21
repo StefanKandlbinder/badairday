@@ -108,7 +108,7 @@ class App extends Component {
           </div>
 
           <CSSTransitionGroup
-            transitionName="a-spinner"
+            transitionName="air__animation-fade"
             transitionAppear={true}
             transitionAppearTimeout={300}
             transitionEnter={false}
@@ -136,9 +136,18 @@ class App extends Component {
             </Button>
             </ div>
             <Legend />
-            {loading}
-            {updating}
-            {notifications}
+
+            <CSSTransitionGroup
+              transitionName="air__animation-fade"
+              transitionAppear={true}
+              transitionAppearTimeout={100}
+              transitionEnter={false}
+              transitionLeave={true}
+              transitionLeaveTimeout={100}>
+              {loading}
+              {updating}
+              {notifications}
+            </ CSSTransitionGroup>
             {updateBar}
           </ CSSTransitionGroup>
         </div>
