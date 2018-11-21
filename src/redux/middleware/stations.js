@@ -52,8 +52,17 @@ export const stationsMiddleware = () => (next) => (action) => {
             break;
 
         case `${STATIONS} ${API_ERROR}`:
+            let message = "Oh je, " + action.meta.provider;
+
+            switch (action.payload.status) {
+                case 400:
+                    message += " ist leider gerade nicht erreichbar!"
+                    break;
+                default:
+            }
+
             next([
-                setNotification({ message: action.meta.provider + ": " + action.payload, feature: STATIONS }),
+                setNotification({ message: message, feature: STATIONS }),
                 setLoader({ state: false, feature: STATIONS }),
                 setUpdater({ state: false, feature: STATIONS })
             ]);

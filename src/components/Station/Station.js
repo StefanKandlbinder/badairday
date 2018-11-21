@@ -206,7 +206,7 @@ class Station extends Component {
         </Button>
 
         if (navigator.share) {
-            sharedButton = <Button clicked={this.share} className="air__button air__button--naked air__station-button air__station-button-share">
+            sharedButton = <Button clicked={this.share} className="air__button air__button--naked air__button--ghost air__station-button air__station-button-share">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
