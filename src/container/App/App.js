@@ -138,12 +138,12 @@ class App extends Component {
             <Legend />
 
             <CSSTransitionGroup
-              transitionName="air__animation-fade"
+              transitionName="air__animation-fade-crunchy"
               transitionAppear={true}
-              transitionAppearTimeout={100}
+              transitionAppearTimeout={150}
               transitionEnter={false}
               transitionLeave={true}
-              transitionLeaveTimeout={100}>
+              transitionLeaveTimeout={150}>
               {loading}
               {updating}
               {notifications}
