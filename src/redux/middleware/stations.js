@@ -3,6 +3,7 @@ import { setUpdate } from "../actions/update";
 import { API_ERROR, API_SUCCESS, apiRequest } from "../actions/api";
 import { setLoader, setUpdater } from "../actions/ui";
 import { setNotification } from "../actions/notifications";
+import getErrorMessage from "../../utilities/getErrorMessage";
 
 export const stationsMiddleware = () => (next) => (action) => {
     next(action);
@@ -52,32 +53,8 @@ export const stationsMiddleware = () => (next) => (action) => {
             break;
 
         case `${STATIONS} ${API_ERROR}`:
-            let message = "Oh Nein! ";
-            switch (action.meta.provider) {
-                case "luftdaten":
-                    message += "Luftdaten"
-                    break;
-                case "upperaustria":
-                    message += "Oberösterreich"
-                    break;
-                default:
-                    break;
-            }
-
-            switch (action.payload.status) {
-                case 400:
-                case 403:
-                case 404:
-                case 405:
-                    message += " ist leider gerade nicht erreichbar!"
-                    break;
-                default:
-                    message += " ist leider gerade nicht erreichbar!";
-                    break;
-            }
-
             next([
-                setNotification({ message: message, feature: STATIONS }),
+                setNotification({ message: getErrorMessage(action.payload.status, action.meta.provider), feature: STATIONS }),
                 setLoader({ state: false, feature: STATIONS }),
                 setUpdater({ state: false, feature: STATIONS })
             ]);
