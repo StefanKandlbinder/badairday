@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Route } from 'react-router-dom';
 import PageVisibility from 'react-page-visibility';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 import { fetchStations } from "../../redux/actions/stations";
 import { clearState } from '../../redux/localStorage';
@@ -43,7 +44,7 @@ class App extends Component {
     }
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
   clearStorage() {
     clearState();
@@ -106,31 +107,40 @@ class App extends Component {
               <path d="M289.3 103.1L98.7 484.2c-5.2 10.3 5.8 21.3 16.1 16.1l179.8-89.9c3.4-1.7 7.4-1.7 10.7 0l179.8 89.9c10.3 5.2 21.3-5.8 16.1-16.1L310.7 103.1c-4.4-8.9-17-8.9-21.4 0zm4.1 276.4l-117.2 58.6c-10.3 5.2-21.3-5.8-16.1-16.1l117.2-234.3c5.7-11.3 22.7-7.3 22.7 5.4v175.8c0 4.4-2.6 8.6-6.6 10.6z" fill="#fff" /></svg>
           </div>
 
-          {station}
-          {stations}
+          <CSSTransitionGroup
+            transitionName="a-spinner"
+            transitionAppear={true}
+            transitionAppearTimeout={300}
+            transitionEnter={false}
+            transitionLeave={true}
+            transitionLeaveTimeout={300}>
 
-          <div className="air__button-group">
-            <Button
-              className="air__button air__button--naked"
-              clicked={() => this.onFetchStations()}>
-              FETCH
+            {station}
+            {stations}
+
+            <div className="air__button-group">
+              <Button
+                className="air__button air__button--naked"
+                clicked={() => this.onFetchStations()}>
+                FETCH
             </Button>
-            <Button
-              className="air__button air__button--naked"
-              clicked={() => this.onUpdateStations()}>
-              UPDATE
+              <Button
+                className="air__button air__button--naked"
+                clicked={() => this.onUpdateStations()}>
+                UPDATE
             </Button>
-            <Button
-              className="air__button air__button--naked"
-              clicked={() => this.clearStorage()}>
-              CLEAR
+              <Button
+                className="air__button air__button--naked"
+                clicked={() => this.clearStorage()}>
+                CLEAR
             </Button>
-          </ div>
-          <Legend />
-          {loading}
-          {updating}
-          {notifications}
-          {updateBar}
+            </ div>
+            <Legend />
+            {loading}
+            {updating}
+            {notifications}
+            {updateBar}
+          </ CSSTransitionGroup>
         </div>
       </PageVisibility>
     );
