@@ -1,5 +1,5 @@
 export default function getErrorMessage(status, provider) {
-    let message = "¯\\_(ツ)_/¯ ";
+    let message = "";
 
     switch (provider) {
         case "luftdaten":
@@ -25,7 +25,7 @@ export default function getErrorMessage(status, provider) {
     }
 
     if (!navigator.onLine) {
-        message = "¯\\_(ツ)_/¯ Derzeit besteht leider keine Internetverbindung!";
+        message = "Derzeit besteht leider keine Internetverbindung!";
     }
 
     return message

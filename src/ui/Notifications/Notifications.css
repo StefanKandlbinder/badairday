@@ -13,3 +13,13 @@
     width: 300px;
     z-index: 100;
 }
+
+.Notifications:after {
+    content: "¯\\_(ツ)_/¯";
+    position: absolute;
+    bottom: 100%;
+    left: 30%;
+    display: inline-block;
+    color: rgba(221, 44, 0, 0.9);
+    font-weight: bold;
+}
