@@ -138,6 +138,6 @@
   "start_url": "./index.html",
   "orientation": "portrait-primary",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#00796b",
   "background_color": "#ffffff"
 }
