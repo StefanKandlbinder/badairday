@@ -24,5 +24,9 @@ export default function getErrorMessage(status, provider) {
             break;
     }
 
+    if (!navigator.onLine) {
+        message = "¯\\_(ツ)_/¯ Derzeit besteht leider keine Internetverbindung!";
+    }
+
     return message
 }
