@@ -1,6 +1,6 @@
 {
-  "short_name": "Airodrome",
-  "name": "Get the actual air quality near you",
+  "short_name": "BadAirDay",
+  "name": "To breathe, or not to breathe ...",
   "icons": [
     {
       "src": "icons/android/android-launchericon-512-512.png",
