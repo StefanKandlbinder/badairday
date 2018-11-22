@@ -88,6 +88,18 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     parseFloat(station.location.longitude),
                     components,
                     components.PM10 ? components.PM10.value : 0)
+                
+                let persistedStations = getState().stations;
+
+                // if the station doesn't exist add it
+                if (persistedStations.length) {
+                    if (find(persistedStations, ['id', stationModel.id]) !== undefined || stationModel.mood > 1900) {
+                        return false
+                    }
+                    else {
+                        dispatch(addStation({ station: stationModel, provider: provider }))
+                    }
+                }
 
                 let filteredStation = getState().stations.filter(station => station.id === stationModel.id)
 
