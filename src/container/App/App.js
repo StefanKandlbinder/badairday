@@ -82,13 +82,9 @@ class App extends Component {
   render() {
     let stations = null;
     let station = null;
-    let loading = null;
-    let updating = null;
-    let notifications = null;
     let updateBar = null;
     let background = null;
     let app = null;
-    let info = null;
 
     stations = <Stations />
 
@@ -115,12 +111,6 @@ class App extends Component {
       {station}
       {stations}
     </div>;
-
-    info = <div>
-      {loading}
-      {updating}
-      {notifications}
-    </div>
 
     return (
       <PageVisibility onChange={this.handleVisibilityChange}>

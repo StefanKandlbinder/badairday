@@ -227,13 +227,6 @@ class Station extends Component {
             fill: this.props.station.components.PM10.update ? this.props.station.moodRGBA : "rgba(70,70,70,0.75)"
         }
 
-        let transStyle = {
-            /* display: "flex",
-            justifyContent: "center",
-            width: "100%",
-            position: "relative" */
-        }
-
         element = (
             <CSSTransition
                 in={this.state.isMounted}

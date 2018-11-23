@@ -11,7 +11,7 @@
   --color-text-weak: rgba(255, 255, 255, 0.3);
   --margin: 0.5rem;
   --border-radius: calc(var(--margin) / 3);
-  --shadow: rgba(0, 0, 0, 0.5);
+  --shadow: rgba(0, 0, 0, 0.3);
   --animation-duration: 300ms;
   --animation-duration-crunchy: calc(var(--animation-duration) / 2);
   --animation-timing: ease-out;
