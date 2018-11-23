@@ -14,7 +14,7 @@ class Notifications extends Component {
   }
 
   componentDidMount() {
-    this.myInterval = setInterval(this.setNotification, 3000);
+    this.myInterval = setInterval(this.setNotification, 4000);
     
     this.setState({
       notification: this.props.notifications[0].message

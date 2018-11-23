@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CSSTransitionGroup } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { Howl, Howler } from 'howler';
@@ -235,14 +235,10 @@ class Station extends Component {
         }
 
         element = (
-            <CSSTransitionGroup
-                style={transStyle}
-                transitionName="a-station"
-                transitionAppear={true}
-                transitionAppearTimeout={300}
-                transitionEnter={false}
-                transitionLeave={true}
-                transitionLeaveTimeout={300}>
+            <CSSTransition
+                in={this.state.isMounted}
+                classNames="a-station"
+                timeout={300}>
                 <div className="air__station" style={{ ...popOriginStyle }}>
                     <svg xmlns="http://www.w3.org/2000/svg"
                         style={{ ...moodStyle }}
@@ -276,7 +272,7 @@ class Station extends Component {
                         {sharedButton}
                     </div>
                 </div>
-            </CSSTransitionGroup>
+            </CSSTransition>
         )
 
         return element;

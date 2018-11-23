@@ -42,22 +42,22 @@
     /* clip-path: circle(180px); */
 }
 
-.a-station-appear {
+.a-station-enter {
     /* opacity: 0; */
     transform: scale(0);
 }
 
-.a-station-appear.a-station-appear-active {
+.a-station-enter-active {
     /* opacity: 1; */
     transform: scale(1);
     transition: transform var(--animation-duration-crunchy) var(--animation-timing), opacity var(--animation-duration-crunchy) var(--animation-timing)
 }
 
-.a-station-leave {
+.a-station-exit {
     opacity: 1;
 }
 
-.a-station-leave.a-station-leave-active {
+.a-station-exit-active {
     transition: opacity var(--animation-duration) var(--animation-timing);
 }
 

@@ -135,32 +135,32 @@
   background: rgba(0, 121, 107, 0.75)
 }
 
-.air__animation-fade-appear,
-.air__animation-fade-crunchy-appear {
+.air__animation-fade-enter,
+.air__animation-fade-crunchy-enter {
   opacity: 0;
+}
+
+.air__animation-fade-enter-active,
+.air__animation-fade-crunchy-enter-active {
+  opacity: 1;
   transition: opacity var(--animation-duration) var(--animation-timing);
 }
 
-.air__animation-fade-crunchy-appear {
+.air__animation-fade-crunchy-enter-active {
   transition: opacity var(--animation-duration-crunchy) var(--animation-timing);
 }
 
-.air__animation-fade-appear.air__animation-fade-appear-active,
-.air__animation-fade-crunchy-appear.air__animation-fade-crunchy-appear-active {
+.air__animation-fade-exit,
+.air__animation-fade-crunchy-exit {
   opacity: 1;
 }
 
-.air__animation-fade-leave,
-.air__animation-fade-crunchy-leave {
-  opacity: 1;
-}
-
-.air__animation-fade-leave.air__animation-fade-leave-active,
-.air__animation-fade-crunchy-leave.air__animation-fade-crunchy-leave-active {
+.air__animation-fade-exit-active,
+.air__animation-fade-crunchy-exit-active {
   opacity: 0;
   transition: opacity var(--animation-duration) var(--animation-timing);
 }
 
-.air__animation-fade-crunchy-leave.air__animation-fade-crunchy-leave-active {
+.air__animation-fade-crunchy-exit-active {
   transition: opacity var(--animation-duration-crunchy) var(--animation-timing);
 }
