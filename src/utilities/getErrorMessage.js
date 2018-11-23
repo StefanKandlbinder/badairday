@@ -17,6 +17,7 @@ export default function getErrorMessage(status, provider) {
         case 403:
         case 404:
         case 405:
+        case 500:
             message += " liefert derzeit keine aktuellen Daten!"
             break;
         default:

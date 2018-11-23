@@ -45,7 +45,11 @@ class Notifications extends Component {
 
   render() {
     return (
-      <ul className="Notifications">{this.state.notification}</ul>
+      <div className="air__notifications">
+        <div className="air__notifications-content">
+          {this.state.notification}
+        </div>
+      </div>
     )
   }
 }
