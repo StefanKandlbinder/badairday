@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { removeNotification } from "../../redux/actions/notifications";
+import { removeNotification } from "../../../redux/actions/notifications";
 import "./Notifications.css";
 
 class Notifications extends Component {

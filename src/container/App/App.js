@@ -11,10 +11,10 @@ import { clearState } from '../../redux/localStorage';
 // import Stations from "../../components/dashboard/Stations/Stations";
 import Stations from '../../components/Stations/Stations';
 import Station from '../../components/Station/Station';
-import Notifications from "../../ui/Notifications/Notifications";
+import Notifications from "../../components/UI/Notifications/Notifications";
 import Button from "../../components/UI/Button/Button";
 import Legend from '../../components/UI/Legend/Legend';
-import Updatebar from "../../ui/Updatebar/Updatebar";
+import Updatebar from "../../components/UI/Updatebar/Updatebar";
 import './App.css';
 
 const luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,10";
