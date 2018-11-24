@@ -5,6 +5,7 @@
     --color-secondary-weak: rgba(37, 113, 199, 0.5);
     --color-text: rgba(255, 255, 255, 0.9);
     --color-text-weak: rgba(255, 255, 255, 0.3);
+    --color-inactive: rgba(170, 170, 170, 0.9);
 }
 
 .color-primary {
@@ -54,4 +55,9 @@
 
 .bg-color-text-weak {
     background-color: var(--color-text-weak);
+}
+
+.color-inactive {
+    color: var(--color-inactive);
+    fill: var(--color-inactive);
 }

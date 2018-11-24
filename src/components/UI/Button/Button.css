@@ -13,6 +13,19 @@
     outline: 0;
 }
 
+.air__button--inactive,
+.air__button--inactive:focus,
+.air__button--inactive:active {
+    pointer-events: none;
+}
+
+.air__button--inactive svg,
+.air__button--inactive:focus svg,
+.air__button--inactive:active svg {
+    color: var(--color-inactive);
+    fill: var(--color-inactive);
+}
+
 .air__button--naked,
 .air__button--naked:focus,
 .air__button--naked:active {
