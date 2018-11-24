@@ -6,6 +6,8 @@
     --color-text: rgba(255, 255, 255, 0.9);
     --color-text-weak: rgba(255, 255, 255, 0.3);
     --color-inactive: rgba(170, 170, 170, 0.9);
+    --color-error: rgba(221, 44, 0, 0.9);
+    --color-warning: rgba(221, 162, 0, 0.9);
 }
 
 .color-primary {
@@ -60,4 +62,22 @@
 .color-inactive {
     color: var(--color-inactive);
     fill: var(--color-inactive);
+}
+
+.color-error {
+    color: var(--color-error);
+    fill: var(--color-error);
+}
+
+.bg-color-error {
+    background-color: var(--color-error);
+}
+
+.color-warning {
+    color: var(--color-warning);
+    fill: var(--color-warning);
+}
+
+.bg-color-warning {
+    background-color: var(--color-warning);
 }
