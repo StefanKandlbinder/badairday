@@ -29,7 +29,7 @@
     content: "¯\\_(ツ)_/¯";
     position: absolute;
     bottom: 100%;
-    left: 10%;
+    right: 10%;
     display: inline-block;
     color: rgba(221, 44, 0, 0.9);
     font-weight: bold;
