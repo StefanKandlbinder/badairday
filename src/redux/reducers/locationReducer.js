@@ -8,7 +8,6 @@ const initState = {
 export const locationReducer = (location = initState, action) => {
     switch (action.type) {
         case SET_LOCATION:
-            console.log(action);
             return { ...location, 
                lat: action.payload.lat,
                lng: action.payload.lng

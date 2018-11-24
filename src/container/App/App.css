@@ -98,9 +98,9 @@
 .air__updating,
 .air__loading {
   position: fixed;
-  width: 140px;
+  width: 160px;
   top: calc(50% - 8px);
-  left: calc(50% - 70px);
+  left: calc(50% - 80px);
   text-align: center;
   color: rgba(0, 121, 107, 1);
   background-color: var(--color-text);

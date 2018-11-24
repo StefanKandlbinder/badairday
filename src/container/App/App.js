@@ -5,8 +5,11 @@ import { Route } from 'react-router-dom';
 import PageVisibility from 'react-page-visibility';
 import { CSSTransition } from 'react-transition-group';
 
+import { STATIONS } from "../../redux/actions/stations";
 import { fetchStations } from "../../redux/actions/stations";
 import { setLocation } from "../../redux/actions/location";
+import { setGeoLocation } from "../../redux/actions/ui";
+import { setNotification } from "../../redux/actions/notifications";
 import { clearState } from '../../redux/localStorage';
 
 import getGeoLocation from '../../utilities/getGeoLocation';
@@ -35,6 +38,12 @@ class Updating extends Component {
 class Loading extends Component {
   render() {
     return <div className="air__loading">Fetching ...</div>
+  }
+}
+
+class Getlocation extends Component {
+  render() {
+    return <div className="air__loading">Geolocation ...</div>
   }
 }
 
@@ -84,9 +93,14 @@ class App extends Component {
   }
 
   handleLocation = () => {
+    this.props.onSetGeoLocation({ state: true, feature: STATIONS });
+
     getGeoLocation().then((success, reject) => {
-      console.log(success);
+      this.props.onSetGeoLocation({ state: false, feature: STATIONS });
       this.props.onSetLocation(success);
+    }).catch((e) => {
+      this.props.onSetGeoLocation({ state: false, feature: STATIONS });
+      this.props.onSetNotification({ message: "Geolocation ist leider nicht verfügbar!", feature: STATIONS });
     });
 }
 
@@ -197,6 +211,15 @@ class App extends Component {
           </CSSTransition>
 
           <CSSTransition
+            in={this.props.geolocation}
+            classNames="air__animation-fade-crunchy"
+            timeout={300}
+            mountOnEnter
+            unmountOnExit>
+            <Getlocation />
+          </CSSTransition>
+
+          <CSSTransition
             in={this.props.notifications.length > 0}
             classNames="air__animation-fade-crunchy"
             timeout={300}
@@ -214,6 +237,7 @@ const mapStateToProps = state => {
   return {
     loading: state.ui.loading,
     updating: state.ui.updating,
+    geolocation: state.ui.geolocation,
     notifications: state.notifications,
     update: state.update,
     stations: state.stations,
@@ -224,7 +248,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onFetchStations: (url, luftdatenProvider, method) => dispatch(fetchStations(url, luftdatenProvider, method)),
-    onSetLocation: (location) => dispatch(setLocation(location))
+    onSetLocation: (location) => dispatch(setLocation(location)),
+    onSetGeoLocation: (geoLocation) => dispatch(setGeoLocation(geoLocation)),
+    onSetNotification: (message) => dispatch(setNotification(message))
   }
 }
 

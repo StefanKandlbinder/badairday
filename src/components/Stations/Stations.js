@@ -6,7 +6,6 @@ import { CSSTransition } from 'react-transition-group';
 import L from 'leaflet';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 
-import getGeoLocation from '../../utilities/getGeoLocation';
 import './Stations.css';
 
 class Stations extends Component {
@@ -15,14 +14,6 @@ class Stations extends Component {
 
         this.state = {
             hasLocation: false,
-            location: {
-                lat: 48.323368,
-                lng: 14.298756,
-            },
-            center: {
-                lat: 48.323368,
-                lng: 14.298756,
-            },
             zoom: 13,
             myStations: []
         }
@@ -39,6 +30,10 @@ class Stations extends Component {
 
         if (this.props.update.timestamp > prevProps.update.timestamp) {
             this.updateStations();
+        }
+
+        if (this.props.location !== prevProps.location) {
+            this.handleLocation();
         }
     }
 
@@ -59,13 +54,8 @@ class Stations extends Component {
     }
 
     handleLocation = () => {
-        getGeoLocation().then((success, reject) => {
-            this.setState({
-                center: success
-            }, () => {
-                this.refs.map.leafletElement.panTo(this.state.center);
-            })
-        });
+        this.refs.map.leafletElement.panTo(this.props.location);
+
     }
 
     getStations = () => {
@@ -146,7 +136,7 @@ class Stations extends Component {
                 <Map className="air__stations"
                     onClick={this.handleClickMap}
                     onMovestart={this.handleClickMap}
-                    center={this.state.center}
+                    center={this.props.location}
                     zoom={this.state.zoom}
                     maxZoom={16}
                     // preferCanvas="true"
