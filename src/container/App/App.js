@@ -24,7 +24,7 @@ import Legend from '../../components/UI/Legend/Legend';
 import Updatebar from "../../components/UI/Updatebar/Updatebar";
 import './App.css';
 
-const luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,10";
+let luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,10";
 const luftdatenProvider = "luftdaten";
 const upperAustriaURL = "https://www2.land-oberoesterreich.gv.at/imm/jaxrs/messwerte/json?";
 const upperAustriaProvider = "upperaustria";
@@ -98,6 +98,7 @@ class App extends Component {
     getGeoLocation().then((success, reject) => {
       this.props.onSetGeoLocation({ state: false, feature: STATIONS });
       this.props.onSetLocation(success);
+      this.onUpdateStations();
     }).catch((e) => {
       this.props.onSetGeoLocation({ state: false, feature: STATIONS });
       this.props.onSetNotification({ message: "Geolocation ist leider nicht verfügbar!", feature: STATIONS });
@@ -119,6 +120,13 @@ class App extends Component {
 
     if (this.props.options.autoupdating) {
       updateBar = <Updatebar interval={60 * 3 * 1000} update={this.onUpdateStations} />
+    }
+
+    if (this.props.location) {
+      luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=" + 
+        this.props.location.lat + 
+        "," + 
+        this.props.location.lng + ",10";
     }
 
     if (this.props.stations) {
@@ -238,6 +246,7 @@ const mapStateToProps = state => {
     loading: state.ui.loading,
     updating: state.ui.updating,
     geolocation: state.ui.geolocation,
+    location: state.location,
     notifications: state.notifications,
     update: state.update,
     stations: state.stations,
