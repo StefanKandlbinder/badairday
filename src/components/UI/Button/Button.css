@@ -26,3 +26,15 @@
 .air__button--ghost:active {
     background: transparent;
 }
+
+.air__button--fab,
+.air__button--fab:focus,
+.air__button--fab:active {
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow:  -1px 1px 4px var(--shadow);
+}

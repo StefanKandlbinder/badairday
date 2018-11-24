@@ -32,23 +32,6 @@
     transition: fill var(--animation-duration) var(--animation-timing) var(--animation-duration-crunchy);
 }
 
-.air__station-button-location,
-.air__station-button-location:hover,
-.air__station-button-location:active,
-.air__station-button-location:visited {
-    position: fixed;
-    bottom: 70px;
-    right: var(--margin);
-    z-index: 50;
-    min-width: 44px;
-    min-height: 44px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow:  -1px 1px 4px var(--shadow);
-}
-
 .air__station-button-location svg {
     fill: var(--color-primary);
 }

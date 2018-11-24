@@ -1,4 +1,4 @@
-import { STATIONS, FETCH_STATIONS, ADD_STATION, UPDATE_STATIONS, addStations, updateStations } from "../actions/stations";
+import { STATIONS, FETCH_STATIONS, ADD_STATION, addStations, updateStations } from "../actions/stations";
 import { setUpdate } from "../actions/update";
 import { API_ERROR, API_SUCCESS, apiRequest } from "../actions/api";
 import { setLoader, setUpdater } from "../actions/ui";
@@ -18,13 +18,6 @@ export const stationsMiddleware = () => (next) => (action) => {
             break;
         
         case FETCH_STATIONS + " UPDATE":
-            next([
-                apiRequest({ body: null, method: 'GET', url: action.payload, feature: STATIONS, provider: action.meta.provider, update: action.meta.method }),
-                setUpdater({ state: true, feature: STATIONS })
-            ]);
-            break;
-        
-        case UPDATE_STATIONS  + " " + action.meta.method:
             next([
                 apiRequest({ body: null, method: 'GET', url: action.payload, feature: STATIONS, provider: action.meta.provider, update: action.meta.method }),
                 setUpdater({ state: true, feature: STATIONS })

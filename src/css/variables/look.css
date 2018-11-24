@@ -1,0 +1,4 @@
+:root {
+    --border-radius: calc(var(--margin) / 3);
+    --shadow: rgba(0, 0, 0, 0.3);
+}

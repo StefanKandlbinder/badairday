@@ -1,0 +1,57 @@
+:root {
+    --color-primary: rgba(0, 121, 107, 0.75);
+    --color-primary-active: rgba(0, 121, 107, 0.9);
+    --color-secondary: rgba(37, 113, 199, 0.9);
+    --color-secondary-weak: rgba(37, 113, 199, 0.5);
+    --color-text: rgba(255, 255, 255, 0.9);
+    --color-text-weak: rgba(255, 255, 255, 0.3);
+}
+
+.color-primary {
+    color: var(--color-primary);
+    fill: var(--color-primary);
+}
+
+.bg-color-primary {
+    background-color: var(--color-primary);
+}
+
+.color-primary-active {
+    color: var(--color-primary-active);
+    fill: var(--color-primary-active);
+}
+
+.bg-color-primary-active {
+    background-color: var(--color-primary-active);
+}
+
+.color-secondary {
+    color: var(--color-secondary);
+    fill: var(--color-secondary);
+}
+
+.bg-color-secondary {
+    background-color: var(--color-secondary);
+}
+
+.bg-color-secondary-weak {
+    background-color: var(--color-secondary-weak);
+}
+
+.color-text {
+    color: var(--color-text);
+    fill: var(--color-text);
+}
+
+.bg-color-text {
+    background-color: var(--color-text);
+}
+
+.color-text-weak {
+    color: var(--color-text-weak);
+    fill: var(--color-text-weak);
+}
+
+.bg-color-text-weak {
+    background-color: var(--color-text-weak);
+}

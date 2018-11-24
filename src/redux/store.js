@@ -9,6 +9,7 @@ import { stationsMiddleware } from './middleware/stations';
 import { apiMiddleware } from './middleware/api';
 import { uiReducer } from "./reducers/uiReducer";
 import { updateReducer } from "./reducers/updateReducer";
+import { locationReducer } from "./reducers/locationReducer";
 import { optionsReducer } from "./reducers/optionsReducer";
 import { notificationsReducer } from "./reducers/notificationsReducer";
 import { normalizeLuftdatenMiddleware } from "./middleware/normalizeLuftdaten";
@@ -24,6 +25,7 @@ const configureStore = () => {
         ui: uiReducer,
         notifications: notificationsReducer,
         update: updateReducer,
+        location: locationReducer,
         options: optionsReducer
     });
 
