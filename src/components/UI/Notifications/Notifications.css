@@ -6,7 +6,7 @@
     color: white;
     line-height: 1.2;
     position: fixed;
-    bottom: 56px;
+    bottom: calc(var(--button-height) * 2 + var(--margin) * 4);
     width: 100%;
     z-index: 100;
 }

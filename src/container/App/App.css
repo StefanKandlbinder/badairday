@@ -90,8 +90,8 @@
 
 .air__button-location {
   position: fixed;
-  right: var(--margin);
-  bottom: 70px;
+  right: calc(var(--margin) * 2);
+  bottom: calc(var(--button-height) + var(--margin) * 2);
   z-index: 50;
 }
 

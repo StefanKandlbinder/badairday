@@ -1,18 +1,15 @@
 export default function getGeoLocation() {
-    console.log(navigator.geolocation);
-    
-    /* if (!navigator.geolocation) {
-        return Error("Geolocation ist leider nicht verfügbar!");
-    } */
-
     return new Promise(function (resolve, reject) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            if (position.coords) {
+        if (!navigator.geolocation) {
+            reject(Error("Geolocation ist leider nicht verfügbar!"));
+        }
+
+        else {
+            navigator.geolocation.getCurrentPosition((position) => {
                 resolve({ lat: position.coords.latitude, lng: position.coords.longitude });
-            }
-            else {
-                reject(Error("Geolocation ist leider nicht verfügbar!"));
-            }
-        });
+            }, (error) => {
+                reject(Error("Geolocation ist für diese Seite blockiert!"));
+            } );
+        }
     });
 }
