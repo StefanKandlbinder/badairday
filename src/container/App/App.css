@@ -95,6 +95,40 @@
   z-index: 50;
 }
 
+.air__icon-location {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(39, 140, 235, 0.9);
+  box-shadow: 0 0 0 2px white;
+  z-index: 9999 !important;
+  position: relative;
+  line-height: 0;
+  font-size: 0;
+  animation: air-location 3s infinite;
+  will-change: box-shadow;
+}
+
+.air__icon-location:before {
+  position: absolute;
+  left: -12px;
+  top: -12px;
+  line-height: 0;
+  font-size: 0;
+  content: " ";
+  width: 36px;
+  height: 36px;
+  background: rgba(39, 140, 235, 0.3);
+  display: inline-block;
+  border-radius: 50%;
+}
+
+@keyframes air-location {
+  0%   { box-shadow: 0 0 0 2px white; }
+  50% { box-shadow: 0 0 0 4px white; }
+  100% { box-shadow: 0 0 0 2px white; }
+}
+
 .air__updating,
 .air__loading {
   position: fixed;

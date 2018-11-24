@@ -55,7 +55,9 @@ class Stations extends Component {
 
     handleLocation = () => {
         this.refs.map.leafletElement.panTo(this.props.location);
-
+        this.setState({
+            hasLocation: true
+        })
     }
 
     getStations = () => {
@@ -127,10 +129,18 @@ class Stations extends Component {
     }
 
     render() {
-        const location = this.state.hasLocation ? (
-            <Marker position={this.state.location}></Marker>
-        ) : null;
+        let location = null;
 
+        if (this.state.hasLocation && this.props.location) {
+            let marker = L.divIcon({
+                hmtl: "",
+                className: "air__icon-location",
+                iconSize: [12, 12]
+            });
+
+            location = <Marker icon={marker} position={this.props.location}></Marker>
+        }
+        
         return (
             <div>
                 <Map className="air__stations"
@@ -149,8 +159,8 @@ class Stations extends Component {
                         // url="https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png"
                         url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
                     />
-                    {location}
                     {this.state.myStations}
+                    {location}
                 </Map>
             </div>
         )
