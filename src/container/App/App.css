@@ -73,26 +73,12 @@
 
 /* ################################### */
 
-.air__button-group {
-  display: flex;
-  justify-content: flex-end;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
-  width: 100%;
-  min-height: var(--button-height);
-  overflow: hidden;
-  padding-bottom: 2px;
-  background: var(--color-text);
-  /* box-shadow: 2px 4px 12px var(--shadow); */
-}
-
 .air__button-location {
   position: fixed;
-  right: calc(var(--margin) * 2);
-  bottom: calc(var(--button-height) + var(--margin) * 2);
-  z-index: 50;
+  left: calc(50% - var(--button-width) / 2);
+  bottom: calc(var(--button-height) / 2 + 2px);
+  border-radius: 50%;
+  z-index: 110;
 }
 
 .air__icon-location {

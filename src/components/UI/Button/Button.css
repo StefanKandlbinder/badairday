@@ -3,8 +3,8 @@
 .air__button:active {
     box-sizing: border-box;    
     padding: 4px 8px;
-    min-height: 32px;
-    min-width: 32px;
+    min-height: var(--button-height);
+    min-width: var(--button-width);
     border: 1px solid white;
     border-radius: 6px;
     background: var(--color-text);
@@ -49,5 +49,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow:  -1px 1px 4px var(--shadow);
+    box-shadow: 0 0 0 1px var(--color-primary)
 }

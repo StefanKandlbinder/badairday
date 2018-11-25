@@ -1,0 +1,30 @@
+.air__sidebar {
+    height: 100%;
+    width: 270px;
+    position: fixed;
+    top: 0;
+    z-index: 200;
+    box-shadow: 0 0 3px var(--shadow);
+    background: var(--color-text);
+    will-change: transform;
+    display: flex;
+    flex-direction: column;
+}
+
+.air__animation-sidebar-enter {
+    transform: translateX(-273px);
+}
+  
+.air__animation-sidebar-enter-active {
+    transform: translateX(0);
+    transition: transform var(--animation-duration) var(--animation-timing);
+}
+  
+.air__animation-sidebar-exit {
+    transform: translateX(0);
+}
+  
+.air__animation-sidebar-exit-active {
+    transform: translateX(-273px);
+    transition: transform var(--animation-duration) var(--animation-timing);
+}

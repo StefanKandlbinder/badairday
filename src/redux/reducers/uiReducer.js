@@ -1,9 +1,10 @@
-import { SET_LOADER, SET_UPDATER, SET_GEOLOCATION } from "../actions/ui";
+import { SET_LOADER, SET_UPDATER, SET_GEOLOCATION, SET_SIDEBAR } from "../actions/ui";
 
 const initState = {
     loading: false,
     updating: false,
-    geolocation: false
+    geolocation: false,
+    sidebar: false
 };
 
 export const uiReducer = (ui = initState, action) => {
@@ -17,6 +18,9 @@ export const uiReducer = (ui = initState, action) => {
         
         case action.type.includes(SET_GEOLOCATION):
             return { ...ui, geolocation: action.payload };
+        
+        case action.type.includes(SET_SIDEBAR):
+            return { ...ui, sidebar: action.payload };
 
         default:
             return ui;

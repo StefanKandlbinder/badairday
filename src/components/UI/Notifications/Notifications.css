@@ -6,9 +6,9 @@
     color: white;
     line-height: 1.2;
     position: fixed;
-    bottom: calc(var(--button-height) * 2 + var(--margin) * 4);
+    bottom: calc(var(--button-height) * 1.5 + var(--margin) * 2);
     width: 100%;
-    z-index: 100;
+    z-index: 300;
 }
 
 .air__notifications-content {
