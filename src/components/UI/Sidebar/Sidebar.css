@@ -17,7 +17,7 @@
   
 .air__animation-sidebar-enter-active {
     transform: translateX(0);
-    transition: transform var(--animation-duration) var(--animation-timing);
+    transition: transform var(--animation-duration-crunchy) var(--animation-timing);
 }
   
 .air__animation-sidebar-exit {
@@ -26,5 +26,5 @@
   
 .air__animation-sidebar-exit-active {
     transform: translateX(-273px);
-    transition: transform var(--animation-duration) var(--animation-timing);
+    transition: transform var(--animation-duration-crunchy) var(--animation-timing);
 }

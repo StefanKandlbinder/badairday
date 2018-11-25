@@ -1,5 +1,5 @@
 :root {
     --animation-duration: 300ms;
     --animation-duration-crunchy: calc(var(--animation-duration) / 2);
-    --animation-timing: ease-out;
+    --animation-timing: cubic-bezier(.53,.04,.83,.88);
 }
