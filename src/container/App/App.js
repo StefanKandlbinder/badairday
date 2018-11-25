@@ -245,8 +245,6 @@ class App extends Component {
             in={this.props.history.location.pathname === "/sidebar" ? true : false}
             classNames="air__animation-sidebar"
             timeout={300}
-            onEnter={() => console.log("SIDEBAR")}
-            onExit={() => console.log("SIDEBAR GONE")}
             mountOnEnter
             unmountOnExit>
             {sidebar}
