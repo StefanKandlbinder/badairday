@@ -64,12 +64,19 @@
     height: 32px;
     line-height: 32px;
     background-color: var(--color-text);
-    color: var(--color-primary-active);
+    color: transparent;
 }
 
-.leaflet-touch .leaflet-bar a:first-child,
+.leaflet-touch .leaflet-bar a:first-child {
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJub25lIiBkPSJNMCAwaDI0djI0SDBWMHoiLz48cGF0aCBmaWxsPSJyZ2JhKDAsIDEyMSwgMTA3LCAwLjc1KSIgZD0iTTE5IDEzaC02djZoLTJ2LTZINXYtMmg2VjVoMnY2aDZ2MnoiLz48L3N2Zz4=');
+}
+
 .leaflet-touch .leaflet-bar a:last-child {
-    border-radius: 0;
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJub25lIiBkPSJNMCAwaDI0djI0SDBWMHoiLz48cGF0aCBmaWxsPSJyZ2JhKDAsIDEyMSwgMTA3LCAwLjc1KSIgZD0iTTE5IDEzSDV2LTJoMTR2MnoiLz48L3N2Zz4=');
 }
 
 .leaflet-control-attribution {
