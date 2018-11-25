@@ -14,11 +14,13 @@
 }
 
 .air__tabbar-link .air__button svg {
+    fill: var(--color-primary);
     transform: scale(1);
-    transition: transform var(--animation-duration) var(--animation-timing);
-    will-change: transform;
+    transition: transform var(--animation-duration) var(--animation-timing), fill var(--animation-duration) var(--animation-timing);
+    will-change: transform fill;
 }
 
 .air__tabbar-link--active .air__button svg {
+    fill: var(--color-primary-active);
     transform: scale(1.2);
 }
