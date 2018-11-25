@@ -49,5 +49,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 0 1px var(--color-primary)
+    /* box-shadow: 0 0 0 1px var(--color-primary) */
 }
