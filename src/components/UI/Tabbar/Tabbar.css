@@ -13,12 +13,12 @@
     /* box-shadow: 2px 4px 12px var(--shadow); */
 }
 
-.air__tabbar-link {
+.air__tabbar-link .air__button svg {
     transform: scale(1);
     transition: transform var(--animation-duration) var(--animation-timing);
     will-change: transform;
 }
 
-.air__tabbar-link--active {
+.air__tabbar-link--active .air__button svg {
     transform: scale(1.2);
 }

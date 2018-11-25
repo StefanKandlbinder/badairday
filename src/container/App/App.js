@@ -44,6 +44,10 @@ class Loading extends Component {
   }
 }
 
+const Dashboard = (props) => (
+  <div className="air__dashboard">Dashboard</div>
+);
+
 class Getlocation extends Component {
   render() {
     return <div className="air__loading">Geolocation ...</div>
@@ -142,8 +146,7 @@ class App extends Component {
             clicked={() => this.clearStorage()}>
             <svg className="color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" /></svg>
           </Button>
-        </div>
-        
+        </div>       
       </Sidebar>
 
     tabbar = <Tabbar>
@@ -158,10 +161,11 @@ class App extends Component {
       </NavLink>
       <NavLink
         className="air__tabbar-link"
-        to={"/"}>
+        activeClassName="air__tabbar-link--active"
+        style={{pointerEvents: "none"}}
+        to={this.props.history.location.pathname === "/dashboard" ? "/" : "/dashboard"}>
         <Button
-          className="air__button air__button--naked air__button--ghost air__button--inactive"
-          clicked={() => this.onUpdateStations()}>
+          className="air__button air__button--naked air__button--ghost air__button--inactive">
           <svg className="color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z" /></svg>
         </Button>
       </NavLink>
@@ -169,7 +173,7 @@ class App extends Component {
       <NavLink
         className="air__tabbar-link"
         activeClassName="air__tabbar-link--active"
-        to={this.props.history.location.pathname === "/sidebar/" ? "/" : "/sidebar/"}>
+        to={this.props.history.location.pathname === "/sidebar" ? "/" : "/sidebar"}>
         <Button
           className="air__button air__button--naked air__button--ghost">
           <svg className="color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" /></svg>
@@ -218,6 +222,17 @@ class App extends Component {
             {app}
           </CSSTransition>
 
+          <CSSTransition
+            in={this.props.history.location.pathname === "/dashboard" ? true : false}
+            classNames="air__animation-site-transition"
+            timeout={300}
+            mountOnEnter
+            unmountOnExit>
+            <Route
+              path="/dashboard"
+              render={() => <Dashboard/>} />
+          </CSSTransition>
+
           <Button
             className="air__button air__button--naked air__button--fab air__button-location"
             clicked={() => this.handleLocation()}>
@@ -227,14 +242,14 @@ class App extends Component {
           {tabbar}
 
           <CSSTransition
-            in={this.props.history.location.pathname === "/sidebar/"}
+            in={this.props.history.location.pathname === "/sidebar" ? true : false}
             classNames="air__animation-sidebar"
             timeout={300}
+            onEnter={() => console.log("SIDEBAR")}
+            onExit={() => console.log("SIDEBAR GONE")}
             mountOnEnter
             unmountOnExit>
-            <Route
-              path="/sidebar/"
-              render={(props) => sidebar} />
+            {sidebar}
           </CSSTransition>
 
           {updateBar}

@@ -29,7 +29,7 @@
 
 .air__stations-upperaustria-marker svg,
 .air__stations-luftdaten-marker svg {
-    transition: fill var(--animation-duration) var(--animation-timing) var(--animation-duration-crunchy);
+    transition: fill var(--animation-duration) var(--animation-timing) var(--animation-duration);
 }
 
 .air__station-button-location svg {
