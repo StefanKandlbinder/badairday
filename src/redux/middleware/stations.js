@@ -47,7 +47,7 @@ export const stationsMiddleware = () => (next) => (action) => {
 
         case `${STATIONS} ${API_ERROR}`:
             next([
-                setNotification({ message: getErrorMessage(action.payload.status, action.meta.provider), feature: STATIONS }),
+                setNotification({ message: getErrorMessage(action.payload.status, action.meta.provider), feature: STATIONS, type: "error" }),
                 setLoader({ state: false, feature: STATIONS }),
                 setUpdater({ state: false, feature: STATIONS })
             ]);

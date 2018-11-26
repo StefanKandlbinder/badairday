@@ -75,8 +75,8 @@
 
 .air__button-location {
   position: fixed;
-  left: calc(50% - var(--button-width) / 2);
-  bottom: calc(var(--button-height) / 2 + 2px);
+  right: var(--margin);
+  bottom: calc(var(--button-height) + var(--margin));
   z-index: 110;
 }
 
@@ -84,7 +84,7 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: rgba(39, 140, 235, 0.9);
+  background: var(--color-secondary);
   box-shadow: 0 0 0 2px white;
   z-index: 9999 !important;
   position: relative;
@@ -103,7 +103,7 @@
   content: " ";
   width: 36px;
   height: 36px;
-  background: radial-gradient(circle at center, rgba(39, 140, 235, 0.5) 0, rgba(39, 140, 235, 0) 100%);
+  background: radial-gradient(circle at center, var(--color-secondary-weak) 0, var(--color-secondary-gone) 100%);
   display: inline-block;
   border-radius: 50%;
 }

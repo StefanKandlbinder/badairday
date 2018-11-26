@@ -3,6 +3,7 @@
     --color-primary-active: rgba(0, 121, 107, 0.9);
     --color-secondary: rgba(37, 113, 199, 0.9);
     --color-secondary-weak: rgba(37, 113, 199, 0.5);
+    --color-secondary-gone: rgba(37, 113, 199, 0);
     --color-text: rgba(255, 255, 255, 0.9);
     --color-text-weak: rgba(255, 255, 255, 0.3);
     --color-inactive: rgba(170, 170, 170, 0.9);

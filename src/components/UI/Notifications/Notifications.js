@@ -9,7 +9,8 @@ class Notifications extends Component {
     super(props);
 
     this.state = {
-      notification: null
+      notification: null,
+      type: ""
     }
   }
 
@@ -17,8 +18,14 @@ class Notifications extends Component {
     this.myInterval = setInterval(this.setNotification, 4000);
     
     this.setState({
-      notification: this.props.notifications[0].message
+      notification: this.props.notifications[0].payload.message
     })
+
+    this.setState({
+      type: this.props.notifications[0].meta.type
+    })
+
+    console.log(this.props.notifications[0]);
   }
 
   componentWillUnmount() {
@@ -26,26 +33,40 @@ class Notifications extends Component {
   }
 
   setNotification = () => {
-
     if (this.props.notifications.length > 1) {
-      this.props.onRemoveNotification(this.props.notifications[0].id);
+      this.props.onRemoveNotification(this.props.notifications[0].payload.id);
       
       this.setState({
-        notification: this.props.notifications[0].message
+        notification: this.props.notifications[0].payload.message
       })
+
+      this.setState({
+        type: this.props.notifications[0].meta.type
+      })
+
+      
     }
     else if (this.props.notifications.length === 1) {
       this.setState({
-        notification: this.props.notifications[0].message
+        notification: this.props.notifications[0].payload.message
       }, () => {
-        this.props.onRemoveNotification(this.props.notifications[0].id);
+        this.props.onRemoveNotification(this.props.notifications[0].payload.id);
       })
     }
   }
 
   render() {
+    let classes = "air__notifications";
+
+    if (this.state.type === "info") {
+      classes += " air__notifications--info"
+    }
+    else if (this.state.type === "error") {
+      classes += " air__notifications--error"
+    }
+
     return (
-      <div className="air__notifications">
+      <div className={classes}>
         <div className="air__notifications-content">
           {this.state.notification}
         </div>

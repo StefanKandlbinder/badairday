@@ -108,7 +108,7 @@ class App extends Component {
       this.onUpdateStations();
     }).catch((e) => {
       this.props.onSetGeoLocation({ state: false, feature: STATIONS });
-      this.props.onSetNotification({ message: e.message, feature: STATIONS });
+      this.props.onSetNotification({ message: e.message, feature: STATIONS, type: "info" });
     });
   }
 
@@ -151,33 +151,24 @@ class App extends Component {
 
     tabbar = <Tabbar>
       <NavLink
-        className="air__tabbar-link"
+        className="air__tabbar-link air__button air__button--naked air__button--ghost"
         activeClassName="air__tabbar-link--active"
         exact to={"/"}>
-        <Button
-          className="air__button air__button--naked air__button--ghost">
-          <svg className="color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zm-5 .99l3-1.01v11.7l-3 1.16V6.46zm14 11.08l-3 1.01V6.86l3-1.16v11.84z" /></svg>
-        </Button>
+        <svg className="color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zm-5 .99l3-1.01v11.7l-3 1.16V6.46zm14 11.08l-3 1.01V6.86l3-1.16v11.84z" /></svg>
       </NavLink>
       <NavLink
-        className="air__tabbar-link"
+        className="air__tabbar-link air__button air__button--naked air__button--ghost air__button--inactive"
         activeClassName="air__tabbar-link--active"
         style={{pointerEvents: "none"}}
         to={this.props.history.location.pathname === "/dashboard" ? "/" : "/dashboard"}>
-        <Button
-          className="air__button air__button--naked air__button--ghost air__button--inactive">
-          <svg className="color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z" /></svg>
-        </Button>
+        <svg className="color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z" /></svg>
       </NavLink>
       <Spacer className="air__spacer" />
       <NavLink
-        className="air__tabbar-link"
+        className="air__tabbar-link air__button air__button--naked air__button--ghost"
         activeClassName="air__tabbar-link--active"
         to={this.props.history.location.pathname === "/sidebar" ? "/" : "/sidebar"}>
-        <Button
-          className="air__button air__button--naked air__button--ghost">
-          <svg className="color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" /></svg>
-        </Button>
+        <svg className="color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" /></svg>
       </NavLink>
     </Tabbar>
 

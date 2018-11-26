@@ -14,7 +14,7 @@ export const notificationMiddleware = () => (next) => (action) => {
 
         // fire a new action with the enriched payload
         // note: the payload is an object
-        next(setNotification({ message: notification, feature: meta.feature }));
+        next(setNotification({ message: notification, feature: meta.feature, type: meta.type }));
 
     } else {
         next(action)
