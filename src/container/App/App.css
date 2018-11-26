@@ -146,11 +146,13 @@
 }
 
 .air__animation-fade-enter,
+.air__animation-fade-entering,
 .air__animation-fade-crunchy-enter {
   opacity: 0;
 }
 
 .air__animation-fade-enter-active,
+.air__animation-fade-entered,
 .air__animation-fade-crunchy-enter-active {
   opacity: 1;
   transition: opacity var(--animation-duration) var(--animation-timing);
@@ -161,11 +163,13 @@
 }
 
 .air__animation-fade-exit,
+.air__animation-fade-exiting,
 .air__animation-fade-crunchy-exit {
   opacity: 1;
 }
 
 .air__animation-fade-exit-active,
+.air__animation-fade-exited,
 .air__animation-fade-crunchy-exit-active {
   opacity: 0;
   transition: opacity var(--animation-duration) var(--animation-timing);
