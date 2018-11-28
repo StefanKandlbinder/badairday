@@ -12,62 +12,7 @@ import Component from "../models/component";
 export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) => (action) => {
     const addStations = (stations, provider) => {
         if (stations) {
-            stations.map(station => {
-                let components = normalizeComponents(station.sensordatavalues);
-                let name =  "Lufdatensensor: " + station.sensor.id;
-
-                if (getState().options.reversegeo && ReverseGeocode !== undefined) {
-                    ReverseGeocode.geocodeService().reverse()
-                        .latlng([station.location.latitude, station.location.longitude])
-                        .distance(10)
-                        .run(function (error, result) {
-                            if (error) {
-                                name = "Luftdatensensor: " + station.id;
-                            }
-                            if (result) {
-                                name = result.address.ShortLabel;
-
-                                let stationModel = new Station(provider,
-                                    station.sensor.id.toString(),
-                                    name,
-                                    getStringDateLuftdaten(station.timestamp),
-                                    parseFloat(station.location.latitude),
-                                    parseFloat(station.location.longitude),
-                                    components,
-                                    components.PM10 ? parseFloat(components.PM10.value) : 0);                
-                                    
-                                dispatch(updateStation({ station: stationModel, provider: provider }))
-                            }
-                        });
-                }
-
-                let stationModel = new Station(provider,
-                    station.sensor.id.toString(),
-                    name,
-                    getStringDateLuftdaten(station.timestamp),
-                    parseFloat(station.location.latitude),
-                    parseFloat(station.location.longitude),
-                    components,
-                    components.PM10 ? components.PM10.value : 0)
-
-                let persistedStations = getState().stations;
-
-                if (persistedStations.length) {
-                    if (find(persistedStations, ['id', stationModel.id]) !== undefined || stationModel.mood > 1900) {
-                        return false
-                    }
-                    else {
-                        dispatch(addStation({ station: stationModel, provider: provider }))
-                    }
-                }
-                else if (stationModel.mood < 1900) {
-                    return dispatch(addStation({ station: stationModel, provider: provider }))
-                }
-
-                // return dispatch(addStation({ station: stationModel, provider: provider }))
-                return false
-                // return dispatch(addStation({ station: stationModel, provider: provider }))
-            })
+            getStations(stations, provider, false);
 
             // notify about the transformation
             dispatch(dataNormalized({ feature: action.meta.feature }));
@@ -88,7 +33,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     parseFloat(station.location.longitude),
                     components,
                     components.PM10 ? components.PM10.value : 0)
-                
+
                 let filteredStation = getState().stations.filter(station => station.id === stationModel.id)
 
                 if (filteredStation.length) {
@@ -104,6 +49,9 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                 }
             })
 
+            // if there are new stations add them
+            getStations(stations, provider, true);
+
             // notify about the transformation
             dispatch(dataNormalized({ feature: action.meta.feature }));
         }
@@ -114,11 +62,70 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
 
         element.forEach(component => {
             let type = component.value_type === "P1" ? "PM10" : "PM25";
-            
+
             components[type] = new Component(type, parseFloat(component.value), "µg/m³");
         });
 
         return components;
+    }
+
+    const getStations = (stations, provider, update) => {
+        stations.map(station => {
+            let components = normalizeComponents(station.sensordatavalues);
+            let name = "Lufdatensensor: " + station.sensor.id;
+
+            if (getState().options.reversegeo && ReverseGeocode !== undefined) {
+                ReverseGeocode.geocodeService().reverse()
+                    .latlng([station.location.latitude, station.location.longitude])
+                    .distance(10)
+                    .run(function (error, result) {
+                        if (error) {
+                            name = "Luftdatensensor: " + station.id;
+                        }
+                        if (result) {
+                            name = result.address.ShortLabel;
+
+                            let stationModel = new Station(provider,
+                                station.sensor.id.toString(),
+                                name,
+                                getStringDateLuftdaten(station.timestamp),
+                                parseFloat(station.location.latitude),
+                                parseFloat(station.location.longitude),
+                                components,
+                                components.PM10 ? parseFloat(components.PM10.value) : 0);
+
+                            dispatch(updateStation({ station: stationModel, provider: provider }))
+                        }
+                    });
+            }
+
+            let stationModel = new Station(provider,
+                station.sensor.id.toString(),
+                name,
+                getStringDateLuftdaten(station.timestamp),
+                parseFloat(station.location.latitude),
+                parseFloat(station.location.longitude),
+                components,
+                components.PM10 ? components.PM10.value : 0)
+
+            let persistedStations = getState().stations;
+
+            if (persistedStations.length) {
+                if (find(persistedStations, ['id', stationModel.id]) !== undefined || stationModel.mood > 1900) {
+                    return false
+                }
+                else {
+                    dispatch(addStation({ station: stationModel, provider: provider }))
+                }
+            }
+            else if (update !== false && stationModel.mood < 1900) {
+                return dispatch(addStation({ station: stationModel, provider: provider }))
+            }
+
+            // return dispatch(addStation({ station: stationModel, provider: provider }))
+            return false
+            // return dispatch(addStation({ station: stationModel, provider: provider }))
+        })
     }
 
     // filter both by action type and metadata content

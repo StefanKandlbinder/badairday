@@ -1,6 +1,9 @@
 .air__button,
 .air__button:focus,
 .air__button:active {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     box-sizing: border-box;    
     padding: 4px 8px;
     min-height: var(--button-height);

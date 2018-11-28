@@ -13,48 +13,8 @@ import Component from "../models/component";
 export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next) => (action) => {
 
     const addStations = (stations, provider) => {
-        let filteredStations = null;
-
         if (stations) {
-            filteredStations = stations.filter(el => {
-                return el.station.match("S") && el.mittelwert === "HMW";
-            });
-
-            filteredStations = groupBy(filteredStations, 'station');
-
-            Object.values(filteredStations).forEach(element => {
-                stationsObject.stationen.forEach(station => {
-                    if (station.code === element[0].station) {
-                        let components = normalizeComponents(element);
-                        
-                        let stationModel = new Station("upperaustria",
-                            element[0].station,
-                            station.kurzname,
-                            getStringDate(element[0].zeitpunkt),
-                            station.geoBreite,
-                            station.geoLaenge,
-                            components,
-                            components.PM10 ? components.PM10.value : 0);
-
-                        let persistedStations = getState().stations;
-
-                        if (persistedStations.length) {
-                            if (find(persistedStations, ['id', stationModel.id]) !== undefined) {
-                                return false
-                            }
-                            else {
-                                dispatch(addStation({ station: stationModel, provider: provider }))
-                            }
-                        }
-                        else {
-                            return dispatch(addStation({ station: stationModel, provider: provider }))
-                        }
-
-                        // return dispatch(addStation({ station: stationModel, provider: provider }))
-                        return false
-                    }
-                })
-            });
+            getStations(stations, provider, false);
 
             // notify about the transformation
             dispatch(dataNormalized({ feature: action.meta.feature }));
@@ -62,9 +22,9 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
     }
 
     const updateStations = (stations, provider) => {
-        let filteredStations = null;
-
         if (stations) {
+            let filteredStations = null;
+            
             filteredStations = stations.filter(el => {
                 return el.station.match("S") && el.mittelwert === "HMW";
             });
@@ -84,7 +44,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                             station.geoLaenge,
                             components,
                             components.PM10 ? components.PM10.value : 0);
-                        
+
                         let filteredStation = getState().stations.filter(station => station.id === stationModel.id)
 
                         if (filteredStation.length) {
@@ -101,6 +61,8 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                     }
                 })
             });
+
+            getStations(stations, provider, true);
 
             // notify about the transformation
             dispatch(dataNormalized({ feature: action.meta.feature }));
@@ -171,6 +133,50 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
         }
 
         return components;
+    }
+
+    const getStations = (stations, provider, update) => {
+        let filteredStations = null;
+        
+        filteredStations = stations.filter(el => {
+            return el.station.match("S") && el.mittelwert === "HMW";
+        });
+
+        filteredStations = groupBy(filteredStations, 'station');
+
+        Object.values(filteredStations).forEach(element => {
+            stationsObject.stationen.forEach(station => {
+                if (station.code === element[0].station) {
+                    let components = normalizeComponents(element);
+
+                    let stationModel = new Station("upperaustria",
+                        element[0].station,
+                        station.kurzname,
+                        getStringDate(element[0].zeitpunkt),
+                        station.geoBreite,
+                        station.geoLaenge,
+                        components,
+                        components.PM10 ? components.PM10.value : 0);
+
+                    let persistedStations = getState().stations;
+
+                    if (persistedStations.length) {
+                        if (find(persistedStations, ['id', stationModel.id]) !== undefined) {
+                            return false
+                        }
+                        else {
+                            dispatch(addStation({ station: stationModel, provider: provider }))
+                        }
+                    }
+                    else if (!update) {
+                        return dispatch(addStation({ station: stationModel, provider: provider }))
+                    }
+
+                    // return dispatch(addStation({ station: stationModel, provider: provider }))
+                    return false
+                }
+            })
+        });
     }
 
     // filter both by action type and metadata content

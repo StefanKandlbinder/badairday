@@ -1,0 +1,30 @@
+.air__bottom-sheet {
+    width: 100%;
+    height: auto;
+    position: fixed;
+    bottom: 0;
+    z-index: 200;
+    /* box-shadow: 0 0 3px var(--shadow); */
+    background: var(--color-text);
+    will-change: transform;
+    display: flex;
+    flex-direction: column;
+}
+
+.air__animation-bottom-sheet-enter {
+    transform: translateY(100%);
+}
+  
+.air__animation-bottom-sheet-enter-active {
+    transform: translateY(0);
+    transition: transform var(--animation-duration-crunchy) var(--animation-timing-sidebar);
+}
+  
+.air__animation-bottom-sheet-exit {
+    transform: translateY(0);
+}
+  
+.air__animation-bottom-sheet-exit-active {
+    transform: translateY(100%);
+    transition: transform var(--animation-duration-crunchy) var(--animation-timing-sidebar);
+}
