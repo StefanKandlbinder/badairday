@@ -13,6 +13,7 @@ import './css/variables/elevation.css';
 import './css/variables/animation.css';
 import './css/variables/look.css';
 import './css/variables/sizes.css';
+import './scss/07-trumps/layout.scss';
 import './index.scss';
 
 const store = configureStore();

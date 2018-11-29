@@ -15,74 +15,74 @@
     --air__color-shadow: rgba(0, 0, 0, 0.3);
 }
 
-.color-primary {
+.air__color-primary {
     color: var(--air__color-primary);
     fill: var(--air__color-primary);
 }
 
-.bg-color-primary {
+.air__bg-color-primary {
     background-color: var(--air__color-primary);
 }
 
-.color-primary-active {
+.air__color-primary--active {
     color: var(--air__color-primary--active);
     fill: var(--air__color-primary--active);
 }
 
-.bg-color-primary-active {
+.air__bg-color-primary--active {
     background-color: var(--air__color-primary--active);
 }
 
-.color-secondary {
+.air__color-secondary {
     color: var(--air__color-secondary);
     fill: var(--air__color-secondary);
 }
 
-.bg-color-secondary {
+.air__bg-color-secondary {
     background-color: var(--air__color-secondary);
 }
 
-.bg-color-secondary-weak {
+.air__bg-color-secondary--weak {
     background-color: var(--air__color-secondary--weak);
 }
 
-.color-text {
+.air__color-text {
     color: var(--air__color-text);
     fill: var(--air__color-text);
 }
 
-.bg-color-text {
+.air__bg-color-text {
     background-color: var(--air__color-text);
 }
 
-.color-text-weak {
+.air__color-text-weak {
     color: var(--air__color-text--weak);
     fill: var(--air__color-text--weak);
 }
 
-.bg-color-text-weak {
+.air__bg-color-text-weak {
     background-color: var(--air__color-text--weak);
 }
 
-.color-inactive {
+.air__color-inactive {
     color: var(--air__color-inactive);
     fill: var(--air__color-inactive);
 }
 
-.color-error {
+.air__color-error {
     color: var(--air__color-error);
     fill: var(--air__color-error);
 }
 
-.bg-color-error {
+.air__bg-color-error {
     background-color: var(--air__color-error);
 }
 
-.color-warning {
+.air__color-warning {
     color: var(--air__color-warning);
     fill: var(--air__color-warning);
 }
 
-.bg-color-warning {
+.air__bg-color-warning {
     background-color: var(--air__color-warning);
 }
