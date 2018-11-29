@@ -6,11 +6,11 @@
     align-items: center;
     box-sizing: border-box;    
     padding: 4px 8px;
-    min-height: var(--button-height);
-    min-width: var(--button-width);
+    min-height: var(--air__button-height);
+    min-width: var(--air__button-width);
     border: 1px solid white;
     border-radius: 6px;
-    background: var(--color-text);
+    background: var(--air__color-text);
     color: rgba(0, 121, 107, 1);
     box-shadow: 0;
     outline: 0;
@@ -25,8 +25,8 @@
 .air__button--inactive svg,
 .air__button--inactive:focus svg,
 .air__button--inactive:active svg {
-    color: var(--color-inactive) !important;
-    fill: var(--color-inactive) !important;
+    color: var(--air__color-inactive) !important;
+    fill: var(--air__color-inactive) !important;
 }
 
 .air__button--naked,
@@ -52,5 +52,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* box-shadow: 0 0 0 1px var(--color-primary) */
+    box-shadow: 0 2px 4px -1px var(--air__color-shadow)
 }

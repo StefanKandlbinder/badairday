@@ -6,7 +6,7 @@ import { CSSTransition } from 'react-transition-group';
 import L from 'leaflet';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 
-import './Stations.css';
+import './Stations.scss';
 
 class Stations extends Component {
     constructor(props) {

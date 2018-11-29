@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './Aircomp.css';
+import './Aircomp.scss';
 
 class Aircomp extends Component {
 

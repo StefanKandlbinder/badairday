@@ -5,7 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform var(--animation-duration) var(--animation-timing);
+    transition: transform var(--air__animation-duration) var(--air__animation-timing);
     transform: translateY(-100%);
     will-change: transform;
 }
@@ -15,7 +15,7 @@
 }
 
 .air__snackbar {
-    --shadow: rgba(0, 0, 0, 0.5);
+    --air__color-shadow: rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -25,7 +25,7 @@
     /* height: 280px; */
     padding: 8px;
     background-color: rgba(255, 0, 0, 0.7);
-    box-shadow: 5px 10px 30px var(--shadow);
+    box-shadow: 5px 10px 30px var(--air__color-shadow);
     color: white;
 }
 

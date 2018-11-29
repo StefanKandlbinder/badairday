@@ -1,6 +1,6 @@
 :root {
-    --animation-duration: 300ms;
-    --animation-duration-crunchy: calc(var(--animation-duration) / 2);
-    --animation-timing: ease-out;
-    --animation-timing-sidebar: cubic-bezier(.53,.04,.83,.88);
+    --air__animation-duration: 300ms;
+    --air__animation-duration-crunchy: calc(var(--air__animation-duration) / 2);
+    --air__animation-timing: ease-out;
+    --air__animation-timing-sidebar: cubic-bezier(.53,.04,.83,.88);
 }

@@ -31,8 +31,8 @@
 
 .air__logo {
   font-size: 10px;
-  color: var(--color-primary);
-  /* background: var(--color-text-weak); */
+  color: var(--air__color-primary);
+  /* background: var(--air__color-text--weak); */
   /* padding: 4px 0; */
   position: absolute;
   right: 12px;
@@ -48,13 +48,13 @@
   height: 12px;
   margin-right: 1px;
   margin-top: -1px;
-  background: var(--color-primary);
+  background: var(--air__color-primary);
   /* padding: 3px; */
   border-radius: 15%;
 }
 
 .air__logo-svg path {
-  fill: var(--color-text);
+  fill: var(--air__color-text);
 }
 
 .air__station-date + .air__comp-wind {
@@ -66,7 +66,7 @@
   bottom: 0;
   width: 100%;
   height: 44px;
-  transition: transform var(--animation-duration) var(--animation-timing);
+  transition: transform var(--air__animation-duration) var(--air__animation-timing);
   will-change: transform;
   z-index: 50;
 }
@@ -75,8 +75,8 @@
 
 .air__button-location {
   position: fixed;
-  right: var(--margin);
-  bottom: calc(var(--button-height) + var(--margin));
+  right: calc(var(--air__margin) * 4);
+  bottom: calc(var(--air__button-height) + calc(var(--air__margin) * 4));
   z-index: 110;
 }
 
@@ -84,7 +84,7 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--color-secondary);
+  background: var(--air__color-secondary);
   box-shadow: 0 0 0 2px white;
   z-index: 9999 !important;
   position: relative;
@@ -103,7 +103,7 @@
   content: " ";
   width: 36px;
   height: 36px;
-  background: radial-gradient(circle at center, var(--color-secondary-weak) 0, var(--color-secondary-gone) 100%);
+  background: radial-gradient(circle at center, var(--air__color-secondary--weak) 0, var(--air__color-secondary--gone) 100%);
   display: inline-block;
   border-radius: 50%;
 }
@@ -122,11 +122,11 @@
   left: calc(50% - 80px);
   text-align: center;
   color: rgba(0, 121, 107, 1);
-  background-color: var(--color-text);
+  background-color: var(--air__color-text);
   padding: 8px;
-  border: 1px solid var(--color-text);
+  border: 1px solid var(--air__color-text);
   border-radius: var(--borderRadius);
-  /* box-shadow: 2px 4px 12px var(--shadow); */
+  /* box-shadow: 2px 4px 12px var(--air__color-shadow); */
   text-transform: uppercase;
   font-size: 14px;
   font-weight: bold;
@@ -155,11 +155,11 @@
 .air__animation-fade-entered,
 .air__animation-fade-crunchy-enter-active {
   opacity: 1;
-  transition: opacity var(--animation-duration) var(--animation-timing);
+  transition: opacity var(--air__animation-duration) var(--air__animation-timing);
 }
 
 .air__animation-fade-crunchy-enter-active {
-  transition: opacity var(--animation-duration-crunchy) var(--animation-timing);
+  transition: opacity var(--air__animation-duration-crunchy) var(--air__animation-timing);
 }
 
 .air__animation-fade-exit,
@@ -172,11 +172,11 @@
 .air__animation-fade-exited,
 .air__animation-fade-crunchy-exit-active {
   opacity: 0;
-  transition: opacity var(--animation-duration) var(--animation-timing);
+  transition: opacity var(--air__animation-duration) var(--air__animation-timing);
 }
 
 .air__animation-fade-crunchy-exit-active {
-  transition: opacity var(--animation-duration-crunchy) var(--animation-timing);
+  transition: opacity var(--air__animation-duration-crunchy) var(--air__animation-timing);
 }
 
 .air__animation-site-transition-enter {
@@ -185,7 +185,7 @@
 
 .air__animation-site-transition-enter-active {
   transform: translateX(0);
-  transition: transform var(--animation-duration) var(--animation-timing);
+  transition: transform var(--air__animation-duration) var(--air__animation-timing);
 }
 
 .air__animation-site-transition-exit {
@@ -194,5 +194,5 @@
 
 .air__animation-site-transition-exit-active {
   transform: translateX(-100%);
-  transition: transform var(--animation-duration) var(--animation-timing);
+  transition: transform var(--air__animation-duration) var(--air__animation-timing);
 }

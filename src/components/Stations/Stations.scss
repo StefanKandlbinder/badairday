@@ -5,7 +5,7 @@
 }
 
 .air__stations-marker-cluster {
-    background: var(--color-secondary-weak);
+    background: var(--air__color-secondary--weak);
     border-radius: 50%;
     color: #ededed;
     height: 40px;
@@ -29,11 +29,11 @@
 
 .air__stations-upperaustria-marker svg,
 .air__stations-luftdaten-marker svg {
-    transition: fill var(--animation-duration) var(--animation-timing) var(--animation-duration);
+    transition: fill var(--air__animation-duration) var(--air__animation-timing) var(--air__animation-duration);
 }
 
 .air__station-button-location svg {
-    fill: var(--color-primary);
+    fill: var(--air__color-primary);
 }
 
 /* ------- */
@@ -56,26 +56,26 @@
     align-items: center;
     border: 0;
     background: transparent;
-    /* box-shadow: 2px 4px 12px var(--shadow); */
+    /* box-shadow: 2px 4px 12px var(--air__color-shadow); */
 }
 
 .leaflet-touch .leaflet-bar a {
     width: 32px;
     height: 32px;
     line-height: 32px;
-    background-color: var(--color-text);
+    background-color: var(--air__color-text);
     color: transparent;
 }
 
 .leaflet-touch .leaflet-bar a:first-child {
-    border-top-left-radius: var(--border-radius);
-    border-top-right-radius: var(--border-radius);
+    border-top-left-radius: var(--air__border-radius);
+    border-top-right-radius: var(--air__border-radius);
     background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJub25lIiBkPSJNMCAwaDI0djI0SDBWMHoiLz48cGF0aCBmaWxsPSJyZ2JhKDAsIDEyMSwgMTA3LCAwLjc1KSIgZD0iTTE5IDEzaC02djZoLTJ2LTZINXYtMmg2VjVoMnY2aDZ2MnoiLz48L3N2Zz4=');
 }
 
 .leaflet-touch .leaflet-bar a:last-child {
-    border-bottom-left-radius: var(--border-radius);
-    border-bottom-right-radius: var(--border-radius);
+    border-bottom-left-radius: var(--air__border-radius);
+    border-bottom-right-radius: var(--air__border-radius);
     background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJub25lIiBkPSJNMCAwaDI0djI0SDBWMHoiLz48cGF0aCBmaWxsPSJyZ2JhKDAsIDEyMSwgMTA3LCAwLjc1KSIgZD0iTTE5IDEzSDV2LTJoMTR2MnoiLz48L3N2Zz4=');
 }
 

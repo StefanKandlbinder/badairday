@@ -2,7 +2,7 @@
     --height: 288px;
     --width: 288px;
     --offset: 5vw;
-    --shadow: rgba(0, 0, 0, 0.5);
+    --air__color-shadow: rgba(0, 0, 0, 0.5);
     
     background-color: transparent;
     margin: 0 auto;
@@ -18,8 +18,8 @@
     left: var(--offset);
     z-index: 100;
     will-change: opacity, transform, box-shadow, background-color;
-    transition: background-color var(--animation-duration) var(--animation-timing);
-    /* box-shadow: 5px 10px 30px var(--shadow); */
+    transition: background-color var(--air__animation-duration) var(--air__animation-timing);
+    /* box-shadow: 5px 10px 30px var(--air__color-shadow); */
 }
 
 @media (min-width: 330px) {
@@ -37,7 +37,7 @@
     top: 0;
     z-index: -1;
     will-change: fill;
-    transition: fill var(--animation-duration) var(--animation-timing);
+    transition: fill var(--air__animation-duration) var(--air__animation-timing);
     transform: scale(calc(600 / 590));
     /* clip-path: circle(180px); */
 }
@@ -50,7 +50,7 @@
 .a-station-enter-active {
     /* opacity: 1; */
     transform: scale(1);
-    transition: transform var(--animation-duration-crunchy) var(--animation-timing), opacity var(--animation-duration-crunchy) var(--animation-timing)
+    transition: transform var(--air__animation-duration-crunchy) var(--air__animation-timing), opacity var(--air__animation-duration-crunchy) var(--air__animation-timing)
 }
 
 .a-station-exit {
@@ -58,13 +58,13 @@
 }
 
 .a-station-exit-active {
-    transition: opacity var(--animation-duration) var(--animation-timing);
+    transition: opacity var(--air__animation-duration) var(--air__animation-timing);
 }
 
 .air__station-header {
     /* background: rgba(0, 0, 0, 0.75); */
     font-size: 20px;
-    color: var(--color-text);
+    color: var(--air__color-text);
     padding: 4px 40px;
     line-height: 1.2;
     margin-bottom: 0;
@@ -79,7 +79,7 @@
 .air__station-date {
     font-size: 11px;
     font-style: italic;
-    color: var(--color-text);
+    color: var(--air__color-text);
     margin-bottom: 10px;
     margin-top: -4px;
     order: 2;
@@ -125,7 +125,7 @@
 }
 
 .air__station-button-icon path {
-    transition: fill var(--animation-duration) var(--animation-timing);
+    transition: fill var(--air__animation-duration) var(--air__animation-timing);
     will-change: fill;
 }
 

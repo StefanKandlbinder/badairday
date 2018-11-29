@@ -1,7 +1,7 @@
 .air__update-bar {
     position: fixed;
     top: 0;
-    height: calc(var(--margin) / 2);
+    height: var(--air__margin);
     width: 100%;
     background: rgba(0, 121, 107, 0.75);
     z-index: 100;

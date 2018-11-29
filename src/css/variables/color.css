@@ -1,84 +1,88 @@
 :root {
-    --color-primary: rgba(0, 121, 107, 0.75);
-    --color-primary-active: rgba(0, 121, 107, 0.9);
-    --color-secondary: rgba(37, 113, 199, 0.9);
-    --color-secondary-weak: rgba(37, 113, 199, 0.5);
-    --color-secondary-gone: rgba(37, 113, 199, 0);
-    --color-text: rgba(255, 255, 255, 0.9);
-    --color-text-weak: rgba(255, 255, 255, 0.3);
-    --color-inactive: rgba(170, 170, 170, 0.9);
-    --color-error: rgba(221, 44, 0, 0.9);
-    --color-warning: rgba(221, 162, 0, 0.9);
+    --air__color-primary: rgba(0, 121, 107, 0.75);
+    --air__color-primary--active: rgba(0, 121, 107, 0.9);
+    --air__color-secondary: rgba(37, 113, 199, 0.9);
+    --air__color-secondary--weak: rgba(37, 113, 199, 0.5);
+    --air__color-secondary--gone: rgba(37, 113, 199, 0);
+
+    --air__color-text: rgba(255, 255, 255, 0.9);
+    --air__color-text--weak: rgba(255, 255, 255, 0.3);
+
+    --air__color-inactive: rgba(170, 170, 170, 0.9);
+    --air__color-error: rgba(221, 44, 0, 0.9);
+    --air__color-warning: rgba(221, 162, 0, 0.9);
+
+    --air__color-shadow: rgba(0, 0, 0, 0.3);
 }
 
 .color-primary {
-    color: var(--color-primary);
-    fill: var(--color-primary);
+    color: var(--air__color-primary);
+    fill: var(--air__color-primary);
 }
 
 .bg-color-primary {
-    background-color: var(--color-primary);
+    background-color: var(--air__color-primary);
 }
 
 .color-primary-active {
-    color: var(--color-primary-active);
-    fill: var(--color-primary-active);
+    color: var(--air__color-primary--active);
+    fill: var(--air__color-primary--active);
 }
 
 .bg-color-primary-active {
-    background-color: var(--color-primary-active);
+    background-color: var(--air__color-primary--active);
 }
 
 .color-secondary {
-    color: var(--color-secondary);
-    fill: var(--color-secondary);
+    color: var(--air__color-secondary);
+    fill: var(--air__color-secondary);
 }
 
 .bg-color-secondary {
-    background-color: var(--color-secondary);
+    background-color: var(--air__color-secondary);
 }
 
 .bg-color-secondary-weak {
-    background-color: var(--color-secondary-weak);
+    background-color: var(--air__color-secondary--weak);
 }
 
 .color-text {
-    color: var(--color-text);
-    fill: var(--color-text);
+    color: var(--air__color-text);
+    fill: var(--air__color-text);
 }
 
 .bg-color-text {
-    background-color: var(--color-text);
+    background-color: var(--air__color-text);
 }
 
 .color-text-weak {
-    color: var(--color-text-weak);
-    fill: var(--color-text-weak);
+    color: var(--air__color-text--weak);
+    fill: var(--air__color-text--weak);
 }
 
 .bg-color-text-weak {
-    background-color: var(--color-text-weak);
+    background-color: var(--air__color-text--weak);
 }
 
 .color-inactive {
-    color: var(--color-inactive);
-    fill: var(--color-inactive);
+    color: var(--air__color-inactive);
+    fill: var(--air__color-inactive);
 }
 
 .color-error {
-    color: var(--color-error);
-    fill: var(--color-error);
+    color: var(--air__color-error);
+    fill: var(--air__color-error);
 }
 
 .bg-color-error {
-    background-color: var(--color-error);
+    background-color: var(--air__color-error);
 }
 
 .color-warning {
-    color: var(--color-warning);
-    fill: var(--color-warning);
+    color: var(--air__color-warning);
+    fill: var(--air__color-warning);
 }
 
 .bg-color-warning {
-    background-color: var(--color-warning);
+    background-color: var(--air__color-warning);
 }

@@ -23,7 +23,7 @@
     height: var(--height);
     display: block;
     position: fixed;
-    bottom: calc(var(--button-height) + var(--margin) * 2);
+    bottom: calc(var(--air__button-height) + var(--air__margin) * 2);
     left: 12px;
     z-index: 50;
     opacity: 0.75;
@@ -40,7 +40,7 @@
 
 .air__legend--horizontal {
     left: 0;
-    bottom: var(--button-height);
+    bottom: var(--air__button-height);
     height: 12px;
     width: 100%;
     background: linear-gradient(to right, 

@@ -13,7 +13,7 @@ import './css/variables/elevation.css';
 import './css/variables/animation.css';
 import './css/variables/look.css';
 import './css/variables/sizes.css';
-import './index.css';
+import './index.scss';
 
 const store = configureStore();
 

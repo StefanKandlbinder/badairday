@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Button from '../Button/Button';
-import './Snackbar.css';
+import './Snackbar.scss';
 
 class Snackbar extends Component {
     constructor(props) {

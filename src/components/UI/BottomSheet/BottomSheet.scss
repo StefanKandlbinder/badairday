@@ -4,8 +4,10 @@
     position: fixed;
     bottom: 0;
     z-index: 200;
-    /* box-shadow: 0 0 3px var(--shadow); */
-    background: var(--color-text);
+    box-shadow: 0 0 3px var(--air__color-shadow);
+    border-top-left-radius: var(--air__border-radius);
+    border-top-right-radius: var(--air__border-radius);
+    background: white;
     will-change: transform;
     display: flex;
     flex-direction: column;
@@ -17,7 +19,7 @@
   
 .air__animation-bottom-sheet-enter-active {
     transform: translateY(0);
-    transition: transform var(--animation-duration-crunchy) var(--animation-timing-sidebar);
+    transition: transform var(--air__animation-duration-crunchy) var(--air__animation-timing-sidebar);
 }
   
 .air__animation-bottom-sheet-exit {
@@ -26,5 +28,5 @@
   
 .air__animation-bottom-sheet-exit-active {
     transform: translateY(100%);
-    transition: transform var(--animation-duration-crunchy) var(--animation-timing-sidebar);
+    transition: transform var(--air__animation-duration-crunchy) var(--air__animation-timing-sidebar);
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import "./Updatebar.css";
+import "./Updatebar.scss";
 
 export default class UpdateBar extends Component {
     constructor(props) {

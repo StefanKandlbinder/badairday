@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './Compass.css';
+import './Compass.scss';
 
 class Compass extends Component {
     state = {

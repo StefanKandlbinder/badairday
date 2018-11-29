@@ -4,14 +4,14 @@
     right: 0;
     bottom: 0;
     left: 0;
-    color: var(--color-text);
+    color: var(--air__color-text);
 }
 
 .air__compass:after {
     content: "";
     position: absolute;
     border-radius: 50%;
-    border: 1px dashed var(--color-text-weak);
+    border: 1px dashed var(--air__color-text--weak);
     top: 22px;
     bottom: 22px;
     right: 22px;
@@ -52,7 +52,7 @@
     left: 0;
     will-change: transform;
     transition: transform ease-out 150ms;
-    color: var(--color-text);
+    color: var(--air__color-text);
 }
 
 .air__compass-grid-n {
@@ -120,7 +120,7 @@
     left: 50%;
     width: 1px;
     height: 100%;
-    background: var(--color-text-weak);
+    background: var(--air__color-text--weak);
     will-change: transform;
     transition: transform ease-out 150ms;
 }

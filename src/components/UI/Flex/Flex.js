@@ -1,11 +1,13 @@
 import React from 'react';
 
-import './Flex.css';
+import './Flex.scss';
 
-const flex = (props) => (
-    <div className={`air__flex ${ props.className !== undefined ? props.className : "" }`}>
-        {props.children}
-    </div>
-);
+export default props => {
+    const { className, children, ...rest } = props;
 
-export default flex;
+    return (
+        <div className={ `air__flex ${className !== undefined ? props.className : ""}` } { ...rest }>
+            {children}
+        </div>
+    );
+}

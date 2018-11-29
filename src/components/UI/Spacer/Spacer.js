@@ -1,10 +1,9 @@
 import React from 'react';
 
-import './Spacer.css';
+import './Spacer.scss';
 
-const spacer = (props) => (
-    <div className={props.className}>
-    </div>
-);
-
-export default spacer;
+export default props => {
+    return (
+        <div className="air__spacer"></div>
+    );
+}

@@ -1,0 +1,30 @@
+.air__tabbar {
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    overflow: hidden;
+    background: var(--air__color-text);
+    /* border-top: 1px solid var(--air__color-primary); */
+    /* box-shadow: 2px 4px 12px var(--air__color-shadow); */
+}
+
+.air__tabbar-link {
+    display: flex;
+    align-items: center;
+}
+
+.air__tabbar-link svg {
+    fill: var(--air__color-primary);
+    transform: scale(1);
+    transition: transform var(--air__animation-duration) var(--air__animation-timing), fill var(--air__animation-duration) var(--air__animation-timing);
+    will-change: transform fill;
+}
+
+.air__tabbar-link--active svg {
+    fill: var(--air__color-primary--active);
+    transform: scale(1.2);
+}

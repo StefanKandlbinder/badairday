@@ -10,7 +10,8 @@ import { getStationByID } from "../../redux/filters/getStationByID";
 import Aircomp from '../../components/Aircomp/Aircomp';
 import Compass from '../../components/Compass/Compass';
 import Button from '../../components/UI/Button/Button';
-import './Station.css';
+
+import './Station.scss';
 
 // http://facebook.design/soundkit#scroll
 import soundMount from '../../audio/Tab 2.m4a';
@@ -51,7 +52,7 @@ class Station extends Component {
         }
     }
 
-    componentWillMount() {}
+    componentWillMount() { }
 
     componentWillUnmount() {
         this.setState({ isMounted: false })
@@ -124,7 +125,7 @@ class Station extends Component {
         if (this.props.station.provider === "upperaustria") {
             Object.entries(this.props.station.components).forEach(([key, value]) => {
                 if (value.unit === "µg/m³") {
-                    
+
                     compItems.push(<Aircomp key={key}
                         component={key}
                         value={value.value}
@@ -157,7 +158,7 @@ class Station extends Component {
 
             Object.entries(this.props.station.components).forEach(([key, value]) => {
                 if (value.unit === "µg/m³") {
-                        
+
                     compItems.push(<Aircomp key={key}
                         component={key}
                         value={value.value}
@@ -177,7 +178,7 @@ class Station extends Component {
         let name = "Station";
         let x = "center";
         let y = "center";
-        
+
         name = this.props.station.name;
         dateElement = <div className="air__station-date">{this.props.station.date}</div>;
 

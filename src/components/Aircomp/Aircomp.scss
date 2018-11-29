@@ -1,7 +1,7 @@
 .air__comp {
     display: flex;
     justify-content: center;
-    color: var(--color-text);
+    color: var(--air__color-text);
     line-height: 1.35;
 }
 
@@ -26,9 +26,9 @@
 .air__comp-wind-direction {
     margin-top: 10px;
     font-size: 12px;
-    color: var(--color-text);
+    color: var(--air__color-text);
     line-height: 1.2;
-    transition: transform var(--animation-duration) var(--animation-timing);
+    transition: transform var(--air__animation-duration) var(--air__animation-timing);
     transform-origin: center center;
     will-change: transform;
 }
@@ -39,12 +39,12 @@
 }
 
 .air__comp-wind-direction-svg path {
-    fill: var(--color-text);
+    fill: var(--air__color-text);
 }
 
 .air__comp-wind-force {
     font-size: 12px;
-    color: var(--color-text);
+    color: var(--air__color-text);
     line-height: 1.2;
 }
 
