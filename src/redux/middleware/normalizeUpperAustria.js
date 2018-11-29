@@ -168,6 +168,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                             dispatch(addStation({ station: stationModel, provider: provider }))
                         }
                     }
+                    
                     else if (!update) {
                         return dispatch(addStation({ station: stationModel, provider: provider }))
                     }

@@ -6,7 +6,7 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box;    
-    padding: 4px 8px;
+    padding: calc(var(--air__margin) * 4) calc(var(--air__margin) * 3);
     min-height: var(--air__button-height);
     min-width: var(--air__button-width);
     border: 1px solid white;
@@ -15,6 +15,13 @@
     color: rgba(0, 121, 107, 1);
     box-shadow: 0;
     outline: 0;
+}
+
+.air__button--full,
+.air__button--full:focus,
+.air__button--full:active {
+    flex-direction: row;
+    width: 100%;
 }
 
 .air__button--inactive,
@@ -50,6 +57,7 @@
     min-width: 44px;
     min-height: 44px;
     border-radius: 50%;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
