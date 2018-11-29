@@ -13,7 +13,7 @@ import { setSidebar } from "../../redux/actions/ui";
 import { setNotification } from "../../redux/actions/notifications";
 import { clearState } from '../../redux/localStorage';
 
-import getGeoLocation from '../../utilities/getGeoLocation';
+import getGeoLocation from '../../services/getGeoLocation';
 
 // import Stations from "../../components/dashboard/Stations/Stations";
 import Stations from '../../components/Stations/Stations';
@@ -21,6 +21,8 @@ import Station from '../../components/Station/Station';
 import Notifications from "../../components/UI/Notifications/Notifications";
 import Button from "../../components/UI/Button/Button";
 import Tabbar from "../../components/UI/Tabbar/Tabbar";
+import Loading from "../../components/UI/Loading/Loading";
+import Spinner from "../../components/UI/Spinner/Spinner";
 import Spacer from "../../components/UI/Spacer/Spacer";
 import Sidebar from "../../components/UI/Sidebar/Sidebar";
 import BottomSheet from "../../components/UI/BottomSheet/BottomSheet";
@@ -35,27 +37,9 @@ const luftdatenProvider = "luftdaten";
 const upperAustriaURL = "https://www2.land-oberoesterreich.gv.at/imm/jaxrs/messwerte/json?";
 const upperAustriaProvider = "upperaustria";
 
-class Updating extends Component {
-  render() {
-    return <div className="air__updating">Updating ...</div>
-  }
-}
-
-class Loading extends Component {
-  render() {
-    return <div className="air__loading">Fetching ...</div>
-  }
-}
-
 const Dashboard = (props) => (
   <div className="air__dashboard">Dashboard</div>
 );
-
-class Getlocation extends Component {
-  render() {
-    return <div className="air__loading">Geolocation ...</div>
-  }
-}
 
 class App extends Component {
   constructor(props) {
@@ -280,7 +264,7 @@ class App extends Component {
             timeout={300}
             mountOnEnter
             unmountOnExit>
-            <Updating />
+            <Spinner />
           </CSSTransition>
 
           <CSSTransition
@@ -289,7 +273,7 @@ class App extends Component {
             timeout={300}
             mountOnEnter
             unmountOnExit>
-            <Loading />
+            <Spinner />
           </CSSTransition>
 
           <CSSTransition
@@ -298,7 +282,7 @@ class App extends Component {
             timeout={300}
             mountOnEnter
             unmountOnExit>
-            <Getlocation />
+            <Loading>Geolocation ...</Loading>
           </CSSTransition>
 
           <CSSTransition

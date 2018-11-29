@@ -1,4 +1,4 @@
-.spinner {
+.air__spinner {
   width: 100%;
   height: 100%;
   text-align: center;
@@ -11,25 +11,25 @@
   align-items: center;
 }
 
-.a-spinner-appear {
+.air__animation-spinner-enter {
   opacity: 0;
   transition: opacity var(--air__animation-duration) var(--air__animation-timing);
 }
 
-.a-spinner-appear.a-spinner-appear-active {
+.air__animation-spinner-enter.air__animation-spinner-enter-active {
   opacity: 1;
 }
 
-.a-spinner-leave {
+.air__animation-spinner-exit {
   opacity: 1;
 }
 
-.a-spinner-leave.a-spinner-leave-active {
+.air__animation-spinner-exit.air__animation-spinner-exit-active {
   opacity: 0;
-  transition: opacity 1000ms var(--air__animation-timing);
+  transition: opacity var(--air__animation-duration) var(--air__animation-timing);
 }
 
-.spinner__backdrop {
+.air__spinner__backdrop {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -38,7 +38,7 @@
   top: 0px;
 }
 
-.spinner__bounce {
+.air__spinner__bounce {
   width: 18px;
   height: 18px;
   background-color: var(--air__color-text);
@@ -50,12 +50,12 @@
   animation: sk-bouncedelay 1.4s infinite ease-in-out both;
 }
 
-.spinner__bounce-1 {
+.air__spinner__bounce-1 {
   -webkit-animation-delay: -0.32s;
   animation-delay: -0.32s;
 }
 
-.spinner__bounce-2 {
+.air__spinner__bounce-2 {
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
 }

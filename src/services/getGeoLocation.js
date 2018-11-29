@@ -5,11 +5,21 @@ export default function getGeoLocation() {
         }
 
         else {
-            navigator.geolocation.getCurrentPosition((position) => {
+            let options = {
+                enableHighAccuracy: true,
+                maximumAge: 30000,
+                timeout: 27000
+            };
+            
+            const success = position => {
                 resolve({ lat: position.coords.latitude, lng: position.coords.longitude });
-            }, (error) => {
+            }
+
+            const error = error => {
                 reject(Error("Geolocation ist für diese Seite blockiert!"));
-            } );
+            }
+            
+            navigator.geolocation.getCurrentPosition(success, error, options);
         }
     });
 }

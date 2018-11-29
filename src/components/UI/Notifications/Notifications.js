@@ -24,8 +24,6 @@ class Notifications extends Component {
     this.setState({
       type: this.props.notifications[0].meta.type
     })
-
-    console.log(this.props.notifications[0]);
   }
 
   componentWillUnmount() {
