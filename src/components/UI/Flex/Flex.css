@@ -1,0 +1,15 @@
+.air__flex {
+    display: flex;
+}
+
+.air__flex--justify-content-center {
+    justify-content: center;
+}
+
+.air__flex--justify-content-space-around {
+    justify-content: space-around;
+}
+
+.air__flex--align-items-center {
+    align-items: center;
+}

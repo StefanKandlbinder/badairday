@@ -75,16 +75,10 @@ class Notifications extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    notifications: state.notifications
-  };
-}
-
 const mapDispatchToProps = dispatch => {
   return {
     onRemoveNotification: (id) => dispatch(removeNotification({ notificationId: id, feature: "[Notifications]" }))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Notifications);
+export default connect(null, mapDispatchToProps)(Notifications);

@@ -17,6 +17,6 @@ export const notificationMiddleware = () => (next) => (action) => {
         next(setNotification({ message: notification, feature: meta.feature, type: meta.type }));
 
     } else {
-        next(action)
+        next(action);
     }
 };
