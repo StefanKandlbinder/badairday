@@ -2,6 +2,7 @@
 .air__button:focus,
 .air__button:active {
     display: inline-flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;    
