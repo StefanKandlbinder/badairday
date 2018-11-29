@@ -74,31 +74,6 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
             let components = normalizeComponents(station.sensordatavalues);
             let name = "Lufdatensensor: " + station.sensor.id;
 
-            if (getState().options.reversegeo && ReverseGeocode !== undefined) {
-                ReverseGeocode.geocodeService().reverse()
-                    .latlng([station.location.latitude, station.location.longitude])
-                    .distance(10)
-                    .run(function (error, result) {
-                        if (error) {
-                            name = "Luftdatensensor: " + station.id;
-                        }
-                        if (result) {
-                            name = result.address.ShortLabel;
-
-                            let stationModel = new Station(provider,
-                                station.sensor.id.toString(),
-                                name,
-                                getStringDateLuftdaten(station.timestamp),
-                                parseFloat(station.location.latitude),
-                                parseFloat(station.location.longitude),
-                                components,
-                                components.PM10 ? parseFloat(components.PM10.value) : 0);
-
-                            dispatch(updateStation({ station: stationModel, provider: provider }))
-                        }
-                    });
-            }
-
             let stationModel = new Station(provider,
                 station.sensor.id.toString(),
                 name,
@@ -119,6 +94,31 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                 }
             }
             else if (update !== false && stationModel.mood < 1900) {
+                if (getState().options.reversegeo && ReverseGeocode !== undefined) {
+                    ReverseGeocode.geocodeService().reverse()
+                        .latlng([station.location.latitude, station.location.longitude])
+                        .distance(10)
+                        .run(function (error, result) {
+                            if (error) {
+                                name = "Luftdatensensor: " + station.id;
+                            }
+                            if (result) {
+                                name = result.address.ShortLabel;
+
+                                let stationModel = new Station(provider,
+                                    station.sensor.id.toString(),
+                                    name,
+                                    getStringDateLuftdaten(station.timestamp),
+                                    parseFloat(station.location.latitude),
+                                    parseFloat(station.location.longitude),
+                                    components,
+                                    components.PM10 ? parseFloat(components.PM10.value) : 0);
+
+                                dispatch(updateStation({ station: stationModel, provider: provider }))
+                            }
+                        });
+                }
+
                 return dispatch(addStation({ station: stationModel, provider: provider }))
             }
 
