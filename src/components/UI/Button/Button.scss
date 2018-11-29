@@ -6,22 +6,24 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box;    
-    padding: calc(var(--air__margin) * 4) calc(var(--air__margin) * 3);
+    padding: 0 calc(var(--air__margin) * 3);
     min-height: var(--air__button-height);
     min-width: var(--air__button-width);
-    border: 1px solid white;
+    border: 1px solid var(--air__color-primary);
     border-radius: 6px;
     background: var(--air__color-text);
+    font-size: 12px;
     color: var(--air__color-primary--active);
     box-shadow: 0;
     outline: 0;
+    transform: scale(1);
+    transition: transform var(--air__animation-duration-crunchy) var(--air__animation-timing), border-color var(--air__animation-duration-crunchy) var(--air__animation-timing);
 }
 
 .air__button--full,
 .air__button--full:focus,
 .air__button--full:active {
-    flex-direction: row;
-    width: 100%;
+    flex-grow: 1
 }
 
 .air__button--inactive,
@@ -40,8 +42,7 @@
 .air__button--naked,
 .air__button--naked:focus,
 .air__button--naked:active {
-    border: 0;
-    border-radius: 0;
+    border-color: transparent;
     box-shadow: 0;
 }
 
@@ -62,4 +63,11 @@
     justify-content: center;
     align-items: center;
     box-shadow: 0 2px 4px -1px var(--air__color-shadow)
+}
+
+.air__button--active,
+.air__button--active:focus,
+.air__button--active:active {
+    transform: scale(1.2);
+    will-change: transform;
 }

@@ -2,6 +2,10 @@
     display: flex;
 }
 
+.air__flex--full {
+    width: 100%;
+}
+
 .air__flex--justify-content-center {
     justify-content: center;
 }
@@ -12,4 +16,8 @@
 
 .air__flex--align-items-center {
     align-items: center;
+}
+
+.air__flex--grow-1 {
+    flex-grow: 1;
 }

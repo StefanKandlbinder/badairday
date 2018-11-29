@@ -1,6 +1,6 @@
 .air__list-header {
-    font-size: 12px;
+    
     letter-spacing: 1px;
-    padding: calc(var(--air__margin) * 4) calc(var(--air__margin) * 3);
+    padding: var(--air__margin--4) var(--air__margin--3) var(--air__margin--2);
     text-align: left;
 }
