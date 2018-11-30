@@ -33,3 +33,21 @@
 .air__notifications--info .air__notifications-content {
     background-color: var(--air__color-secondary);
 }
+
+.air__animation-notification-enter {
+    transform: translateY(-100%);
+}
+  
+.air__animation-notification-enter-active {
+    transform: translateY(0);
+    transition: transform var(--air__animation-duration-crunchy) var(--air__animation-timing-sidebar);
+}
+  
+.air__animation-notification-exit {
+    transform: translateY(0);
+}
+  
+.air__animation-notification-exit-active {
+    transform: translateY(-100%);
+    transition: transform var(--air__animation-duration-crunchy) var(--air__animation-timing-sidebar);
+}

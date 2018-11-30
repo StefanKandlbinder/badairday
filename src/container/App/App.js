@@ -320,7 +320,7 @@ class App extends Component {
 
           <CSSTransition
             in={this.props.notifications.length > 0}
-            classNames="air__animation-fade"
+            classNames="air__animation-notification"
             timeout={300}
             mountOnEnter
             unmountOnExit>
