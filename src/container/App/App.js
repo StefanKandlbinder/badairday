@@ -312,7 +312,7 @@ class App extends Component {
           <CSSTransition
             in={this.props.geolocation}
             classNames="air__animation-fade-crunchy"
-            timeout={300}
+            timeout={150}
             mountOnEnter
             unmountOnExit>
             <Loading>Geolocation</Loading>
@@ -320,7 +320,7 @@ class App extends Component {
 
           <CSSTransition
             in={this.props.notifications.length > 0}
-            classNames="air__animation-fade-crunchy"
+            classNames="air__animation-fade"
             timeout={300}
             mountOnEnter
             unmountOnExit>

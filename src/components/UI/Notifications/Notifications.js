@@ -5,25 +5,8 @@ import { removeNotification } from "../../../redux/actions/notifications";
 import "./Notifications.scss";
 
 class Notifications extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      notification: null,
-      type: ""
-    }
-  }
-
   componentDidMount() {
     this.myInterval = setInterval(this.setNotification, 4000);
-    
-    this.setState({
-      notification: this.props.notifications[0].payload.message
-    })
-
-    this.setState({
-      type: this.props.notifications[0].meta.type
-    })
   }
 
   componentWillUnmount() {
@@ -33,40 +16,22 @@ class Notifications extends Component {
   setNotification = () => {
     if (this.props.notifications.length > 1) {
       this.props.onRemoveNotification(this.props.notifications[0].payload.id);
-      
-      this.setState({
-        notification: this.props.notifications[0].payload.message
-      })
-
-      this.setState({
-        type: this.props.notifications[0].meta.type
-      })
-
-      
     }
+    
     else if (this.props.notifications.length === 1) {
-      this.setState({
-        notification: this.props.notifications[0].payload.message
-      }, () => {
-        this.props.onRemoveNotification(this.props.notifications[0].payload.id);
-      })
+      this.props.onRemoveNotification(this.props.notifications[0].payload.id);
     }
   }
 
   render() {
-    let classes = "air__notifications";
-
-    if (this.state.type === "info") {
-      classes += " air__notifications--info"
-    }
-    else if (this.state.type === "error") {
-      classes += " air__notifications--error"
+    if (this.props.notifications.length) {
+      this.type = this.props.notifications[0].meta.type;
     }
 
     return (
-      <div className={classes}>
+      <div className={`air__notifications air__notifications--${this.type}`}>
         <div className="air__notifications-content">
-          {this.state.notification}
+          {this.props.notifications[0] ? this.props.notifications[0].payload.message : null}
         </div>
       </div>
     )
