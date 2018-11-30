@@ -147,11 +147,6 @@ class App extends Component {
       <List className="air__list">
         <ListItem className="air__list-item">
           <Button
-            className={`air__button ${this.props.options.autoupdating ? "air__button--ghost" : "air__button--naked"}`}
-            clicked={() => this.props.onSetOptionAutoupdater({ state: this.props.options.autoupdating ? false : true, feature: STATIONS })}>
-            <div className="air__button-text">Autoupdating</div>
-          </Button>
-          <Button
             className={`air__button ${this.props.options.reversegeo ? "air__button--ghost" : "air__button--naked"}`}
             clicked={() => this.props.onSetOptionReverseGeo({ state: this.props.options.reversegeo ? false : true, feature: STATIONS })}>
             <div className="air__button-text">ReverseGeo</div>
@@ -165,6 +160,11 @@ class App extends Component {
             className={`air__button ${this.props.options.sort ? "air__button--ghost" : "air__button--naked"}`}
             clicked={() => this.props.onSetOptionSort({ state: this.props.options.sort ? false : true, feature: STATIONS })}>
             <div className="air__button-text">Sort</div>
+          </Button>
+          <Button
+            className={`air__button ${this.props.options.autoupdating ? "air__button--ghost" : "air__button--naked"}`}
+            clicked={() => this.props.onSetOptionAutoupdater({ state: this.props.options.autoupdating ? false : true, feature: STATIONS })}>
+            <div className="air__button-text">Autoupdating</div>
           </Button>
         </ListItem>
       </List>
