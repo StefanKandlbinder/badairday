@@ -118,18 +118,8 @@ class Station extends Component {
         getWebShare(title, text, url).then((success, reject) => {
             // this.props.onSetNotification({ message: "Ihr Beitrag wurde geteilt.", feature: STATIONS, type: "success" });
           }).catch((error) => {
-            // this.props.onSetNotification({ message: error.message, feature: STATIONS, type: "info" });
+            this.props.onSetNotification({ message: error.message, feature: STATIONS, type: "info" });
           });
-
-        /*if (navigator.share) {
-            navigator.share({
-                title: "Airodrome / Luftqualität: " + this.props.station.name,
-                text: 'Verfolgen Sie die aktuelle Luftqualität an der Station ' + this.props.station.name,
-                url: 'https://airodrome.herokuapp.com/station/' + this.props.station.provider + "/" + this.props.station.id
-            })
-                .then(() => console.log('Successful share'))
-                .catch((error) => console.log('Error sharing', error));
-        }*/
     }
 
     getAirComps() {
