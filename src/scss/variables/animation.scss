@@ -40,12 +40,12 @@
 }
 
 .air__animation-site-transition-enter {
-  transform: translateX(-100%);
+  transform: translateX(100%);
 }
 
 .air__animation-site-transition-enter-active {
   transform: translateX(0);
-  transition: transform var(--air__animation-duration) var(--air__animation-timing);
+  transition: transform var(--air__animation-duration) var(--air__animation-timing-sidebar);
 }
 
 .air__animation-site-transition-exit {
@@ -53,6 +53,6 @@
 }
 
 .air__animation-site-transition-exit-active {
-  transform: translateX(-100%);
-  transition: transform var(--air__animation-duration) var(--air__animation-timing);
+  transform: translateX(100%);
+  transition: transform var(--air__animation-duration) var(--air__animation-timing-sidebar);
 }

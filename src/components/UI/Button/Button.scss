@@ -25,6 +25,17 @@
     flex-grow: 1
 }
 
+.air__button--error,
+.air__button--error:focus,
+.air__button--error:active {
+    color: var(--air__color-error);
+    border-color: var(--air__color-error);
+
+    .air__button-icon {
+        fill: var(--air__color-error);
+    }
+}
+
 .air__button--small,
 .air__button--small:focus,
 .air__button--small:active {
@@ -42,9 +53,9 @@
     pointer-events: none !important;
 }
 
-.air__button--inactive svg,
-.air__button--inactive:focus svg,
-.air__button--inactive:active svg {
+.air__button--inactive .air__button-icon,
+.air__button--inactive:focus .air__button-icon,
+.air__button--inactive:active .air__button-icon {
     color: var(--air__color-inactive) !important;
     fill: var(--air__color-inactive) !important;
 }

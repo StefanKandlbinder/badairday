@@ -9,6 +9,7 @@ import * as serviceWorker from './serviceWorker';
 
 import './scss/variables/color.scss';
 import './scss/variables/margin.scss';
+import './scss/variables/padding.scss';
 import './scss/variables/elevation.scss';
 import './scss/variables/animation.scss';
 import './scss/variables/look.scss';

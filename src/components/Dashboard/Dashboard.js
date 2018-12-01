@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import sortBy from 'lodash/sortBy';
 
-import Station from "../Station/Station";
-import './Stations.css';
+import { getFavorizedStations } from '../../redux/filters/getFavorizedStations';
 
-class Stations extends Component {
+import DashboardItem from "./DashbaordItem";
+import './Dashboard.scss';
+
+class Dashboard extends Component {
     render() {
-        let stations = this.props.stations;
+        let stations = getFavorizedStations(this.props.stations);
 
         if (this.props.options.sort) {
-          stations = sortBy(this.props.stations, ['mood']).reverse();
+          stations = sortBy(stations, ['mood']).reverse();
           stations.forEach((station, i) => {
             if (station.favorized) {
                 stations.splice(i, 1);
@@ -19,9 +21,9 @@ class Stations extends Component {
         }
 
         return (
-            <ul className="air__stations">
+            <ul className="air__dashboard">
                 {stations.map((station) =>
-                    <Station
+                    <DashboardItem
                         key={station.id}
                         station={station} />
                 )}
@@ -30,4 +32,4 @@ class Stations extends Component {
     }
 }
 
-export default Stations;
+export default Dashboard;

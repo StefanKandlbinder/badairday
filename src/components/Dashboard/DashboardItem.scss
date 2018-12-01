@@ -1,5 +1,5 @@
-.air__station {
-    padding: calc(var(--air__margin) * 2) calc(var(--air__margin) * 3);
+.air__dashboard-item {
+    padding: var(--air__margin--2) var(--air__margin--3);
     text-align: left;
     /* border-bottom: 1px solid rgba(255, 255, 255, 1); */
     color: rgba(255, 255, 255, 1);
@@ -18,13 +18,13 @@
     flex-grow: 1;
     flex-shrink: 0;
     width: 100%;
-    min-height: 70px;
+    min-height: 64px;
     overflow: hidden;
     position: relative;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
 
-  .air__station:after {
+  .air__dashboard-item:after {
     --size: calc(var(--air__margin) * 4);
     --position: calc((var(--size) / 2)  * -1);
 
@@ -40,23 +40,23 @@
     transform: rotateZ(45deg);
   }
 
-  .air__station--favorized:after {
+  .air__dashboard-item--favorized:after {
     opacity: 1;  
   }
   
   @media (min-width: 530px) {
-    .air__station {
+    .air__dashboard-item {
       width: 50%;
     }
   }
   
   @media (min-width: 795px) {
-    .air__station {
+    .air__dashboard-item {
       width: calc(100% / 3);
     }
   }
 
-  .air__station-item {
+  .air__dashboard-item-content {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -64,18 +64,18 @@
       line-height: 1;
   }
 
-  .air__station--description {
+  .air__dashboard--description {
       flex-grow: 1;
       padding-right: var(--air__margin);
   }
 
-  .air__station-official {
+  .air__dashboard-item-official {
     width: 12px;
     height: 9px;
     margin-left: calc(var(--air__margin) / 2);
   }
 
-  .air__station-date {
+  .air__dashboard-item-date {
     font-size: 11px;
     font-weight: 300;
     color: rgba(255, 255, 255, 1);
@@ -83,26 +83,26 @@
     margin-top: calc(var(--air__margin) / 2);
   }
   
-  .air__station-item--component {
+  .air__dashboard-item-content--component {
     display: flex;
     flex-direction: column;
     text-align: right;
     min-width: 72px;
   }
 
-  .air__station-component {
+  .air__dashboard-item-component {
     display: flex;
     justify-content: flex-end;
   }
 
-  .air__station-component:not(:first-child) {
+  .air__dashboard-item-component:not(:first-child) {
     margin-top: calc(var(--air__margin) / 2);
   }
 
-  .air__station-component--main {
+  .air__dashboard-item-component--main {
     font-size: 16px;
   }
 
-  .air__station-component-value {
+  .air__dashboard-item-component-value {
     min-width: 52px;
   }
