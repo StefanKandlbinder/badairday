@@ -24,7 +24,7 @@
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
 
-  .air__dashboard-item:after {
+  /* .air__dashboard-item:after {
     --size: calc(var(--air__margin) * 4);
     --position: calc((var(--size) / 2)  * -1);
 
@@ -42,7 +42,7 @@
 
   .air__dashboard-item--favorized:after {
     opacity: 1;  
-  }
+  } */
   
   @media (min-width: 530px) {
     .air__dashboard-item {

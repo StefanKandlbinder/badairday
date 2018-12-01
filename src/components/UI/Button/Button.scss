@@ -12,11 +12,16 @@
     border-radius: 6px;
     background: var(--air__color-text);
     font-size: 12px;
-    color: var(--air__color-primary--active);
+    color: var(--air__color-primary);
     box-shadow: 0;
     outline: 0;
     transform: scale(1);
     transition: transform var(--air__animation-duration-crunchy) var(--air__animation-timing), border-color var(--air__animation-duration-crunchy) var(--air__animation-timing);
+
+    .air__button-icon {
+        fill: var(--air__color-primary);
+        transition: fill var(--air__animation-duration-crunchy) var(--air__animation-timing);
+    }
 }
 
 .air__button--full,
@@ -50,14 +55,12 @@
 .air__button--inactive,
 .air__button--inactive:focus,
 .air__button--inactive:active {
-    pointer-events: none !important;
-}
-
-.air__button--inactive .air__button-icon,
-.air__button--inactive:focus .air__button-icon,
-.air__button--inactive:active .air__button-icon {
     color: var(--air__color-inactive) !important;
-    fill: var(--air__color-inactive) !important;
+    pointer-events: none !important;
+
+    .air__button-icon {
+        fill: var(--air__color-inactive) !important;
+    }
 }
 
 .air__button--naked,
@@ -91,6 +94,11 @@
 .air__button--active:active {
     transform: scale(1.2);
     will-change: transform;
+    color: var(--air__color-primary--active);
+
+    .air__button-icon {
+        fill: var(--air__color-primary--active);
+    }
 }
 
 .air__button-icon {

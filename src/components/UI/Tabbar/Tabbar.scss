@@ -16,15 +16,3 @@
     display: flex;
     align-items: center;
 }
-
-.air__tabbar-link svg {
-    fill: var(--air__color-primary);
-    transform: scale(1);
-    transition: transform var(--air__animation-duration) var(--air__animation-timing), fill var(--air__animation-duration) var(--air__animation-timing);
-    will-change: transform fill;
-}
-
-.air__tabbar-link--active svg {
-    fill: var(--air__color-primary--active);
-    transform: scale(1.2);
-}
