@@ -116,7 +116,7 @@ class Station extends Component {
         const url =  'https://badairday.herokuapp.com/station/' + this.props.station.provider + "/" + this.props.station.id;
 
         getWebShare(title, text, url).then((success, reject) => {
-            this.props.onSetNotification({ message: "Ihr Beitrag wurde geteilt.", feature: STATIONS, type: "info" });
+            this.props.onSetNotification({ message: "Ihr Beitrag wurde geteilt.", feature: STATIONS, type: "success" });
           }).catch((error) => {
             this.props.onSetNotification({ message: error.message, feature: STATIONS, type: "info" });
           });
