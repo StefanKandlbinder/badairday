@@ -1,0 +1,57 @@
+.air__toggle {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.air__toggle-knob-wrapper {
+    width: 50px;
+    height: 24px;
+    border-radius: 24px;
+    display: inline-flex;
+    background-color: lightgray;
+    position: relative;
+    align-items: center;
+    transition: background-color var(--air__animation-duration-crunchy) var(--air__animation-timing);   
+}
+
+.air__toggle-label {
+    color: var(--air__color-primary--active);
+    font-size: 14px;
+}
+
+.air__toggle--active {
+    .air__toggle-knob-wrapper {
+        background-color: var(--air__color-success);
+    }
+
+    .air__toggle-knob {
+        transform: translateX(26px);
+    }
+}
+
+.air__toggle--inactive {
+    .air__toggle-knob-wrapper {
+        background-color: var(--air__color-error);
+    }
+    
+    .air__toggle-knob {
+        transform: translateX(0);
+    }
+}
+
+.air__toggle-knob {
+    transform: translateX(0);
+    transition: transform var(--air__animation-duration-crunchy) var(--air__animation-timing-sidebar);
+    left: 1px;
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: white;
+}

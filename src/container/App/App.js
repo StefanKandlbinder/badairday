@@ -28,6 +28,7 @@ import Tabbar from "../../components/UI/Tabbar/Tabbar";
 import Loading from "../../components/UI/Loading/Loading";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import Spacer from "../../components/UI/Spacer/Spacer";
+import Toggle from "../../components/UI/Toggle/Toggle";
 import Sidebar from "../../components/UI/Sidebar/Sidebar";
 import BottomSheet from "../../components/UI/BottomSheet/BottomSheet";
 import List from "../../components/UI/List/List";
@@ -145,40 +146,44 @@ class App extends Component {
     bottomSheet = <BottomSheet>
       <ListHeader className="air__list-header air__color-primary--active">Options</ListHeader>
       <List className="air__list">
-        <ListItem className="air__list-item">
-          <Button
-            className={`air__button ${this.props.options.reversegeo ? "air__button--ghost" : "air__button--naked"}`}
+        <ListItem className="air__list-item air__justify-content--space-between">
+          <Toggle
+            className={`air__toggle ${this.props.options.reversegeo ? "air__toggle--active" : "air__toggle--inactive"}`}
             clicked={() => this.props.onSetOptionReverseGeo({ state: this.props.options.reversegeo ? false : true, feature: STATIONS })}>
-            <div className="air__button-text">ReverseGeo</div>
-          </Button>
-          <Button
-            className={`air__button ${this.props.options.runaways ? "air__button--ghost" : "air__button--naked"}`}
+            ReverseGeo
+          </Toggle>
+        </ListItem>
+        <ListItem className="air__list-item air__justify-content--space-between">
+          <Toggle
+            className={`air__toggle ${this.props.options.runaways ? "air__toggle--active" : "air__toggle--inactive"}`}
             clicked={() => this.props.onSetOptionRunaways({ state: this.props.options.runaways ? false : true, feature: STATIONS })}>
-            <div className="air__button-text">Runaways</div>
-          </Button>
-          <Button
-            className={`air__button ${this.props.options.sort ? "air__button--ghost" : "air__button--naked"}`}
+            Runaways
+          </Toggle>
+        </ListItem>
+        <ListItem className="air__list-item air__justify-content--space-between">
+          <Toggle className={`air__toggle ${this.props.options.sort ? "air__toggle--active" : "air__toggle--inactive"}`}
             clicked={() => this.props.onSetOptionSort({ state: this.props.options.sort ? false : true, feature: STATIONS })}>
-            <div className="air__button-text">Sort</div>
-          </Button>
-          <Button
-            className={`air__button ${this.props.options.autoupdating ? "air__button--ghost" : "air__button--naked"}`}
+            Sort
+          </Toggle>
+        </ListItem>
+        <ListItem className="air__list-item air__justify-content--space-between">
+          <Toggle className={`air__toggle ${this.props.options.autoupdating ? "air__toggle--active" : "air__toggle--inactive"}`} 
             clicked={() => this.props.onSetOptionAutoupdater({ state: this.props.options.autoupdating ? false : true, feature: STATIONS })}>
-            <div className="air__button-text">Autoupdating</div>
-          </Button>
+            Autoupdater
+          </Toggle>
         </ListItem>
       </List>
       <ListHeader className="air__list-header air__color-primary--active">Admin</ListHeader>
       <List className="air__list">
         <ListItem className="air__list-item">
           <Button
-            className="air__button air__button--naked air__button--full air__align-items--flex-start"
+            className="air__button air__button--ghost air__button--full air__button--small air__margin-right"
             clicked={() => this.onFetchStations()}>
             <svg className="air__button-icon air__color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M13 3c-4.97 0-9 4.03-9 9H1l4 3.99L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.25 2.52.77-1.28-3.52-2.09V8z" /></svg>
             Fetch
           </Button>
           <Button
-            className="air__button air__button--naked air__button--full air__align-items--flex-start"
+            className="air__button air__button--ghost air__button--full air__button--small air__margin-left"
             clicked={() => this.clearStorage()}>
             <svg className="air__button-icon air__color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" /></svg>
             Clear
@@ -231,7 +236,7 @@ class App extends Component {
         <path d="M289.3 103.1L98.7 484.2c-5.2 10.3 5.8 21.3 16.1 16.1l179.8-89.9c3.4-1.7 7.4-1.7 10.7 0l179.8 89.9c10.3 5.2 21.3-5.8 16.1-16.1L310.7 103.1c-4.4-8.9-17-8.9-21.4 0zm4.1 276.4l-117.2 58.6c-10.3 5.2-21.3-5.8-16.1-16.1l117.2-234.3c5.7-11.3 22.7-7.3 22.7 5.4v175.8c0 4.4-2.6 8.6-6.6 10.6z" fill="#fff" /></svg>
     </div>;
 
-    background = null;
+    // background = null;
 
     app = <div>
       {station}

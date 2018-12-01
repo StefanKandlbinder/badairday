@@ -7,12 +7,12 @@ import App from "./container/App/App";
 import configureStore from "./redux/store";
 import * as serviceWorker from './serviceWorker';
 
-import './css/variables/color.css';
-import './css/variables/margin.css';
-import './css/variables/elevation.css';
-import './css/variables/animation.css';
-import './css/variables/look.css';
-import './css/variables/sizes.css';
+import './scss/variables/color.scss';
+import './scss/variables/margin.scss';
+import './scss/variables/elevation.scss';
+import './scss/variables/animation.scss';
+import './scss/variables/look.scss';
+import './scss/variables/sizes.scss';
 import './scss/07-trumps/layout.scss';
 import './index.scss';
 

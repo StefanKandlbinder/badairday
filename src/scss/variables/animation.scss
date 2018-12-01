@@ -1,0 +1,58 @@
+:root {
+    --air__animation-duration: 300ms;
+    --air__animation-duration-crunchy: calc(var(--air__animation-duration) / 2);
+    --air__animation-timing: ease-out;
+    --air__animation-timing-sidebar: cubic-bezier(.53,.04,.83,.88);
+}
+
+.air__animation-fade-enter,
+.air__animation-fade-entering,
+.air__animation-fade-crunchy-enter {
+  opacity: 0;
+}
+
+.air__animation-fade-enter-active,
+.air__animation-fade-entered,
+.air__animation-fade-crunchy-enter-active {
+  opacity: 1;
+  transition: opacity var(--air__animation-duration) var(--air__animation-timing);
+}
+
+.air__animation-fade-crunchy-enter-active {
+  transition: opacity var(--air__animation-duration-crunchy) var(--air__animation-timing);
+}
+
+.air__animation-fade-exit,
+.air__animation-fade-exiting,
+.air__animation-fade-crunchy-exit {
+  opacity: 1;
+}
+
+.air__animation-fade-exit-active,
+.air__animation-fade-exited,
+.air__animation-fade-crunchy-exit-active {
+  opacity: 0;
+  transition: opacity var(--air__animation-duration) var(--air__animation-timing);
+}
+
+.air__animation-fade-crunchy-exit-active {
+  transition: opacity var(--air__animation-duration-crunchy) var(--air__animation-timing);
+}
+
+.air__animation-site-transition-enter {
+  transform: translateX(-100%);
+}
+
+.air__animation-site-transition-enter-active {
+  transform: translateX(0);
+  transition: transform var(--air__animation-duration) var(--air__animation-timing);
+}
+
+.air__animation-site-transition-exit {
+  transform: translateX(0);
+}
+
+.air__animation-site-transition-exit-active {
+  transform: translateX(-100%);
+  transition: transform var(--air__animation-duration) var(--air__animation-timing);
+}

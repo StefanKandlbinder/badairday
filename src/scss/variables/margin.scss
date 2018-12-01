@@ -1,0 +1,39 @@
+:root {
+    --air__margin: 4px;
+    --air__margin--2: 8px;
+    --air__margin--3: 12px;
+    --air__margin--4: 16px;
+    --air__margin--5: 20px;
+}
+
+.air__margin-top {
+    margin-top: var(--air__margin);
+}
+
+.air__margin-bottom {
+    margin-bottom: var(--air__margin);
+}
+
+.air__margin-left {
+    margin-left: var(--air__margin);
+}
+
+.air__margin-right {
+    margin-right: var(--air__margin);
+}
+
+.air__margin-top--2 {
+    margin-top: var(--air__margin--2);
+}
+
+.air__margin-bottom--2 {
+    margin-bottom: var(--air__margin--2);
+}
+
+.air__margin-left--2 {
+    margin-left: var(--air__margin--2);
+}
+
+.air__margin-right--2 {
+    margin-right: var(--air__margin--2);
+}

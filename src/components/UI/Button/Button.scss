@@ -2,7 +2,6 @@
 .air__button:focus,
 .air__button:active {
     display: inline-flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;    
@@ -24,6 +23,17 @@
 .air__button--full:focus,
 .air__button--full:active {
     flex-grow: 1
+}
+
+.air__button--small,
+.air__button--small:focus,
+.air__button--small:active {
+    min-height: var(--air__button-height--small);
+
+    .air__button-icon {
+        width: 16px;
+        height: 16px;;
+    }
 }
 
 .air__button--inactive,
@@ -70,4 +80,8 @@
 .air__button--active:active {
     transform: scale(1.2);
     will-change: transform;
+}
+
+.air__button-icon {
+    margin-right: var(--air__margin);
 }
