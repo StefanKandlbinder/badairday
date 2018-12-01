@@ -20,6 +20,10 @@ class Dashboard extends Component {
           })
         }
 
+        let moodStyle = {
+            backgroundColor: stations.length ? stations[stations.length - 1].moodRGBA : ""
+        }
+
         return (
             <ul className="air__dashboard">
                 {stations.map((station) =>
@@ -27,6 +31,7 @@ class Dashboard extends Component {
                         key={station.id}
                         station={station} />
                 )}
+                <li class="air__spacer" style={moodStyle}></li>
             </ul>
         );
     }
