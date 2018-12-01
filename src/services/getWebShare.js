@@ -6,9 +6,7 @@ export default function getWebShare(title, text, url) {
                 text: text,
                 url: url
             })
-                .then((success, reject) => resolve(
-                    "Ihr Beitrag wurde geteilt."
-                ))
+                .then(() => resolve())
                 .catch((error) => reject(Error("Web Share fehlgeschlagen!")));
         }
 
