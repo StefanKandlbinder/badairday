@@ -1,4 +1,4 @@
-import getMood from '../../utilities/getMood';
+import getMood from '../../utilities/getMood.js';
 
 export default class StationModel {
     constructor(provider = "",
