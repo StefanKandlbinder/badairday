@@ -36,7 +36,9 @@ class Stations extends Component {
             this.handleLocation();
         }
 
-        this.updateFavorizedStations();
+        if (this.props.stations.length) {
+            this.updateFavorizedStations();
+        }
     }
 
     // forward to the official station when clicking on the corresponding placeholder on the map
@@ -149,12 +151,18 @@ class Stations extends Component {
             if (station.favorized) {
                 let markerID = '[data-favorized-id="' + station.id + '"]';
                 let marker = document.querySelector(markerID);
-                marker.setAttribute("style", "fill: rgba(255, 255, 255, 0.9)");
+
+                if (marker) {
+                    marker.setAttribute("style", "fill: rgba(255, 255, 255, 0.9)");
+                }
             }
             else {
                 let markerID = '[data-favorized-id="' + station.id + '"]';
                 let marker = document.querySelector(markerID);
-                marker.setAttribute("style", "fill: rgba(255, 255, 255, 0)");
+                
+                if (marker) {
+                    marker.setAttribute("style", "fill: rgba(255, 255, 255, 0)");
+                }
             }
         })
     }
