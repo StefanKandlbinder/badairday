@@ -36,7 +36,7 @@ class Stations extends Component {
             this.handleLocation();
         }
 
-        // this.updateFavorizedStations();
+        this.updateFavorizedStations();
     }
 
     // forward to the official station when clicking on the corresponding placeholder on the map
