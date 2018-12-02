@@ -147,8 +147,6 @@ class Stations extends Component {
     updateFavorizedStations = () => {
         this.props.stations.forEach(station => {
             if (station.favorized) {
-                console.log("yESSSS");
-
                 let markerID = '[data-favorized-id="' + station.id + '"]';
                 let marker = document.querySelector(markerID);
                 marker.setAttribute("style", "fill: rgba(255, 255, 255, 0.9)");
