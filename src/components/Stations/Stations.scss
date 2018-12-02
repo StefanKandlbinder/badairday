@@ -27,9 +27,21 @@
     border-radius: 50%;
 }
 
-.air__stations-upperaustria-marker svg,
-.air__stations-luftdaten-marker svg {
-    transition: fill var(--air__animation-duration) var(--air__animation-timing) var(--air__animation-duration);
+.air__stations-upperaustria-marker,
+.air__stations-luftdaten-marker {
+    position: relative;
+
+    svg {
+        transition: fill var(--air__animation-duration) var(--air__animation-timing) var(--air__animation-duration);
+    }
+
+    .air__stations-favorized-icon {
+        position: absolute;
+        bottom: 6px;
+        left: calc(50% - 4px);
+        width: 8px;
+        height: 8px;
+    }
 }
 
 .air__station-button-location svg {

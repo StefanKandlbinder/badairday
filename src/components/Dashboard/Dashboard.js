@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import sortBy from 'lodash/sortBy';
 
 import { getFavorizedStations } from '../../redux/filters/getFavorizedStations';
@@ -31,14 +32,6 @@ class Dashboard extends Component {
             }
         }
 
-        /* let moodStyle = {
-            backgroundColor: stations.length 
-                ? stations[stations.length - 1].moodRGBA 
-                : (stations[stations.length - 1].mood === 0)
-                ? "rgba(70, 70, 70, 0.75)"
-                : stations[stations.length - 1].moodRGBA
-        } */
-
         return (
             <ul className="air__dashboard">
                 {stations.map((station) =>
@@ -52,4 +45,4 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard;
+export default withRouter(Dashboard);

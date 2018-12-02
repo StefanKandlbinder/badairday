@@ -35,6 +35,8 @@ class Stations extends Component {
         if (this.props.location !== prevProps.location) {
             this.handleLocation();
         }
+
+        this.updateFavorizedStations();
     }
 
     // forward to the official station when clicking on the corresponding placeholder on the map
@@ -71,6 +73,13 @@ class Stations extends Component {
                         data-marker-id="${element.id}"
                         style="fill: ${element.components.PM10.update ? element.moodRGBA : "rgba(70,70,70,0.75)"}">
                         <path d="M41.1,165.29V434.71a25.57,25.57,0,0,0,12.78,22.15L287.21,591.57a25.58,25.58,0,0,0,25.58,0L546.12,456.86a25.57,25.57,0,0,0,12.78-22.15V165.29a25.57,25.57,0,0,0-12.78-22.15L312.79,8.43a25.58,25.58,0,0,0-25.58,0L53.88,143.14A25.57,25.57,0,0,0,41.1,165.29Z"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                        data-favorized-id="${element.id}"
+                        fill="${element.favorized ? "rgba(255, 2255, 255, 0.9)" : "rgba(255,255,255,0.0)"}"
+                        viewBox="0 0 573.99 546.92"
+                        class="air__stations-favorized-icon">
+                        <path d="M295.99 6.05l80.79 163.7a10 10 0 0 0 7.53 5.47l180.68 26.24a10 10 0 0 1 5.54 17.06L439.75 345.96a10 10 0 0 0-2.87 8.85l30.86 179.93a10 10 0 0 1-14.51 10.54l-161.59-85a9.94 9.94 0 0 0-9.3 0l-161.59 85a10 10 0 0 1-14.51-10.54l30.86-179.93a10 10 0 0 0-2.87-8.85L3.5 218.53a10 10 0 0 1 5.54-17.07l180.66-26.25a10 10 0 0 0 7.53-5.47L277.99 6.05a10 10 0 0 1 18 0z"/>
                         </svg>`,
                     className: "air__stations-luftdaten-marker",
                     iconSize: [40, 40],
@@ -85,8 +94,15 @@ class Stations extends Component {
                         data-marker-id="${element.id}"
                         style="fill: ${element.components.PM10.update ? element.moodRGBA : "rgba(70,70,70,0.75)"}">
                         <path d="M5,300H5A295,295,0,0,0,152.5,555.48h0a295,295,0,0,0,295,0h0A295,295,0,0,0,595,300h0A295,295,0,0,0,447.5,44.52h0a295,295,0,0,0-295,0h0A295,295,0,0,0,5,300Z"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                        data-favorized-id="${element.id}"
+                        fill="${element.favorized ? "rgba(255, 2255, 255, 0.9)" : "rgba(255,255,255,0.0)"}"
+                        viewBox="0 0 573.99 546.92"
+                        class="air__stations-favorized-icon">
+                        <path d="M295.99 6.05l80.79 163.7a10 10 0 0 0 7.53 5.47l180.68 26.24a10 10 0 0 1 5.54 17.06L439.75 345.96a10 10 0 0 0-2.87 8.85l30.86 179.93a10 10 0 0 1-14.51 10.54l-161.59-85a9.94 9.94 0 0 0-9.3 0l-161.59 85a10 10 0 0 1-14.51-10.54l30.86-179.93a10 10 0 0 0-2.87-8.85L3.5 218.53a10 10 0 0 1 5.54-17.07l180.66-26.25a10 10 0 0 0 7.53-5.47L277.99 6.05a10 10 0 0 1 18 0z"/>
                         </svg>`,
-                    className: "air__stations-upperaustria-marker-wrapper",
+                    className: "air__stations-upperaustria-marker",
                     iconSize: [40, 40],
                     iconAnchor: [20, 40],
                 });
@@ -128,6 +144,23 @@ class Stations extends Component {
         })
     }
 
+    updateFavorizedStations = () => {
+        this.props.stations.forEach(station => {
+            if (station.favorized) {
+                console.log("yESSSS");
+
+                let markerID = '[data-favorized-id="' + station.id + '"]';
+                let marker = document.querySelector(markerID);
+                marker.setAttribute("style", "fill: rgba(255, 255, 255, 0.9)");
+            }
+            else {
+                let markerID = '[data-favorized-id="' + station.id + '"]';
+                let marker = document.querySelector(markerID);
+                marker.setAttribute("style", "fill: rgba(255, 255, 255, 0)");
+            }
+        })
+    }
+
     render() {
         let location = null;
 
@@ -140,7 +173,7 @@ class Stations extends Component {
 
             location = <Marker icon={marker} position={this.props.location}></Marker>
         }
-        
+
         return (
             <div>
                 <Map className="air__stations"
