@@ -20,9 +20,24 @@ class Dashboard extends Component {
           })
         }
 
-        let moodStyle = {
-            backgroundColor: stations.length ? stations[stations.length - 1].moodRGBA : ""
+        let moodStyle = null;
+
+        if (stations.length) {
+            if ((stations[stations.length - 1].mood === 0)) {
+                moodStyle = { backgroundColor: "rgba(70, 70, 70, 0.75)" }
+            }
+            else {
+                moodStyle = { backgroundColor: stations[stations.length - 1].moodRGBA };
+            }
         }
+
+        /* let moodStyle = {
+            backgroundColor: stations.length 
+                ? stations[stations.length - 1].moodRGBA 
+                : (stations[stations.length - 1].mood === 0)
+                ? "rgba(70, 70, 70, 0.75)"
+                : stations[stations.length - 1].moodRGBA
+        } */
 
         return (
             <ul className="air__dashboard">
@@ -31,7 +46,7 @@ class Dashboard extends Component {
                         key={station.id}
                         station={station} />
                 )}
-                <li class="air__spacer" style={moodStyle}></li>
+                <li className="air__spacer" style={moodStyle}></li>
             </ul>
         );
     }
