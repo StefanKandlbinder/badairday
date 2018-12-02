@@ -142,7 +142,7 @@ class App extends Component {
     </Sidebar>
 
     optionsSheet = <BottomSheet className="air__options-sheet">
-      <ListHeader className="air__list-header air__color-primary--active">Options</ListHeader>
+      <ListHeader className="air__list-header air__list-header--sticky air__color-primary--active">Options</ListHeader>
       <List className="air__list">
         <ListItem className="air__list-item air__justify-content--space-between">
           <Toggle
@@ -171,7 +171,7 @@ class App extends Component {
           </Toggle>
         </ListItem>
       </List>
-      <ListHeader className="air__list-header air__color-primary--active">Admin</ListHeader>
+      <ListHeader className="air__list-header air__list-header--sticky air__color-primary--active">Admin</ListHeader>
       <List className="air__list">
         <ListItem className="air__list-item">
           <Button
