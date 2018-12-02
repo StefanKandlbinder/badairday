@@ -68,7 +68,11 @@ const configureStore = () => {
     store.subscribe(throttle(() => {
         saveState({
             stations: store.getState().stations,
-            favorizedStations: store.getState().favorizedStations
+            ui: store.getState().ui,
+            update: store.getState().update,
+            location: store.getState().location,
+            options: store.getState().options
+
         });
     }, 1000))
 
