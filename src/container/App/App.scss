@@ -121,4 +121,9 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   max-height: 212px;
+
+  .air__list-header:first-child {
+    border-top-left-radius: var(--air__bottom-sheet-border-radius);
+    border-top-right-radius: var(--air__bottom-sheet-border-radius);
+  }
 }
