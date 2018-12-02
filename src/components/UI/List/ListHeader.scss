@@ -1,6 +1,11 @@
 .air__list-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
     letter-spacing: 1px;
     padding: var(--air__margin--5) var(--air__margin--3) var(--air__margin--2);
+    background-color: white;
     text-align: left;
     font-size: 14px;
+    flex: 0 0 auto;
 }

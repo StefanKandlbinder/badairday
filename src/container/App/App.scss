@@ -116,3 +116,9 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
+
+.air__options-sheet {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: 212px;
+}

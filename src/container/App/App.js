@@ -107,7 +107,7 @@ class App extends Component {
     let stations = null;
     let station = null;
     let sidebar = null;
-    let bottomSheet = null;
+    let optionsSheet = null;
     let dashboard = null;
     let tabbar = null;
     let updateBar = null;
@@ -141,7 +141,7 @@ class App extends Component {
       </div>
     </Sidebar>
 
-    bottomSheet = <BottomSheet>
+    optionsSheet = <BottomSheet className="air__options-sheet">
       <ListHeader className="air__list-header air__color-primary--active">Options</ListHeader>
       <List className="air__list">
         <ListItem className="air__list-item air__justify-content--space-between">
@@ -290,7 +290,7 @@ class App extends Component {
             timeout={300}
             mountOnEnter
             unmountOnExit>
-            {bottomSheet}
+            {optionsSheet}
           </CSSTransition>
 
           {updateBar}
