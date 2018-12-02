@@ -20,7 +20,6 @@ import { clearState } from '../../redux/localStorage';
 import getGeoLocation from '../../services/getGeoLocation';
 import { getFavorizedStations } from '../../redux/filters/getFavorizedStations';
 
-// import Stations from "../../components/dashboard/Stations/Stations";
 import Stations from '../../components/Stations/Stations';
 import Station from '../../components/Station/Station';
 import Dashboard from '../../components/Dashboard/Dashboard';

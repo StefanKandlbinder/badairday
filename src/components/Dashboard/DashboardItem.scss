@@ -1,13 +1,12 @@
 .air__dashboard-item {
-    padding: var(--air__margin--2) var(--air__margin--3);
+    padding: var(--air__margin--3) var(--air__margin--3);
     text-align: left;
     /* border-bottom: 1px solid rgba(255, 255, 255, 1); */
     color: rgba(255, 255, 255, 1);
-    font-size: 12px;
+    font-size: 14px;
     text-transform: uppercase;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     background-color: transparent;
     will-change: border-color, background-color;
     transition: background-color var(--air__animation-duration) var(--air__animation-timing) var(--air__animation-duration);
@@ -18,7 +17,7 @@
     flex-grow: 0;
     flex-shrink: 0;
     width: 100%;
-    min-height: 64px;
+    min-height: 70px;
     overflow: hidden;
     position: relative;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
