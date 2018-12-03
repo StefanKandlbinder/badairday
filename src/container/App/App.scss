@@ -115,11 +115,13 @@
   z-index: 120;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 .air__options-sheet {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
   max-height: 212px;
 
   .air__list-header:first-child {
