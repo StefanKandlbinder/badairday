@@ -8,6 +8,12 @@ import DashboardItem from "./DashbaordItem";
 import './Dashboard.scss';
 
 class Dashboard extends Component {
+    componentDidUpdate(prevProps) {
+        if (!getFavorizedStations(this.props.stations).length && getFavorizedStations(prevProps.stations).length === 1) {
+            this.props.history.push("/");
+        }
+    }
+    
     render() {
         let stations = getFavorizedStations(this.props.stations);
 
