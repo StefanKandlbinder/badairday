@@ -135,14 +135,12 @@ class Stations extends Component {
     }
 
     updateStations = () => {
-        this.state.myStations.forEach(station => {
-            this.props.stations.forEach(newStation => {
-                if (station.key === newStation.id) {
-                    let markerID = '[data-marker-id="' + newStation.id + '"]';
-                    let marker = document.querySelector(markerID);
-                    marker.setAttribute("style", 'fill: ' + (newStation.components.PM10.update ? newStation.moodRGBA : "rgba(70,70,70,0.75)"));
-                }
-            })
+        this.props.stations.forEach(station => {
+            let markerID = '[data-marker-id="' + station.id + '"]';
+            if (markerID) {
+                let marker = document.querySelector(markerID);
+                marker.setAttribute("style", 'fill: ' + (station.components.PM10.update ? station.moodRGBA : "rgba(70,70,70,0.75)"));
+            }
         })
     }
 

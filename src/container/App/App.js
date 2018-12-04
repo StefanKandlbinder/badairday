@@ -73,7 +73,11 @@ class App extends Component {
   clearStorage() {
     clearState();
 
-    this.timeoutID = window.setTimeout(window.location.reload(true), 1000);
+    this.timeoutID = window.setTimeout(
+      () => { 
+        this.props.history.push("/");
+        window.location.reload(true);
+      }, 1000);
   }
 
   onFetchStations = () => {
