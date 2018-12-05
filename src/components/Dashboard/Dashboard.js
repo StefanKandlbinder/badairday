@@ -19,12 +19,14 @@ class Dashboard extends Component {
 
         if (this.props.options.sort) {
           stations = sortBy(stations, ['mood']).reverse();
-          stations.forEach((station, i) => {
+          
+          /* stations.forEach((station, i) => {
+            // put the favorites on top
             if (station.favorized) {
                 stations.splice(i, 1);
                 stations.unshift(station);
             }
-          })
+          }) */
         }
 
         let moodStyle = null;
