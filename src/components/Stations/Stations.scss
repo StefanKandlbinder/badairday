@@ -71,7 +71,8 @@
     /* box-shadow: 2px 4px 12px var(--air__color-shadow); */
 }
 
-a.leaflet-control-zoom-in.leaflet-disabled {
+a.leaflet-control-zoom-in.leaflet-disabled,
+a.leaflet-control-zoom-out.leaflet-disabled {
     pointer-events: none;
     filter: grayscale(100%);
 }
