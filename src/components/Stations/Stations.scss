@@ -71,6 +71,11 @@
     /* box-shadow: 2px 4px 12px var(--air__color-shadow); */
 }
 
+a.leaflet-control-zoom-in.leaflet-disabled {
+    pointer-events: none;
+    filter: grayscale(100%);
+}
+
 .leaflet-touch .leaflet-bar a {
     width: 32px;
     height: 32px;
