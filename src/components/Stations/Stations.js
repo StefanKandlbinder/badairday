@@ -157,7 +157,7 @@ class Stations extends Component {
             else {
                 let markerID = '[data-favorized-id="' + station.id + '"]';
                 let marker = document.querySelector(markerID);
-                
+
                 if (marker) {
                     marker.setAttribute("style", "fill: rgba(255, 255, 255, 0)");
                 }
@@ -179,27 +179,25 @@ class Stations extends Component {
         }
 
         return (
-            <div>
-                <Map className="air__stations"
-                    onClick={this.handleClickMap}
-                    onMovestart={this.handleClickMap}
-                    center={this.props.location}
-                    zoom={this.state.zoom}
-                    maxZoom={16}
-                    // preferCanvas="true"
-                    doubleClickZoom="false"
-                    ref="map">
-                    <TileLayer
-                        // https://wiki.openstreetmap.org/wiki/Tile_servers
-                        // https://leaflet-extras.github.io/leaflet-providers/preview/
-                        attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                        // url="https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png"
-                        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-                    />
-                    {this.state.myStations}
-                    {location}
-                </Map>
-            </div>
+            <Map className="air__stations"
+                onClick={this.handleClickMap}
+                onMovestart={this.handleClickMap}
+                center={this.props.location}
+                zoom={this.state.zoom}
+                maxZoom={16}
+                // preferCanvas="true"
+                doubleClickZoom="false"
+                ref="map">
+                <TileLayer
+                    // https://wiki.openstreetmap.org/wiki/Tile_servers
+                    // https://leaflet-extras.github.io/leaflet-providers/preview/
+                    attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                    // url="https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png"
+                    url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                />
+                {this.state.myStations}
+                {location}
+            </Map>
         )
     }
 }

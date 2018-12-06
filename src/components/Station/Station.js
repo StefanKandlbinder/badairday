@@ -134,6 +134,7 @@ class Station extends Component {
                         value={value.value}
                         unit={value.unit} />);
                 }
+
                 else if (key === "WIR") {
                     this.setState({
                         compass: <Compass
@@ -145,6 +146,7 @@ class Station extends Component {
                         value={value.value}
                         unit={value.unit} />);
                 }
+                
                 else {
                     compItems.push(<Aircomp key={key}
                         component={key}
@@ -190,6 +192,7 @@ class Station extends Component {
 
             if (innerWidth > 330)
                 x = this.props.location.state.x - (window.innerWidth - 330) / 2 + "px";
+            
             else
                 x = this.props.location.state.x - (window.innerWidth - 288) / 2 + "px";
 
