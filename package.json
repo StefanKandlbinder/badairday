@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "d3": "^5.7.0",
+    "d3-hexbin": "^0.2.2",
     "d3-scale": "^2.1.2",
     "esri-leaflet-geocoder": "2.2.9",
     "howler": "^2.0.15",

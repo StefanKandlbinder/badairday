@@ -8,8 +8,7 @@ import { CSSTransition } from 'react-transition-group';
 import { STATIONS } from "../../redux/actions/stations";
 import { fetchStations } from "../../redux/actions/stations";
 import { setLocation } from "../../redux/actions/location";
-import { setGeoLocation } from "../../redux/actions/ui";
-import { setSidebar } from "../../redux/actions/ui";
+import { setGeoLocation, setBottomSheet } from "../../redux/actions/ui";
 import { setNotification } from "../../redux/actions/notifications";
 import { setOptionAutoupdater } from "../../redux/actions/options";
 import { setOptionReverseGeo } from "../../redux/actions/options";
@@ -346,7 +345,7 @@ const mapStateToProps = state => {
     loading: state.ui.loading,
     updating: state.ui.updating,
     geolocation: state.ui.geolocation,
-    sidebar: state.ui.sidebar,
+    bottomsheet: state.ui.bottomsheet,
     location: state.location,
     notifications: state.notifications,
     update: state.update,
@@ -360,7 +359,7 @@ const mapDispatchToProps = dispatch => {
     onFetchStations: (url, luftdatenProvider, method) => dispatch(fetchStations(url, luftdatenProvider, method)),
     onSetLocation: (location) => dispatch(setLocation(location)),
     onSetGeoLocation: (geoLocation) => dispatch(setGeoLocation(geoLocation)),
-    onSetSidebar: (sidebar) => dispatch(setSidebar(sidebar)),
+    onSetBottomSheet: (bottomSheet) => dispatch(setBottomSheet(bottomSheet)),
     onSetOptionAutoupdater: (autoupdater) => dispatch(setOptionAutoupdater(autoupdater)),
     onSetOptionReverseGeo: (reversegeo) => dispatch(setOptionReverseGeo(reversegeo)),
     onSetOptionRunaways: (runaways) => dispatch(setOptionRunaways(runaways)),

@@ -64,6 +64,11 @@ class Stations extends Component {
         })
     }
 
+    onZoom = (e) => {
+        let zoom = this.refs.map.leafletElement.getZoom();
+        console.log(zoom);
+    }
+
     getStations = () => {
         let myStations = this.props.stations.map(element => {
             let marker = "";
@@ -185,8 +190,10 @@ class Stations extends Component {
                 center={this.props.location}
                 zoom={this.state.zoom}
                 maxZoom={16}
+                onZoom= {this.onZoom}
                 // preferCanvas="true"
                 doubleClickZoom="false"
+                useFlyTo="true"
                 ref="map">
                 <TileLayer
                     // https://wiki.openstreetmap.org/wiki/Tile_servers
