@@ -15,18 +15,14 @@
   left: 0;
   height: 100%;
   width: 100%;
-  opacity: 0.2;
+  opacity: 0.75;
   z-index: 0;
 }
 
 .air__background svg {
   width: 50%;
   height: 50%;
-  transform: rotate(36deg);
-}
-
-.air__background path {
-  fill: rgba(120, 120, 120, 0.3)
+  // transform: rotate(36deg);
 }
 
 .air__logo {
