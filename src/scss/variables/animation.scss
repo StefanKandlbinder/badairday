@@ -39,6 +39,25 @@
   transition: opacity var(--air__animation-duration-crunchy) var(--air__animation-timing);
 }
 
+.air__animation-site-fade-enter {
+  opacity: 0;
+}
+
+.air__animation-site-fade-enter-active {
+  opacity: 1;
+  transition: opacity var(--air__animation-duration) var(--air__animation-timing-sidebar) var(--air__animation-duration);
+}
+
+.air__animation-site-fade-exit {
+  opacity: 1;
+}
+
+.air__animation-site-fade-exit-active {
+  opacity: 0;
+  transition: opacity var(--air__animation-duration) var(--air__animation-timing-sidebar) var(--air__animation-duration);
+}
+
+
 .air__animation-site-transition-enter {
   transform: translateX(100%);
 }
