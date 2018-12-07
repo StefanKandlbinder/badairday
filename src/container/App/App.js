@@ -28,6 +28,7 @@ import Tabbar from "../../components/UI/Tabbar/Tabbar";
 import Loading from "../../components/UI/Loading/Loading";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import Spacer from "../../components/UI/Spacer/Spacer";
+import Flex from "../../components/UI/Flex/Flex";
 import Toggle from "../../components/UI/Toggle/Toggle";
 import Sidebar from "../../components/UI/Sidebar/Sidebar";
 import BottomSheet from "../../components/UI/BottomSheet/BottomSheet";
@@ -145,29 +146,40 @@ class App extends Component {
     </Sidebar>
 
     optionsSheet = <BottomSheet className="air__options-sheet">
+      <Flex className="air__flex air__flex--align-items-flex-end air__padding-left--3 air__padding-right--3 air__padding-top--4">
+        <svg className="air__margin-right" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <linearGradient id="c" gradientUnits="userSpaceOnUse" x1="12" y1="3.0012" x2="12" y2="20.9988">
+            <stop offset="0" stopColor="#dd1800"/>
+            <stop offset=".5143" stopColor="#eeb600"/>
+            <stop offset="1" stopColor="#00796b"/>
+          </linearGradient>
+          <path d="M12 4.2c.2 0 .3.1.4.3l7.3 14.6c.2.3-.1.7-.4.7-.1 0-.1 0-.2-.1l-6.9-3.4h-.4l-6.9 3.4c-.1 0-.1.1-.2.1-.3 0-.6-.3-.4-.7l7.3-14.6c.1-.2.2-.3.4-.3M7 17.4c.1 0 .1 0 .2-.1l4.5-2.2c.2-.1.3-.2.3-.4V7.9c0-.3-.2-.5-.5-.5-.2 0-.3.1-.4.3l-4.5 9c-.1.3.1.7.4.7M12 3c-.6 0-1.2.4-1.5.9L3.2 18.5c-.3.5-.2 1.1.1 1.6.3.6.8.9 1.4.9.3 0 .5-.1.8-.2l6.5-3.3 6.5 3.3c.2.1.5.2.8.2.6 0 1.1-.3 1.4-.8.3-.5.3-1.1.1-1.6L13.5 3.9c-.3-.5-.9-.9-1.5-.9zM8.8 15.2l2-4v3l-2 1z" fill="url(#c)"/>
+        </svg>
+        <h3 className="air__letter-spacing air__color-primary air__margin-bottom--0 air__margin-top--0">BadAirDay</h3>
+        </Flex>
       <ListHeader className="air__list-header air__list-header--sticky air__color-primary--active">Einstellungen</ListHeader>
       <List className="air__list">
-        <ListItem className="air__list-item air__justify-content--space-between">
+        <ListItem className="air__list-item air__flex--justify-content-space-between">
           <Toggle
             className={`air__toggle ${this.props.options.reversegeo ? "air__toggle--active" : "air__toggle--inactive"}`}
             clicked={() => this.props.onSetOptionReverseGeo({ state: this.props.options.reversegeo ? false : true, feature: STATIONS })}>
             ReverseGeo
           </Toggle>
         </ListItem>
-        <ListItem className="air__list-item air__justify-content--space-between">
+        <ListItem className="air__list-item air__flex--justify-content-space-between">
           <Toggle
             className={`air__toggle ${this.props.options.runaways ? "air__toggle--active" : "air__toggle--inactive"}`}
             clicked={() => this.props.onSetOptionRunaways({ state: this.props.options.runaways ? false : true, feature: STATIONS })}>
             Runaways
           </Toggle>
         </ListItem>
-        <ListItem className="air__list-item air__justify-content--space-between">
+        <ListItem className="air__list-item air__flex--justify-content-space-between">
           <Toggle className={`air__toggle ${this.props.options.sort ? "air__toggle--active" : "air__toggle--inactive"}`}
             clicked={() => this.props.onSetOptionSort({ state: this.props.options.sort ? false : true, feature: STATIONS })}>
             Sort
           </Toggle>
         </ListItem>
-        <ListItem className="air__list-item air__justify-content--space-between">
+        <ListItem className="air__list-item air__flex--justify-content-space-between">
           <Toggle className={`air__toggle ${this.props.options.autoupdating ? "air__toggle--active" : "air__toggle--inactive"}`} 
             clicked={() => this.props.onSetOptionAutoupdater({ state: this.props.options.autoupdating ? false : true, feature: STATIONS })}>
             Autoupdater
