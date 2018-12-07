@@ -275,7 +275,7 @@ class App extends Component {
       <CSSTransition
         in={this.state.hasStations}
         timeout={300}
-        classNames="air__animation-fade"
+        classNames="air__animation-site-fade"
         mountOnEnter
         unmountOnExit>
         {map}
