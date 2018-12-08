@@ -19,6 +19,7 @@ import { clearState } from '../../redux/localStorage';
 import getGeoLocation from '../../services/getGeoLocation';
 import { getFavorizedStations } from '../../redux/filters/getFavorizedStations';
 
+import SVGSprite from '../../components/UI/SVGSprite/SVGSprite';
 import Stations from '../../components/Stations/Stations';
 import Station from '../../components/Station/Station';
 import Dashboard from '../../components/Dashboard/Dashboard';
@@ -53,6 +54,7 @@ class App extends Component {
       hasStations: false
     }
   }
+
   componentDidMount() {
     if (!this.props.stations.length) {
       this.onFetchStations();
@@ -148,12 +150,7 @@ class App extends Component {
     optionsSheet = <BottomSheet className="air__options-sheet">
       <Flex className="air__flex air__flex--align-items-flex-end air__padding-left--3 air__padding-right--3 air__padding-top--4">
         <svg className="air__margin-right" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <linearGradient id="c" gradientUnits="userSpaceOnUse" x1="12" y1="3.0012" x2="12" y2="20.9988">
-            <stop offset="0" stopColor="#dd1800" />
-            <stop offset=".5143" stopColor="#eeb600" />
-            <stop offset="1" stopColor="#00796b" />
-          </linearGradient>
-          <path d="M12 4.2c.2 0 .3.1.4.3l7.3 14.6c.2.3-.1.7-.4.7-.1 0-.1 0-.2-.1l-6.9-3.4h-.4l-6.9 3.4c-.1 0-.1.1-.2.1-.3 0-.6-.3-.4-.7l7.3-14.6c.1-.2.2-.3.4-.3M7 17.4c.1 0 .1 0 .2-.1l4.5-2.2c.2-.1.3-.2.3-.4V7.9c0-.3-.2-.5-.5-.5-.2 0-.3.1-.4.3l-4.5 9c-.1.3.1.7.4.7M12 3c-.6 0-1.2.4-1.5.9L3.2 18.5c-.3.5-.2 1.1.1 1.6.3.6.8.9 1.4.9.3 0 .5-.1.8-.2l6.5-3.3 6.5 3.3c.2.1.5.2.8.2.6 0 1.1-.3 1.4-.8.3-.5.3-1.1.1-1.6L13.5 3.9c-.3-.5-.9-.9-1.5-.9zM8.8 15.2l2-4v3l-2 1z" fill="url(#c)" />
+          <use xlinkHref="#airSVGLogo"></use>
         </svg>
         <h3 className="air__letter-spacing air__color-primary air__margin-bottom--0 air__margin-top--0">BadAirDay</h3>
       </Flex>
@@ -192,13 +189,17 @@ class App extends Component {
           <Button
             className="air__button air__button--ghost air__button--full air__button--small air__margin-right"
             clicked={() => this.onFetchStations()}>
-            <svg className="air__button-icon air__color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M13 3c-4.97 0-9 4.03-9 9H1l4 3.99L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.25 2.52.77-1.28-3.52-2.09V8z" /></svg>
+            <svg className="air__button-icon air__color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <use xlinkHref="#airSVGRefresh"></use>
+            </svg>
             Fetch
           </Button>
           <Button
             className="air__button air__button--ghost air__button--full air__button--small air__margin-left"
             clicked={() => this.clearStorage()}>
-            <svg className="air__button-icon air__color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" /></svg>
+            <svg className="air__button-icon air__color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <use xlinkHref="#airSVGRestore"></use>
+            </svg>
             Clear
           </Button>
         </ListItem>
@@ -211,21 +212,27 @@ class App extends Component {
         activeClassName="air__button--active"
         exact to={"/"}
         onClick={() => this.props.history.location.pathname === "/" ? this.onUpdateStations() : null}>
-        <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zm-5 .99l3-1.01v11.7l-3 1.16V6.46zm14 11.08l-3 1.01V6.86l3-1.16v11.84z" /></svg>
+        <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <use xlinkHref="#airSVGMap"></use>
+        </svg>
       </NavLink>
       <NavLink
         onClick={() => this.props.history.location.pathname === "/dashboard" ? this.onUpdateStations() : null}
         className={`air__tabbar-link air__button air__button--naked ${!getFavorizedStations(this.props.stations).length ? "air__button--inactive" : ""}`}
         activeClassName="air__button--active"
         to={"/dashboard"}>
-        <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M3 8.4h14.3v2.4H3V8.4zm0-4.7h14.3v2.4H3V3.7zm0 9.5h9.5v2.4H3v-2.4zM17.4 12.1l1.1 2.1.1.1 2.4.3c.1 0 .1.1.1.1v.1l-1.7 1.7v.1l.4 2.3c0 .1 0 .1-.1.2h-.1L17.3 18h-.1l-2.1 1.1c-.1 0-.1 0-.2-.1v-.1l.4-2.3v-.1l-1.7-1.7c-.1-.1-.1-.1 0-.2h.1l2.4-.3s.1 0 .1-.1l1.1-2.1c-.1-.1 0-.1.1 0-.1-.1 0-.1 0 0zM3 17.9h10.9v2.4H3z" /></svg>
+        <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <use xlinkHref="#airSVGFavList"></use>
+        </svg>
       </NavLink>
       <Spacer className="air__bg-color-text" />
       <NavLink
         className="air__tabbar-link air__button air__button--naked"
         activeClassName="air__button--active"
         to={this.props.history.location.pathname === "/bottomsheet" ? "/" : "/bottomsheet"}>
-        <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" /></svg>
+        <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <use xlinkHref="#airSVGMoreVert"></use>
+        </svg>
       </NavLink>
     </Tabbar>
 
@@ -267,6 +274,8 @@ class App extends Component {
     return (
       <PageVisibility onChange={this.handleVisibilityChange}>
         <div className="air">
+          <SVGSprite />
+
           {background}
 
           <CSSTransition
@@ -290,7 +299,9 @@ class App extends Component {
           <Button
             className="air__button air__button--naked air__button--fab air__button-location"
             clicked={() => this.handleLocation()}>
-            <svg className="air__color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V2c0-.55-.45-1-1-1s-1 .45-1 1v1.06C6.83 3.52 3.52 6.83 3.06 11H2c-.55 0-1 .45-1 1s.45 1 1 1h1.06c.46 4.17 3.77 7.48 7.94 7.94V22c0 .55.45 1 1 1s1-.45 1-1v-1.06c4.17-.46 7.48-3.77 7.94-7.94H22c.55 0 1-.45 1-1s-.45-1-1-1h-1.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z" /></svg>
+            <svg className="air__color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <use xlinkHref="#airSVGLocation"></use>
+            </svg>
           </Button>
 
           <Legend />
