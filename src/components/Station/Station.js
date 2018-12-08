@@ -203,12 +203,12 @@ class Station extends Component {
         button = <Button clicked={this.props.station.favorized ? this.onRemoveStation : this.onAddStation} className="air__button air__button--naked air__button--ghost air__station-button air__station-button-fav">
             <svg xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 573.99 546.92"
-                className="air__station-button-icon">
-                <path d="M295.99 6.05l80.79 163.7a10 10 0 0 0 7.53 5.47l180.68 26.24a10 10 0 0 1 5.54 17.06L439.75 345.96a10 10 0 0 0-2.87 8.85l30.86 179.93a10 10 0 0 1-14.51 10.54l-161.59-85a9.94 9.94 0 0 0-9.3 0l-161.59 85a10 10 0 0 1-14.51-10.54l30.86-179.93a10 10 0 0 0-2.87-8.85L3.5 218.53a10 10 0 0 1 5.54-17.07l180.66-26.25a10 10 0 0 0 7.53-5.47L277.99 6.05a10 10 0 0 1 18 0z"
-                    fill={this.props.station.favorized ? "rgba(255, 255, 255, 0.85)" : "rgba(255, 255, 255, 0)"}
-                    stroke="rgba(255,255,255,0.9)"
-                    strokeMiterlimit="10"
-                    strokeWidth="24" />
+                className="air__station-button-icon"
+                stroke="rgba(255,255,255,0.9)"
+                strokeMiterlimit="10"
+                strokeWidth="24"
+                fill={this.props.station.favorized ? "rgba(255, 255, 255, 0.85)" : "rgba(255, 255, 255, 0)"}>
+                <use xlinkHref="#airSVGFavorize"></use>
             </svg>
         </Button>
 

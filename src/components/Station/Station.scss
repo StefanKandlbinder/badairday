@@ -124,7 +124,7 @@
     height: 18px;
 }
 
-.air__station-button-icon path {
+.air__station-button-icon {
     transition: fill var(--air__animation-duration) var(--air__animation-timing);
     will-change: fill;
 }
