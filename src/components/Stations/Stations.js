@@ -58,15 +58,21 @@ class Stations extends Component {
     }
 
     handleLocation = () => {
-        this.refs.map.leafletElement.panTo(this.props.location);
         this.setState({
             hasLocation: true
+        }, () => {
+            this.refs.map.leafletElement.flyTo(this.props.location, this.state.zoom);
         })
     }
 
     onZoom = (e) => {
         let zoom = this.refs.map.leafletElement.getZoom();
         console.log(zoom);
+    }
+
+    onMoveEnd = (e) => {
+        let bounds = this.refs.map.leafletElement.getBounds();
+        console.log(bounds);
     }
 
     getStations = () => {
@@ -190,7 +196,8 @@ class Stations extends Component {
                 center={this.props.location}
                 zoom={this.state.zoom}
                 maxZoom={16}
-                onZoom= {this.onZoom}
+                // onZoom={this.onZoom}
+                // onMoveEnd={this.onMoveEnd}
                 // preferCanvas="true"
                 doubleClickZoom="false"
                 useFlyTo="true"
