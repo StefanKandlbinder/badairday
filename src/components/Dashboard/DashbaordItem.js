@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import { favorizeStation, unfavorizeStation } from "../../redux/actions/stations";
 import './DashboardItem.scss';
-import austria from '../../assets/austria.svg';
 
 class Sample extends Component {
     render() {
@@ -51,8 +50,13 @@ class DashboardItem extends Component {
         }
 
         return <li className={airStationClasses} style={moodStyle} onClick={() => this.onToggleFavorized(this.props.station.id)}>
+            {this.props.station.provider === "upperaustria" ? 
+                <svg className="air__dashboard-item-marker" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><use xlinkHref="#airSVGOfficialMarker"></use></svg> : 
+                <svg className="air__dashboard-item-marker" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><use xlinkHref="#airSVGLuftdatenMarker"></use></svg>}
             <div className="air__dashboard-item-content air__dashboard-item--description">
-                <div className="air__dashboard-item-name">{this.props.station.name} {this.props.station.provider === "upperaustria" ? <img src={austria} className="air__dashboard-item-official" alt="austria" /> : ""}</div>
+                <div className="air__dashboard-item-name">
+                    {this.props.station.name}
+                </div>
                 <div className="air__dashboard-item-date">{this.props.station.date}</div>
             </div>
             <div className="air__dashboard-item-content air__dashboard-item-content--component">

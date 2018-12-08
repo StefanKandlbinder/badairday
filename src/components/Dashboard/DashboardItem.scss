@@ -58,6 +58,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      flex-grow: 1;
       height: 100%;
       line-height: 1;
   }
@@ -67,10 +68,12 @@
       padding-right: var(--air__margin);
   }
 
-  .air__dashboard-item-official {
-    width: 12px;
-    height: 9px;
-    margin-left: calc(var(--air__margin) / 2);
+  .air__dashboard-item-marker {
+    width: 20px;
+    height: 20px;
+    fill: rgba(255,255,255,0.9);
+    flex-shrink: 1;
+    margin-right: var(--air__margin--2);
   }
 
   .air__dashboard-item-date {

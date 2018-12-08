@@ -65,12 +65,20 @@ export default () => {
                     <defs><path id="a" d="M0 0h24v24H0z"/></defs><clipPath><use xlinkHref="#a" overflow="visible"/></clipPath><path d="M11 8v5l4.25 2.52.77-1.28-3.52-2.09V8zm10 2V3l-2.64 2.64C16.74 4.01 14.49 3 12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9h-2c0 3.86-3.14 7-7 7s-7-3.14-7-7 3.14-7 7-7c1.93 0 3.68.79 4.95 2.05L14 10h7z"/>
                 </symbol>
 
-                <symbol width="24" height="24" viewBox="0 0 600 600" id="airSVGOfficialMarker">
+                <symbol width="24" height="24" viewBox="0 0 600 600" id="airSVGOfficialMarkerMorph">
                     <path d="M5,300H5A295,295,0,0,0,152.5,555.48h0a295,295,0,0,0,295,0h0A295,295,0,0,0,595,300h0A295,295,0,0,0,447.5,44.52h0a295,295,0,0,0-295,0h0A295,295,0,0,0,5,300Z"/>
                 </symbol>
 
-                <symbol width="24" height="24" viewBox="0 0 600 600" id="airSVGLuftdatenMarker">
+                <symbol width="24" height="24" viewBox="0 0 600 600" id="airSVGLuftdatenMarkerMorph">
                     <path d="M41.1,165.29V434.71a25.57,25.57,0,0,0,12.78,22.15L287.21,591.57a25.58,25.58,0,0,0,25.58,0L546.12,456.86a25.57,25.57,0,0,0,12.78-22.15V165.29a25.57,25.57,0,0,0-12.78-22.15L312.79,8.43a25.58,25.58,0,0,0-25.58,0L53.88,143.14A25.57,25.57,0,0,0,41.1,165.29Z"/>
+                </symbol>
+
+                <symbol width="24" height="24" viewBox="0 0 24 24" id="airSVGOfficialMarker">
+                    <circle cx="12" cy="12" r="12" />
+                </symbol>
+
+                <symbol width="21" height="24" viewBox="0 0 20.784609690826528 24" id="airSVGLuftdatenMarker">
+                    <path d="M10.392304845413264 0L20.784609690826528 6L20.784609690826528 18L10.392304845413264 24L0 18L0 6Z"></path>
                 </symbol>
             </svg>
         </div>
