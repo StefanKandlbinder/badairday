@@ -148,14 +148,14 @@ class App extends Component {
     </Sidebar>
 
     optionsSheet = <BottomSheet className="air__options-sheet">
-      <Flex className="air__flex air__flex--align-items-flex-end air__padding-left--3 air__padding-right--3 air__padding-top--4">
-        <svg className="air__margin-right" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <Flex className="air__flex air__flex--align-items-flex-end air__bg-color-primary air__padding-left--3 air__padding-right--3 air__padding-top--4 air__padding-bottom--3 air__border-radius-top--2 air__overflow--hidden">
+        <svg className="air__color-text air__margin-right" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <use xlinkHref="#airSVGLogo"></use>
         </svg>
-        <h3 className="air__letter-spacing air__color-primary air__margin-bottom--0 air__margin-top--0">BadAirDay</h3>
+        <h3 className="air__letter-spacing air__color-text air__margin-bottom--0 air__margin-top--0">BadAirDay</h3>
       </Flex>
-      <ListHeader className="air__list-header air__list-header--sticky air__color-primary--active">Einstellungen</ListHeader>
-      <List className="air__list">
+      <ListHeader className="air__list-header air__list-header--sticky air__color-primary--active air__border-radius-top--2">Einstellungen</ListHeader>
+      <List className="air__list air__border-radius-top--2">
         <ListItem className="air__list-item air__flex--justify-content-space-between">
           <Toggle
             className={`air__toggle ${this.props.options.reversegeo ? "air__toggle--active" : "air__toggle--inactive"}`}
