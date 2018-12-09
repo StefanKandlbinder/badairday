@@ -73,13 +73,13 @@ export default () => {
                     <path d="M41.1,165.29V434.71a25.57,25.57,0,0,0,12.78,22.15L287.21,591.57a25.58,25.58,0,0,0,25.58,0L546.12,456.86a25.57,25.57,0,0,0,12.78-22.15V165.29a25.57,25.57,0,0,0-12.78-22.15L312.79,8.43a25.58,25.58,0,0,0-25.58,0L53.88,143.14A25.57,25.57,0,0,0,41.1,165.29Z"/>
                 </symbol>
 
-                <symbol width="24" height="24" viewBox="0 0 24 24" id="airSVGOfficialMarker">
-                    <circle cx="12" cy="12" r="12" />
+                <symbol width="24" height="24" viewBox="-1 -1 24 24" id="airSVGOfficialMarker">
+                    <circle cx="11" cy="11" r="11" />
                 </symbol>
 
-                <symbol width="21" height="24" viewBox="0 0 20.784609690826528 24" id="airSVGLuftdatenMarker">
-                    <path d="M10.392304845413264 0L20.784609690826528 6L20.784609690826528 18L10.392304845413264 24L0 18L0 6Z"></path>
-                </symbol>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="airSVGLuftdatenMarker">
+                    <path d="M21.5 17.5v-11L12 1 2.5 6.5v11L12 23z"/>
+                </svg>
             </svg>
         </div>
     );

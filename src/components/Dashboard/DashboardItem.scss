@@ -69,9 +69,10 @@
   }
 
   .air__dashboard-item-marker {
-    width: 20px;
-    height: 20px;
-    fill: rgba(255,255,255,0.9);
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: rgba(255,255,255,0.9);
     flex-shrink: 1;
     margin-right: var(--air__margin--2);
   }
