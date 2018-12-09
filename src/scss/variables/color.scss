@@ -1,5 +1,6 @@
 :root {
     --air__color-primary: rgba(0, 121, 107, 0.75);
+    --air__color-primary--mono: #6ab789;
     --air__color-primary--active: rgba(0, 121, 107, 0.9);
     --air__color-primary--weak: rgba(0, 121, 107, 0.5);
     --air__color-secondary: rgba(37, 113, 199, 0.9);
@@ -20,6 +21,11 @@
 .air__color-primary {
     color: var(--air__color-primary);
     fill: var(--air__color-primary);
+}
+
+.air__color-primary--mono {
+    color: var(--air__color-primary--mono);
+    fill: var(--air__color-primary--mono);
 }
 
 .air__bg-color-primary {

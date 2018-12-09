@@ -148,7 +148,7 @@ class App extends Component {
     </Sidebar>
 
     optionsSheet = <BottomSheet className="air__options-sheet">
-      <Flex className="air__flex air__flex--align-items-flex-end air__bg-color-primary air__padding-left--3 air__padding-right--3 air__padding-top--4 air__padding-bottom--3 air__border-radius-top--2 air__overflow--hidden">
+      <Flex className="air__flex air__flex--align-items-flex-end air__bg-color-primary air__padding-left--3 air__padding-right--3 air__padding-top--4 air__padding-bottom--3 air__border-radius-top--2">
         <svg className="air__color-text air__margin-right" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <use xlinkHref="#airSVGLogo"></use>
         </svg>
