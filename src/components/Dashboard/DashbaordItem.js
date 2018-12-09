@@ -51,7 +51,7 @@ class DashboardItem extends Component {
 
         return <li className={airStationClasses} style={moodStyle} onClick={() => this.onToggleFavorized(this.props.station.id)}>
             {this.props.station.provider === "upperaustria" ? 
-                <svg className="air__dashboard-item-marker" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><use xlinkHref="#airSVGOfficialMarker"></use></svg> : 
+                <svg className="air__dashboard-item-marker air__dashboard-item-marker--official" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><use xlinkHref="#airSVGOfficialMarker"></use></svg> : 
                 <svg className="air__dashboard-item-marker" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><use xlinkHref="#airSVGLuftdatenMarker"></use></svg>}
             <div className="air__dashboard-item-content air__dashboard-item--description">
                 <div className="air__dashboard-item-name">
