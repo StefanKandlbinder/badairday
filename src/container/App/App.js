@@ -256,7 +256,7 @@ class App extends Component {
     background = <div className="air__background">
     </div>;
 
-    // background = null;
+    background = null;
 
     app = <React.Fragment>
       {station}
