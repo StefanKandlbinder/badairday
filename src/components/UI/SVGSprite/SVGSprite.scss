@@ -1,0 +1,19 @@
+.air__svg-logo-cool-simple-bkg {
+    fill: var(--air__color-primary);
+}
+
+.air__svg-logo-cool-simple-arrow {
+    fill: var(--air__color-text);
+}
+
+.air__svg-logo-cool-simple--inverse {
+    .air__svg-logo-cool-simple-bkg {
+        fill: var(--air__color-text);
+    }    
+}
+
+.air__svg-logo-cool-simple--inverse {
+    .air__svg-logo-cool-simple-arrow {
+        fill: var(--air__color-primary);
+    }
+}
