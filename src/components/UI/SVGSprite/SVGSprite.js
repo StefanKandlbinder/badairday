@@ -4,7 +4,7 @@ import './SVGSprite.scss';
 
 export default () => {
     return (
-        <div style={{ height: "0" }}>
+        <div style={{ height: "0", visibility: "hidden" }}>
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient id="logoGradient" gradientUnits="userSpaceOnUse" x1="12" y1="3.0012" x2="12" y2="20.9988">
