@@ -15,6 +15,7 @@
     height: var(--height);;
     margin-top: 44px;
     position: fixed;
+    top: 0;
     left: var(--offset);
     z-index: 100;
     will-change: opacity, transform, box-shadow, background-color;

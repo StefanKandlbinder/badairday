@@ -110,8 +110,6 @@ class App extends Component {
   }
 
   render() {
-    let stations = null;
-    let station = null;
     let sidebar = null;
     let optionsSheet = null;
     let dashboard = null;
@@ -119,14 +117,6 @@ class App extends Component {
     let updateBar = null;
     let background = null;
     let app = null;
-
-    stations = <Stations />
-
-    station = <Route
-      path="/station/:provider/:id"
-      render={() =>
-        <Station />
-      } />
 
     sidebar = <Sidebar>
       <Spacer />
@@ -242,26 +232,33 @@ class App extends Component {
       updateBar = <Updatebar interval={60 * 3 * 1000} update={this.onUpdateStations} />
     }
 
-    if (this.props.location) {
+    if (this.props.positon) {
       luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=" +
-        this.props.location.lat +
+        this.props.positon.lat +
         "," +
-        this.props.location.lng + ",50";
+        this.props.positon.lng + ",50";
     }
 
-    if (this.props.stations) {
-      stations = <Stations stations={this.props.stations} options={this.props.options} />;
-    }
+    
 
     background = <div className="air__background">
     </div>;
 
     background = null;
 
-    app = <React.Fragment>
-      {station}
-      {stations}
-    </React.Fragment>
+    if (this.props.stations) {
+      app = <React.Fragment>
+          <Stations stations={this.props.stations}
+            options={this.props.options} 
+            update={this.props.update} 
+            position={this.props.position} />
+          <Route
+            path="/station/:provider/:id"
+            render={() =>
+            <Station />
+          } />
+        </React.Fragment>
+    }
 
     return (
       <PageVisibility onChange={this.handleVisibilityChange}>
@@ -367,7 +364,7 @@ const mapStateToProps = state => {
     updating: state.ui.updating,
     geolocation: state.ui.geolocation,
     bottomsheet: state.ui.bottomsheet,
-    location: state.location,
+    position: state.location,
     notifications: state.notifications,
     update: state.update,
     stations: state.stations,

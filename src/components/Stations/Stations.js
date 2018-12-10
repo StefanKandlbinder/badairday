@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 
 import L from 'leaflet';
@@ -32,7 +31,7 @@ class Stations extends Component {
             this.updateStations();
         }
 
-        if (this.props.location !== prevProps.location) {
+        if (this.props.position !== prevProps.position) {
             this.handleLocation();
         }
 
@@ -61,7 +60,7 @@ class Stations extends Component {
         this.setState({
             hasLocation: true
         }, () => {
-            this.refs.map.leafletElement.flyTo(this.props.location, this.state.zoom);
+            this.refs.map.leafletElement.flyTo(this.props.position, this.state.zoom);
         })
     }
 
@@ -148,8 +147,8 @@ class Stations extends Component {
     updateStations = () => {
         this.props.stations.forEach(station => {
             let markerID = '[data-marker-id="' + station.id + '"]';
-            if (markerID) {
-                let marker = document.querySelector(markerID);
+            let marker = document.querySelector(markerID);
+            if (marker) {
                 marker.setAttribute("style", 'fill: ' + (station.components.PM10.update ? station.moodRGBA : "rgba(70,70,70,0.75)"));
             }
         })
@@ -179,21 +178,21 @@ class Stations extends Component {
     render() {
         let location = null;
 
-        if (this.state.hasLocation && this.props.location) {
+        if (this.state.hasLocation && this.props.position) {
             let marker = L.divIcon({
                 hmtl: "",
                 className: "air__icon-location",
                 iconSize: [12, 12]
             });
 
-            location = <Marker icon={marker} position={this.props.location}></Marker>
+            location = <Marker icon={marker} position={this.props.position}></Marker>
         }
 
         return (
             <Map className="air__stations"
                 onClick={this.handleClickMap}
                 onMovestart={this.handleClickMap}
-                center={this.props.location}
+                center={this.props.position}
                 zoom={this.state.zoom}
                 maxZoom={16}
                 // onZoom={this.onZoom}
@@ -216,12 +215,4 @@ class Stations extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        stations: state.stations,
-        update: state.update,
-        location: state.location
-    };
-}
-
-export default withRouter(connect(mapStateToProps)(Stations));
+export default withRouter(Stations);
