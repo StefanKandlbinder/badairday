@@ -1,12 +1,10 @@
 .air__bottom-sheet {
     --air__bottom-sheet-border-radius: calc(var(--air__border-radius) * 2);
     width: 100%;
-    max-width: 440px;
     height: auto;
     position: fixed;
     bottom: 0;
-    right: 0;
-    z-index: 110;
+    z-index: 200;
     // box-shadow: 0 0 3px var(--air__color-shadow);
     border-top-left-radius: var(--air__bottom-sheet-border-radius);
     border-top-right-radius: var(--air__bottom-sheet-border-radius);
