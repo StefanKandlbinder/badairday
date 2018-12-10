@@ -45,7 +45,9 @@ class Dashboard extends Component {
                 {stations.map((station) =>
                     <DashboardItem
                         key={station.id}
-                        station={station} />
+                        station={station} 
+                        onFavorizeStation={this.props.onFavorizeStation} 
+                        onUnfavorizeStation={this.props.onUnfavorizeStation} />
                 )}
                 <li className="air__spacer" style={moodStyle}></li>
             </ul>

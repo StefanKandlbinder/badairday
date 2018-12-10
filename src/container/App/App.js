@@ -6,7 +6,7 @@ import PageVisibility from 'react-page-visibility';
 import { CSSTransition } from 'react-transition-group';
 
 import { STATIONS } from "../../redux/actions/stations";
-import { fetchStations } from "../../redux/actions/stations";
+import { fetchStations, favorizeStation, unfavorizeStation } from "../../redux/actions/stations";
 import { setLocation } from "../../redux/actions/location";
 import { setGeoLocation, setBottomSheet } from "../../redux/actions/ui";
 import { setNotification } from "../../redux/actions/notifications";
@@ -226,7 +226,7 @@ class App extends Component {
       </NavLink>
     </Tabbar>
 
-    dashboard = <div className="air__site"><Dashboard stations={this.props.stations} options={this.props.options} /></div>;
+    dashboard = <div className="air__site"><Dashboard stations={this.props.stations} options={this.props.options} onFavorizeStation={this.props.onFavorizeStation} onUnfavorizeStation={this.props.onUnfavorizeStation} /></div>;
 
     if (this.props.options.autoupdating) {
       updateBar = <Updatebar interval={60 * 3 * 1000} update={this.onUpdateStations} />
@@ -376,6 +376,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onFetchStations: (url, luftdatenProvider, method) => dispatch(fetchStations(url, luftdatenProvider, method)),
     onSetLocation: (location) => dispatch(setLocation(location)),
+    onFavorizeStation: (id) => dispatch(favorizeStation(id)),
+    onUnfavorizeStation: (id) => dispatch(unfavorizeStation(id)),
     onSetGeoLocation: (geoLocation) => dispatch(setGeoLocation(geoLocation)),
     onSetBottomSheet: (bottomSheet) => dispatch(setBottomSheet(bottomSheet)),
     onSetOptionAutoupdater: (autoupdater) => dispatch(setOptionAutoupdater(autoupdater)),

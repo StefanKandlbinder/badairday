@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
-import { favorizeStation, unfavorizeStation } from "../../redux/actions/stations";
 import './DashboardItem.scss';
 
 class Sample extends Component {
@@ -68,11 +66,4 @@ class DashboardItem extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onFavorizeStation: (id) => dispatch(favorizeStation(id)),
-        onUnfavorizeStation: (id) => dispatch(unfavorizeStation(id))
-    }
-}
-
-export default connect(null, mapDispatchToProps)(DashboardItem);
+export default DashboardItem;
