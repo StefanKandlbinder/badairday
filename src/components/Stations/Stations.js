@@ -14,7 +14,7 @@ class Stations extends Component {
         this.state = {
             hasLocation: false,
             zoom: 13,
-            myStations: []
+            stationMarkers: []
         }
     }
 
@@ -66,7 +66,20 @@ class Stations extends Component {
 
     onZoom = (e) => {
         let zoom = this.refs.map.leafletElement.getZoom();
-        console.log(zoom);
+        console.log(this.state.stationMarkers);
+    }
+
+    onZoomStart = (e) => {
+        this.markerPane = document.getElementsByClassName("leaflet-marker-pane")[0];
+        this.markerPane.style.animationDelay = "0s";
+        this.markerPane.style.opacity = 0;
+        console.log("Zoom started!", this.markerPane);
+    }
+
+    onZoomEnd = (e) => {
+        this.markerPane.style.animationDelay = "1s";
+        this.markerPane.style.opacity = 1;
+        console.log("Zoom ended!");
     }
 
     onMoveEnd = (e) => {
@@ -75,7 +88,7 @@ class Stations extends Component {
     }
 
     getStations = () => {
-        let myStations = this.props.stations.map(element => {
+        let stationMarkers = this.props.stations.map(element => {
             let marker = "";
 
             if (element.provider === "luftdaten") {
@@ -121,27 +134,19 @@ class Stations extends Component {
             }
 
             return (
-                <CSSTransition
+                <Marker
                     key={element.id}
-                    in={true}
-                    timeout={3000}
-                    classNames="air__animation-fade-crunchy"
-                    mountOnEnter
-                    unmountOnExit>
-                    <Marker
-                        key={element.id}
-                        icon={marker}
-                        onClick={this.handleClickCircle(element.provider, element.id)}
-                        bubblingMouseEvents={false}
-                        position={[element.longitude, element.latitude]}
-                        title={element.name}
-                        stroke={false}
-                        fillOpacity={1}></Marker>
-                </CSSTransition>
+                    icon={marker}
+                    onClick={this.handleClickCircle(element.provider, element.id)}
+                    bubblingMouseEvents={false}
+                    position={[element.longitude, element.latitude]}
+                    title={element.name}
+                    stroke={false}
+                    fillOpacity={1} />
             )
         });
 
-        this.setState({ myStations: myStations });
+        this.setState({ stationMarkers: stationMarkers });
     }
 
     updateStations = () => {
@@ -192,11 +197,13 @@ class Stations extends Component {
             <Map className="air__stations"
                 onClick={this.handleClickMap}
                 onMovestart={this.handleClickMap}
+                // onMoveEnd={this.onMoveEnd}
                 center={this.props.position}
                 zoom={this.state.zoom}
                 maxZoom={16}
-                // onZoom={this.onZoom}
-                // onMoveEnd={this.onMoveEnd}
+                onZoom={this.onZoom}
+                onZoomStart={this.onZoomStart}
+                onZoomEnd={this.onZoomEnd}
                 // preferCanvas="true"
                 doubleClickZoom="false"
                 useFlyTo="true"
@@ -208,7 +215,7 @@ class Stations extends Component {
                     // url="https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png"
                     url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
                 />
-                {this.state.myStations}
+                {this.state.stationMarkers}
                 {location}
             </Map>
         )

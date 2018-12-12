@@ -56,6 +56,12 @@
     opacity: 0.75;
 }
 
+.leaflet-marker-pane {
+    will-change: opacity;
+    transition: opacity var(--air__animation-duration) var(--air__animation-timing);
+    opacity: 1;
+}
+
 .leaflet-left .leaflet-control {
     margin-left: 12px;
     margin-top: 12px;
