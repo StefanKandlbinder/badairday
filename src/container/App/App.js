@@ -198,7 +198,7 @@ class App extends Component {
 
     tabbar = <Tabbar>
       <NavLink
-        className="air__tabbar-link air__button air__button--naked air__button--active"
+        className="air__tabbar-link air__button air__button--naked"
         activeClassName="air__button--active"
         exact to={"/"}
         onClick={() => this.props.history.location.pathname === "/" ? this.onUpdateStations() : null}>
