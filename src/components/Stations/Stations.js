@@ -201,8 +201,8 @@ class Stations extends Component {
                 zoom={this.state.zoom}
                 maxZoom={16}
                 onZoom={this.onZoom}
-                onZoomStart={this.onZoomStart}
-                onZoomEnd={this.onZoomEnd}
+                // onZoomStart={this.onZoomStart}
+                // onZoomEnd={this.onZoomEnd}
                 // preferCanvas="true"
                 doubleClickZoom="false"
                 useFlyTo="true"
