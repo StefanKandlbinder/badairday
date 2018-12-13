@@ -66,14 +66,13 @@ class Stations extends Component {
 
     onZoom = (e) => {
         let zoom = this.refs.map.leafletElement.getZoom();
-        console.log(this.state.stationMarkers);
     }
 
     onZoomStart = (e) => {
         this.markerPane = document.getElementsByClassName("leaflet-marker-pane")[0];
         this.markerPane.style.animationDelay = "0s";
         this.markerPane.style.opacity = 0;
-        console.log("Zoom started!", this.markerPane);
+        console.log("Zoom started!");
     }
 
     onZoomEnd = (e) => {
@@ -84,7 +83,7 @@ class Stations extends Component {
 
     onMoveEnd = (e) => {
         let bounds = this.refs.map.leafletElement.getBounds();
-        console.log(bounds);
+        // console.log(bounds);
     }
 
     getStations = () => {
