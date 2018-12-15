@@ -22,7 +22,7 @@
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
   
-  @media (min-width: 530px) {
+  /* @media (min-width: 530px) {
     .air__dashboard-item {
       width: 50%;
     }
@@ -32,7 +32,7 @@
     .air__dashboard-item {
       width: calc(100% / 3);
     }
-  }
+  } */
 
   .air__dashboard-item-content {
       display: flex;
