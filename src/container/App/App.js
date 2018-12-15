@@ -293,6 +293,7 @@ class App extends Component {
 
           <Button
             className="air__button air__button--naked air__button--fab air__button-location"
+            aria-label="Get Location"
             clicked={() => this.handleLocation()}>
             <svg className="air__color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <use xlinkHref="#airSVGLocation"></use>
