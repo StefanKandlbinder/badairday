@@ -1,4 +1,9 @@
 {
-    "root": "build/",
-    "https_only": true
+  "root": "build/",
+  "https_only": true,
+  "headers": {
+    "/**": {
+      "Content-Encoding": "gzip"
+    }
   }
+}
