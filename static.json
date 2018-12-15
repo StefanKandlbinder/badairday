@@ -3,8 +3,7 @@
   "https_only": true,
   "headers": {
     "/**": {
-      "Content-Encoding": "gzip, compress, deflate, identity, br",
-      "Accept-Encoding": "*"
+      "Content-Encoding": "gzip, compress, deflate, identity, br"
     }
   }
 }
