@@ -153,3 +153,7 @@ a.leaflet-control-zoom-out.leaflet-disabled {
     transform-origin: bottom right;
     text-align: right;
 }
+
+.leaflet-control-attribution a {
+    font-size: 12px;
+}
