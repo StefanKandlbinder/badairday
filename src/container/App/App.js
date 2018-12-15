@@ -123,6 +123,7 @@ class App extends Component {
       <Spacer />
       <Button
         className="air__button air__button--naked air__button--ghost"
+        aria-label=""
         clicked={() => this.onUpdateStations()}>
         <svg className="air__color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><defs><path id="a" d="M0 0h24v24H0z" /></defs><clipPath><use href="#a" overflow="visible" /></clipPath><path d="M11 8v5l4.25 2.52.77-1.28-3.52-2.09V8zm10 2V3l-2.64 2.64C16.74 4.01 14.49 3 12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9h-2c0 3.86-3.14 7-7 7s-7-3.14-7-7 3.14-7 7-7c1.93 0 3.68.79 4.95 2.05L14 10h7z" /></svg>
       </Button>
@@ -200,6 +201,7 @@ class App extends Component {
     tabbar = <Tabbar>
       <NavLink
         className="air__tabbar-link air__button air__button--naked"
+        aria-label="Map"
         activeClassName="air__button--active"
         exact to={"/"}
         onClick={() => this.props.history.location.pathname === "/" ? this.onUpdateStations() : null}>
@@ -210,6 +212,7 @@ class App extends Component {
       <NavLink
         onClick={() => this.props.history.location.pathname === "/dashboard" ? this.onUpdateStations() : null}
         className={`air__tabbar-link air__button air__button--naked ${!getFavorizedStations(this.props.stations).length ? "air__button--inactive" : ""}`}
+        aria-label="List"
         activeClassName="air__button--active"
         to={"/dashboard"}>
         <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -219,6 +222,7 @@ class App extends Component {
       <Spacer className="air__bg-color-text" />
       <NavLink
         className="air__tabbar-link air__button air__button--naked"
+        aria-label="Options Sheet"
         activeClassName="air__button--active"
         to={this.props.history.location.pathname === "/bottomsheet" ? "/" : "/bottomsheet"}>
         <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
