@@ -4,6 +4,7 @@ export const SET_UPDATER = 'SET_UPDATER';
 export const SET_GEOLOCATION = 'SET_GEOLOCATION';
 export const SET_SIDEBAR = 'SET_SIDEBAR';
 export const SET_BOTTOMSHEET = 'SET_BOTTOMSHEET';
+export const SET_DASHBOARD = 'SET_DASHBOARD';
 
 // action creators
 export const setLoader = ({ state, feature }) => ({
@@ -32,6 +33,12 @@ export const setSidebar = ({ state, feature }) => ({
 
 export const setBottomSheet = ({ state, feature }) => ({
     type: `${feature} ${SET_BOTTOMSHEET}`,
+    payload: state,
+    meta: { feature }
+});
+
+export const setDashboard = ({ state, feature }) => ({
+    type: `${feature} ${SET_DASHBOARD}`,
     payload: state,
     meta: { feature }
 });

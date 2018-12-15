@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { Route, NavLink } from 'react-router-dom';
 import PageVisibility from 'react-page-visibility';
 import { CSSTransition } from 'react-transition-group';
+// import MediaQuery from 'react-responsive';
 
 import { STATIONS } from "../../redux/actions/stations";
 import { fetchStations, favorizeStation, unfavorizeStation } from "../../redux/actions/stations";
@@ -277,6 +278,7 @@ class App extends Component {
           </CSSTransition>
 
           <CSSTransition
+            // in={this.props.history.location.pathname === "/dashboard" ? true : false}
             in={this.props.history.location.pathname === "/dashboard" ? true : false}
             classNames="air__animation-site-transition"
             timeout={300}
@@ -364,6 +366,7 @@ const mapStateToProps = state => {
     updating: state.ui.updating,
     geolocation: state.ui.geolocation,
     bottomsheet: state.ui.bottomsheet,
+    dashboard: state.ui.dashboard,
     position: state.location,
     notifications: state.notifications,
     update: state.update,

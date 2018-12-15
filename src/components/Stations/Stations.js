@@ -193,30 +193,33 @@ class Stations extends Component {
         }
 
         return (
-            <Map className="air__stations"
-                onClick={this.handleClickMap}
-                onMovestart={this.handleClickMap}
-                // onMoveEnd={this.onMoveEnd}
-                center={this.props.position}
-                zoom={this.state.zoom}
-                maxZoom={16}
-                onZoom={this.onZoom}
-                // onZoomStart={this.onZoomStart}
-                // onZoomEnd={this.onZoomEnd}
-                // preferCanvas="true"
-                doubleClickZoom="false"
-                useFlyTo="true"
-                ref="map">
-                <TileLayer
-                    // https://wiki.openstreetmap.org/wiki/Tile_servers
-                    // https://leaflet-extras.github.io/leaflet-providers/preview/
-                    attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                    // url="https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png"
-                    url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-                />
-                {this.state.stationMarkers}
-                {location}
-            </Map>
+            <React.Fragment>
+                <Map className="air__stations"
+                    onClick={this.handleClickMap}
+                    onMovestart={this.handleClickMap}
+                    // onMoveEnd={this.onMoveEnd}
+                    center={this.props.position}
+                    zoom={this.state.zoom}
+                    maxZoom={16}
+                    onZoom={this.onZoom}
+                    // onZoomStart={this.onZoomStart}
+                    // onZoomEnd={this.onZoomEnd}
+                    // preferCanvas="true"
+                    doubleClickZoom="false"
+                    useFlyTo="true"
+                    ref="map">
+                    <TileLayer
+                        // https://wiki.openstreetmap.org/wiki/Tile_servers
+                        // https://leaflet-extras.github.io/leaflet-providers/preview/
+                        attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                        // url="https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png"
+                        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                    />
+                    {this.state.stationMarkers}
+                    {location}
+                    {this.props.children}
+                </Map>
+            </React.Fragment>
         )
     }
 }

@@ -1,11 +1,12 @@
-import { SET_LOADER, SET_UPDATER, SET_GEOLOCATION, SET_SIDEBAR, SET_BOTTOMSHEET } from "../actions/ui";
+import { SET_LOADER, SET_UPDATER, SET_GEOLOCATION, SET_SIDEBAR, SET_BOTTOMSHEET, SET_DASHBOARD } from "../actions/ui";
 
 const initState = {
     loading: false,
     updating: false,
     geolocation: false,
     sidebar: false,
-    bottomsheet: false
+    bottomsheet: false,
+    dashboard: false
 };
 
 export const uiReducer = (ui = initState, action) => {
@@ -25,6 +26,9 @@ export const uiReducer = (ui = initState, action) => {
         
         case action.type.includes(SET_BOTTOMSHEET):
             return { ...ui, bottomsheet: action.payload };
+        
+        case action.type.includes(SET_DASHBOARD):
+            return { ...ui, dashboard: action.payload };
 
         default:
             return ui;

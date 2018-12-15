@@ -53,13 +53,24 @@
   right: 0;
   height: 100%;
   width: 100%;
-  max-width: 414px;
   background: rgba(255, 255, 255, 1);
   will-change: transform;
   z-index: 120;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
+}
+
+@media(min-width: 414px) {
+  .air__site {
+    max-width: 100%;
+  }
+}
+
+@media(min-width: 415px) {
+  .air__site {
+    max-width: 320px;
+  }
 }
 
 .air__options-sheet {
