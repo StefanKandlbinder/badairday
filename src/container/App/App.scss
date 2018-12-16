@@ -41,9 +41,16 @@
 
 .air__button-location {
   position: fixed;
-  right: calc(var(--air__margin) * 4);
-  bottom: calc(var(--air__button-height) + calc(var(--air__margin) * 4));
-  z-index: 110;
+  right: calc(50% - var(--air__button-height) / 2);
+  bottom: 8px;
+  z-index: 140;
+  border: 2px solid white;
+  padding: 0;
+}
+
+.air__button-location svg {
+  width: var(--air__button-width);
+  height: var(--air__button-height);
 }
 
 .air__site {

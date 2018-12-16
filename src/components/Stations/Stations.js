@@ -53,7 +53,9 @@ class Stations extends Component {
 
     // go back to the main route
     handleClickMap = () => {
+        //if (this.props.location.pathname === "/bottomsheet") {
         this.props.history.push("/");
+        //} 
     }
 
     handleLocation = () => {

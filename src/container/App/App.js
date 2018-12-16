@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import { Route, NavLink } from 'react-router-dom';
 import PageVisibility from 'react-page-visibility';
 import { CSSTransition } from 'react-transition-group';
-// import MediaQuery from 'react-responsive';
+import Media from 'react-media';
 
 import { STATIONS } from "../../redux/actions/stations";
 import { fetchStations, favorizeStation, unfavorizeStation } from "../../redux/actions/stations";
@@ -244,11 +244,7 @@ class App extends Component {
         this.props.positon.lng + ",50";
     }
 
-    
-
-    background = <div className="air__background">
-    </div>;
-
+    background = <div className="air__background"></div>;
     background = null;
 
     if (this.props.stations) {
@@ -281,6 +277,15 @@ class App extends Component {
             {app}
           </CSSTransition>
 
+          <Media
+            query="(min-width: 600px) and (orientation: landscape)"
+            onChange={matches =>
+              matches
+                ? this.props.history.push("/dashboard")
+                : this.props.history.push("/")
+            }
+          />
+
           <CSSTransition
             // in={this.props.history.location.pathname === "/dashboard" ? true : false}
             in={this.props.history.location.pathname === "/dashboard" ? true : false}
@@ -296,7 +301,7 @@ class App extends Component {
             aria-label="Get Location"
             clicked={() => this.handleLocation()}>
             <svg className="air__color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <use xlinkHref="#airSVGLocation"></use>
+              <use xlinkHref="#airSVGLogoCool"></use>
             </svg>
           </Button>
 
