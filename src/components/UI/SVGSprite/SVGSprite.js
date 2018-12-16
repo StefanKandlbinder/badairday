@@ -20,19 +20,19 @@ export default () => {
 
                 <symbol width="24" height="24" viewBox="0 0 24 24" id="airSVGLogoCool">
                     <circle className="air__color-primary" cx="12" cy="12" r="12" />
-                    <path className="air__color-text" d="M12 .9c6.1 0 11.1 5 11.1 11.1s-5 11.1-11.1 11.1S.9 18.1.9 12 5.9.9 12 .9m0-.9C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0z" />
+                    <path className="air__color-text--full" d="M12 .9c6.1 0 11.1 5 11.1 11.1s-5 11.1-11.1 11.1S.9 18.1.9 12 5.9.9 12 .9m0-.9C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0z" />
                     <path className="air__color-primary--mono" d="M14.9 17.6c-.4.1-.8 0-1.1-.3-.1-.1-.2-.3-.3-.5L11.9 12l-4.8-1.6c-.2-.1-.3-.2-.5-.3-.2-.2-.3-.6-.2-1 0-.1.1-.3.2-.4l-5.4 5.4c.8 4.4 4.3 7.9 8.7 8.8l5.4-5.4c-.1 0-.2.1-.4.1z" />
                     <path className="air__color-text" d="M10.9 13.9l-.7-.2-.2-.6.4-.5.7.1.3.6zM5.3 19.5h-.4l-.2-.4.3-.4.4.1.2.4zM8.1 18.9l-.9.1-.5-.7.3-.8.8-.1.6.6zM11.6 16.9v1l-.8.4-.8-.5v-.9l.8-.5zM6.6 14.6v.7l-.6.4-.7-.4v-.7l.7-.4z" />
-                    <circle className="air__color-text" cx="8.8" cy="15.3" r=".7" />
-                    <circle className="air__color-text" cx="7.5" cy="12.5" r="1" />
-                    <circle className="air__color-text" cx="12.2" cy="15.7" r=".4" />
-                    <circle className="air__color-text" cx="5" cy="17.3" r=".5" />
+                    <circle className="air__color-text--full" cx="8.8" cy="15.3" r=".7" />
+                    <circle className="air__color-text--full" cx="7.5" cy="12.5" r="1" />
+                    <circle className="air__color-text--full" cx="12.2" cy="15.7" r=".4" />
+                    <circle className="air__color-text--full" cx="5" cy="17.3" r=".5" />
                     <path className="air__color-primary--mono" d="M18.1 5.5L7.4 9.1c-.2 0-.3.3-.1.5l.1.1 5 1.7s.1 0 .1.1l.1.1 1.7 5c0 .1 0 .1.1.1.2.2.4.1.5-.1l3.6-10.7c0-.1 0-.2-.1-.3 0-.1-.2-.2-.3-.1z" />
-                    <path className="air__color-text" d="M18.2 5.5c.1 0 .2 0 .2.1.1.1.1.2.1.3l-3.6 10.7c0 .1-.2.2-.3.2-.1 0-.2 0-.2-.1l-.1-.1-1.7-5s0-.1-.1-.1l-.1-.1-5-1.7c-.1 0-.1 0-.1-.1-.2-.2-.1-.5.1-.5l10.7-3.6h.1m0-.9c-.1 0-.3 0-.4.1L7.1 8.2c-.4.2-.7.5-.8.9-.1.4 0 .8.3 1.1.1.1.3.2.5.3l4.8 1.6 1.6 4.8c.1.2.2.3.3.5.2.2.5.3.8.3.5 0 1-.3 1.1-.8l3.6-10.7c.1-.4 0-.9-.3-1.2-.2-.3-.5-.4-.8-.4z" />
-                    <path className="air__color-text" d="M16.6 7.4l-3.3 3.3c-.1.1-.2.1-.3.1L9.7 9.6c-.1 0-.1 0-.1-.1-.2-.1-.1-.4.1-.5l6.6-2.2c.1 0 .2 0 .3.1.1.1.2.3 0 .5z" />
+                    <path className="air__color-text--full" d="M18.2 5.5c.1 0 .2 0 .2.1.1.1.1.2.1.3l-3.6 10.7c0 .1-.2.2-.3.2-.1 0-.2 0-.2-.1l-.1-.1-1.7-5s0-.1-.1-.1l-.1-.1-5-1.7c-.1 0-.1 0-.1-.1-.2-.2-.1-.5.1-.5l10.7-3.6h.1m0-.9c-.1 0-.3 0-.4.1L7.1 8.2c-.4.2-.7.5-.8.9-.1.4 0 .8.3 1.1.1.1.3.2.5.3l4.8 1.6 1.6 4.8c.1.2.2.3.3.5.2.2.5.3.8.3.5 0 1-.3 1.1-.8l3.6-10.7c.1-.4 0-.9-.3-1.2-.2-.3-.5-.4-.8-.4z" />
+                    <path className="air__color-text--full" d="M16.6 7.4l-3.3 3.3c-.1.1-.2.1-.3.1L9.7 9.6c-.1 0-.1 0-.1-.1-.2-.1-.1-.4.1-.5l6.6-2.2c.1 0 .2 0 .3.1.1.1.2.3 0 .5z" />
                 </symbol>
 
-                <symbol id="airSVGLogoCoolSimple" className="air__svg-logo-cool-simple" width="24" height="24" viewBox="0 0 24 24" id="airSVGLogoCoolSimple">
+                <symbol id="airSVGLogoCoolSimple" className="air__svg-logo-cool-simple" width="24" height="24" viewBox="0 0 24 24">
                     <path className="air__svg-logo-cool-simple-bkg" d="M12 23.5C5.6 23.5.5 18.4.5 12S5.6.5 12 .5 23.5 5.6 23.5 12 18.4 23.5 12 23.5z"/>
                     <path className="air__svg-logo-cool-simple-arrow" d="M12 .9c6.1 0 11.1 5 11.1 11.1s-5 11.1-11.1 11.1S.9 18.1.9 12 5.9.9 12 .9m0-.9C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0z"/>
                     <path className="air__svg-logo-cool-simple-arrow" d="M17.5 6.1c.1 0 .2 0 .3.1.1.1.1.2.1.4l-4.4 13.1c-.1.2-.2.3-.4.3-.1 0-.2 0-.3-.1 0 0-.1-.1-.1-.2l-2.1-6.2c0-.1-.1-.1-.1-.2 0 0-.1-.1-.2-.1l-6.2-2.1c-.1 0-.1-.1-.2-.1.1-.1.1-.5.4-.5l13.1-4.4h.1m0-1.1c-.2 0-.3 0-.5.1L4 9.4c-.5.2-.8.6-1 1-.1.5 0 1 .4 1.4.2.2.4.3.6.4l5.8 1.9 1.9 5.8c.1.2.2.4.4.6.3.3.6.4 1 .4.6 0 1.2-.4 1.4-1l4.4-13.1c.2-.5 0-1.1-.4-1.5-.2-.1-.6-.3-1-.3z"/>
