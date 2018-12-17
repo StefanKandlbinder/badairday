@@ -41,7 +41,7 @@
 
 .air__button-location {
   position: fixed;
-  right: calc(50% - var(--air__button-height) / 2);
+  right: calc(50% - var(--air__button-height) / 2 - 2px);
   bottom: 4px;
   z-index: 140;
   border: 2px solid white;

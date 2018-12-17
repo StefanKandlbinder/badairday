@@ -19,7 +19,7 @@ export default () => {
                 </symbol>
 
                 <symbol width="24" height="24" viewBox="0 0 24 24" id="airSVGLogoCool">
-                    <circle className="air__color-primary" cx="12" cy="12" r="12" />
+                    <circle className="air__color-primary" cx="12" cy="12" r="11.8" />
                     <path className="air__color-text--full" d="M12 .9c6.1 0 11.1 5 11.1 11.1s-5 11.1-11.1 11.1S.9 18.1.9 12 5.9.9 12 .9m0-.9C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0z" />
                     <path className="air__color-primary--mono" d="M14.9 17.6c-.4.1-.8 0-1.1-.3-.1-.1-.2-.3-.3-.5L11.9 12l-4.8-1.6c-.2-.1-.3-.2-.5-.3-.2-.2-.3-.6-.2-1 0-.1.1-.3.2-.4l-5.4 5.4c.8 4.4 4.3 7.9 8.7 8.8l5.4-5.4c-.1 0-.2.1-.4.1z" />
                     <path className="air__color-text" d="M10.9 13.9l-.7-.2-.2-.6.4-.5.7.1.3.6zM5.3 19.5h-.4l-.2-.4.3-.4.4.1.2.4zM8.1 18.9l-.9.1-.5-.7.3-.8.8-.1.6.6zM11.6 16.9v1l-.8.4-.8-.5v-.9l.8-.5zM6.6 14.6v.7l-.6.4-.7-.4v-.7l.7-.4z" />
