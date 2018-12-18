@@ -135,6 +135,18 @@
     will-change: fill;
 }
 
+.air__station-button-fav {
+    .air__station-button-icon {
+        fill: var(--air__color-text--gone);
+    }
+}
+
+.air__station-button-fav--active {
+    .air__station-button-icon {
+        fill: var(--air__color-text);
+    }
+}
+
 /*------------------------------------*\
   #SPINNER
 \*------------------------------------*/
