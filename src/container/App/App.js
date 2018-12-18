@@ -9,7 +9,7 @@ import Media from 'react-media';
 import { STATIONS } from "../../redux/actions/stations";
 import { fetchStations, favorizeStation, unfavorizeStation } from "../../redux/actions/stations";
 import { setLocation } from "../../redux/actions/location";
-import { setGeoLocation, setBottomSheet } from "../../redux/actions/ui";
+import { setGeoLocation, setBottomSheet, setDashboard, setMedia } from "../../redux/actions/ui";
 import { setNotification } from "../../redux/actions/notifications";
 import { setOptionAutoupdater } from "../../redux/actions/options";
 import { setOptionReverseGeo } from "../../redux/actions/options";
@@ -71,6 +71,15 @@ class App extends Component {
 
   componentWillUnmount() {
     window.clearTimeout(this.timeoutID);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.media === "medium" && this.props.media === "small") {
+      this.props.onSetDashboard({ state: false, feature: STATIONS });
+    }
+    else if (prevProps.media === "small" && this.props.media === "medium" && getFavorizedStations(this.props.stations).length) {
+      this.props.onSetDashboard({ state: true, feature: STATIONS });
+    }
   }
 
   clearStorage() {
@@ -204,13 +213,14 @@ class App extends Component {
         aria-label="Map"
         activeClassName="air__button--active"
         exact to={"/"}
-        onClick={() => this.props.history.location.pathname === "/" ? this.onUpdateStations() : null}>
+        onClick={() => this.props.history.location.pathname === "/" ? this.onUpdateStations() : this.props.onSetDashboard({ state: false, feature: STATIONS })}>
         <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <use xlinkHref="#airSVGMap"></use>
         </svg>
       </NavLink>
-      <NavLink
-        onClick={() => this.props.history.location.pathname === "/dashboard" ? this.onUpdateStations() : null}
+      {this.props.media === "small" 
+        ? <NavLink
+        onClick={() => this.props.dashboard ? this.onUpdateStations() : this.props.onSetDashboard({ state: true, feature: STATIONS })}
         className={`air__tabbar-link air__button air__button--naked ${!getFavorizedStations(this.props.stations).length ? "air__button--inactive" : ""}`}
         aria-label="List"
         activeClassName="air__button--active"
@@ -218,7 +228,10 @@ class App extends Component {
         <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <use xlinkHref="#airSVGFavList"></use>
         </svg>
-      </NavLink>
+        </NavLink>
+        : null
+      }
+      
       <Spacer className="air__bg-color-text" />
       <NavLink
         className="air__tabbar-link air__button air__button--naked"
@@ -231,7 +244,13 @@ class App extends Component {
       </NavLink>
     </Tabbar>
 
-    dashboard = <div className="air__site"><Dashboard stations={this.props.stations} options={this.props.options} onFavorizeStation={this.props.onFavorizeStation} onUnfavorizeStation={this.props.onUnfavorizeStation} /></div>;
+    dashboard = <div className="air__site">
+        <Dashboard stations={this.props.stations} 
+          options={this.props.options} 
+          onSetDashboard={this.props.onSetDashboard}
+          onFavorizeStation={this.props.onFavorizeStation} 
+          onUnfavorizeStation={this.props.onUnfavorizeStation} />
+      </div>;
 
     if (this.props.options.autoupdating) {
       updateBar = <Updatebar interval={60 * 3 * 1000} update={this.onUpdateStations} />
@@ -252,11 +271,14 @@ class App extends Component {
           <Stations stations={this.props.stations}
             options={this.props.options} 
             update={this.props.update} 
-            position={this.props.position} />
+            media={this.props.media} 
+            position={this.props.position} 
+            onSetDashboard={this.props.onSetDashboard} />
           <Route
             path="/station/:provider/:id"
             render={() =>
-            <Station />
+            <Station media={this.props.media} 
+              onSetDashboard={this.props.onSetDashboard} />
           } />
         </React.Fragment>
     }
@@ -278,17 +300,17 @@ class App extends Component {
           </CSSTransition>
 
           <Media
-            query="(min-width: 600px) and (orientation: landscape)"
+            query="(min-width: 768px) and (orientation: landscape)"
             onChange={matches =>
               matches
-                ? this.props.history.push("/dashboard")
-                : this.props.history.push("/")
+                ? this.props.onSetMedia({ state: "medium", feature: STATIONS })
+                : this.props.onSetMedia({ state: "small", feature: STATIONS })
             }
           />
 
           <CSSTransition
-            // in={this.props.history.location.pathname === "/dashboard" ? true : false}
-            in={this.props.history.location.pathname === "/dashboard" ? true : false}
+            in={this.props.dashboard}
+            // in={this.props.media === "medium" ? true : false}
             classNames="air__animation-site-transition"
             timeout={300}
             mountOnEnter
@@ -377,6 +399,7 @@ const mapStateToProps = state => {
     geolocation: state.ui.geolocation,
     bottomsheet: state.ui.bottomsheet,
     dashboard: state.ui.dashboard,
+    media: state.ui.media,
     position: state.location,
     notifications: state.notifications,
     update: state.update,
@@ -393,6 +416,8 @@ const mapDispatchToProps = dispatch => {
     onUnfavorizeStation: (id) => dispatch(unfavorizeStation(id)),
     onSetGeoLocation: (geoLocation) => dispatch(setGeoLocation(geoLocation)),
     onSetBottomSheet: (bottomSheet) => dispatch(setBottomSheet(bottomSheet)),
+    onSetMedia: (media) => dispatch(setMedia(media)),
+    onSetDashboard: (dashboard) => dispatch(setDashboard(dashboard)),
     onSetOptionAutoupdater: (autoupdater) => dispatch(setOptionAutoupdater(autoupdater)),
     onSetOptionReverseGeo: (reversegeo) => dispatch(setOptionReverseGeo(reversegeo)),
     onSetOptionRunaways: (runaways) => dispatch(setOptionRunaways(runaways)),

@@ -5,6 +5,7 @@ export const SET_GEOLOCATION = 'SET_GEOLOCATION';
 export const SET_SIDEBAR = 'SET_SIDEBAR';
 export const SET_BOTTOMSHEET = 'SET_BOTTOMSHEET';
 export const SET_DASHBOARD = 'SET_DASHBOARD';
+export const SET_MEDIA = 'SET_MEDIA';
 
 // action creators
 export const setLoader = ({ state, feature }) => ({
@@ -33,12 +34,18 @@ export const setSidebar = ({ state, feature }) => ({
 
 export const setBottomSheet = ({ state, feature }) => ({
     type: `${feature} ${SET_BOTTOMSHEET}`,
-    payload: state,
+    payload: state, 
     meta: { feature }
 });
 
 export const setDashboard = ({ state, feature }) => ({
     type: `${feature} ${SET_DASHBOARD}`,
+    payload: state,
+    meta: { feature }
+});
+
+export const setMedia = ({ state, feature }) => ({
+    type: `${feature} ${SET_MEDIA}`,
     payload: state,
     meta: { feature }
 });

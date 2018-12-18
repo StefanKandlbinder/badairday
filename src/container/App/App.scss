@@ -39,7 +39,11 @@
 
 /* ################################### */
 
-.air__button-location {
+.air__button-location,
+.air__button-location:hover,
+.air__button-location:active,
+.air__button-location:focus,
+.air__button-location:visited {
   position: fixed;
   right: calc(50% - var(--air__button-height) / 2 - 2px);
   bottom: 4px;

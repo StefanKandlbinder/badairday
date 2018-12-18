@@ -75,6 +75,10 @@ class Station extends Component {
 
         if (this.props.station.provider === "luftdaten")
             this.setState({ shape: hexagon })
+        
+        if (this.props.media === "small") {
+            this.props.onSetDashboard({ state: false, feature: STATIONS });
+        }
 
         timeout = window.setTimeout(mount.play(), 50);
     }
@@ -189,13 +193,19 @@ class Station extends Component {
 
         if (this.props.location.state !== undefined) {
             let innerWidth = window.innerWidth;
+            let dashboardWidth = 0;
+
+            if (innerWidth >= 768) {
+                dashboardWidth = 320;
+            }
 
             if (innerWidth > 330)
-                x = this.props.location.state.x - (window.innerWidth - 330) / 2 + "px";
+                x = this.props.location.state.x - (window.innerWidth - 330 - dashboardWidth) / 2  + "px";
             
             else
-                x = this.props.location.state.x - (window.innerWidth - 288) / 2 + "px";
+                x = this.props.location.state.x - (window.innerWidth - 288 - dashboardWidth) / 2  + "px";
 
+            // x = this.props.location.state.y + "px";
             y = this.props.location.state.y + "px";
         }
 

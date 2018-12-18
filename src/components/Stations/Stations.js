@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import L from 'leaflet';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 
+import { STATIONS } from "../../redux/actions/stations";
 import './Stations.scss';
 
 class Stations extends Component {
@@ -53,9 +54,13 @@ class Stations extends Component {
 
     // go back to the main route
     handleClickMap = () => {
-        //if (this.props.location.pathname === "/bottomsheet") {
-        this.props.history.push("/");
-        //} 
+        if (this.props.location.pathname === "/bottomsheet" || this.props.location.pathname.includes("/station")) {
+            this.props.history.push("/");
+        }
+        if (this.props.media === "small") {
+            this.props.history.push("/");
+            this.props.onSetDashboard({ state: false, feature: STATIONS });
+        }
     }
 
     handleLocation = () => {

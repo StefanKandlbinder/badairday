@@ -1,4 +1,4 @@
-import { SET_LOADER, SET_UPDATER, SET_GEOLOCATION, SET_SIDEBAR, SET_BOTTOMSHEET, SET_DASHBOARD } from "../actions/ui";
+import { SET_LOADER, SET_UPDATER, SET_GEOLOCATION, SET_SIDEBAR, SET_BOTTOMSHEET, SET_DASHBOARD, SET_MEDIA } from "../actions/ui";
 
 const initState = {
     loading: false,
@@ -6,7 +6,10 @@ const initState = {
     geolocation: false,
     sidebar: false,
     bottomsheet: false,
-    dashboard: false
+    dashboard: false,
+    media: {
+        size: "small"
+    }
 };
 
 export const uiReducer = (ui = initState, action) => {
@@ -29,6 +32,9 @@ export const uiReducer = (ui = initState, action) => {
         
         case action.type.includes(SET_DASHBOARD):
             return { ...ui, dashboard: action.payload };
+        
+        case action.type.includes(SET_MEDIA):
+            return { ...ui, media: action.payload };
 
         default:
             return ui;

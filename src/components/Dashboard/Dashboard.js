@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import sortBy from 'lodash/sortBy';
 
+import { STATIONS } from "../../redux/actions/stations";
 import { getFavorizedStations } from '../../redux/filters/getFavorizedStations';
 
 import DashboardItem from "./DashbaordItem";
@@ -38,6 +39,10 @@ class Dashboard extends Component {
             else {
                 moodStyle = { backgroundColor: stations[stations.length - 1].moodRGBA };
             }
+        }
+
+        else {
+            this.props.onSetDashboard({ state: false, feature: STATIONS });
         }
 
         return (

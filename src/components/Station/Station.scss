@@ -1,7 +1,7 @@
 .air__station {
     --height: 288px;
     --width: 288px;
-    --offset: 5vw;
+    --offset: calc(50% - var(--width) / 2);
     --air__color-shadow: rgba(0, 0, 0, 0.5);
     
     background-color: transparent;
@@ -27,7 +27,12 @@
     .air__station {
         --width: 330px;
         --height: 330px;
-        --offset: calc(50% - 165px);
+    }
+}
+
+@media (min-width: 768px) {
+    .air__station {
+        --offset: calc(50% - var(--width) / 2 - 160px);
     }
 }
 
