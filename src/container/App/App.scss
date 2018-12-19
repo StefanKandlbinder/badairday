@@ -87,13 +87,13 @@
 .air__options-sheet {  
   max-height: 256px;
   max-width: 414px;
-  bottom: 56px;
-  right: var(--air__margin--2);
-  left: var(--air__margin--2);
+  bottom: 64px;
+  right: var(--air__margin--3);
+  left: var(--air__margin--3);
   overflow: hidden;
 
   &.air__animation-bottom-sheet-exit-active {
-    transform: translateY(calc(100% + var(--air__margin--2)));
+    transform: translateY(calc(100% + var(--air__margin--3)));
   }
 }
 
