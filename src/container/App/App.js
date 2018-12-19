@@ -148,7 +148,7 @@ class App extends Component {
       </Button>
     </Sidebar>
 
-    optionsSheet = <BottomSheet className={`air__options-sheet ${this.props.media === "medium" ? " air__bottom-sheet--medium" : ""}`}>
+    optionsSheet = <BottomSheet className={`air__options-sheet ${this.props.media === "medium" ? "" : ""}`}>
       <Flex className="air__flex air__flex--align-items-center air__padding-left--3 air__padding-right--3 air__padding-top--4 air__padding-bottom air__border-radius-top--2">
         <svg className="air__color-text air__margin-right" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <use xlinkHref="#airSVGLogoCoolSimple"></use>

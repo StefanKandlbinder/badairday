@@ -90,10 +90,17 @@
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   max-height: 256px;
+  max-width: 304px;
+  left: 8px;
+  bottom: 56px;
 
   .air__list-header:first-child {
     border-top-left-radius: var(--air__bottom-sheet-border-radius);
     border-top-right-radius: var(--air__bottom-sheet-border-radius);
+  }
+
+  &.air__animation-bottom-sheet-exit-active {
+    transform: translateY(calc(100% + 8px));
   }
 }
 

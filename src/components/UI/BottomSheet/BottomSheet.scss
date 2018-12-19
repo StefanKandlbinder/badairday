@@ -3,22 +3,14 @@
     width: 100%;
     height: auto;
     position: fixed;
-    bottom: 48px;
+    bottom: 0;
     z-index: 120;
     // box-shadow: 0 0 3px var(--air__color-shadow);
-    border-top-left-radius: var(--air__bottom-sheet-border-radius);
-    border-top-right-radius: var(--air__bottom-sheet-border-radius);
+    border-radius: var(--air__bottom-sheet-border-radius);
     background: white;
     will-change: transform;
     display: flex;
     flex-direction: column;
-}
-
-.air__bottom-sheet--medium {
-    max-width: 320px;
-    left: 8px;
-    bottom: 56px;
-    border-radius: var(--air__bottom-sheet-border-radius);
 }
 
 .air__animation-bottom-sheet-enter {
