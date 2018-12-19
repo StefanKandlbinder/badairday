@@ -149,75 +149,67 @@ class App extends Component {
     </Sidebar>
 
     optionsSheet = <BottomSheet className={`air__options-sheet ${this.props.media === "medium" ? "" : ""}`}>
-      <Flex className="air__flex air__flex--align-items-center air__padding-left--3 air__padding-right--3 air__padding-top--4 air__padding-bottom air__border-radius-top--2">
-        <svg className="air__color-text air__margin-right" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <use xlinkHref="#airSVGLogoCoolSimple"></use>
-        </svg>
-        <h3 className="air__letter-spacing air__color-primary air__margin-bottom--0 air__margin-top--0">BadAirDay</h3>
-      </Flex>
-      <ListHeader className="air__list-header air__list-header--sticky air__color-primary--active air__border-radius-top--2">Einstellungen</ListHeader>
-      <List className="air__list air__border-radius-top--2">
-        <ListItem className="air__list-item air__flex--justify-content-space-between">
-          <Toggle
-            className={`air__toggle ${this.props.options.reversegeo ? "air__toggle--active" : "air__toggle--inactive"}`}
-            clicked={() => this.props.onSetOptionReverseGeo({ state: this.props.options.reversegeo ? false : true, feature: STATIONS })}>
-            ReverseGeo
-          </Toggle>
-        </ListItem>
-        <ListItem className="air__list-item air__flex--justify-content-space-between">
-          <Toggle
-            className={`air__toggle ${this.props.options.runaways ? "air__toggle--active" : "air__toggle--inactive"}`}
-            clicked={() => this.props.onSetOptionRunaways({ state: this.props.options.runaways ? false : true, feature: STATIONS })}>
-            Runaways
-          </Toggle>
-        </ListItem>
-        <ListItem className="air__list-item air__flex--justify-content-space-between">
-          <Toggle className={`air__toggle ${this.props.options.sort ? "air__toggle--active" : "air__toggle--inactive"}`}
-            clicked={() => this.props.onSetOptionSort({ state: this.props.options.sort ? false : true, feature: STATIONS })}>
-            Sort
-          </Toggle>
-        </ListItem>
-        <ListItem className="air__list-item air__flex--justify-content-space-between">
-          <Toggle className={`air__toggle ${this.props.options.autoupdating ? "air__toggle--active" : "air__toggle--inactive"}`}
-            clicked={() => this.props.onSetOptionAutoupdater({ state: this.props.options.autoupdating ? false : true, feature: STATIONS })}>
-            Autoupdater
-          </Toggle>
-        </ListItem>
-      </List>
-      <ListHeader className="air__list-header air__list-header--sticky air__color-primary--active">Admin</ListHeader>
-      <List className="air__list">
-        <ListItem className="air__list-item">
-          <Button
-            className="air__button air__button--ghost air__button--full air__button--small air__margin-right"
-            clicked={() => this.onFetchStations()}>
-            <svg className="air__button-icon air__color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <use xlinkHref="#airSVGRefresh"></use>
-            </svg>
-            Fetch
-          </Button>
-          <Button
-            className="air__button air__button--ghost air__button--full air__button--small air__margin-left"
-            clicked={() => this.clearStorage()}>
-            <svg className="air__button-icon air__color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <use xlinkHref="#airSVGRestore"></use>
-            </svg>
-            Clear
-          </Button>
-        </ListItem>
-      </List>
+      <div className="air__options-sheet-scroll-container">
+        <Flex className="air__flex air__flex--align-items-center air__padding-left--3 air__padding-right--3 air__padding-top--4 air__padding-bottom air__border-radius-top--2">
+          <svg className="air__color-text air__margin-right" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <use xlinkHref="#airSVGLogoCoolSimple"></use>
+          </svg>
+          <h3 className="air__letter-spacing air__color-primary air__margin-bottom--0 air__margin-top--0">BadAirDay</h3>
+        </Flex>
+        <ListHeader className="air__list-header air__list-header--sticky air__color-primary--active air__border-radius-top--2">Einstellungen</ListHeader>
+        <List className="air__list air__border-radius-top--2">
+          <ListItem className="air__list-item air__flex--justify-content-space-between">
+            <Toggle
+              className={`air__toggle ${this.props.options.reversegeo ? "air__toggle--active" : "air__toggle--inactive"}`}
+              clicked={() => this.props.onSetOptionReverseGeo({ state: this.props.options.reversegeo ? false : true, feature: STATIONS })}>
+              ReverseGeo
+            </Toggle>
+          </ListItem>
+          <ListItem className="air__list-item air__flex--justify-content-space-between">
+            <Toggle
+              className={`air__toggle ${this.props.options.runaways ? "air__toggle--active" : "air__toggle--inactive"}`}
+              clicked={() => this.props.onSetOptionRunaways({ state: this.props.options.runaways ? false : true, feature: STATIONS })}>
+              Runaways
+            </Toggle>
+          </ListItem>
+          <ListItem className="air__list-item air__flex--justify-content-space-between">
+            <Toggle className={`air__toggle ${this.props.options.sort ? "air__toggle--active" : "air__toggle--inactive"}`}
+              clicked={() => this.props.onSetOptionSort({ state: this.props.options.sort ? false : true, feature: STATIONS })}>
+              Sort
+            </Toggle>
+          </ListItem>
+          <ListItem className="air__list-item air__flex--justify-content-space-between">
+            <Toggle className={`air__toggle ${this.props.options.autoupdating ? "air__toggle--active" : "air__toggle--inactive"}`}
+              clicked={() => this.props.onSetOptionAutoupdater({ state: this.props.options.autoupdating ? false : true, feature: STATIONS })}>
+              Autoupdater
+            </Toggle>
+          </ListItem>
+        </List>
+        <ListHeader className="air__list-header air__list-header--sticky air__color-primary--active">Admin</ListHeader>
+        <List className="air__list">
+          <ListItem className="air__list-item">
+            <Button
+              className="air__button air__button--ghost air__button--full air__button--small air__margin-right"
+              clicked={() => this.onFetchStations()}>
+              <svg className="air__button-icon air__color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <use xlinkHref="#airSVGRefresh"></use>
+              </svg>
+              Fetch
+            </Button>
+            <Button
+              className="air__button air__button--ghost air__button--full air__button--small air__margin-left"
+              clicked={() => this.clearStorage()}>
+              <svg className="air__button-icon air__color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <use xlinkHref="#airSVGRestore"></use>
+              </svg>
+              Clear
+            </Button>
+          </ListItem>
+        </List>
+      </div>
     </BottomSheet>
 
     tabbar = <Tabbar>
-      <NavLink
-        className="air__tabbar-link air__button air__button--naked"
-        aria-label="Options Sheet"
-        activeClassName="air__button--active"
-        to={this.props.history.location.pathname === "/bottomsheet" ? "/" : "/bottomsheet"}>
-        <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <use xlinkHref="#airSVGMoreVert"></use>
-        </svg>
-      </NavLink>
-      <Spacer className="air__bg-color-text" />
       <NavLink
         className="air__tabbar-link air__button air__button--naked"
         aria-label="Map"
@@ -241,6 +233,16 @@ class App extends Component {
         </NavLink>
         : null
       }
+      <Spacer className="air__bg-color-text" />
+      <NavLink
+        className="air__tabbar-link air__button air__button--naked"
+        aria-label="Options Sheet"
+        activeClassName="air__button--active"
+        to={this.props.history.location.pathname === "/bottomsheet" ? "/" : "/bottomsheet"}>
+        <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <use xlinkHref="#airSVGMoreVert"></use>
+        </svg>
+      </NavLink>
     </Tabbar>
 
     dashboard = <div className="air__site">
