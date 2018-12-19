@@ -86,6 +86,7 @@
 
 .air__options-sheet {
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   max-height: 256px;
