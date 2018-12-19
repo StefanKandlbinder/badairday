@@ -218,6 +218,16 @@ class App extends Component {
         </svg>
       </NavLink>
       <Spacer className="air__bg-color-text" />
+      <NavLink
+        className="air__tabbar-link air__button air__button--naked"
+        aria-label="Map"
+        activeClassName="air__button--active"
+        exact to={"/"}
+        onClick={() => this.props.history.location.pathname === "/" ? this.onUpdateStations() : this.props.onSetDashboard({ state: false, feature: STATIONS })}>
+        <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <use xlinkHref="#airSVGMap"></use>
+        </svg>
+      </NavLink>
       {this.props.media === "small" 
         ? <NavLink
         onClick={() => this.props.dashboard ? this.onUpdateStations() : this.props.onSetDashboard({ state: true, feature: STATIONS })}
@@ -231,16 +241,6 @@ class App extends Component {
         </NavLink>
         : null
       }
-      <NavLink
-        className="air__tabbar-link air__button air__button--naked"
-        aria-label="Map"
-        activeClassName="air__button--active"
-        exact to={"/"}
-        onClick={() => this.props.history.location.pathname === "/" ? this.onUpdateStations() : this.props.onSetDashboard({ state: false, feature: STATIONS })}>
-        <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <use xlinkHref="#airSVGMap"></use>
-        </svg>
-      </NavLink>
     </Tabbar>
 
     dashboard = <div className="air__site">
