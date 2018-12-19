@@ -148,7 +148,7 @@ class App extends Component {
       </Button>
     </Sidebar>
 
-    optionsSheet = <BottomSheet className="air__options-sheet">
+    optionsSheet = <BottomSheet className={`air__options-sheet ${this.props.media === "medium" ? " air__bottom-sheet--medium" : ""}`}>
       <Flex className="air__flex air__flex--align-items-center air__padding-left--3 air__padding-right--3 air__padding-top--4 air__padding-bottom air__border-radius-top--2">
         <svg className="air__color-text air__margin-right" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <use xlinkHref="#airSVGLogoCoolSimple"></use>
@@ -210,14 +210,14 @@ class App extends Component {
     tabbar = <Tabbar>
       <NavLink
         className="air__tabbar-link air__button air__button--naked"
-        aria-label="Map"
+        aria-label="Options Sheet"
         activeClassName="air__button--active"
-        exact to={"/"}
-        onClick={() => this.props.history.location.pathname === "/" ? this.onUpdateStations() : this.props.onSetDashboard({ state: false, feature: STATIONS })}>
+        to={this.props.history.location.pathname === "/bottomsheet" ? "/" : "/bottomsheet"}>
         <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <use xlinkHref="#airSVGMap"></use>
+          <use xlinkHref="#airSVGMoreVert"></use>
         </svg>
       </NavLink>
+      <Spacer className="air__bg-color-text" />
       {this.props.media === "small" 
         ? <NavLink
         onClick={() => this.props.dashboard ? this.onUpdateStations() : this.props.onSetDashboard({ state: true, feature: STATIONS })}
@@ -231,15 +231,14 @@ class App extends Component {
         </NavLink>
         : null
       }
-      
-      <Spacer className="air__bg-color-text" />
       <NavLink
         className="air__tabbar-link air__button air__button--naked"
-        aria-label="Options Sheet"
+        aria-label="Map"
         activeClassName="air__button--active"
-        to={this.props.history.location.pathname === "/bottomsheet" ? "/" : "/bottomsheet"}>
+        exact to={"/"}
+        onClick={() => this.props.history.location.pathname === "/" ? this.onUpdateStations() : this.props.onSetDashboard({ state: false, feature: STATIONS })}>
         <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <use xlinkHref="#airSVGMoreVert"></use>
+          <use xlinkHref="#airSVGMap"></use>
         </svg>
       </NavLink>
     </Tabbar>
