@@ -76,7 +76,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
 
             if (getState().options.reversegeo && ReverseGeocode !== undefined) {
                 ReverseGeocode.geocodeService().reverse()
-                    .token("V0u7DHWAgfsexhlG2HghmaTq5fUdpR64ZQUY-WJemgDd6zCtBK2-XqYvt_1vZD7S0TV7KLK0KROfjlEiwFY4psuIrhZwFUKV8PM38d9LI6nOVnoepxwHBjp6Bhsriy1EcDnm1dAioNoLrNmDo_HJpA..")
+                    // .token("V0u7DHWAgfsexhlG2HghmaTq5fUdpR64ZQUY-WJemgDd6zCtBK2-XqYvt_1vZD7S0TV7KLK0KROfjlEiwFY4psuIrhZwFUKV8PM38d9LI6nOVnoepxwHBjp6Bhsriy1EcDnm1dAioNoLrNmDo_HJpA..")
                     .latlng([station.location.latitude, station.location.longitude])
                     .distance(10)
                     .run(function (error, result) {
