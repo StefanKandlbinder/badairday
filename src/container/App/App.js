@@ -247,7 +247,9 @@ class App extends Component {
 
     dashboard = <div className="air__site"
       onTouchStart = {(e) => {
-        this.props.history.push("/dashboard");
+        if (this.props.media === "small") {
+          this.props.history.push("/dashboard");
+        }
       }}>
         <Dashboard stations={this.props.stations}
           options={this.props.options} 
