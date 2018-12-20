@@ -245,8 +245,11 @@ class App extends Component {
       </NavLink>
     </Tabbar>
 
-    dashboard = <div className="air__site">
-        <Dashboard stations={this.props.stations} 
+    dashboard = <div className="air__site"
+      onTouchStart = {(e) => {
+        this.props.history.push("/dashboard");
+      }}>
+        <Dashboard stations={this.props.stations}
           options={this.props.options} 
           onSetDashboard={this.props.onSetDashboard}
           onFavorizeStation={this.props.onFavorizeStation} 
