@@ -93,7 +93,7 @@
   overflow: hidden;
 
   &.air__animation-bottom-sheet-exit-active {
-    transform: translateY(calc(100% + var(--air__margin--3)));
+    transform: translateY(calc(100% + var(--air__margin--4)));
   }
 }
 
