@@ -2,10 +2,15 @@
     --air__border-radius: var(--air__margin);
     --air__border-radius--2: var(--air__margin--2);
     --air__letter-spacing: 1px;
+    --air__letter-spacing--small: 0.5px;
 }
 
 .air__letter-spacing {
     letter-spacing: var(--air__letter-spacing)
+}
+
+.air__letter-spacing--small {
+    letter-spacing: var(--air__letter-spacing--small);
 }
 
 .air__border-radius {

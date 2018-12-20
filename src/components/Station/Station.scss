@@ -71,6 +71,7 @@
     /* background: rgba(0, 0, 0, 0.75); */
     font-size: 20px;
     color: var(--air__color-text);
+    letter-spacing: var(--air__letter-spacing);
     padding: 4px 40px;
     line-height: 1.2;
     margin-bottom: 0;
@@ -83,12 +84,16 @@
 }
 
 .air__station-date {
-    font-size: 11px;
+    font-size: 12px;
     font-style: italic;
     color: var(--air__color-text);
     margin-bottom: 10px;
     margin-top: -4px;
     order: 2;
+}
+
+.air__comp--dust {
+    letter-spacing: var(--air__letter-spacing--small)
 }
 
 .air__comp--dust-NO2 {
@@ -97,6 +102,7 @@
 
 .air__comp--dust-PM10 {
     order: 4;
+    font-size: 16px;
 }
 
 .air__comp--dust-PM25 {

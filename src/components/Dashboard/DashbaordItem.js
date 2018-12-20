@@ -58,9 +58,9 @@ class DashboardItem extends Component {
                 <div className="air__dashboard-item-date">{this.props.station.date}</div>
             </div>
             <div className="air__dashboard-item-content air__dashboard-item-content--component">
+                {no2}
                 {pm10}
                 {pm25}
-                {no2}
             </div>
         </li>
     }
