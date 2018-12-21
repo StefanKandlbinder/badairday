@@ -186,7 +186,7 @@ class App extends Component {
             </Toggle>
           </ListItem>
         </List>
-        <ListHeader className="air__list-header air__list-header--sticky air__color-primary--active">Handle Withare</ListHeader>
+        <ListHeader className="air__list-header air__list-header--sticky air__color-primary--active">Handle With Care</ListHeader>
         <List className="air__list">
           <ListItem className="air__list-item">
             <Button
