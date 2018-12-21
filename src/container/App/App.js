@@ -50,6 +50,7 @@ const upperAustriaProvider = "upperaustria";
 class App extends Component {
   constructor(props) {
     super(props);
+    this.dashboard = React.createRef();
 
     this.state = {
       hasStations: false
@@ -185,7 +186,7 @@ class App extends Component {
             </Toggle>
           </ListItem>
         </List>
-        <ListHeader className="air__list-header air__list-header--sticky air__color-primary--active">Handle With Care</ListHeader>
+        <ListHeader className="air__list-header air__list-header--sticky air__color-primary--active">Handle Withare</ListHeader>
         <List className="air__list">
           <ListItem className="air__list-item">
             <Button
@@ -250,7 +251,9 @@ class App extends Component {
         if (this.props.media === "small") {
           this.props.history.push("/dashboard");
         }
-      }}>
+        this.dashboard.current.focus();
+      }}
+      ref={this.dashboard}>
         <Dashboard stations={this.props.stations}
           options={this.props.options} 
           onSetDashboard={this.props.onSetDashboard}
