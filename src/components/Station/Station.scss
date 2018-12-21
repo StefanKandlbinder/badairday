@@ -83,6 +83,14 @@
     order: 1;
 }
 
+.air__station--upperaustria {
+    .air__station-header {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
 .air__station-date {
     font-size: 12px;
     font-style: italic;
@@ -128,7 +136,7 @@
 .air__action-container {
     display: flex;
     position: absolute;
-    bottom: 24px;
+    bottom: 20px;
 }
 
 .air__station-button-icon {

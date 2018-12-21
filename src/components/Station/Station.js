@@ -248,7 +248,7 @@ class Station extends Component {
                 in={this.state.isMounted}
                 classNames="a-station"
                 timeout={300}>
-                <div className="air__station" style={{ ...popOriginStyle }}>
+                <div className={`air__station air__station--${this.props.station.provider}`} style={{ ...popOriginStyle }}>
                     <svg xmlns="http://www.w3.org/2000/svg"
                         style={{ ...moodStyle }}
                         className="air__station-background"
