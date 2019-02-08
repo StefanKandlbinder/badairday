@@ -22,6 +22,8 @@ import { getFavorizedStations } from '../../redux/filters/getFavorizedStations';
 
 import SVGSprite from '../../components/UI/SVGSprite/SVGSprite';
 import Stations from '../../components/Stations/Stations';
+// import MapGLStations from '../../components/MapGLStations/MapGLStations';
+// import DeckGLStations from '../../components/DeckGLStations/DeckGLStations';
 import Station from '../../components/Station/Station';
 import Dashboard from '../../components/Dashboard/Dashboard';
 import Notifications from "../../components/UI/Notifications/Notifications";
@@ -124,6 +126,7 @@ class App extends Component {
     let sidebar = null;
     let optionsSheet = null;
     let dashboard = null;
+    // let mapgl = null;
     let tabbar = null;
     let updateBar = null;
     let background = null;
@@ -235,6 +238,16 @@ class App extends Component {
         : null
       }
       <Spacer className="air__bg-color-text" />
+      {/*<NavLink
+        className="air__tabbar-link air__button air__button--naked"
+        aria-label="Map"
+        activeClassName="air__button--active"
+        exact to={"/mapgl"}
+        onClick={() => this.props.history.location.pathname === "/mapgl" ? this.onUpdateStations() : this.props.onSetDashboard({ state: false, feature: STATIONS })}>
+        <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <use xlinkHref="#airSVGMap"></use>
+        </svg>
+      </NavLink>*/}
       <NavLink
         className="air__tabbar-link air__button air__button--naked"
         aria-label="Options Sheet"
@@ -246,7 +259,7 @@ class App extends Component {
       </NavLink>
     </Tabbar>
 
-    dashboard = <div className="air__site"
+    dashboard = <div className="air__site air__site--dashboard"
       onTouchStart = {(e) => {
         if (this.props.media === "small") {
           this.props.history.push("/dashboard");
@@ -260,6 +273,11 @@ class App extends Component {
           onFavorizeStation={this.props.onFavorizeStation} 
           onUnfavorizeStation={this.props.onUnfavorizeStation} />
       </div>;
+    
+    /* mapgl = <div className="air__site">
+      <DeckGLStations stations={this.props.stations}
+        position={this.props.position} />
+    </div> */
 
     if (this.props.options.autoupdating) {
       updateBar = <Updatebar interval={60 * 3 * 1000} update={this.onUpdateStations} />
@@ -306,7 +324,16 @@ class App extends Component {
             mountOnEnter
             unmountOnExit>
             {app}
-          </CSSTransition>
+          </CSSTransition>          
+
+          {/*<CSSTransition
+            in={this.props.history.location.pathname === "/mapgl" ? true : false}
+            classNames="air__animation-site-transition"
+            timeout={300}
+            mountOnEnter
+            unmountOnExit>
+            {mapgl}
+          </CSSTransition>*/}
 
           <Media
             query="(min-width: 768px) and (orientation: landscape)"

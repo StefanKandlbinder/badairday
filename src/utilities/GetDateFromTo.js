@@ -1,3 +1,6 @@
+// the data is arriving with a delay
+const DELAY = 70;
+
 export default class GetDateFromTo {
     constructor() {
         this.dateFrom = new Date();
@@ -8,10 +11,12 @@ export default class GetDateFromTo {
         // this.dateTo.setHours(this.dateTo.getHours() - 1);
 
         // Wintertime
-        this.dateFrom.setHours(this.dateFrom.getHours());
-        this.dateTo.setHours(this.dateTo.getHours());
+        this.dateFrom.setMinutes(this.dateFrom.getMinutes() - DELAY);
+        // this.dateTo.setHours(this.dateTo.getHours());
 
-        if (this.dateFrom.getMinutes() > 10 && this.dateFrom.getMinutes() < 40) {
+        // 40 minutes delay
+
+        /* if (this.dateFrom.getMinutes() > 10 && this.dateFrom.getMinutes() < 40) {
             this.dateFrom.setMinutes(0);
             this.dateTo.setMinutes(10);
         }
@@ -26,7 +31,7 @@ export default class GetDateFromTo {
             this.dateTo.setHours(this.dateTo.getHours() - 1);
             this.dateFrom.setMinutes(30);
             this.dateTo.setMinutes(40);
-        }
+        } */
     }
 
     stringDateFrom() {

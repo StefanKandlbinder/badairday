@@ -75,13 +75,13 @@
 }
 
 @media(min-width: 414px) {
-  .air__site {
+  .air__site--dashboard {
     max-width: 100%;
   }
 }
 
 @media(min-width: 415px) {
-  .air__site {
+  .air__site--dashboard {
     max-width: 320px;
   }
 }

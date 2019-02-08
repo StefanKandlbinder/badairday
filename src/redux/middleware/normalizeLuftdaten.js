@@ -2,9 +2,11 @@ import find from 'lodash/find';
 import ReverseGeocode from 'esri-leaflet-geocoder';
 
 import { dataNormalized } from "../actions/data";
-import { addStation, updateStation, ADD_STATIONS, UPDATE_STATIONS } from "../actions/stations";
+import { addStation, updateStation, ADD_STATIONS, UPDATE_STATIONS, STATIONS } from "../actions/stations";
+import { setTokenReverseGeo } from "../actions/tokens";
 import getStringDateLuftdaten from '../../utilities/getStringDateLuftdaten';
 import getUnixDateFromLuftdaten from '../../utilities/getUnixDateFromLuftdaten';
+import getArcgisToken from '../../services/getArcgisToken';
 
 import Station from "../models/station";
 import Component from "../models/component";
@@ -70,13 +72,30 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
     }
 
     const getStations = (stations, provider, update) => {
+        console.log(getState().tokens.reversegeo.timestamp);
+
+        if (getState().tokens.reversegeo.timestamp + 7200 > Date.now() || getState().tokens.reversegeo.timestamp === undefined) {
+            getArcgisToken()
+            .then((res) => {
+                let token = { 
+                    token: res.access_token,
+                    timestamp: Date.now()
+                };
+
+                dispatch(setTokenReverseGeo({ state: token, feature: STATIONS }));
+            })
+            .catch((err) => {
+                // token = "";
+            });
+        }
+
         stations.map(station => {
             let components = normalizeComponents(station.sensordatavalues);
             let name = "Lufdatensensor: " + station.sensor.id;
 
-            if (getState().options.reversegeo && ReverseGeocode !== undefined) {
+            if (getState().options.reversegeo && ReverseGeocode !== undefined && getState().tokens.reversegeo.timestamp) {
                 ReverseGeocode.geocodeService().reverse()
-                    // .token("V0u7DHWAgfsexhlG2HghmaTq5fUdpR64ZQUY-WJemgDd6zCtBK2-XqYvt_1vZD7S0TV7KLK0KROfjlEiwFY4psuIrhZwFUKV8PM38d9LI6nOVnoepxwHBjp6Bhsriy1EcDnm1dAioNoLrNmDo_HJpA..")
+                    .token(getState().tokens.reversegeo.token)
                     .latlng([station.location.latitude, station.location.longitude])
                     .distance(10)
                     .run(function (error, result) {

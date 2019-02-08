@@ -72,7 +72,7 @@ class Stations extends Component {
     }
 
     onZoom = (e) => {
-        let zoom = this.refs.map.leafletElement.getZoom();
+        // let zoom = this.refs.map.leafletElement.getZoom();
     }
 
     onZoomStart = (e) => {
@@ -89,7 +89,7 @@ class Stations extends Component {
     }
 
     onMoveEnd = (e) => {
-        let bounds = this.refs.map.leafletElement.getBounds();
+        // let bounds = this.refs.map.leafletElement.getBounds();
         // console.log(bounds);
     }
 
@@ -211,7 +211,7 @@ class Stations extends Component {
                     onZoom={this.onZoom}
                     // onZoomStart={this.onZoomStart}
                     // onZoomEnd={this.onZoomEnd}
-                    // preferCanvas="true"
+                    preferCanvas="true"
                     doubleClickZoom="false"
                     useFlyTo="true"
                     ref="map">
