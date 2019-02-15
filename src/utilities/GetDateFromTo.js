@@ -1,5 +1,5 @@
 // the data is arriving with a delay
-const DELAY = 70;
+const DELAY = 45;
 
 export default class GetDateFromTo {
     constructor() {
