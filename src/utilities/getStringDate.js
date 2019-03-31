@@ -1,4 +1,5 @@
-export default function getStringDateLuftdaten(date) {
+export default function getStringDate(date) {
+    date += 3600;
     let tmpDate = new Date(date);
     let year = tmpDate.getFullYear();
     let month = (tmpDate.getMonth() + 1);

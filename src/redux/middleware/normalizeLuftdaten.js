@@ -72,7 +72,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
     }
 
     const getStations = (stations, provider, update) => {
-        console.log(getState().tokens.reversegeo.timestamp);
+        // console.log(getState().tokens.reversegeo.timestamp);
 
         if (getState().tokens.reversegeo.timestamp + 7200 > Date.now() || getState().tokens.reversegeo.timestamp === undefined) {
             getArcgisToken()
