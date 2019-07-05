@@ -363,7 +363,7 @@ class App extends Component {
             </svg>
           </Button>
 
-          <Legend />
+          <Legend className="air__legend--horizontal"/>
 
           {tabbar}
 

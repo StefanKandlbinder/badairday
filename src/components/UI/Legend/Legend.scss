@@ -23,7 +23,7 @@
     height: var(--height);
     display: block;
     position: fixed;
-    bottom: calc(var(--air__button-height) + var(--air__margin) * 2);
+    bottom: 64px;
     left: 12px;
     z-index: 50;
     opacity: 0.75;
@@ -40,9 +40,10 @@
 
 .air__legend--horizontal {
     left: 0;
-    bottom: var(--air__button-height);
+    top: 0;
     height: 12px;
     width: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
     background: linear-gradient(to right, 
         var(--color-stop-0) 0%, 
         var(--color-stop-1) 16%, 
@@ -64,10 +65,10 @@
 }
 
 .air__legend--horizontal .air__legend-scale {
-    bottom: 12px;
+    bottom: -20px;
     left: 0;
     width: 100%;
-    background: transparent;
+    // background: transparent;
 }
 
 .air__legend-scale-stop {
@@ -75,6 +76,10 @@
     font-size: 12px;
     text-align: left;
     bottom: 4px;
+}
+
+.air__legend--horizontal .air__legend-scale-stop {
+    bottom: 2px;
 }
 
 .air__legend-scale-stop:after {
@@ -88,10 +93,10 @@
 }
 
 .air__legend--horizontal .air__legend-scale-stop:after {
-    height: 16px;
+    height: 12px;
     width: 1px;
     left: 0;
-    bottom: -16px;
+    bottom: 16px;
 }
 
 .air__legend-scale-stop:first-child:after,
@@ -105,8 +110,7 @@
 }
 
 .air__legend--horizontal .air__legend-scale-stop--0 {
-    left: 0;
-    bottom: 4px;
+    left: 4px;
 }
 
 .air__legend-scale-stop--1 {
@@ -115,7 +119,7 @@
 
 .air__legend--horizontal .air__legend-scale-stop--1 {
     left: 20%;
-    bottom: 4px;
+    text-indent: -4px;
 }
 
 .air__legend-scale-stop--2 {
@@ -124,7 +128,7 @@
 
 .air__legend--horizontal .air__legend-scale-stop--2 {
     left: 40%;
-    bottom: 4px;
+    text-indent: -4px;
 }
 
 .air__legend-scale-stop--3 {
@@ -134,6 +138,7 @@
 .air__legend--horizontal .air__legend-scale-stop--3 {
     left: 60%;
     bottom: 4px;
+    text-indent: -4px;
 }
 
 .air__legend-scale-stop--4 {
@@ -142,7 +147,7 @@
 
 .air__legend--horizontal .air__legend-scale-stop--4 {
     left: 80%;
-    bottom: 4px;
+    text-indent: -8px;
 }
 
 .air__legend-scale-stop--5 {
@@ -150,8 +155,7 @@
 }
 
 .air__legend--horizontal .air__legend-scale-stop--5 {
-    right: 0;
-    bottom: 4px;
+    right: 4px;
 }
 
 .air__legend-scale--limit {
@@ -177,8 +181,9 @@
 }
 
 .air__legend--horizontal .air__legend-scale--limit.air__legend-scale-stop:after {
-    height: 16px;
-    width: 1px;
-    left: 0;
-    bottom: -16px;
+    // background: rgba(255,255,255,0.75);
+    height: 12px;
+    width: 3px;
+    left: -1px;
+    bottom: 16px;
 }
