@@ -104,9 +104,9 @@
     opacity: 1;
 }
 
-.leaflet-left .leaflet-control {
-    margin-left: 12px;
-    margin-top: 12px;
+.leaflet-right {
+    bottom: 54px;
+    right: 2px;
 }
 
 .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {

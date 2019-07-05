@@ -45,10 +45,10 @@
 .air__button-location:focus,
 .air__button-location:visited {
   position: fixed;
-  right: calc(50% - var(--air__button-height) / 2 - 2px);
-  bottom: 4px;
+  right: calc(50% - var(--air__button-height) / 2 - 6px);
+  bottom: 0;
   z-index: 140;
-  border: 2px solid white;
+  border: 6px solid white;
   padding: 0;
 }
 
