@@ -72,8 +72,23 @@
     font-size: 12px;
     font-weight: 300;
     color: rgba(255, 255, 255, 1);
-    max-width: 65px;
+    // max-width: 65px;
     margin-top: calc(var(--air__margin) / 2);
+  }
+
+  .air__dashboard-item-wind {
+    display: flex;
+    padding: calc(var(--air__margin) / 2) 0 0;
+  }
+
+  .air__dashboard-item-wiv {
+    margin-right: var(--air__margin);
+  }
+
+  .air__dashboard-item-wir-svg,
+  .air__dashboard-item-wir {
+    width: 14px;
+    height: 14px;
   }
   
   .air__dashboard-item-content--component {
