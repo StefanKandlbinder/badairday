@@ -81,6 +81,7 @@
 
 .air__legend--horizontal .air__legend-scale-stop {
     bottom: 2px;
+    text-indent: -5px;
 }
 
 .air__legend-scale-stop:after {
@@ -112,6 +113,7 @@
 
 .air__legend--horizontal .air__legend-scale-stop--0 {
     left: 4px;
+    text-indent: 0;
 }
 
 .air__legend-scale-stop--1 {
@@ -120,7 +122,6 @@
 
 .air__legend--horizontal .air__legend-scale-stop--1 {
     left: 20%;
-    text-indent: -4px;
 }
 
 .air__legend-scale-stop--2 {
@@ -129,7 +130,7 @@
 
 .air__legend--horizontal .air__legend-scale-stop--2 {
     left: 40%;
-    text-indent: -16px;
+    text-indent: -17px;
 }
 
 .air__legend-scale-stop--3 {
@@ -138,7 +139,6 @@
 
 .air__legend--horizontal .air__legend-scale-stop--3 {
     left: 60%;
-    text-indent: -4px;
 }
 
 .air__legend-scale-stop--4 {
@@ -147,7 +147,7 @@
 
 .air__legend--horizontal .air__legend-scale-stop--4 {
     left: 80%;
-    text-indent: -8px;
+    text-indent: -9px;
 }
 
 .air__legend-scale-stop--5 {
@@ -156,11 +156,12 @@
 
 .air__legend--horizontal .air__legend-scale-stop--5 {
     right: 4px;
+    text-indent: 0;
 }
 
 .air__legend-scale--limit {
     color: rgba(255, 0, 0, 1);
-    font-weight: 500;
+    font-weight: 700;
 }
 
 .air__legend-scale--limit-text {
