@@ -85,7 +85,7 @@
 
 .air__legend-scale-stop:after {
     content: "";
-    background: rgba(255,255,255,0.75);
+    background: rgba(0, 0, 0, 0.75);
     position: absolute;
     width: 12px;
     height: 1px;
@@ -129,7 +129,7 @@
 
 .air__legend--horizontal .air__legend-scale-stop--2 {
     left: 40%;
-    text-indent: -4px;
+    text-indent: -16px;
 }
 
 .air__legend-scale-stop--3 {
@@ -159,8 +159,8 @@
 }
 
 .air__legend-scale--limit {
-    color: rgba(255,0,0,1);
-    font-weight: bold;
+    color: rgba(0, 0, 0, 1);
+    font-weight: 500;
 }
 
 .air__legend-scale--limit-text {
@@ -174,7 +174,7 @@
 }
 
 .air__legend-scale--limit.air__legend-scale-stop:after {
-    background: rgba(255,0,0,0.75);
+    background: rgba(0, 0, 0, 1);
     height: 2px;
     left: -18px;
     width: 16px;
