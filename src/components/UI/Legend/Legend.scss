@@ -159,7 +159,7 @@
 }
 
 .air__legend-scale--limit {
-    color: rgba(0, 0, 0, 1);
+    color: rgba(255, 0, 0, 1);
     font-weight: 500;
 }
 
@@ -174,7 +174,7 @@
 }
 
 .air__legend-scale--limit.air__legend-scale-stop:after {
-    background: rgba(0, 0, 0, 1);
+    background: rgba(255, 0, 0, 1);
     height: 2px;
     left: -18px;
     width: 16px;
