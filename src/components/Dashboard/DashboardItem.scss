@@ -41,6 +41,7 @@
   .air__dashboard-item-name {
     font-size: 16px;
     width: 100%;
+    letter-spacing: 1.5px;
   }
 
   .air__dashboard-item-content {
@@ -53,6 +54,8 @@
   }
 
   .air__dashboard-item--description {
+    display: flex;
+    flex-wrap: wrap;
     flex-grow: 1;
     margin-right: var(--air__margin--2);
   }
@@ -76,21 +79,27 @@
 
   .air__dashboard-item-date {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     font-size: 12px;
     font-weight: 300;
     color: rgba(255, 255, 255, 1);
     // max-width: 65px;
     // margin-top: calc(var(--air__margin) / 2);
-    margin-right: var(--air__margin);
-    margin-bottom: var(--air__margin);
-    margin-top: calc(var(--air__margin)/2);
-    width: 100%;
+    margin-right: var(--air__margin--2);
+    // margin-bottom: var(--air__margin);
+    // margin-top: calc(var(--air__margin)/2);
+    width: 65px;
+  }
+
+  @media (max-width: 359px) {
+    .air__dashboard-item-date {
+      width: auto;
+    }
   }
 
   .air__dashboard-item-wind {
     display: inline-flex;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .air__dashboard-item-wiv {
@@ -99,8 +108,13 @@
     flex-direction: column;
   }
 
-  .air__dashboard-item-wiv-unit {
+  .air__dashboard-item-wiv-value {
     font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .air__dashboard-item-wiv-unit {
+    font-size: 11px;
     margin-top: calc(var(--air__margin)/2);
   }
 
@@ -110,6 +124,7 @@
     display: flex;
     justify-content: center;
     // align-items: center;
+    align-self: center;
     border-radius: 50%;
     border: 1px solid white;
     margin-right: var(--air__margin--2);
@@ -135,8 +150,13 @@
     flex-direction: column;
   }
 
-  .air__dashboard-item-temp-unit {
+  .air__dashboard-item-temp-value {
     font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .air__dashboard-item-temp-unit {
+    font-size: 11px;
     margin-top: calc(var(--air__margin)/2);
   }
 
@@ -145,6 +165,7 @@
     height: 18px;
     fill: white;
     margin-right: calc(var(--air__margin)/2);
+    align-self: center;
   }
   
   .air__dashboard-item-content--component {
