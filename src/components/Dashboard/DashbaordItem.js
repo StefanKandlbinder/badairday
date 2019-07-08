@@ -102,8 +102,10 @@ class DashboardItem extends Component {
                     {this.props.station.name}
                 </div>
                 <div className="air__dashboard-item-date">{this.props.station.date}</div>
-                {wind}
-                {temp}
+                <div className="air__dashboard-item-container">
+                    {wind}
+                    {temp}
+                </div>
             </div>
             <div className="air__dashboard-item-content air__dashboard-item-content--component">
                 {no2}
