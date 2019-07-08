@@ -45,7 +45,7 @@ class DashboardItem extends Component {
         }
 
         if (this.props.station.components.WIV) {
-            wiv = <div className="air__dashboard-item-wiv">{this.props.station.components.WIV.value}<br></br>{this.props.station.components.WIV.unit}</div>
+            wiv = <div className="air__dashboard-item-wiv"><div><span className="air__dashboard-item-wiv-value">{this.props.station.components.WIV.value}</span><br></br><span className="air__dashboard-item-wiv-unit">{this.props.station.components.WIV.unit}</span></div></div>
         }
 
         if (this.props.station.components.WIR) {
@@ -76,7 +76,7 @@ class DashboardItem extends Component {
                                 <path d="M132.595,169.042V69.924c0-4.142-3.357-7.5-7.5-7.5s-7.5,3.358-7.5,7.5v99.118c-10.104,3.183-17.43,12.622-17.43,23.783   c0,13.767,11.16,24.931,24.93,24.931c13.773,0,24.932-11.164,24.932-24.931C150.026,181.663,142.7,172.223,132.595,169.042z"/>
                             </g>
                         </svg>
-                        {this.props.station.components.TEMP.value}°<br></br>{this.props.station.components.TEMP.unit}
+                        <div><span className="air__dashboard-item-temp-value">{this.props.station.components.TEMP.value}°</span><br></br><span className="air__dashboard-item-temp-unit">{this.props.station.components.TEMP.unit}</span></div>
                     </div>
         }
 
