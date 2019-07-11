@@ -312,7 +312,7 @@ class App extends Component {
 
     return (
       <PageVisibility onChange={this.handleVisibilityChange}>
-        <div className="air">
+        <div className={this.props.dashboard ? "air air--dashboard" : "air"}>
           <SVGSprite />
 
           {background}

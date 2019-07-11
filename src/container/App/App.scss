@@ -87,8 +87,10 @@
 }
 
 @media(min-width: 761px) {
-  .air__legend--horizontal {
-    width: calc(100% - 320px);
+  .air--dashboard {
+    .air__legend--horizontal {
+      width: calc(100% - 320px);
+    }
   }
 }
 
