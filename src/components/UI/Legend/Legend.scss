@@ -95,8 +95,9 @@
 }
 
 .air__legend--horizontal .air__legend-scale-stop:after {
+    background: rgba(255, 255, 255, 0.75);
     height: 12px;
-    width: 1px;
+    width: 2px;
     left: 0;
     bottom: 18px;
 }
