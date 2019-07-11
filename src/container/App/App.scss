@@ -86,6 +86,12 @@
   }
 }
 
+@media(min-width: 761px) {
+  .air__legend--horizontal {
+    width: calc(100% - 320px);
+  }
+}
+
 .air__options-sheet {  
   max-height: 256px;
   max-width: 414px;
