@@ -93,8 +93,6 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
             let components = normalizeComponents(station.sensordatavalues);
             let name = "Lufdatensensor: " + station.sensor.id;
 
-            console.log(ReverseGeocode);
-
             if (getState().options.reversegeo && ReverseGeocode !== undefined && getState().tokens.reversegeo.timestamp) {
                 ReverseGeocode.geocodeService().reverse()
                     .token(getState().tokens.reversegeo.token)
