@@ -2,11 +2,6 @@
 # yarn lockfile v1
 
 
-"@asymmetrik/leaflet-d3@^4.3.2":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@asymmetrik/leaflet-d3/-/leaflet-d3-4.4.0.tgz#2b666dc35ef949cf029238084c7e0e45f4031979"
-  integrity sha512-4KC5Tfn1xfoWUdsXzs1WLziZnXmX1/by49z9ax7q2v9ec3SN4Js38o5cTp9+pmvtF+ZfCy/dyAse5MBbV/LtSQ==
-
 "@babel/code-frame@7.0.0", "@babel/code-frame@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"
@@ -8330,13 +8325,6 @@ react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
   integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
 
-react-leaflet-d3@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/react-leaflet-d3/-/react-leaflet-d3-2.0.0.tgz#94f13ba8bed4c20a8ace686fcd01cde79eefa5b3"
-  integrity sha512-PgV0V98zoFQGGRB7SYiPSfAOo8eyL8XpP1PjrrGBGAEKkajYO+9S3MGLBu00cD+v8GvYVLrW6omROlwAAY9fFQ==
-  dependencies:
-    "@asymmetrik/leaflet-d3" "^4.3.2"
-
 react-leaflet@^2.1.2:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-2.4.0.tgz#9cef74e14aeeb094bfe662b46de1682623c090ea"
@@ -8542,7 +8530,7 @@ redux-devtools-instrument@^1.9.0:
     lodash "^4.2.0"
     symbol-observable "^1.0.2"
 
-redux-devtools@^3.4.1:
+redux-devtools@^3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/redux-devtools/-/redux-devtools-3.5.0.tgz#d69ab76d4f0f8abdf6d24bcf5954d7a1aa2b6827"
   integrity sha512-pGU8TZNvWxPaCCE432AGm6H6alQbAz80gQM5CzM3SjX9/oSNu/HPF17xFdPQJOXasqyih1Gv167kZDTRe7r0iQ==
