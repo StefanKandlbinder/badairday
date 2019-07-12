@@ -1,4 +1,5 @@
 import find from 'lodash/find';
+import ReverseGeocode from 'esri-leaflet-geocoder';
 
 import { dataNormalized } from "../actions/data";
 import { addStation, updateStation, ADD_STATIONS, UPDATE_STATIONS, STATIONS } from "../actions/stations";
@@ -75,49 +76,46 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
 
         if (getState().tokens.reversegeo.timestamp + 7200 > Date.now() || getState().tokens.reversegeo.timestamp === undefined) {
             getArcgisToken()
-                .then((res) => {
-                    let token = {
-                        token: res.access_token,
-                        timestamp: Date.now()
-                    };
+            .then((res) => {
+                let token = { 
+                    token: res.access_token,
+                    timestamp: Date.now()
+                };
 
-                    dispatch(setTokenReverseGeo({ state: token, feature: STATIONS }));
-                })
-                .catch((err) => {
-                    // token = "";
-                });
+                dispatch(setTokenReverseGeo({ state: token, feature: STATIONS }));
+            })
+            .catch((err) => {
+                // token = "";
+            });
         }
 
         stations.map(station => {
             let components = normalizeComponents(station.sensordatavalues);
             let name = "Lufdatensensor: " + station.sensor.id;
 
-            if (getState().options.reversegeo && getState().tokens.reversegeo.timestamp) {
-                fetch(`https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?outSr=4326&returnIntersection=false&location=${this.location.longitude},${this.location.latitude}&distance=10&token=${getState().tokens.reversegeo.token}&f=json`)
-                    .then(res => {
-                        if (res.status !== 200) {
+            if (getState().options.reversegeo && ReverseGeocode !== undefined && getState().tokens.reversegeo.timestamp) {
+                ReverseGeocode.geocodeService().reverse()
+                    .token(getState().tokens.reversegeo.token)
+                    .latlng([station.location.latitude, station.location.longitude])
+                    .distance(10)
+                    .run(function (error, result) {
+                        if (error) {
                             name = "Luftdatensensor: " + station.id;
                         }
-                        console.log("FETCH");
-                        
-                        return res.json();
-                    })
-                    .then(parsedRes => {
-                        name = parsedRes.address.ShortLabel;
+                        if (result) {
+                            name = result.address.ShortLabel;
 
-                        let stationModel = new Station(provider,
-                            station.sensor.id.toString(),
-                            name,
-                            getStringDateLuftdaten(station.timestamp),
-                            parseFloat(station.location.latitude),
-                            parseFloat(station.location.longitude),
-                            components,
-                            components.PM10 ? parseFloat(components.PM10.value) : 0);
+                            let stationModel = new Station(provider,
+                                station.sensor.id.toString(),
+                                name,
+                                getStringDateLuftdaten(station.timestamp),
+                                parseFloat(station.location.latitude),
+                                parseFloat(station.location.longitude),
+                                components,
+                                components.PM10 ? parseFloat(components.PM10.value) : 0);
 
-                        dispatch(updateStation({ station: stationModel, provider: provider }))
-                    })
-                    .catch(err => {
-                        name = "Luftdatensensor: " + station.id;
+                            dispatch(updateStation({ station: stationModel, provider: provider }))
+                        }
                     });
             }
 

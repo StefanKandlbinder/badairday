@@ -27,7 +27,7 @@
     "eslint-plugin-jsx-a11y": "6.2.1",
     "eslint-plugin-react": "7.12.4",
     "eslint-plugin-react-hooks": "^1.5.0",
-    "esri-leaflet-geocoder": "2.2.14",
+    "esri-leaflet-geocoder": "2.2.9",
     "file-loader": "3.0.1",
     "fs-extra": "7.0.1",
     "howler": "^2.1.2",
