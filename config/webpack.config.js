@@ -544,7 +544,7 @@ module.exports = function(webpackEnv) {
       // Generate a manifest file which contains a mapping of all asset filenames
       // to their corresponding output file so that tools can pick it up without
       // having to parse `index.html`.
-      /* new ManifestPlugin({
+      new ManifestPlugin({
         fileName: 'asset-manifest.json',
         publicPath: publicPath,
         generate: (seed, files) => {
@@ -557,7 +557,7 @@ module.exports = function(webpackEnv) {
             files: manifestFiles,
           };
         },
-      }), */
+      }),
       // Moment.js is an extremely popular library that bundles large locale files
       // by default due to how Webpack interprets its code. This is a practical
       // solution that requires the user to opt into importing specific locales.
@@ -580,6 +580,16 @@ module.exports = function(webpackEnv) {
             new RegExp('/[^/]+\\.[^/]+$'),
           ],
         }), */
+      isEnvProduction &&
+        new WorkboxWebpackPlugin.InjectManifest({
+          swSrc: paths.appSrc + '/sw-template.js', // this is your sw template file
+          swDest: './sw.js' // this will be created in the build step
+        }),
+      isEnvDevelopment &&
+        new WorkboxWebpackPlugin.InjectManifest({
+          swSrc: paths.appSrc + '/sw-template.js', // this is your sw template file
+          swDest: './sw.js' // this will be created in the build step
+        }),
       // TypeScript type checking
       useTypeScript &&
         new ForkTsCheckerWebpackPlugin({

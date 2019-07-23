@@ -19,7 +19,8 @@ const isLocalhost = Boolean(
 );
 
 export function register(config) {
-  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  // if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  if ('serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location);
     if (publicUrl.origin !== window.location.origin) {
@@ -125,3 +126,7 @@ export function unregister() {
     });
   }
 }
+
+/**
+ * curl "https://fcm.googleapis.com/fcm/send/drumaCNcS8U:APA91bGPvayY9vdKHZe7RLIClHHglt5rt7EYO8iCXyEY3LMfdYdb-9BHuE4gM3UjGK_9ZPlJKE5bSx-uQgSErtYQRL_7uNfvYoGE1Lhg1zsvHnga9rLcoQGTH5nop48QYDweWIzQi6Qc" --request POST --header "TTL: 60" --header "Content-Length: 0" \ --header "Authorization: key=AIzaSyAY-37x40ODsuFN6ElAPfzMyL_6oEprTf0"
+ */

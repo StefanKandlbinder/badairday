@@ -22,6 +22,7 @@ import { getFavorizedStations } from '../../redux/filters/getFavorizedStations';
 
 import SVGSprite from '../../components/UI/SVGSprite/SVGSprite';
 import Stations from '../../components/Stations/Stations';
+import BadAirDayNotifications from '../../services/Notifications/BadAirDayNotifications';
 // import MapGLStations from '../../components/MapGLStations/MapGLStations';
 // import DeckGLStations from '../../components/DeckGLStations/DeckGLStations';
 import Station from '../../components/Station/Station';
@@ -53,6 +54,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.dashboard = React.createRef();
+    this.BadAirDayNotifications = new BadAirDayNotifications();
 
     this.state = {
       hasStations: false
@@ -60,6 +62,10 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.BadAirDayNotifications.requestPermission();
+    this.BadAirDayNotifications.subscribeUser();
+
+
     if (!this.props.stations.length) {
       this.onFetchStations();
     }

@@ -10,9 +10,9 @@ if ('function' === typeof importScripts) {
     workbox.precaching.precacheAndRoute([]);
 
     /* custom cache rules*/
-    workbox.routing.registerNavigationRoute('/index.html', {
+    /* workbox.routing.registerNavigationRoute('/index.html', {
       blacklist: [/^\/_/, /\/[^\/]+\.[^\/]+$/],
-    });
+    }); */
 
     workbox.routing.registerRoute(
       /\.(?:png|gif|jpg|jpeg)$/,
@@ -63,3 +63,30 @@ workbox.routing.registerRoute(
     ]
   })
 );
+
+/**
+ * PUSH PUSH
+ */
+
+self.addEventListener('push', event => {
+  const data = event.data.json();
+  console.log('New notification', data);
+
+  var options = {
+    body: 'This notification was generated from a push!',
+    icon: 'icons/favicon-196x196.png',
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: '2'
+    },
+    actions: [
+      {action: 'explore', title: 'Explore this new world',
+        icon: 'images/checkmark.png'},
+      {action: 'close', title: 'Close',
+        icon: 'images/xmark.png'},
+    ]
+  };
+  event.waitUntil(
+    self.registration.showNotification(data.title, options)
+  );
+})
