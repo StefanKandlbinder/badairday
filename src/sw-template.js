@@ -73,18 +73,18 @@ self.addEventListener('push', event => {
   console.log('New notification', data);
 
   var options = {
-    body: 'This notification was generated from a push!',
+    body: data.body,
     icon: 'icons/favicon-196x196.png',
-    data: {
-      dateOfArrival: Date.now(),
-      primaryKey: '2'
-    },
-    actions: [
-      {action: 'explore', title: 'Explore this new world',
-        icon: 'images/checkmark.png'},
-      {action: 'close', title: 'Close',
-        icon: 'images/xmark.png'},
-    ]
+    /* actions: [
+      {
+        action: 'explore', title: 'Explore this new world',
+        icon: 'images/checkmark.png'
+      },
+      {
+        action: 'close', title: 'Close',
+        icon: 'images/xmark.png'
+      },
+    ] */
   };
   event.waitUntil(
     self.registration.showNotification(data.title, options)
