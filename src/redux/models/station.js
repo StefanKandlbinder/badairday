@@ -11,7 +11,8 @@ export default class StationModel {
         mood = 0,
         moodRGBA = "rgba(70, 70, 70, 0.75)",
         marker = {},
-        favorized = false) {
+        favorized = false,
+        notify = false) {
             this.provider   = provider;
             this.id         = id;
             this.name       = name;
@@ -22,7 +23,8 @@ export default class StationModel {
             this.mood       = mood;
             this.moodRGBA   = getMood(mood, 0.75);
             this.marker     = marker;
-            this.favorized  = favorized
+            this.favorized  = favorized;
+            this.notify     = notify;
     }
 
     set setProvider(provider) {

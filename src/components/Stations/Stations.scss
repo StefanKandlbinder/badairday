@@ -43,6 +43,14 @@
         width: 8px;
         height: 8px;
     }
+
+    .air__stations-notified-icon {
+        position: absolute;
+        top: 5px;
+        left: calc(50% - 5px);
+        width: 10px;
+        height: 10px;
+    }
 }
 
 .air__station-button-location svg {

@@ -11,6 +11,8 @@ export const UPDATE_STATIONS = `${STATIONS} UPDATE`;
 export const UPDATE_STATION = `${STATION} UPDATE`;
 export const FAVORIZE_STATION = `${STATIONS} FAVORIZE`;
 export const UNFAVORIZE_STATION = `${STATIONS} UNFAVORIZE`;
+export const NOTIFY_STATION = `${STATIONS} NOTIFY`;
+export const UNNOTIFY_STATION = `${STATIONS} UNNOTIFY`;
 
 // action creators
 export const fetchStations = (url, provider, method) => ({
@@ -57,6 +59,18 @@ export const favorizeStation = (id) => ({
 
 export const unfavorizeStation = (id) => ({
     type: UNFAVORIZE_STATION,
+    payload: id,
+    meta: { feature: STATIONS }
+});
+
+export const notifyStation = (id) => ({
+    type: NOTIFY_STATION,
+    payload: id,
+    meta: { feature: STATIONS }
+});
+
+export const unnotifyStation = (id) => ({
+    type: UNNOTIFY_STATION,
     payload: id,
     meta: { feature: STATIONS }
 });

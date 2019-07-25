@@ -10,6 +10,7 @@ import { apiMiddleware } from './middleware/api';
 import { uiReducer } from "./reducers/uiReducer";
 import { updateReducer } from "./reducers/updateReducer";
 import { locationReducer } from "./reducers/locationReducer";
+import { subscriptionReducer } from "./reducers/subscriptionReducer";
 import { optionsReducer } from "./reducers/optionsReducer";
 import { tokensReducer } from "./reducers/tokensReducer";
 import { notificationsReducer } from "./reducers/notificationsReducer";
@@ -27,6 +28,7 @@ const configureStore = () => {
         notifications: notificationsReducer,
         update: updateReducer,
         location: locationReducer,
+        subscription: subscriptionReducer,
         options: optionsReducer,
         tokens: tokensReducer
     });
@@ -73,7 +75,8 @@ const configureStore = () => {
             ui: store.getState().ui,
             update: store.getState().update,
             location: store.getState().location,
-            options: store.getState().options
+            options: store.getState().options,
+            subscription: store.getState().subscription
 
         });
     }, 1000))

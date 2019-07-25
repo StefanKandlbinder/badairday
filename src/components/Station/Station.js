@@ -5,14 +5,17 @@ import { connect } from 'react-redux';
 import { Howl, Howler } from 'howler';
 
 import { STATIONS } from "../../redux/actions/stations";
-import { favorizeStation, unfavorizeStation } from "../../redux/actions/stations";
+import { favorizeStation, unfavorizeStation, notifyStation, unnotifyStation } from "../../redux/actions/stations";
 import { setNotification } from '../../redux/actions/notifications';
+import { setSubscription } from '../../redux/actions/subscription';
 import { getStationByID } from "../../redux/filters/getStationByID";
+import { getNotifiedStations } from '../../redux/filters/getNotifiedStations';
 import getWebShare from '../../services/getWebShare';
 
 import Aircomp from '../../components/Aircomp/Aircomp';
 import Compass from '../../components/Compass/Compass';
 import Button from '../../components/UI/Button/Button';
+import BadAirDayNotifications from '../../services/Notifications/BadAirDayNotifications';
 
 import './Station.scss';
 
@@ -45,6 +48,7 @@ class Station extends Component {
     constructor(props) {
         super(props);
 
+        this.BadAirDayNotifications = new BadAirDayNotifications();
         this.state = {
             shape: "",
             animationCircle: null,
@@ -80,7 +84,7 @@ class Station extends Component {
             this.props.onSetDashboard({ state: false, feature: STATIONS });
         }
 
-        timeout = window.setTimeout(mount.play(), 50);
+        timeout = window.setTimeout(mount.play(), 50); 
     }
 
     componentDidUpdate(prevProps) {
@@ -112,6 +116,69 @@ class Station extends Component {
 
     onRemoveStation = () => {
         this.props.onUnfavorizeStation(this.props.station.id);
+    }
+
+    onAddNotify = () => {
+        this.props.onNotifyStation(this.props.station.id);
+        
+        this.BadAirDayNotifications.requestPermission();
+
+        if (this.props.subscription.id === "") {
+            this.BadAirDayNotifications.subscribeUser()
+                .then(res => {
+                    this.BadAirDayNotifications.sendSubscription(res)
+                        .then(res => {
+                            this.props.onSetSubscription(res.name);
+                            console.log("Subscription id: ", res);
+                            this.updateNotifiedStations(res.name);
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
+                })
+                .catch(err => {
+                    console.log("Subscribe User: ", err);
+                });
+        }
+        else {
+            this.updateNotifiedStations(this.props.subscription.id.toString());
+        }
+    }
+
+    onRemoveNotify = () => {
+        this.props.onUnnotifyStation(this.props.station.id);
+        this.updateNotifiedStations(this.props.subscription.id.toString());
+    }
+
+    updateNotifiedStations = (id) => {
+        var timeoutID; // this is HACKY!!!
+        const url = `https://badairday22.firebaseio.com/subscriptions/${id}/notifiedStations.json`;
+
+        function delayedUpdate() {
+            timeoutID = window.setTimeout(update, 2000);
+        }
+
+        const update = () =>{
+            fetch(url, {
+                method: 'PUT',
+                body: JSON.stringify(getNotifiedStations(this.props.stations)),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(response => {
+                    console.log('Success:', JSON.stringify(response));
+                    window.clearTimeout(timeoutID);
+                    // resolve(response);
+                })
+                .catch(error => {
+                    console.error('Error:', error)
+                    // reject(Error("Couldn't add notify stations do database: ", error));
+                })
+        }
+
+        delayedUpdate();
     }
 
     share = () => {
@@ -183,6 +250,7 @@ class Station extends Component {
         let element = null;
         let dateElement = null;
         let button = null;
+        let notifyButton = null;
         let sharedButton = null;
         let name = "Station";
         let x = "center";
@@ -210,7 +278,9 @@ class Station extends Component {
         }
 
 
-        button = <Button clicked={this.props.station.favorized ? this.onRemoveStation : this.onAddStation} className={`air__button air__button--naked air__button--ghost air__station-button air__station-button-fav${this.props.station.favorized ? " air__station-button-fav--active" : ""}`}>
+        button = <Button 
+            clicked={this.props.station.favorized ? this.onRemoveStation : this.onAddStation} 
+            className={`air__button air__button--naked air__button--ghost air__station-button air__station-button-fav${this.props.station.favorized ? " air__station-button-fav--active" : ""}`}>
             <svg xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 className="air__station-button-icon"
@@ -220,6 +290,20 @@ class Station extends Component {
                 <use xlinkHref="#airSVGFavorize"></use>
             </svg>
         </Button>
+
+        if ('Notification' in window && navigator.serviceWorker) {
+            notifyButton = <Button 
+                clicked={this.props.station.notify ? this.onRemoveNotify : this.onAddNotify} 
+                className={`air__button air__button--naked air__button--ghost air__station-button air__station-button-notify${this.props.station.notify ? " air__station-button-notify--active" : ""}`}>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    className="air__station-button-icon"
+                    stroke="rgba(255,255,255,0.9)"
+                    strokeWidth="1">
+                    <use xlinkHref="#airSVGNotify"></use>
+                </svg>
+            </Button>
+        }
 
         /* if (navigator.share) {
             sharedButton = <Button clicked={this.share} className="air__button air__button--naked air__button--ghost air__station-button air__station-button-share">
@@ -280,6 +364,9 @@ class Station extends Component {
                         {button}
                         {sharedButton}
                     </div>
+                    <div className="air__action-container air__action-container--top">
+                        {notifyButton}
+                    </div>
                 </div>
             </CSSTransition>
         )
@@ -296,7 +383,8 @@ const mapStateToProps = (state, ownProps) => {
             ownProps.match.params.id
         ),
         update: state.update,
-        favorizedStations: state.favorizedStations
+        favorizedStations: state.favorizedStations,
+        subscription: state.subscription
     };
 }
 
@@ -304,7 +392,10 @@ const mapDispatchToProps = dispatch => {
     return {
         onFavorizeStation: (id) => dispatch(favorizeStation(id)),
         onUnfavorizeStation: (id) => dispatch(unfavorizeStation(id)),
-        onSetNotification: (message) => dispatch(setNotification(message))
+        onNotifyStation: (id) => dispatch(notifyStation(id)),
+        onUnnotifyStation: (id) => dispatch(unnotifyStation(id)),
+        onSetNotification: (message) => dispatch(setNotification(message)),
+        onSetSubscription: (id) => dispatch(setSubscription(id))
     }
 }
 

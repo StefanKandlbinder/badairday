@@ -137,6 +137,11 @@
     display: flex;
     position: absolute;
     bottom: 20px;
+
+    &.air__action-container--top {
+        bottom: auto;
+        top: 20px;
+    }
 }
 
 .air__station-button-icon {
@@ -156,6 +161,20 @@
 }
 
 .air__station-button-fav--active {
+    .air__station-button-icon {
+        fill: var(--air__color-text);
+    }
+}
+
+.air__station-button-notify {
+    .air__station-button-icon {
+        width: 24px;
+        height: 24px;
+        fill: var(--air__color-text--gone);
+    }
+}
+
+.air__station-button-notify--active {
     .air__station-button-icon {
         fill: var(--air__color-text);
     }

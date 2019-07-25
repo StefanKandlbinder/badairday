@@ -1,4 +1,11 @@
-import { SET_STATIONS, ADD_STATION, UPDATE_STATION, FAVORIZE_STATION, UNFAVORIZE_STATION } from "../actions/stations";
+import { 
+    SET_STATIONS, 
+    ADD_STATION, 
+    UPDATE_STATION, 
+    FAVORIZE_STATION, 
+    UNFAVORIZE_STATION,
+    NOTIFY_STATION, 
+    UNNOTIFY_STATION } from "../actions/stations";
 
 const initState = [];
 
@@ -54,6 +61,30 @@ export const stationsReducer = (stations = initState, action) => {
         
                 return station;        
             });
+        
+            case NOTIFY_STATION:
+                return stations.map((station) => {
+                    if (station.id === action.payload) {
+                        return {
+                            ...station,
+                            notify: true
+                        }
+                    }
+            
+                    return station;        
+                });
+            
+            case UNNOTIFY_STATION:
+                return stations.map((station) => {
+                    if (station.id === action.payload) {
+                        return {
+                            ...station, 
+                            notify: false,
+                        }
+                    }
+            
+                    return station;        
+                });
 
         default:
             return stations;

@@ -1,4 +1,8 @@
-import { SET_OPTION_REVERSEGEO, SET_OPTION_AUTOUPDATING, SET_OPTION_RUNAWAYS, SET_OPTION_SORT } from "../actions/options";
+import { 
+    SET_OPTION_REVERSEGEO, 
+    SET_OPTION_AUTOUPDATING, 
+    SET_OPTION_RUNAWAYS, 
+    SET_OPTION_SORT } from "../actions/options";
 
 const initState = {
     reversegeo: false,

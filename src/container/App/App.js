@@ -62,8 +62,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.BadAirDayNotifications.requestPermission();
-    this.BadAirDayNotifications.subscribeUser();
+    // this.BadAirDayNotifications.requestPermission();
+    // this.BadAirDayNotifications.subscribeUser();
 
 
     if (!this.props.stations.length) {
