@@ -65,11 +65,11 @@ export default class BadAirDayNotifications {
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            })
-                .then(res => res.json())
-                .then(response => {
-                    console.log('Success:', JSON.stringify(response));
-                    resolve(response);
+                })
+                    .then(res => res.json())
+                    .then(response => {
+                        console.log('New Subscription added to Database:', JSON.stringify(response));
+                        resolve(response);
                 })
                 .catch(error => {
                     console.error('Error:', error)
@@ -79,18 +79,16 @@ export default class BadAirDayNotifications {
     }
 
     subscribeUser() {
-        /* fetch(`${process.env.REACT_APP_API_URL}/notifications/send`)
-            .then(res => res.json())
-            .then(response => console.log('Success:', JSON.stringify(response)))
-            .catch(error => console.error('Error:', error)); */
-
         return new Promise((resolve, reject) => {
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.ready.then(registration => {
                     if (!registration.pushManager) {
                         console.log('Push manager unavailable.')
                         reject(Error("Push Manager nicht verfügbar"));
+                        return
                     }
+
+                    console.log(registration.pushManager);
 
                     registration.pushManager.getSubscription().then(existedSubscription => {
                         if (existedSubscription === null) {

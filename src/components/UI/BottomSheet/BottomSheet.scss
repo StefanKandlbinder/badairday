@@ -35,3 +35,9 @@
         transform: translateY(calc(100% + 8px));
     }
 }
+
+.air__bottom-sheet-button {
+    .air__bottom-sheet-button-icon {
+        fill: var(--air__color-primary--active);
+    }
+}
