@@ -4,7 +4,8 @@ export const getNotifiedStations = (stations) => {
     const simpleNotifiedStations =notifiedStations.map(item => {
         let temp = {
             id: item.id,
-            provider: item.provider
+            provider: item.provider,
+            name: item.name
         }
 
         return temp;

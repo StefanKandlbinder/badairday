@@ -6,8 +6,18 @@ export default class BadAirDayNotifications {
     requestPermission() {
         if ('Notification' in window && navigator.serviceWorker) {
             // Display the UI to let the user toggle notifications
-            Notification.requestPermission(function (status) {
-                console.log('Notification permission status:', status);
+            Notification.requestPermission().then(function (result) {
+                if (result === 'denied') {
+                    console.log('Permission wasn\'t granted. Allow a retry.');
+                    return;
+                }
+                if (result === 'default') {
+                    console.log('The permission request was dismissed.');
+                    return;
+                }
+
+                return true
+                // Do something with the granted permission.
             });
         }
     }
@@ -65,20 +75,20 @@ export default class BadAirDayNotifications {
                 headers: {
                     'Content-Type': 'application/json'
                 }
-                })
-                    .then(res => res.json())
-                    .then(response => {
-                        console.log('New Subscription added to Database:', JSON.stringify(response));
+            })
+                .then(res => res.json())
+                .then(response => {
+                    console.log('New Subscription added to Database:', JSON.stringify(response));
 
-                        fetch(`${process.env.REACT_APP_API_URL}/notifications/subscribe`, {
-                            method: 'POST',
-                            body: JSON.stringify(newSubscription),
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        });
-                
-                        resolve(response);
+                    fetch(`${process.env.REACT_APP_API_URL}/notifications/subscribe`, {
+                        method: 'POST',
+                        body: JSON.stringify(newSubscription),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    resolve(response);
                 })
                 .catch(error => {
                     console.error('Error:', error)
@@ -96,8 +106,6 @@ export default class BadAirDayNotifications {
                         reject(Error("Push Manager nicht verfügbar"));
                         return
                     }
-
-                    console.log(registration.pushManager);
 
                     registration.pushManager.getSubscription().then(existedSubscription => {
                         if (existedSubscription === null) {

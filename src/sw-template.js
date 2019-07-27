@@ -73,8 +73,12 @@ self.addEventListener('push', event => {
   console.log('New notification', data);
 
   var options = {
+    title: data.title,
     body: data.body,
-    icon: 'icons/favicon-196x196.png',
+    icon: data.icon,
+    data: {
+      url: data.data.url
+    }
     /* actions: [
       {
         action: 'explore', title: 'Explore this new world',
@@ -90,3 +94,16 @@ self.addEventListener('push', event => {
     self.registration.showNotification(data.title, options)
   );
 })
+
+self.addEventListener('notificationclick', function(event) {
+  const clickedNotification = event.notification;
+  clickedNotification.close();
+
+  // Do something as the result of the notification click
+  const doSomething = (event) => {
+    clients.openWindow(event.notification.data.url)
+  }
+
+  const promiseChain = doSomething(event);
+  event.waitUntil(promiseChain);
+});

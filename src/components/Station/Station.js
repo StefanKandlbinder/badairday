@@ -119,8 +119,6 @@ class Station extends Component {
 
     onAddNotify = () => {
         this.props.onNotifyStation(this.props.station.id);
-        
-        this.BadAirDayNotifications.requestPermission();
 
         if (this.props.subscription.id === "") {
             this.BadAirDayNotifications.subscribeUser()
