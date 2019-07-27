@@ -69,7 +69,7 @@ const configureStore = () => {
         // other store enhancers if any
     ));
 
-    /* store.subscribe(throttle(() => {
+    store.subscribe(throttle(() => {
         saveState({
             stations: store.getState().stations,
             ui: store.getState().ui,
@@ -79,7 +79,7 @@ const configureStore = () => {
             subscription: store.getState().subscription
 
         });
-    }, 1000)) */
+    }, 1000))
 
     return store;
 }
