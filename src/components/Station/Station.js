@@ -120,7 +120,7 @@ class Station extends Component {
     onAddNotify = () => {
         this.props.onNotifyStation(this.props.station.id);
 
-        if (this.props.subscription.id === "") {
+        if (this.props.subscription.id === "" || Notification.permission === "default") {
             this.BadAirDayNotifications.subscribeUser()
                 .then(res => {
                     this.BadAirDayNotifications.sendSubscription(res)
