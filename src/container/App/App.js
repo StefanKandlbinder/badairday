@@ -259,7 +259,7 @@ class App extends Component {
 
     tabbar = <Tabbar>
       <NavLink
-        className="air__tabbar-link air__button air__button--naked"
+        className="air__tabbar-link air__button air__button--label air__button--naked"
         aria-label="Map"
         activeClassName="air__button--active"
         exact to={"/"}
@@ -267,17 +267,19 @@ class App extends Component {
         <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <use xlinkHref="#airSVGMap"></use>
         </svg>
+        Karte
       </NavLink>
       {this.props.media === "small" 
         ? <NavLink
         onClick={() => this.props.dashboard ? this.onUpdateStations() : this.props.onSetDashboard({ state: true, feature: STATIONS })}
-        className={`air__tabbar-link air__button air__button--naked ${!getFavorizedStations(this.props.stations).length ? "air__button--inactive" : ""}`}
+        className={`air__tabbar-link air__button air__button--label air__button--naked ${!getFavorizedStations(this.props.stations).length ? "air__button--inactive" : ""}`}
         aria-label="List"
         activeClassName="air__button--active"
         to={"/dashboard"}>
         <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <use xlinkHref="#airSVGFavList"></use>
         </svg>
+        Favoriten
         </NavLink>
         : null
       }
@@ -293,13 +295,14 @@ class App extends Component {
         </svg>
       </NavLink>*/}
       <NavLink
-        className="air__tabbar-link air__button air__button--naked"
+        className="air__tabbar-link air__button air__button--label air__button--naked"
         aria-label="Options Sheet"
         activeClassName="air__button--active"
         to={this.props.history.location.pathname === "/bottomsheet" ? "/" : "/bottomsheet"}>
         <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <use xlinkHref="#airSVGMoreVert"></use>
         </svg>
+        Mehr
       </NavLink>
     </Tabbar>
 

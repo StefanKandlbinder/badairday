@@ -15,12 +15,20 @@
     color: var(--air__color-primary);
     box-shadow: 0;
     outline: 0;
+    text-shadow: none;
+    transition: font-weight var(--air__animation-duration-crunchy) var(--air__animation-timing);
 
     .air__button-icon {
         will-change: transform fill, transform;
         transform: scale(1);
         fill: var(--air__color-primary);
         transition: transform var(--air__animation-duration-crunchy) var(--air__animation-timing), fill var(--air__animation-duration) var(--air__animation-timing);
+    }
+
+    &.air__button--label {
+        flex-direction: column;
+        text-decoration: none;
+        font-size: 11px;
     }
 }
 
@@ -92,6 +100,8 @@
 .air__button--active,
 .air__button--active:focus,
 .air__button--active:active {
+    font-weight: bold;
+
     .air__button-icon {
         transform: scale(1.2);
         color: var(--air__color-primary--active);
