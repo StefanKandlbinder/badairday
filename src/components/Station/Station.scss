@@ -19,20 +19,18 @@
     left: var(--offset);
     z-index: 100;
     will-change: opacity, transform, box-shadow, background-color;
-    transition: background-color var(--air__animation-duration) var(--air__animation-timing);
+    transition: background-color var(--air__animation-duration) var(--air__animation-timing), left var(--air__animation-duration) var(--air__animation-timing);
     /* box-shadow: 5px 10px 30px var(--air__color-shadow); */
+
+    &.air__station--dashboard-true {
+        --offset: calc(50% - var(--width) / 2 - 160px);
+    }
 }
 
 @media (min-width: 330px) {
     .air__station {
         --width: 330px;
         --height: 330px;
-    }
-}
-
-@media (min-width: 768px) {
-    .air__station {
-        --offset: calc(50% - var(--width) / 2 - 160px);
     }
 }
 

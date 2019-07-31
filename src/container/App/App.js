@@ -63,9 +63,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // this.BadAirDayNotifications.requestPermission();
-    // this.BadAirDayNotifications.subscribeUser();
-
+    if (this.props.media === "medium" && getFavorizedStations(this.props.stations).length) {
+      this.props.onSetDashboard({ state: true, feature: STATIONS });
+    }
 
     if (!this.props.stations.length) {
       this.onFetchStations();
@@ -87,7 +87,7 @@ class App extends Component {
     if (prevProps.media === "medium" && this.props.media === "small") {
       this.props.onSetDashboard({ state: false, feature: STATIONS });
     }
-    else if (prevProps.media === "small" && this.props.media === "medium" && getFavorizedStations(this.props.stations).length) {
+    else if (this.props.media === "medium" && getFavorizedStations(this.props.stations).length) {
       this.props.onSetDashboard({ state: true, feature: STATIONS });
     }
   }

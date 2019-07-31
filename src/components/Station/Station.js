@@ -4,7 +4,6 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { Howl, Howler } from 'howler';
 
-import { STATIONS } from "../../redux/actions/stations";
 import { favorizeStation, unfavorizeStation, notifyStation, unnotifyStation } from "../../redux/actions/stations";
 import { setNotification } from '../../redux/actions/notifications';
 import { setSubscription } from '../../redux/actions/subscription';
@@ -78,10 +77,6 @@ class Station extends Component {
 
         if (this.props.station.provider === "luftdaten")
             this.setState({ shape: hexagon })
-        
-        if (this.props.media === "small") {
-            this.props.onSetDashboard({ state: false, feature: STATIONS });
-        }
 
         timeout = window.setTimeout(mount.play(), 50); 
     }
@@ -246,18 +241,24 @@ class Station extends Component {
         if (this.props.location.state !== undefined) {
             let innerWidth = window.innerWidth;
             let dashboardWidth = 0;
+            let stationWidth = 0;
 
-            if (innerWidth >= 768) {
+            if (this.props.media === "medium" && this.props.dashboard) {
                 dashboardWidth = 320;
+                stationWidth = 330;
             }
 
-            if (innerWidth > 330)
-                x = this.props.location.state.x - (window.innerWidth - 330 - dashboardWidth) / 2  + "px";
-            
-            else
-                x = this.props.location.state.x - (window.innerWidth - 288 - dashboardWidth) / 2  + "px";
+            if (this.props.media === "medium" && !this.props.dashboard) {
+                dashboardWidth = 0;
+                stationWidth = 330;
+            } 
 
-            // x = this.props.location.state.y + "px";
+            if (this.props.media === "small") {
+                dashboardWidth = 0;
+                stationWidth = 288;
+            }
+
+            x = this.props.location.state.x - (innerWidth - stationWidth - dashboardWidth) / 2  + "px";
             y = this.props.location.state.y + "px";
         }
 
@@ -302,7 +303,7 @@ class Station extends Component {
                 in={this.state.isMounted}
                 classNames="a-station"
                 timeout={300}>
-                <div className={`air__station air__station--${this.props.station.provider}`} style={{ ...popOriginStyle }}>
+                <div className={`air__station air__station--${this.props.station.provider} air__station--dashboard-${this.props.dashboard}`} style={{ ...popOriginStyle }}>
                     <svg xmlns="http://www.w3.org/2000/svg"
                         style={{ ...moodStyle }}
                         className="air__station-background"
@@ -351,6 +352,8 @@ const mapStateToProps = (state, ownProps) => {
             state.stations,
             ownProps.match.params.id
         ),
+        dashboard: state.ui.dashboard,
+        media: state.ui.media,
         update: state.update,
         favorizedStations: state.favorizedStations,
         subscription: state.subscription
