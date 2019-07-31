@@ -12,17 +12,16 @@
     border-radius: 6px;
     background: var(--air__color-text);
     font-size: 12px;
-    color: var(--air__color-primary);
+    font-weight: bold;
+    color: var(--air__color-primary--weak);
     box-shadow: 0;
     outline: 0;
     text-shadow: none;
-    transition: font-weight var(--air__animation-duration-crunchy) var(--air__animation-timing);
+    transition: color var(--air__animation-duration) var(--air__animation-timing);
 
     .air__button-icon {
-        will-change: transform fill, transform;
-        transform: scale(1);
-        fill: var(--air__color-primary);
-        transition: transform var(--air__animation-duration-crunchy) var(--air__animation-timing), fill var(--air__animation-duration) var(--air__animation-timing);
+        fill: var(--air__color-primary--weak);
+        transition: fill var(--air__animation-duration) var(--air__animation-timing);
     }
 
     &.air__button--label {
@@ -100,10 +99,9 @@
 .air__button--active,
 .air__button--active:focus,
 .air__button--active:active {
-    font-weight: bold;
+    color: var(--air__color-primary--active);
 
     .air__button-icon {
-        transform: scale(1.2);
         color: var(--air__color-primary--active);
         fill: var(--air__color-primary--active);
     }
