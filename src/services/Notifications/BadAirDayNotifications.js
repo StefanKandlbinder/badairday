@@ -11,17 +11,17 @@ export default class BadAirDayNotifications {
                     .then(function (result) {
                         switch(result) {
                             case "default":
-                                console.log("The user hasn't been asked for permission yet, so notifications won't be displayed.");
+                                // console.log("The user hasn't been asked for permission yet, so notifications won't be displayed.");
                                 reject(false);
                                 break;
                         
                             case 'granted':
-                                console.log("The user has granted permission to display notifications, after having been asked previously.");
+                                // console.log("The user has granted permission to display notifications, after having been asked previously.");
                                 resolve(true);
                                 break;
 
                             case 'denied':
-                                console.log('The user has explicitly declined permission to show notifications.');
+                                // console.log('The user has explicitly declined permission to show notifications.');
                                 reject(false);
                                 break;
                             default:
@@ -29,7 +29,7 @@ export default class BadAirDayNotifications {
                         }
                     })
                     .catch(err => {
-                        console.log("Permission of Notification went wrong: ", err);
+                        // console.log("Permission of Notification went wrong: ", err);
                         reject(false)
                     });
             }
@@ -44,17 +44,17 @@ export default class BadAirDayNotifications {
                     .then(function (result) {
                         switch(result) {
                             case "default":
-                                console.log("The user hasn't been asked for permission yet, so notifications won't be displayed.");
+                                // console.log("The user hasn't been asked for permission yet, so notifications won't be displayed.");
                                 reject(false);
                                 break;
                         
                             case 'granted':
-                                console.log("The user has granted permission to display notifications, after having been asked previously.");
+                                // console.log("The user has granted permission to display notifications, after having been asked previously.");
                                 resolve(true);
                                 break;
 
                             case 'denied':
-                                console.log('The user has explicitly declined permission to show notifications.');
+                                // console.log('The user has explicitly declined permission to show notifications.');
                                 reject(false);
                                 break;
                             default:
@@ -62,7 +62,7 @@ export default class BadAirDayNotifications {
                         }
                     })
                     .catch(err => {
-                        console.log("Permission of Notification went wrong: ", err);
+                        // console.log("Permission of Notification went wrong: ", err);
                         reject(false)
                     });
             }
@@ -122,7 +122,7 @@ export default class BadAirDayNotifications {
                 .then(res => res.json())
                 .then(response => {
                     resolve(response);
-                    console.log('New Subscription added to Database:', JSON.stringify(response));
+                    // console.log('New Subscription added to Database:', JSON.stringify(response));
 
                     fetch(`${process.env.REACT_APP_API_URL}subscribe`, {
                         method: 'POST',
@@ -134,15 +134,15 @@ export default class BadAirDayNotifications {
                         .then(res => res.text())
                         .then(response => {
                             resolve(response);
-                            console.log(response)
+                            // console.log(response)
                         })
                         .catch(error => {
                             reject(Error("Couldn't add subscription do database: ", error));
-                            console.error("Couldn't send new subscription notification:", error)
+                            // console.error("Couldn't send new subscription notification:", error)
                         });
                 })
                 .catch(error => {
-                    console.error('Error:', error)
+                    // console.error('Error:', error)
                     reject(Error("Couldn't add subscription do database: ", error));
                 });
         });
@@ -153,39 +153,43 @@ export default class BadAirDayNotifications {
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.ready.then(registration => {
                     if (!registration.pushManager) {
-                        console.log('Push manager unavailable.')
+                        // console.log('Push manager unavailable.')
                         reject(Error("Push Manager nicht verfügbar"));
                         return
                     }
 
                     registration.pushManager.getSubscription().then(existedSubscription => {
                         if (existedSubscription === null) {
-                            console.log('No subscription detected, make a request.')
+                            // console.log('No subscription detected, make a request.')
+
                             registration.pushManager.subscribe({
                                 applicationServerKey: this.convertedVapidKey,
                                 userVisibleOnly: true,
                             }).then(newSubscription => {
-                                console.log('New subscription added.');
+                                // console.log('New subscription added.');
+
                                 return resolve(newSubscription);
                                 // this.sendSubscription(newSubscription, notifiedStations)
                             }).catch(function (e) {
                                 if (Notification.permission !== 'granted') {
-                                    console.log('Permission was not granted.');
+                                    // console.log('Permission was not granted.');
+
                                     reject(Error("Permission not granted"));
                                 } else {
-                                    console.error('An error ocurred during the subscription process.', e);
+                                    // console.error('An error ocurred during the subscription process.', e);
+
                                     reject(Error('An error ocurred during the subscription process.', e));
                                 }
                             })
                         } else {
-                            console.log('Existed subscription detected: ', existedSubscription);
+                            // console.log('Existed subscription detected: ', existedSubscription);
                             // reject(Error('Existed subscription detected.'));
                             // this.sendSubscription(existedSubscription, notifiedStations);
                         }
                     })
                 })
                     .catch(function (e) {
-                        console.error('An error ocurred during Service Worker registration.', e)
+                        // console.error('An error ocurred during Service Worker registration.', e)
                     })
             }
         });
@@ -199,13 +203,14 @@ export default class BadAirDayNotifications {
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.ready.then(registration => {
                 if (!registration.pushManager) {
-                    console.log('Push manager unavailable.')
+                    // console.log('Push manager unavailable.')
                     return
                 }
 
                 registration.pushManager.getSubscription().then(existedSubscription => {
                     if (existedSubscription !== null) {
-                        console.log('Existed subscription detected: ', existedSubscription)
+                        // console.log('Existed subscription detected: ', existedSubscription)
+
                         subscription = true;
                     }
                     else {
@@ -214,7 +219,7 @@ export default class BadAirDayNotifications {
                 })
             })
                 .catch(function (e) {
-                    console.error('An error ocurred during Service Worker registration.', e)
+                    // console.error('An error ocurred during Service Worker registration.', e)
                 })
         }
 

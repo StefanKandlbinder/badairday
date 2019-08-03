@@ -123,19 +123,18 @@ class Station extends Component {
                             this.BadAirDayNotifications.sendSubscription(res)
                                 .then(res => {
                                     this.props.onSetSubscription(res.name);
-                                    console.log("Subscription id: ", res);
                                     this.updateNotifiedStations(res.name);
                                 })
                                 .catch(err => {
-                                    console.log(err);
+                                    // console.log(err);
                                 })
                         })
                         .catch(err => {
-                            console.log("Subscribe User: ", err);
+                            // console.log("Subscribe User: ", err);
                         });
                 })
                 .catch(err => {
-                    console.log(err);
+                    // console.log(err);
                 });
         }
         else {
@@ -166,12 +165,12 @@ class Station extends Component {
             })
                 .then(res => res.json())
                 .then(response => {
-                    console.log('Updated Notified Stations:', JSON.stringify(response));
+                    // console.log('Updated Notified Stations:', JSON.stringify(response));
                     window.clearTimeout(timeoutID);
                     // resolve(response);
                 })
                 .catch(error => {
-                    console.error('Error:', error)
+                    // console.error('Error:', error)
                     // reject(Error("Couldn't add notify stations do database: ", error));
                 })
         }
