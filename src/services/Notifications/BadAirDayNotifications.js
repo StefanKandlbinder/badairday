@@ -126,16 +126,17 @@ export default class BadAirDayNotifications {
 
                     fetch(`${process.env.REACT_APP_API_URL}subscribe`, {
                         method: 'POST',
-                        /* headers: {
+                        headers: {
                             'Content-Type': 'application/json'
-                        }, */
+                        },
                         body: JSON.stringify({subscription})
                     })
                         .then(res => res.json())
-                        .then(response => console.log('Sent new subscription notification:', JSON.stringify(response)))
+                        .then(response => {
+                            console.log('Sent new subscription notification:', JSON.stringify(response))
+                        })
                         .catch(error => {
                             console.error("Couldn't send new subscription notification:", error)
-                            reject(Error("Couldn't add subscription do database: ", error));
                         });
                 })
                 .catch(error => {
