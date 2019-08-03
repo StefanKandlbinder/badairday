@@ -78,7 +78,7 @@ class Station extends Component {
         if (this.props.station.provider === "luftdaten")
             this.setState({ shape: hexagon })
 
-        timeout = window.setTimeout(mount.play(), 50); 
+        timeout = window.setTimeout(mount.play(), 50);
     }
 
     componentDidUpdate(prevProps) {
@@ -116,20 +116,26 @@ class Station extends Component {
         this.props.onNotifyStation(this.props.station.id);
 
         if (this.props.subscription.id === "" || Notification.permission === "default") {
-            this.BadAirDayNotifications.subscribeUser()
+            this.BadAirDayNotifications.requestPermission()
                 .then(res => {
-                    this.BadAirDayNotifications.sendSubscription(res)
+                    this.BadAirDayNotifications.subscribeUser()
                         .then(res => {
-                            this.props.onSetSubscription(res.name);
-                            console.log("Subscription id: ", res);
-                            this.updateNotifiedStations(res.name);
+                            this.BadAirDayNotifications.sendSubscription(res)
+                                .then(res => {
+                                    this.props.onSetSubscription(res.name);
+                                    console.log("Subscription id: ", res);
+                                    this.updateNotifiedStations(res.name);
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                })
                         })
                         .catch(err => {
-                            console.log(err);
-                        })
+                            console.log("Subscribe User: ", err);
+                        });
                 })
                 .catch(err => {
-                    console.log("Subscribe User: ", err);
+                    console.log(err);
                 });
         }
         else {
@@ -150,7 +156,7 @@ class Station extends Component {
             timeoutID = window.setTimeout(update, 2000);
         }
 
-        const update = () =>{
+        const update = () => {
             fetch(url, {
                 method: 'PUT',
                 body: JSON.stringify(getNotifiedStations(this.props.stations)),
@@ -197,7 +203,7 @@ class Station extends Component {
                         value={value.value}
                         unit={value.unit} />);
                 }
-                
+
                 else {
                     compItems.push(<Aircomp key={key}
                         component={key}
@@ -251,20 +257,20 @@ class Station extends Component {
             if (this.props.media === "medium" && !this.props.dashboard) {
                 dashboardWidth = 0;
                 stationWidth = 330;
-            } 
+            }
 
             if (this.props.media === "small") {
                 dashboardWidth = 0;
                 stationWidth = 288;
             }
 
-            x = this.props.location.state.x - (innerWidth - stationWidth - dashboardWidth) / 2  + "px";
+            x = this.props.location.state.x - (innerWidth - stationWidth - dashboardWidth) / 2 + "px";
             y = this.props.location.state.y + "px";
         }
 
 
-        button = <Button 
-            clicked={this.props.station.favorized ? this.onRemoveStation : this.onAddStation} 
+        button = <Button
+            clicked={this.props.station.favorized ? this.onRemoveStation : this.onAddStation}
             className={`air__button air__button--naked air__button--ghost air__station-button air__station-button-fav${this.props.station.favorized ? " air__station-button-fav--active" : ""}`}>
             <svg xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -277,8 +283,8 @@ class Station extends Component {
         </Button>
 
         if ('Notification' in window && navigator.serviceWorker) {
-            notifyButton = <Button 
-                clicked={this.props.station.notify ? this.onRemoveNotify : this.onAddNotify} 
+            notifyButton = <Button
+                clicked={this.props.station.notify ? this.onRemoveNotify : this.onAddNotify}
                 className={`air__button air__button--naked air__button--ghost air__station-button air__station-button-notify${this.props.station.notify ? " air__station-button-notify--active" : ""}`}>
                 <svg xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"

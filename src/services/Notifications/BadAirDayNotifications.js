@@ -4,22 +4,69 @@ export default class BadAirDayNotifications {
     }
 
     requestPermission() {
-        if ('Notification' in window && navigator.serviceWorker) {
-            // Display the UI to let the user toggle notifications
-            Notification.requestPermission().then(function (result) {
-                if (result === 'denied') {
-                    console.log('Permission wasn\'t granted. Allow a retry.');
-                    return;
-                }
-                if (result === 'default') {
-                    console.log('The permission request was dismissed.');
-                    return;
-                }
+        return new Promise((resolve, reject) => {
+            if ('Notification' in window && navigator.serviceWorker) {
+                // Display the UI to let the user toggle notifications
+                Notification.requestPermission()
+                    .then(function (result) {
+                        switch(result) {
+                            case "default":
+                                console.log("The user hasn't been asked for permission yet, so notifications won't be displayed.");
+                                reject(false);
+                                break;
+                        
+                            case 'granted':
+                                console.log("The user has granted permission to display notifications, after having been asked previously.");
+                                resolve(true);
+                                break;
 
-                return true
-                // Do something with the granted permission.
-            });
-        }
+                            case 'denied':
+                                console.log('The user has explicitly declined permission to show notifications.');
+                                reject(false);
+                                break;
+                            default:
+                                break;
+                        }
+                    })
+                    .catch(err => {
+                        console.log("Permission of Notification went wrong: ", err);
+                        reject(false)
+                    });
+            }
+        });
+    }
+
+    requestPermissionCalback() {
+        return new Promise((resolve, reject) => {
+            if ('Notification' in window && navigator.serviceWorker) {
+                // Display the UI to let the user toggle notifications
+                Notification.requestPermission()
+                    .then(function (result) {
+                        switch(result) {
+                            case "default":
+                                console.log("The user hasn't been asked for permission yet, so notifications won't be displayed.");
+                                reject(false);
+                                break;
+                        
+                            case 'granted':
+                                console.log("The user has granted permission to display notifications, after having been asked previously.");
+                                resolve(true);
+                                break;
+
+                            case 'denied':
+                                console.log('The user has explicitly declined permission to show notifications.');
+                                reject(false);
+                                break;
+                            default:
+                                break;
+                        }
+                    })
+                    .catch(err => {
+                        console.log("Permission of Notification went wrong: ", err);
+                        reject(false)
+                    });
+            }
+        });
     }
 
     displayNotification() {
@@ -65,13 +112,9 @@ export default class BadAirDayNotifications {
 
     sendSubscription(subscription) {
         return new Promise((resolve, reject) => {
-            let newSubscription = {
-                subscription
-            }
-
             return fetch(`https://badairday22.firebaseio.com/subscriptions.json`, {
                 method: 'POST',
-                body: JSON.stringify(newSubscription),
+                body: JSON.stringify({subscription}),
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -79,16 +122,21 @@ export default class BadAirDayNotifications {
                 .then(res => res.json())
                 .then(response => {
                     console.log('New Subscription added to Database:', JSON.stringify(response));
-
-                    fetch(`${process.env.REACT_APP_API_URL}notifications/subscribe`, {
-                        method: 'POST',
-                        body: JSON.stringify(newSubscription),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    });
-
                     resolve(response);
+
+                    fetch(`${process.env.REACT_APP_API_URL}subscribe`, {
+                        method: 'POST',
+                        /* headers: {
+                            'Content-Type': 'application/json'
+                        }, */
+                        body: JSON.stringify({subscription})
+                    })
+                        .then(res => res.json())
+                        .then(response => console.log('Sent new subscription notification:', JSON.stringify(response)))
+                        .catch(error => {
+                            console.error("Couldn't send new subscription notification:", error)
+                            reject(Error("Couldn't add subscription do database: ", error));
+                        });
                 })
                 .catch(error => {
                     console.error('Error:', error)
