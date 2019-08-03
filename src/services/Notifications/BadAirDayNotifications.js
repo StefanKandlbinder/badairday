@@ -131,9 +131,8 @@ export default class BadAirDayNotifications {
                         },
                         body: JSON.stringify({subscription})
                     })
-                        .then(res => res.json())
                         .then(response => {
-                            console.log('Sent new subscription notification:', JSON.stringify(response))
+                            console.log('Sent new subscription notification:', response)
                         })
                         .catch(error => {
                             console.error("Couldn't send new subscription notification:", error)
