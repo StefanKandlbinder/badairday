@@ -248,12 +248,12 @@ class Station extends Component {
             let dashboardWidth = 0;
             let stationWidth = 0;
 
-            if (this.props.media === "medium" && this.props.dashboard) {
+            if (this.props.media === "medium" && this.props.favboard) {
                 dashboardWidth = 320;
                 stationWidth = 330;
             }
 
-            if (this.props.media === "medium" && !this.props.dashboard) {
+            if (this.props.media === "medium" && !this.props.favboard) {
                 dashboardWidth = 0;
                 stationWidth = 330;
             }
@@ -308,7 +308,7 @@ class Station extends Component {
                 in={this.state.isMounted}
                 classNames="a-station"
                 timeout={300}>
-                <div className={`air__station air__station--${this.props.station.provider} air__station--dashboard-${this.props.dashboard}`} style={{ ...popOriginStyle }}>
+                <div className={`air__station air__station--${this.props.station.provider} air__station--favboard-${this.props.favboard}`} style={{ ...popOriginStyle }}>
                     <svg xmlns="http://www.w3.org/2000/svg"
                         style={{ ...moodStyle }}
                         className="air__station-background"
@@ -357,7 +357,7 @@ const mapStateToProps = (state, ownProps) => {
             state.stations,
             ownProps.match.params.id
         ),
-        dashboard: state.ui.dashboard,
+        favboard: state.ui.favboard,
         media: state.ui.media,
         update: state.update,
         favorizedStations: state.favorizedStations,

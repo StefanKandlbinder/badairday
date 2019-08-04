@@ -22,7 +22,7 @@
     transition: background-color var(--air__animation-duration) var(--air__animation-timing), left var(--air__animation-duration) var(--air__animation-timing);
     /* box-shadow: 5px 10px 30px var(--air__color-shadow); */
 
-    &.air__station--dashboard-true {
+    &.air__station--favboard-true {
         --offset: calc(50% - var(--width) / 2 - 160px);
     }
 }

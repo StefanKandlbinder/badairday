@@ -1,11 +1,12 @@
-import { 
-    SET_STATIONS, 
-    ADD_STATION, 
-    UPDATE_STATION, 
-    FAVORIZE_STATION, 
+import {
+    SET_STATIONS,
+    ADD_STATION,
+    UPDATE_STATION,
+    FAVORIZE_STATION,
     UNFAVORIZE_STATION,
-    NOTIFY_STATION, 
-    UNNOTIFY_STATION } from "../actions/stations";
+    NOTIFY_STATION,
+    UNNOTIFY_STATION
+} from "../actions/stations";
 
 const initState = [];
 
@@ -22,7 +23,7 @@ export const stationsReducer = (stations = initState, action) => {
             return stations.map((station) => {
                 if (station.id === action.payload.id) {
                     return {
-                        ...station, 
+                        ...station,
                         date: action.payload.date,
                         mood: action.payload.mood,
                         moodRGBA: action.payload.moodRGBA,
@@ -33,11 +34,11 @@ export const stationsReducer = (stations = initState, action) => {
                         }
                     }
                 }
-        
+
                 // This isn't the item we care about - keep it as-is
-                return station;        
+                return station;
             });
-        
+
         case FAVORIZE_STATION:
             return stations.map((station) => {
                 if (station.id === action.payload) {
@@ -46,45 +47,45 @@ export const stationsReducer = (stations = initState, action) => {
                         favorized: true
                     }
                 }
-        
-                return station;        
+
+                return station;
             });
-        
+
         case UNFAVORIZE_STATION:
             return stations.map((station) => {
                 if (station.id === action.payload) {
                     return {
-                        ...station, 
+                        ...station,
                         favorized: false,
                     }
                 }
-        
-                return station;        
+
+                return station;
             });
-        
-            case NOTIFY_STATION:
-                return stations.map((station) => {
-                    if (station.id === action.payload) {
-                        return {
-                            ...station,
-                            notify: true
-                        }
+
+        case NOTIFY_STATION:
+            return stations.map((station) => {
+                if (station.id === action.payload) {
+                    return {
+                        ...station,
+                        notify: true
                     }
-            
-                    return station;        
-                });
-            
-            case UNNOTIFY_STATION:
-                return stations.map((station) => {
-                    if (station.id === action.payload) {
-                        return {
-                            ...station, 
-                            notify: false,
-                        }
+                }
+
+                return station;
+            });
+
+        case UNNOTIFY_STATION:
+            return stations.map((station) => {
+                if (station.id === action.payload) {
+                    return {
+                        ...station,
+                        notify: false,
                     }
-            
-                    return station;        
-                });
+                }
+
+                return station;
+            });
 
         default:
             return stations;

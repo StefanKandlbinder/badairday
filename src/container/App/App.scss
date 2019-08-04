@@ -75,19 +75,19 @@
 }
 
 @media(min-width: 414px) {
-  .air__site--dashboard {
+  .air__site--favboard {
     max-width: 100%;
   }
 }
 
 @media(min-width: 415px) {
-  .air__site--dashboard {
+  .air__site--favboard {
     max-width: 320px;
   }
 }
 
 @media(min-width: 761px) {
-  .air--dashboard {
+  .air--favboard {
     .air__legend--horizontal {
       width: calc(100% - 320px);
     }

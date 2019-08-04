@@ -4,7 +4,8 @@ export const SET_UPDATER = 'SET_UPDATER';
 export const SET_GEOLOCATION = 'SET_GEOLOCATION';
 export const SET_SIDEBAR = 'SET_SIDEBAR';
 export const SET_BOTTOMSHEET = 'SET_BOTTOMSHEET';
-export const SET_DASHBOARD = 'SET_DASHBOARD';
+export const SET_FAVBOARD = 'SET_FAVBOARD';
+export const SET_NOTEBOARD = 'SET_NOTEBOARD';
 export const SET_MEDIA = 'SET_MEDIA';
 
 // action creators
@@ -38,8 +39,14 @@ export const setBottomSheet = ({ state, feature }) => ({
     meta: { feature }
 });
 
-export const setDashboard = ({ state, feature }) => ({
-    type: `${feature} ${SET_DASHBOARD}`,
+export const setFavboard = ({ state, feature }) => ({
+    type: `${feature} ${SET_FAVBOARD}`,
+    payload: state,
+    meta: { feature }
+});
+
+export const setNoteboard = ({ state, feature }) => ({
+    type: `${feature} ${SET_NOTEBOARD}`,
     payload: state,
     meta: { feature }
 });

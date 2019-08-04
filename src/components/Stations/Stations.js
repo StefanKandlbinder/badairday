@@ -62,7 +62,7 @@ class Stations extends Component {
         }
         if (this.props.media === "small") {
             this.props.history.push("/");
-            this.props.onSetDashboard({ state: false, feature: STATIONS });
+            this.props.onSetFavboard({ state: false, feature: STATIONS });
         }
     }
 

@@ -42,7 +42,7 @@ class Dashboard extends Component {
         }
 
         else {
-            this.props.onSetDashboard({ state: false, feature: STATIONS });
+            this.props.onSetFavboard({ state: false, feature: STATIONS });
         }
 
         return (

@@ -6,20 +6,35 @@ import PageVisibility from 'react-page-visibility';
 import { CSSTransition } from 'react-transition-group';
 import Media from 'react-media';
 
+/**
+ * ACTIONS
+ */
 import { STATIONS } from "../../redux/actions/stations";
-import { fetchStations, favorizeStation, unfavorizeStation } from "../../redux/actions/stations";
+import { fetchStations, favorizeStation, unfavorizeStation, notifyStation, unnotifyStation } from "../../redux/actions/stations";
 import { setLocation } from "../../redux/actions/location";
-import { setGeoLocation, setBottomSheet, setDashboard, setMedia } from "../../redux/actions/ui";
+import { setGeoLocation, setBottomSheet, setFavboard, setNoteboard, setMedia } from "../../redux/actions/ui";
 import { setNotification } from "../../redux/actions/notifications";
 import { setOptionAutoupdater } from "../../redux/actions/options";
 import { setOptionReverseGeo } from "../../redux/actions/options";
 import { setOptionRunaways } from "../../redux/actions/options";
 import { setOptionSort } from "../../redux/actions/options";
+
+/**
+ * STORAGE
+ */
 import { clearState } from '../../redux/localStorage';
 
+/**
+ * SERVICES
+ */
 import getGeoLocation from '../../services/getGeoLocation';
-import { getFavorizedStations } from '../../redux/filters/getFavorizedStations';
 import getWebShare from '../../services/getWebShare';
+
+/**
+ * FILTERS
+ */
+import { getFavorizedStations } from '../../redux/filters/getFavorizedStations';
+import { getNotifiedStations } from '../../redux/filters/getNotifiedStations';
 
 import SVGSprite from '../../components/UI/SVGSprite/SVGSprite';
 import Stations from '../../components/Stations/Stations';
@@ -54,7 +69,7 @@ const upperAustriaProvider = "upperaustria";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.dashboard = React.createRef();
+    this.favboard = React.createRef();
     this.BadAirDayNotifications = new BadAirDayNotifications();
 
     this.state = {
@@ -64,7 +79,7 @@ class App extends Component {
 
   componentDidMount() {
     if (this.props.media === "medium" && getFavorizedStations(this.props.stations).length) {
-      this.props.onSetDashboard({ state: true, feature: STATIONS });
+      this.props.onSetFavboard({ state: true, feature: STATIONS });
     }
 
     if (!this.props.stations.length) {
@@ -85,10 +100,10 @@ class App extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.media === "medium" && this.props.media === "small") {
-      this.props.onSetDashboard({ state: false, feature: STATIONS });
+      this.props.onSetFavboard({ state: false, feature: STATIONS });
     }
     else if (this.props.media === "medium" && getFavorizedStations(this.props.stations).length) {
-      this.props.onSetDashboard({ state: true, feature: STATIONS });
+      this.props.onSetFavboard({ state: true, feature: STATIONS });
     }
   }
 
@@ -131,22 +146,23 @@ class App extends Component {
 
   share = () => {
     const title = 'BadAirday';
-    const text =  'Verfolgen Sie die aktuelle Luftqualität in ihrer Nähe';
+    const text = 'Verfolgen Sie die aktuelle Luftqualität in ihrer Nähe';
     // const url =  'https://badairday.herokuapp.com/station/' + this.props.station.provider + "/" + this.props.station.id;
-    const url =  'https://badairday.netlify.com/';
+    const url = 'https://badairday.netlify.com/';
 
     getWebShare(title, text, url).then((success, reject) => {
-        // this.props.onSetNotification({ message: "Ihr Beitrag wurde geteilt.", feature: STATIONS, type: "success" });
-      }).catch((error) => {
-        this.props.onSetNotification({ message: error.message, feature: STATIONS, type: "info" });
-      });
+      // this.props.onSetNotification({ message: "Ihr Beitrag wurde geteilt.", feature: STATIONS, type: "success" });
+    }).catch((error) => {
+      this.props.onSetNotification({ message: error.message, feature: STATIONS, type: "info" });
+    });
   }
 
   render() {
     let sidebar = null;
     let optionsSheet = null;
     let shareSection = null;
-    let dashboard = null;
+    let favboard = null;
+    let noteboard = null;
     // let mapgl = null;
     let tabbar = null;
     let updateBar = null;
@@ -155,24 +171,24 @@ class App extends Component {
 
     if (navigator.share) {
       shareSection = <React.Fragment>
-          <ListHeader className="air__list-header air__list-header--sticky air__color-primary--active air__border-radius-top--2">Social</ListHeader>        
-          <List className="air__list air__border-radius-top--2">
-            <ListItem className="air__list-item air__flex--justify-content-space-between">
-              Teile mich
+        <ListHeader className="air__list-header air__list-header--sticky air__color-primary--active air__border-radius-top--2">Social</ListHeader>
+        <List className="air__list air__border-radius-top--2">
+          <ListItem className="air__list-item air__flex--justify-content-space-between">
+            Teile mich
               <Button clicked={this.share} className="air__button air__button--naked air__button--ghost air__bottom-sheet-button air__bottom-button-share">
-                  <svg xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      className="air__bottom-sheet-button-icon">
-                      <path d="M0 0h24v24H0z" fill="none" />
-                      <path 
-                          d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
-                  </svg>
-              </Button>
-            </ListItem>
-          </List>
-        </React.Fragment>
+              <svg xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                className="air__bottom-sheet-button-icon">
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
+              </svg>
+            </Button>
+          </ListItem>
+        </List>
+      </React.Fragment>
     }
 
     sidebar = <Sidebar>
@@ -263,23 +279,23 @@ class App extends Component {
         aria-label="Map"
         activeClassName="air__button--active"
         exact to={"/"}
-        onClick={() => this.props.history.location.pathname === "/" ? this.onUpdateStations() : this.props.onSetDashboard({ state: false, feature: STATIONS })}>
+        onClick={() => this.props.history.location.pathname === "/" ? this.onUpdateStations() : (this.props.onSetFavboard({ state: false, feature: STATIONS }), this.props.onSetNoteboard({ state: false, feature: STATIONS }))}>
         <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <use xlinkHref="#airSVGMap"></use>
         </svg>
         Karte
       </NavLink>
-      {this.props.media === "small" 
+      {this.props.media === "small"
         ? <NavLink
-        onClick={() => this.props.dashboard ? this.onUpdateStations() : this.props.onSetDashboard({ state: true, feature: STATIONS })}
-        className={`air__tabbar-link air__button air__button--label air__button--naked ${!getFavorizedStations(this.props.stations).length ? "air__button--inactive" : ""}`}
-        aria-label="List"
-        activeClassName="air__button--active"
-        to={"/dashboard"}>
-        <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <use xlinkHref="#airSVGFavList"></use>
-        </svg>
-        Favoriten
+          onClick={() => this.props.favboard ? this.onUpdateStations() : this.props.onSetFavboard({ state: true, feature: STATIONS })}
+          className={`air__tabbar-link air__button air__button--label air__button--naked ${!getFavorizedStations(this.props.stations).length ? "air__button--inactive" : ""}`}
+          aria-label="List"
+          activeClassName="air__button--active"
+          to={"/favboard"}>
+          <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <use xlinkHref="#airSVGFavList"></use>
+          </svg>
+          Favoriten
         </NavLink>
         : null
       }
@@ -289,11 +305,29 @@ class App extends Component {
         aria-label="Map"
         activeClassName="air__button--active"
         exact to={"/mapgl"}
-        onClick={() => this.props.history.location.pathname === "/mapgl" ? this.onUpdateStations() : this.props.onSetDashboard({ state: false, feature: STATIONS })}>
+        onClick={() => this.props.history.location.pathname === "/mapgl" ? this.onUpdateStations() : this.props.onSetFavboard({ state: false, feature: STATIONS })}>
         <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <use xlinkHref="#airSVGMap"></use>
         </svg>
       </NavLink>*/}
+      {('Notification' in window && navigator.serviceWorker) ?
+        <NavLink
+          onClick={() => this.props.noteboard ? this.onUpdateStations() : this.props.onSetNoteboard({ state: true, feature: STATIONS })}
+          className={`air__tabbar-link air__button air__button--label air__button--naked ${!getNotifiedStations(this.props.stations).length ? "air__button--inactive" : ""}`}
+          aria-label="List"
+          activeClassName="air__button--active"
+          to={"/noteboard"}>
+          <svg xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            className="air__button-icon"
+            stroke="rgba(255,255,255,0.9)"
+            strokeWidth="1">
+            <use xlinkHref="#airSVGNotify"></use>
+          </svg>
+          Push
+        </NavLink>
+        : null
+      }
       <NavLink
         className="air__tabbar-link air__button air__button--label air__button--naked"
         aria-label="Options Sheet"
@@ -306,21 +340,36 @@ class App extends Component {
       </NavLink>
     </Tabbar>
 
-    dashboard = <div className="air__site air__site--dashboard"
-      onTouchStart = {(e) => {
+    favboard = <div className="air__site air__site--favboard"
+      onTouchStart={(e) => {
         if (this.props.media === "small") {
-          this.props.history.push("/dashboard");
+          this.props.history.push("/favboard");
         }
-        this.dashboard.current.focus();
+        this.favboard.current.focus();
       }}
-      ref={this.dashboard}>
-        <Dashboard stations={this.props.stations}
-          options={this.props.options} 
-          onSetDashboard={this.props.onSetDashboard}
-          onFavorizeStation={this.props.onFavorizeStation} 
-          onUnfavorizeStation={this.props.onUnfavorizeStation} />
-      </div>;
-    
+      ref={this.favboard}>
+      <Dashboard stations={this.props.stations}
+        options={this.props.options}
+        onSetFavboard={this.props.onSetFavboard}
+        onFavorizeStation={this.props.onFavorizeStation}
+        onUnfavorizeStation={this.props.onUnfavorizeStation} />
+    </div>;
+
+    noteboard = <div className="air__site air__site--noteboard"
+      onTouchStart={(e) => {
+        if (this.props.media === "small") {
+          this.props.history.push("/noteboard");
+        }
+        this.noteboard.current.focus();
+      }}
+      ref={this.noteboard}>
+      <Dashboard stations={this.props.stations}
+        options={this.props.options}
+        onSetNoteboard={this.props.onSetNoteboard}
+        onNotifyStation={this.props.onNotifyStation}
+        onUnnotifyStation={this.props.onUnnotifyStation} />
+    </div>;
+
     /* mapgl = <div className="air__site">
       <DeckGLStations stations={this.props.stations}
         position={this.props.position} />
@@ -342,24 +391,24 @@ class App extends Component {
 
     if (this.props.stations) {
       app = <React.Fragment>
-          <Stations stations={this.props.stations}
-            options={this.props.options} 
-            update={this.props.update} 
-            media={this.props.media} 
-            position={this.props.position} 
-            onSetDashboard={this.props.onSetDashboard} />
-          <Route
-            path="/station/:provider/:id"
-            render={() =>
-            <Station media={this.props.media} 
-              onSetDashboard={this.props.onSetDashboard} />
+        <Stations stations={this.props.stations}
+          options={this.props.options}
+          update={this.props.update}
+          media={this.props.media}
+          position={this.props.position}
+          onSetFavboard={this.props.onSetFavboard} />
+        <Route
+          path="/station/:provider/:id"
+          render={() =>
+            <Station media={this.props.media}
+              onSetFavboard={this.props.onSetFavboard} />
           } />
-        </React.Fragment>
+      </React.Fragment>
     }
 
     return (
       <PageVisibility onChange={this.handleVisibilityChange}>
-        <div className={this.props.dashboard ? "air air--dashboard" : "air"}>
+        <div className={this.props.favboard ? "air air--favboard" : "air"}>
           <SVGSprite />
 
           {background}
@@ -371,7 +420,7 @@ class App extends Component {
             mountOnEnter
             unmountOnExit>
             {app}
-          </CSSTransition>          
+          </CSSTransition>
 
           {/*<CSSTransition
             in={this.props.history.location.pathname === "/mapgl" ? true : false}
@@ -392,13 +441,23 @@ class App extends Component {
           />
 
           <CSSTransition
-            in={this.props.dashboard}
+            in={this.props.favboard}
             // in={this.props.media === "medium" ? true : false}
             classNames="air__animation-site-transition"
             timeout={300}
             mountOnEnter
             unmountOnExit>
-            {dashboard}
+            {favboard}
+          </CSSTransition>
+
+          <CSSTransition
+            in={this.props.noteboard}
+            // in={this.props.media === "medium" ? true : false}
+            classNames="air__animation-site-transition"
+            timeout={300}
+            mountOnEnter
+            unmountOnExit>
+            {noteboard}
           </CSSTransition>
 
           <Button
@@ -410,7 +469,7 @@ class App extends Component {
             </svg>
           </Button>
 
-          <Legend className="air__legend--horizontal"/>
+          <Legend className="air__legend--horizontal" />
 
           {tabbar}
 
@@ -481,7 +540,8 @@ const mapStateToProps = state => {
     updating: state.ui.updating,
     geolocation: state.ui.geolocation,
     bottomsheet: state.ui.bottomsheet,
-    dashboard: state.ui.dashboard,
+    favboard: state.ui.favboard,
+    noteboard: state.ui.noteboard,
     media: state.ui.media,
     position: state.location,
     notifications: state.notifications,
@@ -497,10 +557,13 @@ const mapDispatchToProps = dispatch => {
     onSetLocation: (location) => dispatch(setLocation(location)),
     onFavorizeStation: (id) => dispatch(favorizeStation(id)),
     onUnfavorizeStation: (id) => dispatch(unfavorizeStation(id)),
+    onNotifyStation: (id) => dispatch(notifyStation(id)),
+    onUnnotifyStation: (id) => dispatch(unnotifyStation(id)),
     onSetGeoLocation: (geoLocation) => dispatch(setGeoLocation(geoLocation)),
     onSetBottomSheet: (bottomSheet) => dispatch(setBottomSheet(bottomSheet)),
     onSetMedia: (media) => dispatch(setMedia(media)),
-    onSetDashboard: (dashboard) => dispatch(setDashboard(dashboard)),
+    onSetFavboard: (favboard) => dispatch(setFavboard(favboard)),
+    onSetNoteboard: (noteboard) => dispatch(setNoteboard(noteboard)),
     onSetOptionAutoupdater: (autoupdater) => dispatch(setOptionAutoupdater(autoupdater)),
     onSetOptionReverseGeo: (reversegeo) => dispatch(setOptionReverseGeo(reversegeo)),
     onSetOptionRunaways: (runaways) => dispatch(setOptionRunaways(runaways)),

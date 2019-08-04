@@ -1,4 +1,13 @@
-import { SET_LOADER, SET_UPDATER, SET_GEOLOCATION, SET_SIDEBAR, SET_BOTTOMSHEET, SET_DASHBOARD, SET_MEDIA } from "../actions/ui";
+import { 
+    SET_LOADER, 
+    SET_UPDATER, 
+    SET_GEOLOCATION, 
+    SET_SIDEBAR, 
+    SET_BOTTOMSHEET, 
+    SET_FAVBOARD,
+    SET_NOTEBOARD,
+    SET_MEDIA 
+} from "../actions/ui";
 
 const initState = {
     loading: false,
@@ -6,7 +15,8 @@ const initState = {
     geolocation: false,
     sidebar: false,
     bottomsheet: false,
-    dashboard: false,
+    favboard: false,
+    noteboard: false,
     media: {
         size: "small"
     }
@@ -30,8 +40,11 @@ export const uiReducer = (ui = initState, action) => {
         case action.type.includes(SET_BOTTOMSHEET):
             return { ...ui, bottomsheet: action.payload };
         
-        case action.type.includes(SET_DASHBOARD):
-            return { ...ui, dashboard: action.payload };
+        case action.type.includes(SET_FAVBOARD):
+            return { ...ui, favboard: action.payload };
+        
+        case action.type.includes(SET_NOTEBOARD):
+            return { ...ui, noteboard: action.payload };
         
         case action.type.includes(SET_MEDIA):
             return { ...ui, media: action.payload };
