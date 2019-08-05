@@ -57,8 +57,6 @@ class Stations extends Component {
 
     // go back to the main route
     handleClickMap = () => {
-        console.log("Noteboard: ", this.props.noteboard, this.props.favboard);
-
         if (this.props.location.pathname === "/bottomsheet" || this.props.location.pathname.includes("/station")) {
             this.props.history.push("/");
         }

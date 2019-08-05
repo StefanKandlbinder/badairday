@@ -20,6 +20,8 @@
     transition: color var(--air__animation-duration) var(--air__animation-timing);
 
     .air__button-icon {
+        width: 24px;
+        height: 24px;
         fill: var(--air__color-primary--weak);
         transition: fill var(--air__animation-duration) var(--air__animation-timing);
     }
