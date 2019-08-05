@@ -244,6 +244,7 @@ class App extends Component {
               className={`air__toggle ${this.props.options.reversegeo ? "air__toggle--active" : "air__toggle--inactive"}`}
               clicked={() => this.props.onSetOptionReverseGeo({ state: this.props.options.reversegeo ? false : true, feature: STATIONS })}>
               ReverseGeo
+              <small>Umwandlung der GPS-Daten in reale Adresse.</small>
             </Toggle>
           </ListItem>
           <ListItem className="air__list-item air__flex--justify-content-space-between">
@@ -251,18 +252,21 @@ class App extends Component {
               className={`air__toggle ${this.props.options.runaways ? "air__toggle--active" : "air__toggle--inactive"}`}
               clicked={() => this.props.onSetOptionRunaways({ state: this.props.options.runaways ? false : true, feature: STATIONS })}>
               Runaways
+              <small>Ausreißer(PM10 >= 1999) werden ausgeblendet.</small>
             </Toggle>
           </ListItem>
           <ListItem className="air__list-item air__flex--justify-content-space-between">
             <Toggle className={`air__toggle ${this.props.options.sort ? "air__toggle--active" : "air__toggle--inactive"}`}
               clicked={() => this.props.onSetOptionSort({ state: this.props.options.sort ? false : true, feature: STATIONS })}>
               Sort
+              <small>Sortierung anhand des PM10 Wertes.</small>
             </Toggle>
           </ListItem>
           <ListItem className="air__list-item air__flex--justify-content-space-between">
             <Toggle className={`air__toggle ${this.props.options.autoupdating ? "air__toggle--active" : "air__toggle--inactive"}`}
               clicked={() => this.props.onSetOptionAutoupdater({ state: this.props.options.autoupdating ? false : true, feature: STATIONS })}>
               Autoupdater
+              <small>Alle 5 Minuten erfolgt automatisch ein Update.</small>
             </Toggle>
           </ListItem>
         </List>

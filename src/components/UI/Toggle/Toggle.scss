@@ -23,6 +23,9 @@
 .air__toggle-label {
     color: var(--air__color-primary--active);
     font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }
 
 .air__toggle--active {
