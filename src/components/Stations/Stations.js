@@ -20,8 +20,6 @@ class Stations extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props);
-        
         this.getStations();
         this.refs.map.leafletElement.zoomControl.setPosition("bottomleft");
         // console.log(this.refs.map.leafletElement.zoomControl.options.position);

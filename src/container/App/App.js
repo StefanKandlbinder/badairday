@@ -127,6 +127,24 @@ class App extends Component {
     this.props.onFetchStations(upperAustriaURL, upperAustriaProvider, "UPDATE");
   }
 
+  onResetPushFav = () => {
+    this.props.onSetFavboard({ state: false, feature: STATIONS })
+    this.props.onSetNoteboard({ state: false, feature: STATIONS })
+  }
+
+  onSetFav = () => {
+    if (this.props.favboard && !this.props.noteboard) {
+      this.onUpdateStations()
+      this.props.onSetNoteboard({ state: false, feature: STATIONS })
+    }
+    if (this.props.noteboard) {
+      this.props.onSetNoteboard({ state: false, feature: STATIONS })
+    }
+    
+    this.props.onSetFavboard({ state: true, feature: STATIONS })
+    
+  }
+
   handleVisibilityChange = isVisible => {
     this.onUpdateStations();
   }
@@ -279,7 +297,7 @@ class App extends Component {
         aria-label="Map"
         activeClassName="air__button--active"
         exact to={"/"}
-        onClick={() => this.props.history.location.pathname === "/" ? this.onUpdateStations() : (this.props.onSetFavboard({ state: false, feature: STATIONS }), this.props.onSetNoteboard({ state: false, feature: STATIONS }))}>
+        onClick={() => this.props.history.location.pathname === "/" ? this.onUpdateStations() : this.onResetPushFav()}>
         <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <use xlinkHref="#airSVGMap"></use>
         </svg>
@@ -287,7 +305,7 @@ class App extends Component {
       </NavLink>
       {this.props.media === "small"
         ? <NavLink
-          onClick={() => this.props.favboard ? this.onUpdateStations() : this.props.onSetFavboard({ state: true, feature: STATIONS })}
+          onClick={this.onSetFav}
           className={`air__tabbar-link air__button air__button--label air__button--naked ${!getFavorizedStations(this.props.stations).length ? "air__button--inactive" : ""}`}
           aria-label="List"
           activeClassName="air__button--active"
