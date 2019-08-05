@@ -20,6 +20,8 @@ class Stations extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props);
+        
         this.getStations();
         this.refs.map.leafletElement.zoomControl.setPosition("bottomleft");
         // console.log(this.refs.map.leafletElement.zoomControl.options.position);
@@ -57,12 +59,20 @@ class Stations extends Component {
 
     // go back to the main route
     handleClickMap = () => {
+        console.log("Noteboard: ", this.props.noteboard, this.props.favboard);
+
         if (this.props.location.pathname === "/bottomsheet" || this.props.location.pathname.includes("/station")) {
             this.props.history.push("/");
         }
-        if (this.props.media === "small") {
+
+        if (this.props.media === "small" && this.props.favboard) {
             this.props.history.push("/");
             this.props.onSetFavboard({ state: false, feature: STATIONS });
+        }
+
+        if (this.props.noteboard) {
+            this.props.history.push("/");
+            this.props.onSetNoteboard({ state: false, feature: STATIONS });
         }
     }
 

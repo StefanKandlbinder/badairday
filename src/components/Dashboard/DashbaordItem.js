@@ -14,7 +14,17 @@ class Sample extends Component {
 class DashboardItem extends Component {
 
     onToggleFavorized = (id) => {
-        !this.props.station.favorized ? this.props.onFavorizeStation(id) : this.props.onUnfavorizeStation(id);
+        switch(this.props.type) {
+            case "favorized":
+                !this.props.station.favorized ? this.props.onAdd(id) : this.props.onRemove(id);
+                break;
+            case "notify":
+                !this.props.station.notify ? this.props.onAdd(id) : this.props.onRemove(id);
+                break;
+            default: 
+                break;
+        }   
+        
     }
 
     render() {
@@ -86,7 +96,7 @@ class DashboardItem extends Component {
                     </div>
         }
 
-        if (this.props.station.favorized) {
+        if (this.props.station.favorized || this.props.station.notify) {
             airStationClasses += " air__dashboard-item--favorized";
         }
         else {

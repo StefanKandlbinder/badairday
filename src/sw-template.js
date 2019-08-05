@@ -70,11 +70,11 @@ workbox.routing.registerRoute(
 
 self.addEventListener('push', event => {
   const data = event.data.json();
-  console.log('New notification', data);
 
   var options = {
     title: data.title,
     body: data.body,
+    tag: data.data.tag,
     icon: data.icon,
     data: {
       url: data.data.url

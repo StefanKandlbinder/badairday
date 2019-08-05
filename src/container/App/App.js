@@ -348,26 +348,25 @@ class App extends Component {
         this.favboard.current.focus();
       }}
       ref={this.favboard}>
-      <Dashboard stations={this.props.stations}
+      <Dashboard 
+        stations={this.props.stations}
         options={this.props.options}
-        onSetFavboard={this.props.onSetFavboard}
-        onFavorizeStation={this.props.onFavorizeStation}
-        onUnfavorizeStation={this.props.onUnfavorizeStation} />
+        onSet={this.props.onSetFavboard}
+        onAdd={this.props.onFavorizeStation}
+        onRemove={this.props.onUnfavorizeStation}
+        getActive={getFavorizedStations}
+        type = "favorized" />
     </div>;
 
-    noteboard = <div className="air__site air__site--noteboard"
-      onTouchStart={(e) => {
-        if (this.props.media === "small") {
-          this.props.history.push("/noteboard");
-        }
-        this.noteboard.current.focus();
-      }}
-      ref={this.noteboard}>
-      <Dashboard stations={this.props.stations}
+    noteboard = <div className="air__site air__site--favboard">
+      <Dashboard 
+        stations={this.props.stations}
         options={this.props.options}
-        onSetNoteboard={this.props.onSetNoteboard}
-        onNotifyStation={this.props.onNotifyStation}
-        onUnnotifyStation={this.props.onUnnotifyStation} />
+        onSet={this.props.onSetNoteboard}
+        onAdd={this.props.onNotifyStation}
+        onRemove={this.props.onUnnotifyStation}
+        getActive={getNotifiedStations}
+        type = "notify" />
     </div>;
 
     /* mapgl = <div className="air__site">
@@ -396,12 +395,19 @@ class App extends Component {
           update={this.props.update}
           media={this.props.media}
           position={this.props.position}
-          onSetFavboard={this.props.onSetFavboard} />
+          favboard={this.props.favboard}
+          noteboard={this.props.noteboard}
+          onSetFavboard={this.props.onSetFavboard}
+          onSetNoteboard={this.props.onSetNoteboard}/>
         <Route
           path="/station/:provider/:id"
           render={() =>
-            <Station media={this.props.media}
-              onSetFavboard={this.props.onSetFavboard} />
+            <Station 
+              media={this.props.media}
+              favboard={this.props.favboard}
+              noteboard={this.props.noteboard}
+              onSetFavboard={this.props.onSetFavboard}
+              onSetNoteboard={this.props.onSetNoteboard} />
           } />
       </React.Fragment>
     }

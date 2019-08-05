@@ -3,20 +3,19 @@ import { withRouter } from 'react-router';
 import sortBy from 'lodash/sortBy';
 
 import { STATIONS } from "../../redux/actions/stations";
-import { getFavorizedStations } from '../../redux/filters/getFavorizedStations';
 
 import DashboardItem from "./DashbaordItem";
 import './Dashboard.scss';
 
 class Dashboard extends Component {
     componentDidUpdate(prevProps) {
-        if (!getFavorizedStations(this.props.stations).length && getFavorizedStations(prevProps.stations).length === 1) {
+        if (!this.props.getActive(this.props.stations).length && this.props.getActive(prevProps.stations).length === 1) {
             this.props.history.push("/");
         }
     }
     
     render() {
-        let stations = getFavorizedStations(this.props.stations);
+        let stations = this.props.getActive(this.props.stations);
 
         if (this.props.options.sort) {
           stations = sortBy(stations, ['mood']).reverse();
@@ -42,7 +41,7 @@ class Dashboard extends Component {
         }
 
         else {
-            this.props.onSetFavboard({ state: false, feature: STATIONS });
+            this.props.onSet({ state: false, feature: STATIONS });
         }
 
         return (
@@ -51,8 +50,9 @@ class Dashboard extends Component {
                     <DashboardItem
                         key={station.id}
                         station={station} 
-                        onFavorizeStation={this.props.onFavorizeStation} 
-                        onUnfavorizeStation={this.props.onUnfavorizeStation} />
+                        onAdd={this.props.onAdd} 
+                        onRemove={this.props.onRemove}
+                        type={this.props.type} />
                 )}
                 <li className="air__spacer" style={moodStyle}></li>
             </ul>
