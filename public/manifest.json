@@ -135,7 +135,8 @@
       "sizes": "16x16"
     }
   ],
-  "start_url": "./index.html",
+  "start_url": "/",
+  "scope": "/",
   "orientation": "portrait-primary",
   "display": "standalone",
   "theme_color": "#00796b",
