@@ -116,15 +116,17 @@
 }
 
 .air__comp--temp {
-    order: 8;
-}
-
-.air__comp-wind-direction {
-    order: 6;
-}
-
-.air__comp-wind-force {
     order: 7;
+}
+
+.air__station-windtemp {
+    display: flex;
+    order: 6;
+    margin-top: var(--air__margin--3);
+
+    .air__comp--temp {
+        margin-left: var(--air__margin--2);
+    }
 }
 
 .air__station-date + .air__comp-wind {

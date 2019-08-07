@@ -23,14 +23,28 @@
     font-size: 16px !important;
 }
 
+.air__comp--wind {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    line-height: 1;
+    letter-spacing: 1px;
+}
+
 .air__comp-wind-direction {
-    margin-top: 10px;
+    margin-right: var(--air__margin--2);
     font-size: 12px;
     color: var(--air__color-text);
     line-height: 1.2;
     transition: transform var(--air__animation-duration) var(--air__animation-timing);
     transform-origin: center center;
     will-change: transform;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    border: 1px solid var(--air__color-text);
+    border-radius: 50%;
 }
 
 .air__comp-wind-direction-svg {
@@ -45,9 +59,21 @@
 .air__comp-wind-force {
     font-size: 12px;
     color: var(--air__color-text);
-    line-height: 1.2;
+}
+
+.air__comp--wind,
+.air__comp--temp {
+    font-size: 12px;
+    
+    .air__comp-unit {
+        font-size: 11px;
+    }
 }
 
 .air__comp--temp {
     order: 1;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    letter-spacing: 1px;
 }

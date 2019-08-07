@@ -99,7 +99,7 @@ class Station extends Component {
             this.state.animationHexagon.beginElement();
         }
 
-        if (this.props.station.favorized !== prevProps.station.favorized) {
+        if (this.props.station.favorized !== prevProps.station.favorized || this.props.station.notify !== prevProps.station.notify) {
             change.play();
         }
     }
@@ -180,8 +180,11 @@ class Station extends Component {
 
     getAirComps() {
         let compItems = [];
+        let wind = [];
+        let temp = null;
 
         if (this.props.station.provider === "upperaustria") {
+            
             Object.entries(this.props.station.components).forEach(([key, value]) => {
                 if (value.unit === "µg/m³") {
 
@@ -197,19 +200,31 @@ class Station extends Component {
                             value={value.value} />
                     })
 
-                    compItems.push(<Aircomp key={key}
+                    wind.push(<Aircomp key={key}
                         component={key}
                         value={value.value}
                         unit={value.unit} />);
                 }
 
-                else {
-                    compItems.push(<Aircomp key={key}
+                else if (key === "WIV") {
+                    wind.push(<Aircomp key={key}
+                        component={key}
+                        value={value.value}
+                        unit={value.unit} />);
+                }
+
+                else if (key === "TEMP") {
+                    temp = (<Aircomp key={key}
                         component={key}
                         value={value.value}
                         unit={value.unit} />);
                 }
             });
+
+            const windItem = (<div className="air__comp air__comp--wind">{wind}</div>)
+            const windTempItem = (<div className="air__station-windtemp" key="windtemp">{windItem}{temp}</div>)
+
+            compItems.push(windTempItem);
 
             return (compItems);
         }
