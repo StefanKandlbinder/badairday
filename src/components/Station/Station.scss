@@ -93,7 +93,7 @@
     font-size: 12px;
     font-style: italic;
     color: var(--air__color-text);
-    margin-bottom: 10px;
+    margin-bottom: var(--air__margin);
     margin-top: -4px;
     order: 2;
 }
@@ -121,8 +121,7 @@
 
 .air__station-windtemp {
     display: flex;
-    order: 6;
-    margin-top: var(--air__margin--3);
+    order: 2;
 
     .air__comp--temp {
         margin-left: var(--air__margin--2);

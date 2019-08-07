@@ -2,7 +2,15 @@
     display: flex;
     justify-content: center;
     color: var(--air__color-text);
-    line-height: 1.35;
+    line-height: 1.2;
+}
+
+.air__comp.air__comp--dust {
+    margin-top: var(--air__margin--2);
+    
+    &+ .air__comp.air__comp--dust {
+        margin-top: 0;
+    }
 }
 
 .air__comp--dust .air__comp-title,
