@@ -39,20 +39,22 @@
     transition: transform var(--air__animation-duration) var(--air__animation-timing);
     transform-origin: center center;
     will-change: transform;
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     display: flex;
     justify-content: center;
     border: 1px solid var(--air__color-text);
     border-radius: 50%;
 }
 
-.air__comp-wind-direction-svg {
-    width: 18px;
-    height: 18px;
+.air__comp-wind-direction-svg,
+.air__comp-temp-svg {
+    width: 16px;
+    height: 16px;
 }
 
-.air__comp-wind-direction-svg path {
+.air__comp-wind-direction-svg path,
+.air__comp-temp-svg path {
     fill: var(--air__color-text);
 }
 
