@@ -68,6 +68,7 @@
 .air__station-header {
     /* background: rgba(0, 0, 0, 0.75); */
     font-size: 20px;
+    font-weight: 500;
     color: var(--air__color-text);
     letter-spacing: var(--air__letter-spacing);
     padding: 4px 40px;
@@ -121,7 +122,8 @@
 
 .air__station-windtemp {
     display: flex;
-    order: 2;
+    order: 5;
+    margin-top: var(--air__margin);
 
     .air__comp--temp {
         margin-left: var(--air__margin--2);
