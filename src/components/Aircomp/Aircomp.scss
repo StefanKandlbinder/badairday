@@ -5,14 +5,6 @@
     line-height: 1.2;
 }
 
-.air__comp.air__comp--dust {
-    margin-top: var(--air__margin--2);
-    
-    &+ .air__comp.air__comp--dust {
-        margin-top: 0;
-    }
-}
-
 .air__comp--dust .air__comp-title,
 .air__comp--dust .air__comp-value {
     width: 90px;
