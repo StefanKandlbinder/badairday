@@ -125,6 +125,7 @@
     display: flex;
     order: 5;
     margin-top: var(--air__margin);
+    opacity: 0.9;
 
     .air__comp--temp {
         margin-left: var(--air__margin--2);
