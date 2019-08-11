@@ -1,4 +1,5 @@
 import find from 'lodash/find';
+import unionBy from 'lodash/unionBy';
 import ReverseGeocode from 'esri-leaflet-geocoder';
 
 import { dataNormalized } from "../actions/data";
@@ -23,23 +24,33 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
 
     const updateStations = (stations, provider) => {
         if (stations) {
+            // get the latest
+            stations = unionBy(stations.reverse(), 'sensor.id');
+
             stations.map(station => {
                 let components = normalizeComponents(station.sensordatavalues);
                 let name = null;
 
-                let stationModel = new Station(provider,
-                    station.sensor.id.toString(),
-                    name,
-                    getStringDateLuftdaten(station.timestamp),
-                    parseFloat(station.location.latitude),
-                    parseFloat(station.location.longitude),
-                    components,
-                    components.PM10 ? components.PM10.value : 0)
+                let stationModel = new Station(
+                    "Feature",
+                    { type: "Point",
+                    coordinates: 
+                        [parseFloat(station.location.latitude), parseFloat(station.location.longitude), 0]
+                    },
+                    {
+                        provider: provider,
+                        id: station.sensor.id.toString(),
+                        name: name,
+                        date: getStringDateLuftdaten(station.timestamp),
+                        components: components,
+                        mood: (components.PM10 ? components.PM10.value : 0),
+                        moodRGBA: "rgba(70, 70, 70, 0.75)",
+                    })
 
-                let filteredStation = getState().stations.filter(station => station.id === stationModel.id)
+                let filteredStation = getState().stations.features.filter(station => station.properties.id === stationModel.properties.id)
 
                 if (filteredStation.length) {
-                    if (getUnixDateFromLuftdaten(filteredStation[0].date) < getUnixDateFromLuftdaten(stationModel.date)) {
+                    if (getUnixDateFromLuftdaten(filteredStation[0].properties.date) < getUnixDateFromLuftdaten(stationModel.properties.date)) {
                         return dispatch(updateStation({ station: stationModel, provider: provider }))
                     }
                     else
@@ -72,7 +83,8 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
     }
 
     const getStations = (stations, provider, update) => {
-        // console.log(getState().tokens.reversegeo.timestamp);
+        // get the latest
+        stations = unionBy(stations.reverse(), 'sensor.id');
 
         if (getState().tokens.reversegeo.timestamp + 7200 > Date.now() || getState().tokens.reversegeo.timestamp === undefined) {
             getArcgisToken()
@@ -105,41 +117,61 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                         if (result) {
                             name = result.address.ShortLabel;
 
-                            let stationModel = new Station(provider,
-                                station.sensor.id.toString(),
-                                name,
-                                getStringDateLuftdaten(station.timestamp),
-                                parseFloat(station.location.latitude),
-                                parseFloat(station.location.longitude),
-                                components,
-                                components.PM10 ? parseFloat(components.PM10.value) : 0);
+                            let stationModel = new Station(
+                                "Feature",
+                                { type: "Point",
+                                coordinates: 
+                                    [parseFloat(station.location.latitude), parseFloat(station.location.longitude), 0]
+                                },
+                                {
+                                    provider: provider,
+                                    id: station.sensor.id.toString(),
+                                    name: name,
+                                    date: getStringDateLuftdaten(station.timestamp),
+                                    components: components,
+                                    mood: (components.PM10 ? components.PM10.value : 0),
+                                    moodRGBA: "rgba(70, 70, 70, 0.75)",
+                                    marker: {},
+                                    favorized: false,
+                                    notify: false,
+                                })
 
                             dispatch(updateStation({ station: stationModel, provider: provider }))
                         }
                     });
             }
 
-            let stationModel = new Station(provider,
-                station.sensor.id.toString(),
-                name,
-                getStringDateLuftdaten(station.timestamp),
-                parseFloat(station.location.latitude),
-                parseFloat(station.location.longitude),
-                components,
-                components.PM10 ? components.PM10.value : 0)
+            let stationModel = new Station(
+                "Feature",
+                { type: "Point",
+                coordinates: 
+                    [parseFloat(station.location.latitude), parseFloat(station.location.longitude), 0]
+                },
+                {
+                    provider: provider,
+                    id: station.sensor.id.toString(),
+                    name: name,
+                    date: getStringDateLuftdaten(station.timestamp),
+                    components: components,
+                    mood: (components.PM10 ? components.PM10.value : 0),
+                    moodRGBA: "rgba(70, 70, 70, 0.75)",
+                    marker: {},
+                    favorized: false,
+                    notify: false,
+                })
 
-            let persistedStations = getState().stations;
+            let persistedStations = getState().stations.features;
 
             if (persistedStations.length) {
-                if (find(persistedStations, ['id', stationModel.id]) !== undefined || stationModel.mood > 1900) {
+                if (find(persistedStations, ['properties.id', stationModel.properties.id]) !== undefined) {
                     return false
                 }
                 else {
                     dispatch(addStation({ station: stationModel, provider: provider }))
                 }
             }
-
-            else if (update === false && stationModel.mood < 1900) {
+            
+            else if (!update) {
                 return dispatch(addStation({ station: stationModel, provider: provider }))
             }
 

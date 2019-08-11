@@ -78,7 +78,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    if (this.props.media === "medium" && getFavorizedStations(this.props.stations).length) {
+    if (this.props.media === "medium" && getFavorizedStations(this.props.stations.features).length) {
       this.props.onSetFavboard({ state: true, feature: STATIONS });
     }
 
@@ -410,7 +410,7 @@ class App extends Component {
     background = <div className="air__background"></div>;
     background = null;
 
-    if (this.props.stations) {
+    if (this.props.stations.features) {
       app = <React.Fragment>
         <Stations stations={this.props.stations}
           options={this.props.options}

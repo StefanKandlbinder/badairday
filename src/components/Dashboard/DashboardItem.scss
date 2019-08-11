@@ -1,5 +1,5 @@
 .air__dashboard-item {
-    padding: var(--air__margin--3) var(--air__margin--3);
+    padding: var(--air__margin--3) var(--air__margin--2);
     text-align: left;
     /* border-bottom: 1px solid rgba(255, 255, 255, 1); */
     color: rgba(255, 255, 255, 1);
@@ -88,7 +88,7 @@
     align-items: flex-start;
     font-size: 12px;
     font-weight: 300;
-    color: rgba(255, 255, 255, 1);
+    color: rgba(255, 255, 255, 0.9);
     margin-right: var(--air__margin--2);
     width: 65px;
   }

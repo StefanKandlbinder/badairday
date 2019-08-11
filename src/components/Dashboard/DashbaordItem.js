@@ -16,10 +16,10 @@ class DashboardItem extends Component {
     onToggleFavorized = (id) => {
         switch(this.props.type) {
             case "favorized":
-                !this.props.station.favorized ? this.props.onAdd(id) : this.props.onRemove(id);
+                !this.props.station.properties.favorized ? this.props.onAdd(id) : this.props.onRemove(id);
                 break;
             case "notify":
-                !this.props.station.notify ? this.props.onAdd(id) : this.props.onRemove(id);
+                !this.props.station.properties.notify ? this.props.onAdd(id) : this.props.onRemove(id);
                 break;
             default: 
                 break;
@@ -29,7 +29,7 @@ class DashboardItem extends Component {
 
     render() {
         let moodStyle = {
-            backgroundColor: this.props.station.components["PM10"].update ? this.props.station.moodRGBA : "rgba(70, 70, 70, 0.75)"
+            backgroundColor: this.props.station.properties.components["PM10"].update ? this.props.station.properties.moodRGBA : "rgba(70, 70, 70, 0.75)"
         }
 
         let airStationClasses = "air__dashboard-item";
@@ -42,27 +42,27 @@ class DashboardItem extends Component {
         let wind = null;
         let temp = null;
 
-        if (this.props.station.components.NO2) {
-            no2 = <Sample classes="air__dashboard-item-component" component={this.props.station.components.NO2}></Sample>
+        if (this.props.station.properties.components.NO2) {
+            no2 = <Sample classes="air__dashboard-item-component" component={this.props.station.properties.components.NO2}></Sample>
         }
 
-        if (this.props.station.components.PM10) {
-            pm10 = <Sample classes="air__dashboard-item-component air__dashboard-component-content--main" component={this.props.station.components.PM10}></Sample>
+        if (this.props.station.properties.components.PM10) {
+            pm10 = <Sample classes="air__dashboard-item-component air__dashboard-component-content--main" component={this.props.station.properties.components.PM10}></Sample>
         }
 
-        if (this.props.station.components.PM25) {
-            pm25 = <Sample classes="air__dashboard-item-component" component={this.props.station.components.PM25}></Sample>
+        if (this.props.station.properties.components.PM25) {
+            pm25 = <Sample classes="air__dashboard-item-component" component={this.props.station.properties.components.PM25}></Sample>
         }
 
-        if (this.props.station.components.WIV) {
+        if (this.props.station.properties.components.WIV) {
             wiv = <div className="air__dashboard-item-wiv">
-                    <span className="air__dashboard-item-wiv-value">{this.props.station.components.WIV.value}</span>
-                    <span className="air__dashboard-item-wiv-unit">{this.props.station.components.WIV.unit}</span>
+                    <span className="air__dashboard-item-wiv-value">{this.props.station.properties.components.WIV.value}</span>
+                    <span className="air__dashboard-item-wiv-unit">{this.props.station.properties.components.WIV.unit}</span>
                 </div>
         }
 
-        if (this.props.station.components.WIR) {
-            const winddirection = this.props.station.components.WIR.value || 0;
+        if (this.props.station.properties.components.WIR) {
+            const winddirection = this.props.station.properties.components.WIR.value || 0;
             const divStyle = {
                 transform: 'rotate(' + (winddirection - 180) + 'deg)'
             };
@@ -74,14 +74,14 @@ class DashboardItem extends Component {
                 </div>
         }
 
-        if (this.props.station.components.WIV && this.props.station.components.WIR) {
+        if (this.props.station.properties.components.WIV && this.props.station.properties.components.WIR) {
             wind = <div className="air__dashboard-item-wind">
                     {wir}
                     {wiv}
                 </div>
         }
 
-        if (this.props.station.components.TEMP) {
+        if (this.props.station.properties.components.TEMP) {
             temp = <div className="air__dashboard-item-temp">
                         <svg className="air__dashboard-item-temp-svg" xmlns="http://www.w3.org/2000/svg" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 250.189 250.189">
                             <g>
@@ -90,28 +90,28 @@ class DashboardItem extends Component {
                             </g>
                         </svg>
                         <div className="air__dashboard-item-temp-container">
-                            <span className="air__dashboard-item-temp-value">{this.props.station.components.TEMP.value}°</span>
-                            <span className="air__dashboard-item-temp-unit">{this.props.station.components.TEMP.unit}</span>
+                            <span className="air__dashboard-item-temp-value">{this.props.station.properties.components.TEMP.value}°</span>
+                            <span className="air__dashboard-item-temp-unit">{this.props.station.properties.components.TEMP.unit}</span>
                         </div>
                     </div>
         }
 
-        if (this.props.station.favorized || this.props.station.notify) {
+        if (this.props.station.properties.favorized || this.props.station.properties.notify) {
             airStationClasses += " air__dashboard-item--favorized";
         }
         else {
             airStationClasses = "air__dashboard-item";
         }
 
-        return <li className={airStationClasses} style={moodStyle} onClick={() => this.onToggleFavorized(this.props.station.id)}>
-            {this.props.station.provider === "upperaustria" ? 
+        return <li className={airStationClasses} style={moodStyle} onClick={() => this.onToggleFavorized(this.props.station.properties.id)}>
+            {this.props.station.properties.provider === "upperaustria" ? 
                 <svg className="air__dashboard-item-marker air__dashboard-item-marker--official" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><use xlinkHref="#airSVGOfficialMarker"></use></svg> : 
                 <svg className="air__dashboard-item-marker" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><use xlinkHref="#airSVGLuftdatenMarker"></use></svg>}
             <div className="air__dashboard-item-content air__dashboard-item--description">
                 <div className="air__dashboard-item-name">
-                    {this.props.station.name}
+                    {this.props.station.properties.name}
                 </div>
-                <div className="air__dashboard-item-date">{this.props.station.date}</div>
+                <div className="air__dashboard-item-date">{this.props.station.properties.date}</div>
                 <div className="air__dashboard-item-container">
                     {wind}
                     {temp}

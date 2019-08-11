@@ -8,7 +8,12 @@ import {
     UNNOTIFY_STATION
 } from "../actions/stations";
 
-const initState = [];
+const initState = {
+    type: "FeatureCollection",
+    features: []
+};
+
+let features = [];
 
 export const stationsReducer = (stations = initState, action) => {
     switch (action.type) {
@@ -16,21 +21,29 @@ export const stationsReducer = (stations = initState, action) => {
         case SET_STATIONS:
             return action.payload;
 
-        case ADD_STATION:
-            return [...stations, action.payload];
+        case ADD_STATION: 
+            return {
+                ...stations,
+                features:[
+                    ...stations.features, action.payload
+                ]
+            }
 
         case UPDATE_STATION:
-            return stations.map((station) => {
-                if (station.id === action.payload.id) {
+            features = stations.features.map((station) => {
+                if (station.properties.id === action.payload.properties.id) {
                     return {
                         ...station,
-                        date: action.payload.date,
-                        mood: action.payload.mood,
-                        moodRGBA: action.payload.moodRGBA,
-                        name: action.payload.name !== null ? action.payload.name : station.name,
-                        components: {
-                            ...station.components,
-                            ...action.payload.components
+                        properties: {
+                            ...station.properties,
+                            date: action.payload.properties.date,
+                            mood: action.payload.properties.mood,
+                            moodRGBA: action.payload.properties.moodRGBA,
+                            name: action.payload.properties.name !== null ? action.payload.properties.name : station.name,
+                            components: {
+                                ...station.properties.components,
+                                ...action.payload.properties.components
+                            }
                         }
                     }
                 }
@@ -39,53 +52,90 @@ export const stationsReducer = (stations = initState, action) => {
                 return station;
             });
 
+            return {
+                ...stations,
+                features
+            }
+
         case FAVORIZE_STATION:
-            return stations.map((station) => {
-                if (station.id === action.payload) {
+            features = stations.features.map((station) => {
+                if (station.properties.id === action.payload) {
                     return {
                         ...station,
-                        favorized: true
+                        properties: {
+                            ...station.properties,
+                            favorized: true
+                        }
                     }
                 }
 
                 return station;
             });
+
+            return {
+                ...stations,
+                features
+            }
 
         case UNFAVORIZE_STATION:
-            return stations.map((station) => {
-                if (station.id === action.payload) {
-                    return {
-                        ...station,
-                        favorized: false,
+                features = stations.features.map((station) => {
+                    if (station.properties.id === action.payload) {
+                        return {
+                            ...station,
+                            properties: {
+                                ...station.properties,
+                                favorized: false
+                            }
+                        }
                     }
+    
+                    return station;
+                });
+    
+                return {
+                    ...stations,
+                    features
                 }
-
-                return station;
-            });
 
         case NOTIFY_STATION:
-            return stations.map((station) => {
-                if (station.id === action.payload) {
-                    return {
-                        ...station,
-                        notify: true
+                features = stations.features.map((station) => {
+                    if (station.properties.id === action.payload) {
+                        return {
+                            ...station,
+                            properties: {
+                                ...station.properties,
+                                notify: true
+                            }
+                        }
                     }
+    
+                    return station;
+                });
+    
+                return {
+                    ...stations,
+                    features
                 }
-
-                return station;
-            });
 
         case UNNOTIFY_STATION:
-            return stations.map((station) => {
-                if (station.id === action.payload) {
-                    return {
-                        ...station,
-                        notify: false,
+                features = stations.features.map((station) => {
+                    if (station.properties.id === action.payload) {
+                        return {
+                            ...station,
+                            properties: {
+                                ...station.properties,
+                                notify: false
+                            }
+                        }
                     }
+    
+                    return station;
+                });
+    
+                return {
+                    ...stations,
+                    features
                 }
-
-                return station;
-            });
 
         default:
             return stations;

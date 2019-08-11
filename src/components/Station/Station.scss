@@ -100,6 +100,27 @@
     opacity: 0.8;
 }
 
+.air__station-dust-container {
+    order: 2;
+    display: flex;
+    align-items: center;
+}
+
+.air__station-dust-icon {
+    position: absolute;
+    top: calc(50% - 16px);
+    width: 32px;
+    height: 32px;
+    fill: rgba(255, 255, 255, 0.8);
+    margin-right: var(--air__margin);
+}
+
+.air__station-comp-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
 .air__comp--dust {
     letter-spacing: var(--air__letter-spacing--small)
 }

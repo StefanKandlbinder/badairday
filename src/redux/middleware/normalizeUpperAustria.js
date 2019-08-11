@@ -36,16 +36,22 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                     if (station.code === element[0].station) {
                         let components = normalizeComponents(element);
 
-                        let stationModel = new Station("upperaustria",
-                            element[0].station,
-                            station.kurzname,
-                            getStringDate(element[0].zeitpunkt),
-                            station.geoBreite,
-                            station.geoLaenge,
-                            components,
-                            components.PM10 ? components.PM10.value : 0);
+                        let stationModel = new Station(
+                            "Feature",
+                            { type: "Point",
+                            coordinates: 
+                                [station.geoBreite, station.geoLaenge, 0]
+                            },
+                            {
+                                provider: provider,
+                                id: element[0].station,
+                                name: station.kurzname,
+                                date: getStringDate(element[0].zeitpunkt),
+                                components: components,
+                                mood: (components.PM10 ? components.PM10.value : 0),
+                            })
 
-                        let filteredStation = getState().stations.filter(station => station.id === stationModel.id)
+                        let filteredStation = getState().stations.features.filter(station => station.properties.id === stationModel.properties.id)
 
                         if (filteredStation.length) {
                             //if (getUnixDateFromLuftdaten(filteredStation[0].date) < getUnixDateFromLuftdaten(stationModel.date)) {
@@ -149,19 +155,29 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                 if (station.code === element[0].station) {
                     let components = normalizeComponents(element);
 
-                    let stationModel = new Station("upperaustria",
-                        element[0].station,
-                        station.kurzname,
-                        getStringDate(element[0].zeitpunkt),
-                        station.geoBreite,
-                        station.geoLaenge,
-                        components,
-                        components.PM10 ? components.PM10.value : 0);
+                    let stationModel = new Station(
+                            "Feature",
+                            { type: "Point",
+                            coordinates: 
+                                [station.geoBreite, station.geoLaenge, 0]
+                            },
+                            {
+                                provider: provider,
+                                id: element[0].station,
+                                name: station.kurzname,
+                                date: getStringDate(element[0].zeitpunkt),
+                                components: components,
+                                mood: (components.PM10 ? components.PM10.value : 0),
+                                moodRGBA: "rgba(70, 70, 70, 0.75)",
+                                marker: {},
+                                favorized: false,
+                                notify: false,
+                            })
 
-                    let persistedStations = getState().stations;
+                    let persistedStations = getState().stations.features;
 
                     if (persistedStations.length) {
-                        if (find(persistedStations, ['id', stationModel.id]) !== undefined) {
+                        if (find(persistedStations, ['properties.id', stationModel.properties.id]) !== undefined) {
                             return false
                         }
                         else {

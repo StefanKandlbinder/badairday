@@ -1,3 +1,3 @@
 export const getFavorizedStations = (stations) => {
-    return stations.filter(stations => stations.favorized);
+    return stations.features.filter(stations => stations.properties.favorized);
 }

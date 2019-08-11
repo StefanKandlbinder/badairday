@@ -66,23 +66,23 @@ class Station extends Component {
         window.clearTimeout(timeout);
     }
 
-    componentDidMount() {
+    componentDidMount() {       
         this.setState({ isMounted: true })
         this.setState({ animationCircle: document.getElementById("animation-to-circle") })
         this.setState({ animationHexagon: document.getElementById("animation-to-hexagon") })
         this.setState({ comps: this.getAirComps() })
 
-        if (this.props.station.provider === "upperaustria")
+        if (this.props.station.properties.provider === "upperaustria")
             this.setState({ shape: circle })
 
-        if (this.props.station.provider === "luftdaten")
+        if (this.props.station.properties.provider === "luftdaten")
             this.setState({ shape: hexagon })
 
         timeout = window.setTimeout(mount.play(), 50);
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.station.id !== prevProps.station.id) {
+        if (this.props.station.properties.id !== prevProps.station.properties.id) {
             this.setState({ comps: this.getAirComps() });
             change.play();
         }
@@ -91,29 +91,29 @@ class Station extends Component {
             this.setState({ comps: this.getAirComps() });
         }
 
-        if (this.props.station.provider !== "luftdaten" && prevProps.station.provider === "luftdaten") {
+        if (this.props.station.properties.provider !== "luftdaten" && prevProps.station.properties.provider === "luftdaten") {
             this.state.animationCircle.beginElement();
         }
 
-        if (this.props.station.provider !== "upperaustria" && prevProps.station.provider === "upperaustria") {
+        if (this.props.station.properties.provider !== "upperaustria" && prevProps.station.properties.provider === "upperaustria") {
             this.state.animationHexagon.beginElement();
         }
 
-        if (this.props.station.favorized !== prevProps.station.favorized || this.props.station.notify !== prevProps.station.notify) {
+        if (this.props.station.properties.favorized !== prevProps.station.properties.favorized || this.props.station.properties.notify !== prevProps.station.properties.notify) {
             change.play();
         }
     }
 
     onAddStation = () => {
-        this.props.onFavorizeStation(this.props.station.id);
+        this.props.onFavorizeStation(this.props.station.properties.id);
     }
 
     onRemoveStation = () => {
-        this.props.onUnfavorizeStation(this.props.station.id);
+        this.props.onUnfavorizeStation(this.props.station.properties.id);
     }
 
     onAddNotify = () => {
-        this.props.onNotifyStation(this.props.station.id);
+        this.props.onNotifyStation(this.props.station.properties.id);
 
         if (this.props.subscription.id === "" || Notification.permission === "default") {
             this.BadAirDayNotifications.requestPermission()
@@ -143,7 +143,7 @@ class Station extends Component {
     }
 
     onRemoveNotify = () => {
-        this.props.onUnnotifyStation(this.props.station.id);
+        this.props.onUnnotifyStation(this.props.station.properties.id);
         this.updateNotifiedStations(this.props.subscription.id.toString());
     }
 
@@ -180,15 +180,16 @@ class Station extends Component {
 
     getAirComps() {
         let compItems = [];
+        let components = [];
         let wind = [];
         let temp = null;
 
-        if (this.props.station.provider === "upperaustria") {
+        if (this.props.station.properties.provider === "upperaustria") {
             
-            Object.entries(this.props.station.components).forEach(([key, value]) => {
+            Object.entries(this.props.station.properties.components).forEach(([key, value]) => {
                 if (value.unit === "µg/m³") {
 
-                    compItems.push(<Aircomp key={key}
+                    components.push(<Aircomp key={key}
                         component={key}
                         value={value.value}
                         unit={value.unit} />);
@@ -223,16 +224,23 @@ class Station extends Component {
 
             const windItem = (<div className="air__comp air__comp--wind">{wind}</div>)
             const windTempItem = (<div className="air__station-windtemp" key="windtemp">{windItem}{temp}</div>)
+            const componentsItem = (
+                <div className="air__comp air__station-dust-container" key="components">
+                    <div className="air__station-comp-container">
+                        {components}
+                    </div>
+                </div>)
 
+            compItems.push(componentsItem);
             compItems.push(windTempItem);
 
             return (compItems);
         }
 
-        if (this.props.station.provider === "luftdaten") {
+        if (this.props.station.properties.provider === "luftdaten") {
             this.setState({ compass: null });
 
-            Object.entries(this.props.station.components).forEach(([key, value]) => {
+            Object.entries(this.props.station.properties.components).forEach(([key, value]) => {
                 if (value.unit === "µg/m³") {
 
                     compItems.push(<Aircomp key={key}
@@ -255,8 +263,8 @@ class Station extends Component {
         let x = "center";
         let y = "center";
 
-        name = this.props.station.name;
-        dateElement = <div className="air__station-date">{this.props.station.date}</div>;
+        name = this.props.station.properties.name;
+        dateElement = <div className="air__station-date">{this.props.station.properties.date}</div>;
 
         if (this.props.location.state !== undefined) {
             let innerWidth = window.innerWidth;
@@ -284,8 +292,8 @@ class Station extends Component {
 
 
         button = <Button
-            clicked={this.props.station.favorized ? this.onRemoveStation : this.onAddStation}
-            className={`air__button air__button--naked air__button--ghost air__station-button air__station-button-fav${this.props.station.favorized ? " air__station-button-fav--active" : ""}`}>
+            clicked={this.props.station.properties.favorized ? this.onRemoveStation : this.onAddStation}
+            className={`air__button air__button--naked air__button--ghost air__station-button air__station-button-fav${this.props.station.properties.favorized ? " air__station-button-fav--active" : ""}`}>
             <svg xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 className="air__station-button-icon"
@@ -298,8 +306,8 @@ class Station extends Component {
 
         if ('Notification' in window && navigator.serviceWorker) {
             notifyButton = <Button
-                clicked={this.props.station.notify ? this.onRemoveNotify : this.onAddNotify}
-                className={`air__button air__button--naked air__button--ghost air__station-button air__station-button-notify${this.props.station.notify ? " air__station-button-notify--active" : ""}`}>
+                clicked={this.props.station.properties.notify ? this.onRemoveNotify : this.onAddNotify}
+                className={`air__button air__button--naked air__button--ghost air__station-button air__station-button-notify${this.props.station.properties.notify ? " air__station-button-notify--active" : ""}`}>
                 <svg xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     className="air__station-button-icon"
@@ -315,7 +323,7 @@ class Station extends Component {
         }
 
         let moodStyle = {
-            fill: this.props.station.components.PM10.update ? this.props.station.moodRGBA : "rgba(70,70,70,0.75)"
+            fill: this.props.station.properties.components.PM10.update ? this.props.station.properties.moodRGBA : "rgba(70,70,70,0.75)"
         }
 
         element = (
@@ -323,7 +331,7 @@ class Station extends Component {
                 in={this.state.isMounted}
                 classNames="a-station"
                 timeout={300}>
-                <div className={`air__station air__station--${this.props.station.provider} air__station--favboard-${this.props.favboard}`} style={{ ...popOriginStyle }}>
+                <div className={`air__station air__station--${this.props.station.properties.provider} air__station--favboard-${this.props.favboard}`} style={{ ...popOriginStyle }}>
                     <svg xmlns="http://www.w3.org/2000/svg"
                         style={{ ...moodStyle }}
                         className="air__station-background"

@@ -26,19 +26,19 @@ class Stations extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.stations.length && this.props.stations.length > prevProps.stations.length) {
+        if (this.props.stations.features.length && this.props.stations.features.length > prevProps.stations.features.length) {
             this.getStations();
         }
 
         if (this.props.update.timestamp > prevProps.update.timestamp) {
-            this.updateStations();
+            // this.updateStations();
         }
 
         if (this.props.position !== prevProps.position) {
             this.handleLocation();
         }
 
-        if (this.props.stations.length) {
+        if (this.props.stations.features.length) {
             this.updateFavorizedStations();
             this.updateNotifiedStations();
         }
@@ -103,27 +103,27 @@ class Stations extends Component {
     }
 
     getStations = () => {
-        let stationMarkers = this.props.stations.map(element => {
+        let stationMarkers = this.props.stations.features.map(element => {
             let marker = "";
 
-            if (element.provider === "luftdaten") {
+            if (element.properties.provider === "luftdaten") {
                 marker = L.divIcon({
                     html: `<svg xmlns="http://www.w3.org/2000/svg" 
                         class="" viewBox="0 0 24 24"
-                        data-marker-id="${element.id}"
-                        style="fill: ${element.components.PM10.update ? element.moodRGBA : "rgba(70,70,70,0.75)"}">
+                        data-marker-id="${element.properties.id}"
+                        style="fill: ${element.properties.components.PM10.update ? element.properties.moodRGBA : "rgba(70,70,70,0.75)"}">
                         <use xlink:href="#airSVGLuftdatenMarker"></use>
                         </svg>
                         <svg xmlns="http://www.w3.org/2000/svg"
-                            data-notify-id="${element.id}"
-                            fill="${element.notify ? "rgba(255, 2255, 255, 0.9)" : "rgba(255,255,255,0.0)"}"
+                            data-notify-id="${element.properties.id}"
+                            fill="${element.properties.notify ? "rgba(255, 2255, 255, 0.9)" : "rgba(255,255,255,0.0)"}"
                             viewBox="0 0 24 24"
                             class="air__stations-notified-icon">
                             <use xlink:href="#airSVGNotify"></use>
                         </svg>
                         <svg xmlns="http://www.w3.org/2000/svg"
-                            data-favorized-id="${element.id}"
-                            fill="${element.favorized ? "rgba(255, 2255, 255, 0.9)" : "rgba(255,255,255,0.0)"}"
+                            data-favorized-id="${element.properties.id}"
+                            fill="${element.properties.favorized ? "rgba(255, 2255, 255, 0.9)" : "rgba(255,255,255,0.0)"}"
                             viewBox="0 0 24 24"
                             class="air__stations-favorized-icon">
                             <use xlink:href="#airSVGFavorize"></use>
@@ -134,24 +134,24 @@ class Stations extends Component {
                 });
             }
 
-            if (element.provider === "upperaustria") {
+            if (element.properties.provider === "upperaustria") {
                 marker = L.divIcon({
                     html: `<svg xmlns="http://www.w3.org/2000/svg" 
                         class="" viewBox="0 0 24 24"
-                        data-marker-id="${element.id}"
-                        style="fill: ${element.components.PM10.update ? element.moodRGBA : "rgba(70,70,70,0.75)"}">
+                        data-marker-id="${element.properties.id}"
+                        style="fill: ${element.properties.components.PM10.update ? element.properties.moodRGBA : "rgba(70,70,70,0.75)"}">
                         <use xlink:href="#airSVGOfficialMarker"></use>
                         </svg>
                         <svg xmlns="http://www.w3.org/2000/svg"
-                            data-notify-id="${element.id}"
-                            fill="${element.notify ? "rgba(255, 2255, 255, 0.9)" : "rgba(255,255,255,0.0)"}"
+                            data-notify-id="${element.properties.id}"
+                            fill="${element.properties.notify ? "rgba(255, 2255, 255, 0.9)" : "rgba(255,255,255,0.0)"}"
                             viewBox="0 0 24 24"
                             class="air__stations-notified-icon">
                             <use xlink:href="#airSVGNotify"></use>
                         </svg>
                         <svg xmlns="http://www.w3.org/2000/svg"
-                        data-favorized-id="${element.id}"
-                        fill="${element.favorized ? "rgba(255, 2255, 255, 0.9)" : "rgba(255,255,255,0.0)"}"
+                        data-favorized-id="${element.properties.id}"
+                        fill="${element.properties.favorized ? "rgba(255, 2255, 255, 0.9)" : "rgba(255,255,255,0.0)"}"
                         viewBox="0 0 24 24"
                         class="air__stations-favorized-icon">
                         <use xlink:href="#airSVGFavorize"></use>
@@ -164,12 +164,12 @@ class Stations extends Component {
 
             return (
                 <Marker
-                    key={element.id}
+                    key={element.properties.id}
                     icon={marker}
-                    onClick={this.handleClickCircle(element.provider, element.id)}
+                    onClick={this.handleClickCircle(element.properties.provider, element.properties.id)}
                     bubblingMouseEvents={false}
-                    position={[element.longitude, element.latitude]}
-                    title={element.name}
+                    position={[element.geometry.coordinates[0], element.geometry.coordinates[1]]}
+                    title={element.properties.name}
                     stroke={false}
                     fillOpacity={1} />
             )
@@ -179,7 +179,7 @@ class Stations extends Component {
     }
 
     updateStations = () => {
-        this.props.stations.forEach(station => {
+        this.props.stations.features.forEach(station => {
             let markerID = '[data-marker-id="' + station.id + '"]';
             let marker = document.querySelector(markerID);
             if (marker) {
@@ -189,9 +189,9 @@ class Stations extends Component {
     }
 
     updateFavorizedStations = () => {
-        this.props.stations.forEach(station => {
-            if (station.favorized) {
-                let markerID = '[data-favorized-id="' + station.id + '"]';
+        this.props.stations.features.forEach(station => {
+            if (station.properties.favorized) {
+                let markerID = '[data-favorized-id="' + station.properties.id + '"]';
                 let marker = document.querySelector(markerID);
 
                 if (marker) {
@@ -199,7 +199,7 @@ class Stations extends Component {
                 }
             }
             else {
-                let markerID = '[data-favorized-id="' + station.id + '"]';
+                let markerID = '[data-favorized-id="' + station.properties.id + '"]';
                 let marker = document.querySelector(markerID);
 
                 if (marker) {
@@ -210,9 +210,9 @@ class Stations extends Component {
     }
 
     updateNotifiedStations = () => {
-        this.props.stations.forEach(station => {
-            if (station.notify) {
-                let markerID = '[data-notify-id="' + station.id + '"]';
+        this.props.stations.features.forEach(station => {
+            if (station.properties.notify) {
+                let markerID = '[data-notify-id="' + station.properties.id + '"]';
                 let marker = document.querySelector(markerID);
 
                 if (marker) {
@@ -220,7 +220,7 @@ class Stations extends Component {
                 }
             }
             else {
-                let markerID = '[data-notify-id="' + station.id + '"]';
+                let markerID = '[data-notify-id="' + station.properties.id + '"]';
                 let marker = document.querySelector(markerID);
 
                 if (marker) {

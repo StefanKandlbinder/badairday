@@ -1,30 +1,25 @@
 import getMood from '../../utilities/getMood';
 
 export default class StationModel {
-    constructor(provider = "",
-        id = 0,
-        name = "Messstation",
-        date = "",
-        longitude = 0,
-        latitude = 0,
-        components = {},
-        mood = 0,
-        moodRGBA = "rgba(70, 70, 70, 0.75)",
-        marker = {},
-        favorized = false,
-        notify = false) {
-            this.provider   = provider;
-            this.id         = id;
-            this.name       = name;
-            this.date       = date;
-            this.longitude  = longitude;
-            this.latitude   = latitude;
-            this.components = components;
-            this.mood       = mood;
-            this.moodRGBA   = getMood(mood, 0.75);
-            this.marker     = marker;
-            this.favorized  = favorized;
-            this.notify     = notify;
+    constructor(
+        type="Feature",
+        geometry={},
+        properties={
+            provider: "",
+            id: 0,
+            name: "Messstation",
+            date: "",
+            components: {},
+            mood: 0,
+            moodRGBA: "rgba(70, 70, 70, 0.75)",
+            marker: {},
+            favorized: false,
+            notify: false,
+        }) {
+            this.type       = type;
+            this.geometry   = geometry
+            this.properties = properties;
+            this.properties.moodRGBA = getMood(properties.mood, 0.75);
     }
 
     set setProvider(provider) {

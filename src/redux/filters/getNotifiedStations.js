@@ -1,3 +1,3 @@
 export const getNotifiedStations = (stations) => {
-    return stations.filter(stations => stations.notify);
+    return stations.features.filter(stations => stations.properties.notify);
 }

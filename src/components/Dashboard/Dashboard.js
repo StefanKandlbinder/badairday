@@ -18,7 +18,7 @@ class Dashboard extends Component {
         let stations = this.props.getActive(this.props.stations);
 
         if (this.props.options.sort) {
-          stations = sortBy(stations, ['mood']).reverse();
+          stations = sortBy(stations, ['properties.mood']).reverse();
           
           /* stations.forEach((station, i) => {
             // put the favorites on top
@@ -32,11 +32,11 @@ class Dashboard extends Component {
         let moodStyle = null;
 
         if (stations.length) {
-            if ((stations[stations.length - 1].mood === 0)) {
+            if ((stations[stations.length - 1].properties.mood === 0)) {
                 moodStyle = { backgroundColor: "rgba(70, 70, 70, 0.75)" }
             }
             else {
-                moodStyle = { backgroundColor: stations[stations.length - 1].moodRGBA };
+                moodStyle = { backgroundColor: stations[stations.length - 1].properties.moodRGBA };
             }
         }
 
@@ -48,7 +48,7 @@ class Dashboard extends Component {
             <ul className="air__dashboard">
                 {stations.map((station) =>
                     <DashboardItem
-                        key={station.id}
+                        key={station.properties.id}
                         station={station} 
                         onAdd={this.props.onAdd} 
                         onRemove={this.props.onRemove}
