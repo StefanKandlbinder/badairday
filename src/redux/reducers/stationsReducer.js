@@ -39,7 +39,7 @@ export const stationsReducer = (stations = initState, action) => {
                             date: action.payload.properties.date,
                             mood: action.payload.properties.mood,
                             moodRGBA: action.payload.properties.moodRGBA,
-                            name: action.payload.properties.name !== null ? action.payload.properties.name : station.name,
+                            name: action.payload.properties.name !== null ? action.payload.properties.name : station.properties.name,
                             components: {
                                 ...station.properties.components,
                                 ...action.payload.properties.components
