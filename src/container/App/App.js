@@ -78,11 +78,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    if (this.props.media === "medium" && getFavorizedStations(this.props.stations.features).length) {
+    if (this.props.media === "medium" && getFavorizedStations(this.props.stations).length) {
       this.props.onSetFavboard({ state: true, feature: STATIONS });
     }
 
-    if (!this.props.stations.length) {
+    if (!this.props.stations.features.length) {
       this.onFetchStations();
     }
     else {
