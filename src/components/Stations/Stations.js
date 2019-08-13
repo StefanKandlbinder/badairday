@@ -31,7 +31,7 @@ class Stations extends Component {
         }
 
         if (this.props.update.timestamp > prevProps.update.timestamp) {
-            // this.updateStations();
+            this.updateStations();
         }
 
         if (this.props.position !== prevProps.position) {
