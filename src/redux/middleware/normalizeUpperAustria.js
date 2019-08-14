@@ -24,7 +24,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
     const updateStations = (stations, provider) => {
         if (stations) {
             let filteredStations = null;
-            
+
             filteredStations = stations.filter(el => {
                 return el.station.match("S") && el.mittelwert === "HMW";
             });
@@ -38,9 +38,10 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
 
                         let stationModel = new Station(
                             "Feature",
-                            { type: "Point",
-                            coordinates: 
-                                [station.geoBreite, station.geoLaenge, 0]
+                            {
+                                type: "Point",
+                                coordinates:
+                                    [station.geoBreite, station.geoLaenge, 0]
                             },
                             {
                                 provider: provider,
@@ -62,13 +63,11 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                         }
 
                         else {
-                            return false
+                            getStations(stations, provider, true);
                         }
                     }
                 })
             });
-
-            getStations(stations, provider, true);
 
             // notify about the transformation
             dispatch(dataNormalized({ feature: action.meta.feature }));
@@ -143,7 +142,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
 
     const getStations = (stations, provider, update) => {
         let filteredStations = null;
-        
+
         filteredStations = stations.filter(el => {
             return el.station.match("S") && el.mittelwert === "HMW";
         });
@@ -156,23 +155,24 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                     let components = normalizeComponents(element);
 
                     let stationModel = new Station(
-                            "Feature",
-                            { type: "Point",
-                            coordinates: 
+                        "Feature",
+                        {
+                            type: "Point",
+                            coordinates:
                                 [station.geoBreite, station.geoLaenge, 0]
-                            },
-                            {
-                                provider: provider,
-                                id: element[0].station,
-                                name: station.kurzname,
-                                date: getStringDate(element[0].zeitpunkt),
-                                components: components,
-                                mood: (components.PM10 ? components.PM10.value : 0),
-                                moodRGBA: "rgba(70, 70, 70, 0.75)",
-                                marker: {},
-                                favorized: false,
-                                notify: false,
-                            })
+                        },
+                        {
+                            provider: provider,
+                            id: element[0].station,
+                            name: station.kurzname,
+                            date: getStringDate(element[0].zeitpunkt),
+                            components: components,
+                            mood: (components.PM10 ? components.PM10.value : 0),
+                            moodRGBA: "rgba(70, 70, 70, 0.75)",
+                            marker: {},
+                            favorized: false,
+                            notify: false,
+                        })
 
                     let persistedStations = getState().stations.features;
 
@@ -184,7 +184,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                             dispatch(addStation({ station: stationModel, provider: provider }))
                         }
                     }
-                    
+
                     else if (!update) {
                         return dispatch(addStation({ station: stationModel, provider: provider }))
                     }

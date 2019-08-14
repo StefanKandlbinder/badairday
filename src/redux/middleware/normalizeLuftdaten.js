@@ -58,12 +58,11 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                 }
 
                 else {
+                    // if there are new stations add them
+                    getStations(stations, provider, true);
                     return false
                 }
             })
-
-            // if there are new stations add them
-            getStations(stations, provider, true);
 
             // notify about the transformation
             dispatch(dataNormalized({ feature: action.meta.feature }));
@@ -83,6 +82,8 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
     }
 
     const getStations = (stations, provider, update) => {
+        console.info("GET STATIONS")
+
         // get the latest
         stations = unionBy(stations.reverse(), 'sensor.id');
 
