@@ -180,11 +180,12 @@ class Stations extends Component {
 
     updateStations = () => {
         this.props.stations.features.forEach(station => {
-            let markerID = '[data-marker-id="' + station.id + '"]';
-            let marker = document.querySelector(markerID);
-            if (marker) {
-                marker.setAttribute("style", 'fill: ' + (station.components.PM10.update ? station.moodRGBA : "rgba(70,70,70,0.75)"));
-            }
+                let markerID = '[data-marker-id="' + station.properties.id + '"]';
+                let marker = document.querySelector(markerID);
+
+                if(marker) {
+                    marker.setAttribute("style", 'fill: ' + station.properties.moodRGBA);
+                }
         })
     }
 
