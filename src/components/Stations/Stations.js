@@ -184,7 +184,7 @@ class Stations extends Component {
                 let marker = document.querySelector(markerID);
 
                 if(marker) {
-                    marker.setAttribute("style", 'fill: ' + station.properties.moodRGBA);
+                    marker.setAttribute("style", 'fill: ' + (station.properties.components.PM10.update ? station.properties.moodRGBA : "rgba(70,70,70,0.75)"));
                 }
         })
     }
