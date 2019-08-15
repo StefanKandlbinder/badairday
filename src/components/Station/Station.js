@@ -57,8 +57,6 @@ class Station extends Component {
         }
     }
 
-    componentWillMount() { }
-
     componentWillUnmount() {
         this.setState({ isMounted: false })
 
