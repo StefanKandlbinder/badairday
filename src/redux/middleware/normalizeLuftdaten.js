@@ -27,9 +27,24 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
             // get the latest
             stations = unionBy(stations.reverse(), 'sensor.id');
 
+            if (getState().tokens.reversegeo.timestamp + 7200 > Date.now() || getState().tokens.reversegeo.timestamp === undefined) {
+                getArcgisToken()
+                .then((res) => {
+                    let token = { 
+                        token: res.access_token,
+                        timestamp: Date.now()
+                    };
+    
+                    dispatch(setTokenReverseGeo({ state: token, feature: STATIONS }));
+                })
+                .catch((err) => {
+                    // token = "";
+                });
+            }
+
             stations.map(station => {
                 let components = normalizeComponents(station.sensordatavalues);
-                let name = null;
+                let name = "Lufdatensensor: " + station.sensor.id;
 
                 let stationModel = new Station(
                     "Feature",
@@ -50,6 +65,44 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                 let filteredStation = getState().stations.features.filter(station => station.properties.id === stationModel.properties.id)
 
                 if (filteredStation.length) {
+                    if (getState().options.reversegeo && 
+                        ReverseGeocode !== undefined && 
+                        getState().tokens.reversegeo.timestamp &&
+                        filteredStation[0].properties.name.includes("sensor")) {
+
+                        ReverseGeocode.geocodeService().reverse()
+                            .token(getState().tokens.reversegeo.token)
+                            .latlng([station.location.latitude, station.location.longitude])
+                            .distance(10)
+                            .run(function (error, result) {
+                                if (error) {
+                                    // name = "Luftdatensensor: " + station.id;
+                                    return false
+                                }
+                                if (result) {
+                                    name = result.address.ShortLabel;
+
+                                    let stationModel = new Station(
+                                        "Feature",
+                                        { type: "Point",
+                                        coordinates: 
+                                            [parseFloat(station.location.latitude), parseFloat(station.location.longitude), 0]
+                                        },
+                                        {
+                                            provider: provider,
+                                            id: station.sensor.id.toString(),
+                                            name: name,
+                                            date: getStringDateLuftdaten(station.timestamp),
+                                            components: components,
+                                            mood: (components.PM10 ? components.PM10.value : 0),
+                                            moodRGBA: "rgba(70, 70, 70, 0.75)",
+                                        })
+        
+                                    dispatch(updateStation({ station: stationModel, provider: provider }))
+                                }
+                            });
+                    }
+
                     if (getUnixDateFromLuftdaten(filteredStation[0].properties.date) < getUnixDateFromLuftdaten(stationModel.properties.date)) {
                         return dispatch(updateStation({ station: stationModel, provider: provider }))
                     }
@@ -82,65 +135,12 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
     }
 
     const getStations = (stations, provider, update) => {
-        console.info("GET STATIONS")
-
         // get the latest
         stations = unionBy(stations.reverse(), 'sensor.id');
-
-        if (getState().tokens.reversegeo.timestamp + 7200 > Date.now() || getState().tokens.reversegeo.timestamp === undefined) {
-            getArcgisToken()
-            .then((res) => {
-                let token = { 
-                    token: res.access_token,
-                    timestamp: Date.now()
-                };
-
-                dispatch(setTokenReverseGeo({ state: token, feature: STATIONS }));
-            })
-            .catch((err) => {
-                // token = "";
-            });
-        }
 
         stations.map(station => {
             let components = normalizeComponents(station.sensordatavalues);
             let name = "Lufdatensensor: " + station.sensor.id;
-
-            if (getState().options.reversegeo && ReverseGeocode !== undefined && getState().tokens.reversegeo.timestamp) {
-                ReverseGeocode.geocodeService().reverse()
-                    .token(getState().tokens.reversegeo.token)
-                    .latlng([station.location.latitude, station.location.longitude])
-                    .distance(10)
-                    .run(function (error, result) {
-                        if (error) {
-                            name = "Luftdatensensor: " + station.id;
-                        }
-                        if (result) {
-                            name = result.address.ShortLabel;
-
-                            let stationModel = new Station(
-                                "Feature",
-                                { type: "Point",
-                                coordinates: 
-                                    [parseFloat(station.location.latitude), parseFloat(station.location.longitude), 0]
-                                },
-                                {
-                                    provider: provider,
-                                    id: station.sensor.id.toString(),
-                                    name: name,
-                                    date: getStringDateLuftdaten(station.timestamp),
-                                    components: components,
-                                    mood: (components.PM10 ? components.PM10.value : 0),
-                                    moodRGBA: "rgba(70, 70, 70, 0.75)",
-                                    marker: {},
-                                    favorized: false,
-                                    notify: false,
-                                })
-
-                            dispatch(updateStation({ station: stationModel, provider: provider }))
-                        }
-                    });
-            }
 
             let stationModel = new Station(
                 "Feature",

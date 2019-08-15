@@ -3688,15 +3688,15 @@ esrecurse@^4.1.0:
   dependencies:
     estraverse "^4.1.0"
 
-esri-leaflet-geocoder@2.2.14:
-  version "2.2.14"
-  resolved "https://registry.yarnpkg.com/esri-leaflet-geocoder/-/esri-leaflet-geocoder-2.2.14.tgz#d00d456d8d595903af6c087de3b1b9ffd96de79d"
-  integrity sha512-OG1oNm5Tku2M3PNM6n+PHjy9rjY76B7aYNPmz6p6yfYeiXMQ5Zv7Ye38isY0mw2lyq4PWSuja5ZIwoAbMDq74g==
+esri-leaflet-geocoder@2.2.9:
+  version "2.2.9"
+  resolved "https://registry.yarnpkg.com/esri-leaflet-geocoder/-/esri-leaflet-geocoder-2.2.9.tgz#6a3e183bdfe44092a0b177222174a4e68ec0129c"
+  integrity sha512-QHPbgM0ujhrWl6i5vvYZzM6jLMPSKJQFS35Np0TG43sQYzzDb48UnGHnzDZkhz3ieZiGSvD3bUI2KnMzKJaRUg==
   dependencies:
-    esri-leaflet "^2.1.4"
+    esri-leaflet "^2.0.3"
     leaflet "^1.0.0"
 
-esri-leaflet@^2.1.4:
+esri-leaflet@^2.0.3:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/esri-leaflet/-/esri-leaflet-2.3.0.tgz#fc714ebb9f32bc843ecc068f8cda9efc447a9e55"
   integrity sha512-il9bozdMPQ3FoGPHeraKfDkZGayssKVYenE4L/tTXndZ3SEOQvYSfTqNk87TUE3awdASPryC3UMQqrsMELWrgQ==
