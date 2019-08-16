@@ -49,7 +49,8 @@ class Dashboard extends Component {
                 {stations.map((station) =>
                     <DashboardItem
                         key={station.properties.id}
-                        station={station} 
+                        station={station}
+                        reversegeo={this.props.options.reversegeo} 
                         onAdd={this.props.onAdd} 
                         onRemove={this.props.onRemove}
                         type={this.props.type} />

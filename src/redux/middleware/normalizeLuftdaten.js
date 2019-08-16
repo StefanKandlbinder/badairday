@@ -3,7 +3,7 @@ import unionBy from 'lodash/unionBy';
 import ReverseGeocode from 'esri-leaflet-geocoder';
 
 import { dataNormalized } from "../actions/data";
-import { addStation, updateStation, ADD_STATIONS, UPDATE_STATIONS, STATIONS } from "../actions/stations";
+import { addStation, updateStation, updateStationName, ADD_STATIONS, UPDATE_STATIONS, STATIONS } from "../actions/stations";
 import { setTokenReverseGeo } from "../actions/tokens";
 import getStringDateLuftdaten from '../../utilities/getStringDateLuftdaten';
 import getUnixDateFromLuftdaten from '../../utilities/getUnixDateFromLuftdaten';
@@ -44,7 +44,6 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
 
             stations.map(station => {
                 let components = normalizeComponents(station.sensordatavalues);
-                let name = "Lufdatensensor: " + station.sensor.id;
 
                 let stationModel = new Station(
                     "Feature",
@@ -55,7 +54,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     {
                         provider: provider,
                         id: station.sensor.id.toString(),
-                        name: name,
+                        name: "Luftdatensensor: " + station.sensor.id,
                         date: getStringDateLuftdaten(station.timestamp),
                         components: components,
                         mood: (components.PM10 ? components.PM10.value : 0),
@@ -68,7 +67,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     if (getState().options.reversegeo && 
                         ReverseGeocode !== undefined && 
                         getState().tokens.reversegeo.timestamp &&
-                        filteredStation[0].properties.name.includes("sensor")) {
+                        filteredStation[0].properties.reverseGeoName.includes("Luftdatensensor")) {
 
                         ReverseGeocode.geocodeService().reverse()
                             .token(getState().tokens.reversegeo.token)
@@ -80,8 +79,6 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                                     return false
                                 }
                                 if (result) {
-                                    name = result.address.ShortLabel;
-
                                     let stationModel = new Station(
                                         "Feature",
                                         { type: "Point",
@@ -91,14 +88,15 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                                         {
                                             provider: provider,
                                             id: station.sensor.id.toString(),
-                                            name: name,
+                                            name: "Luftdatensensor: " + station.sensor.id,
+                                            reverseGeoName: result.address.ShortLabel,
                                             date: getStringDateLuftdaten(station.timestamp),
                                             components: components,
                                             mood: (components.PM10 ? components.PM10.value : 0),
                                             moodRGBA: "rgba(70, 70, 70, 0.75)",
                                         })
         
-                                    dispatch(updateStation({ station: stationModel, provider: provider }))
+                                    dispatch(updateStationName({ station: stationModel, provider: provider }))
                                 }
                             });
                     }
@@ -140,7 +138,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
 
         stations.map(station => {
             let components = normalizeComponents(station.sensordatavalues);
-            let name = "Lufdatensensor: " + station.sensor.id;
+            let name = "Luftdatensensor: " + station.sensor.id;
 
             let stationModel = new Station(
                 "Feature",
@@ -152,6 +150,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                     provider: provider,
                     id: station.sensor.id.toString(),
                     name: name,
+                    reverseGeoName: name,
                     date: getStringDateLuftdaten(station.timestamp),
                     components: components,
                     mood: (components.PM10 ? components.PM10.value : 0),

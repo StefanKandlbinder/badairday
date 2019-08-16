@@ -8,6 +8,7 @@ export default class StationModel {
             provider: "",
             id: 0,
             name: "Messstation",
+            reverseGeoName: "Messstation",
             date: "",
             components: {},
             mood: 0,
@@ -22,6 +23,7 @@ export default class StationModel {
             this.properties.provider = properties.provider;
             this.properties.id = properties.id;
             this.properties.name = properties.name;
+            this.properties.reverseGeoName = properties.reverseGeoName;
             this.properties.date = properties.date;
             this.properties.components = properties.components;
             this.properties.mood = properties.mood;

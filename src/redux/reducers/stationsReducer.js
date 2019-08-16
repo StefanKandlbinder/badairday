@@ -2,6 +2,7 @@ import {
     SET_STATIONS,
     ADD_STATION,
     UPDATE_STATION,
+    UPDATE_STATION_NAME,
     FAVORIZE_STATION,
     UNFAVORIZE_STATION,
     NOTIFY_STATION,
@@ -21,10 +22,10 @@ export const stationsReducer = (stations = initState, action) => {
         case SET_STATIONS:
             return action.payload;
 
-        case ADD_STATION: 
+        case ADD_STATION:
             return {
                 ...stations,
-                features:[
+                features: [
                     ...stations.features, action.payload
                 ]
             }
@@ -44,6 +45,27 @@ export const stationsReducer = (stations = initState, action) => {
                                 ...station.properties.components,
                                 ...action.payload.properties.components
                             }
+                        }
+                    }
+                }
+
+                // This isn't the item we care about - keep it as-is
+                return station;
+            });
+
+            return {
+                ...stations,
+                features
+            }
+
+        case UPDATE_STATION_NAME:
+            features = stations.features.map((station) => {
+                if (station.properties.id === action.payload.properties.id) {
+                    return {
+                        ...station,
+                        properties: {
+                            ...station.properties,
+                            reverseGeoName: action.payload.properties.reverseGeoName !== null ? action.payload.properties.reverseGeoName : station.properties.name,
                         }
                     }
                 }
@@ -78,64 +100,64 @@ export const stationsReducer = (stations = initState, action) => {
             }
 
         case UNFAVORIZE_STATION:
-                features = stations.features.map((station) => {
-                    if (station.properties.id === action.payload) {
-                        return {
-                            ...station,
-                            properties: {
-                                ...station.properties,
-                                favorized: false
-                            }
+            features = stations.features.map((station) => {
+                if (station.properties.id === action.payload) {
+                    return {
+                        ...station,
+                        properties: {
+                            ...station.properties,
+                            favorized: false
                         }
                     }
-    
-                    return station;
-                });
-    
-                return {
-                    ...stations,
-                    features
                 }
+
+                return station;
+            });
+
+            return {
+                ...stations,
+                features
+            }
 
         case NOTIFY_STATION:
-                features = stations.features.map((station) => {
-                    if (station.properties.id === action.payload) {
-                        return {
-                            ...station,
-                            properties: {
-                                ...station.properties,
-                                notify: true
-                            }
+            features = stations.features.map((station) => {
+                if (station.properties.id === action.payload) {
+                    return {
+                        ...station,
+                        properties: {
+                            ...station.properties,
+                            notify: true
                         }
                     }
-    
-                    return station;
-                });
-    
-                return {
-                    ...stations,
-                    features
                 }
 
+                return station;
+            });
+
+            return {
+                ...stations,
+                features
+            }
+
         case UNNOTIFY_STATION:
-                features = stations.features.map((station) => {
-                    if (station.properties.id === action.payload) {
-                        return {
-                            ...station,
-                            properties: {
-                                ...station.properties,
-                                notify: false
-                            }
+            features = stations.features.map((station) => {
+                if (station.properties.id === action.payload) {
+                    return {
+                        ...station,
+                        properties: {
+                            ...station.properties,
+                            notify: false
                         }
                     }
-    
-                    return station;
-                });
-    
-                return {
-                    ...stations,
-                    features
                 }
+
+                return station;
+            });
+
+            return {
+                ...stations,
+                features
+            }
 
         default:
             return stations;

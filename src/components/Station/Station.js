@@ -262,6 +262,11 @@ class Station extends Component {
         let y = "center";
 
         name = this.props.station.properties.name;
+
+        if (this.props.station.properties.provider === "luftdaten" && this.props.reversegeo) {
+            name = this.props.station.properties.reverseGeoName;
+        }
+
         dateElement = <div className="air__station-date">{this.props.station.properties.date}</div>;
 
         if (this.props.location.state !== undefined) {
@@ -381,6 +386,7 @@ const mapStateToProps = (state, ownProps) => {
         favboard: state.ui.favboard,
         media: state.ui.media,
         update: state.update,
+        reversegeo: state.options.reversegeo,
         favorizedStations: state.favorizedStations,
         subscription: state.subscription
     };

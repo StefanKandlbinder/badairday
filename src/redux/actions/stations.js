@@ -9,6 +9,7 @@ export const ADD_STATION = `${STATION} ADD`;
 export const ADD_STATIONS = `${STATIONS} ADD`;
 export const UPDATE_STATIONS = `${STATIONS} UPDATE`;
 export const UPDATE_STATION = `${STATION} UPDATE`;
+export const UPDATE_STATION_NAME = `${STATION} UPDATE NAME`;
 export const FAVORIZE_STATION = `${STATIONS} FAVORIZE`;
 export const UNFAVORIZE_STATION = `${STATIONS} UNFAVORIZE`;
 export const NOTIFY_STATION = `${STATIONS} NOTIFY`;
@@ -47,6 +48,12 @@ export const addStation = ({ station, provider }) => ({
 
 export const updateStation = ({ station, provider }) => ({
     type: UPDATE_STATION,
+    payload: station,
+    meta: { feature: STATIONS, provider: provider }
+});
+
+export const updateStationName = ({ station, provider }) => ({
+    type: UPDATE_STATION_NAME,
     payload: station,
     meta: { feature: STATIONS, provider: provider }
 });

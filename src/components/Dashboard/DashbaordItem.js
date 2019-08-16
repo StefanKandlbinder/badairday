@@ -42,6 +42,12 @@ class DashboardItem extends Component {
         let wind = null;
         let temp = null;
 
+        let name = this.props.station.properties.name;
+
+        if (this.props.station.properties.provider === "luftdaten" && this.props.reversegeo) {
+            name = this.props.station.properties.reverseGeoName;
+        }
+
         if (this.props.station.properties.components.NO2) {
             no2 = <Sample classes="air__dashboard-item-component" component={this.props.station.properties.components.NO2}></Sample>
         }
@@ -109,7 +115,7 @@ class DashboardItem extends Component {
                 <svg className="air__dashboard-item-marker" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><use xlinkHref="#airSVGLuftdatenMarker"></use></svg>}
             <div className="air__dashboard-item-content air__dashboard-item--description">
                 <div className="air__dashboard-item-name">
-                    {this.props.station.properties.name}
+                    {name}
                 </div>
                 <div className="air__dashboard-item-date">{this.props.station.properties.date}</div>
                 <div className="air__dashboard-item-container">
