@@ -194,10 +194,10 @@ class Station extends Component {
                 }
 
                 else if (key === "WIR") {
-                    this.setState({
+                    /* this.setState({
                         compass: <Compass
                             value={value.value} />
-                    })
+                    }) */
 
                     wind.push(<Aircomp key={key}
                         component={key}

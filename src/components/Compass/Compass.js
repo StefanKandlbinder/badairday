@@ -5,7 +5,7 @@ import './Compass.scss';
 class Compass extends Component {
     state = {
         orientation: 0,
-        available: false,
+        available: true,
         platform: navigator.platform
     }
 
