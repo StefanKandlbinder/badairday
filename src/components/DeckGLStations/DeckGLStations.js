@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import ReactMapGL from 'react-map-gl';
-import DeckGL, { HexagonLayer } from 'deck.gl';
+import DeckGL from '@deck.gl/react';
+import {H3ClusterLayer} from '@deck.gl/geo-layers';
 import { isWebGL2 } from 'luma.gl';
+import geojson2h3 from 'geojson2h3';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import getMood from '../../utilities/getMood';
+
+const h3 = require("h3-js");
 
 // Set your mapbox token here
 const MAPBOX_TOKEN = "pk.eyJ1IjoiYmFkYWlyZGF5IiwiYSI6ImNqcHdtNmlubzA1N2Y0Mm8xa2UyMXJzcTcifQ.nkVX7LX7t6tR2VX71ZpI3A";
@@ -30,14 +35,17 @@ export default class DeckGLStations extends Component {
                 longitude: this.props.position.lng,
                 latitude: this.props.position.lat,
                 zoom: 10,
-                maxZoom: 16,
+                maxZoom: 13.5,
                 pitch: 0,
                 bearing: 0
             },
-            hexagon: {
-                radius: 700
-            }
+            hexagons: null,
+            resolution: 8
         }
+    }
+
+    componentDidMount() {
+        this._renderLayers();
     }
 
     _getColorValue(points) {
@@ -55,27 +63,43 @@ export default class DeckGLStations extends Component {
     }
 
     _renderLayers() {
-        const data = this.props.stations;
+        const hexagons = this.props.stations.features.map(feature => {
+            const [lng, lat] = feature.geometry.coordinates;
+            let mood = getMood(feature.properties.mood, 1).replace("rgb(", "").replace(")", "");
+            mood = mood.split(",");
 
-        return [
-            new HexagonLayer({
-                id: 'hexagon',
-                data,
+            const hexagon = {
+                mean: mood,
+                count: 1,
+                hexIDs: [
+                    h3.geoToH3(lng, lat, this.state.resolution)
+                ]
+            }
+
+            return hexagon;
+        });
+        
+        // const hexagonSet = h3.h3SetToMultiPolygon(hexagons, false);
+
+        // console.info(hexagonSet);
+        this.setState({
+            hexagons: new H3ClusterLayer({
+                id: 'h3-cluster-layer',
+                data: hexagons,
                 pickable: true,
-                getPosition: data => [data.latitude, data.longitude],
-                getColorValue: this._getColorValue,
-                // getElevationValue: this._getColorValue,
-                radius: this.state.hexagon.radius,
-                // elevationRange,
-                colorDomain,
-                colorRange,
-                gpuAggregation: true,
-                onClick: (event) => {
-                    console.log(event)
+                stroked: true,
+                filled: true,
+                extruded: false,
+                opacity: 0.75,
+                getHexagons: d => d.hexIDs,
+                getFillColor: d => [parseInt(d.mean[0]), parseInt(d.mean[1]), parseInt(d.mean[2])],
+                getLineColor: [255, 255, 255],
+                lineWidthMinPixels: 1,
+                onClick: ({object}) => {
+                    console.info(object);
                 }
-                
-            })
-        ];
+              })
+        })
     }
 
     _onInitialized(gl) {
@@ -93,104 +117,86 @@ export default class DeckGLStations extends Component {
     }
 
     _viewStateChanged = (changed) => {
-        const zoom = changed.viewState.zoom 
-        let initalRadius = 700;
-        // console.log(zoom);
+        const zoom = changed.viewState.zoom;
 
-        if (zoom >= 0 && zoom <= 1) {
+        if (zoom >= 0 && zoom <= 1.5) {
             this.setState({
-                hexagon: { radius: initalRadius * 500}
-            })    
-        }
-
-        if (zoom > 1 && zoom <= 2) {
-            this.setState({
-                hexagon: { radius: initalRadius * 300}
+                resolution: 1
+            }, () => {
+                this._renderLayers();
             })    
         }
 
-        if (zoom > 2 && zoom <= 3) {
+        if (zoom > 1.5 && zoom <= 3) {
             this.setState({
-                hexagon: { radius: initalRadius * 100}
-            })    
-        }
-        if (zoom > 3 && zoom <= 4) {
-            this.setState({
-                hexagon: { radius: initalRadius * 50}
+                resolution: 2
+            }, () => {
+                this._renderLayers();
             })    
         }
 
-        if (zoom > 4 && zoom <= 5) {
+        if (zoom > 3 && zoom <= 4.5) {
             this.setState({
-                hexagon: { radius: initalRadius * 30}
+                resolution: 3
+            }, () => {
+                this._renderLayers();
+            })    
+        }
+        if (zoom > 4.5 && zoom <= 6) {
+            this.setState({
+                resolution: 4
+            }, () => {
+                this._renderLayers();
             })    
         }
 
-        if (zoom > 5 && zoom <= 6) {
+        if (zoom > 6 && zoom <= 7.5) {
             this.setState({
-                hexagon: { radius: initalRadius * 20}
-            })    
-        }
-        if (zoom > 6 && zoom <= 7) {
-            this.setState({
-                hexagon: { radius: initalRadius * 10}
+                resolution: 5
+            }, () => {
+                this._renderLayers();
             })    
         }
 
-        if (zoom > 7 && zoom <= 8) {
+        if (zoom > 7.5 && zoom <= 8.5) {
             this.setState({
-                hexagon: { radius: initalRadius * 5}
+                resolution: 6
+            }, () => {
+                this._renderLayers();
             })    
         }
 
-        if (zoom > 8 && zoom <= 9) {
+        if (zoom > 8.5 && zoom <= 9.5) {
             this.setState({
-                hexagon: { radius: initalRadius * 2}
+                resolution: 7
+            }, () => {
+                this._renderLayers();
             })    
         }
 
-        if (zoom > 9 && zoom <= 10) {
+        if (zoom > 9.5 && zoom <= 11) {
             this.setState({
-                hexagon: { radius: initalRadius}
+                resolution: 8
+            }, () => {
+                this._renderLayers();
             })    
         }
 
-        if (zoom > 10 && zoom <= 11) {
+        if (zoom > 11 && zoom <= 13) {
             this.setState({
-                hexagon: { radius: initalRadius / 2}
+                resolution: 9
+            }, () => {
+                this._renderLayers();
             })    
         }
 
-        if (zoom > 11 && zoom <= 12) {
+        if (zoom > 12.5 && zoom <= 13.5) {
             this.setState({
-                hexagon: { radius: initalRadius / 3.333}
+                resolution: 10
+            }, () => {
+                this._renderLayers();
             })    
         }
-
-        if (zoom > 12 && zoom <= 13) {
-            this.setState({
-                hexagon: { radius: initalRadius / 10}
-            })    
-        }
-
-        if (zoom > 13 && zoom <= 14) {
-            this.setState({
-                hexagon: { radius: initalRadius / 20}
-            })    
-        }
-
-        if (zoom > 14 && zoom <= 15) {
-            this.setState({
-                hexagon: { radius: initalRadius / 33.333}
-            })    
-        }
-
-        if (zoom > 15 && zoom <= 16) {
-            this.setState({
-                hexagon: { radius: initalRadius / 50}
-            })    
-        }
-
         // console.log(this.state.hexagon.radius, zoom);
         // console.log(this.refs.map.getMap());
         // this.radius = (this.state.maxZoom - zoom) * 100;
@@ -202,7 +208,7 @@ export default class DeckGLStations extends Component {
 
         return (
             <DeckGL
-                layers={this._renderLayers()}
+                layers={this.state.hexagons}
                 initialViewState={viewport}
                 onWebGLInitialized={this._onInitialized.bind(this)}
                 onViewStateChange={this._viewStateChanged}

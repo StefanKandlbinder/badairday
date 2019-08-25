@@ -163,7 +163,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
             let persistedStations = getState().stations.features;
 
             if (persistedStations.length) {
-                if (find(persistedStations, ['properties.id', stationModel.properties.id]) !== undefined) {
+                if (find(persistedStations, ['properties.id', stationModel.properties.id]) !== undefined || stationModel.properties.mood > 1900) {
                     return false
                 }
                 else {

@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-// import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 
 import L from 'leaflet';
-import { Map, TileLayer, Marker } from 'react-leaflet';
+import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
 
 import { STATIONS } from "../../redux/actions/stations";
 import './Stations.scss';
+
+import HexbinLayer from './HexBinLayer';
+import Dashboard from '../../components/Dashboard/Dashboard';
+
+const WrappedHexbinLayer = withLeaflet(HexbinLayer);
+const options = {};
 
 class Stations extends Component {
     constructor(props) {
@@ -15,48 +21,36 @@ class Stations extends Component {
         this.state = {
             hasLocation: false,
             zoom: 13,
-            stationMarkers: []
-        }
+            stationMarkers: [],
+            polygons: null,
+            hexToStation: [],
+            clusterBoard: false,
+            res: 9
+        };
     }
 
     componentDidMount() {
-        this.getStations();
         this.refs.map.leafletElement.zoomControl.setPosition("bottomleft");
-        // console.log(this.refs.map.leafletElement.zoomControl.options.position);
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.stations.features.length && this.props.stations.features.length > prevProps.stations.features.length) {
-            this.getStations();
-        }
-
-        if (this.props.update.timestamp > prevProps.update.timestamp) {
-            this.updateStations();
-        }
-
         if (this.props.position !== prevProps.position) {
             this.handleLocation();
         }
-
-        if (this.props.stations.features.length) {
-            this.updateFavorizedStations();
-            this.updateNotifiedStations();
-        }
     }
 
-    // forward to the official station when clicking on the corresponding placeholder on the map
-    handleClickCircle = (provider, station) => (e) => {
+    handleHexCLick = (d, i, coords) => {
         this.props.history.push({
-            pathname: "/station/" + provider + "/" + station,
+            pathname: "/station/" + d[0].o.properties.provider + "/" + d[0].o.properties.id,
             state: {
-                x: e.originalEvent.clientX,
-                y: e.originalEvent.clientY
+                x: coords[0],
+                y: coords[1]
             }
         });
     }
 
     // go back to the main route
-    handleClickMap = () => {
+    handleMoveStart = () => {
         if (this.props.location.pathname === "/bottomsheet" || this.props.location.pathname.includes("/station")) {
             this.props.history.push("/");
         }
@@ -92,8 +86,33 @@ class Stations extends Component {
     }
 
     onZoomEnd = (e) => {
-        this.markerPane.style.animationDelay = "1s";
-        this.markerPane.style.opacity = 1;
+        // this.markerPane.style.animationDelay = "1s";
+        // this.markerPane.style.opacity = 1;
+        /* this.setState({
+            zoom: this.refs.map.leafletElement.getZoom()
+        }, () => {
+            this.setState({
+                res: this.setRes(this.state.zoom)
+            }, () => {
+                this.getHexIds(this.state.res)
+            })
+
+        }) */
+        /* let bounds = this.refs.map.leafletElement.getBounds();
+        let center = this.refs.map.leafletElement.getCenter();
+        let distance = this.refs.map.leafletElement.distance(L.latLng(bounds._northEast.lat, bounds._northEast.lng),L.latLng(bounds._southWest.lat, bounds._southWest.lng));
+
+        luftdatenURL += bounds._northEast.lat + "," + 
+            bounds._northEast.lng + "," +
+            bounds._southWest.lat + "," +
+            bounds._southWest.lng + ",";
+
+        let url = luftdatenURLRadius + center.lat + "," + center.lng + "," + Math.round(distance / 1000);
+        
+        console.info(url); */
+            
+        // this.props.onFetchStations(url, luftdatenProvider, "FETCH");
+
         console.log("Zoom ended!");
     }
 
@@ -102,137 +121,30 @@ class Stations extends Component {
         // console.log(bounds);
     }
 
-    getStations = () => {
-        let stationMarkers = this.props.stations.features.map(element => {
-            let marker = "";
-
-            if (element.properties.provider === "luftdaten") {
-                marker = L.divIcon({
-                    html: `<svg xmlns="http://www.w3.org/2000/svg" 
-                        class="" viewBox="0 0 24 24"
-                        data-marker-id="${element.properties.id}"
-                        style="fill: ${element.properties.components.PM10.update ? element.properties.moodRGBA : "rgba(70,70,70,0.75)"}">
-                        <use xlink:href="#airSVGLuftdatenMarker"></use>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            data-notify-id="${element.properties.id}"
-                            fill="${element.properties.notify ? "rgba(255, 2255, 255, 0.9)" : "rgba(255,255,255,0.0)"}"
-                            viewBox="0 0 24 24"
-                            class="air__stations-notified-icon">
-                            <use xlink:href="#airSVGNotify"></use>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            data-favorized-id="${element.properties.id}"
-                            fill="${element.properties.favorized ? "rgba(255, 2255, 255, 0.9)" : "rgba(255,255,255,0.0)"}"
-                            viewBox="0 0 24 24"
-                            class="air__stations-favorized-icon">
-                            <use xlink:href="#airSVGFavorize"></use>
-                        </svg>`,
-                    className: "air__stations-luftdaten-marker",
-                    iconSize: [40, 40],
-                    iconAnchor: [20, 40],
-                });
-            }
-
-            if (element.properties.provider === "upperaustria") {
-                marker = L.divIcon({
-                    html: `<svg xmlns="http://www.w3.org/2000/svg" 
-                        class="" viewBox="0 0 24 24"
-                        data-marker-id="${element.properties.id}"
-                        style="fill: ${element.properties.components.PM10.update ? element.properties.moodRGBA : "rgba(70,70,70,0.75)"}">
-                        <use xlink:href="#airSVGOfficialMarker"></use>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            data-notify-id="${element.properties.id}"
-                            fill="${element.properties.notify ? "rgba(255, 2255, 255, 0.9)" : "rgba(255,255,255,0.0)"}"
-                            viewBox="0 0 24 24"
-                            class="air__stations-notified-icon">
-                            <use xlink:href="#airSVGNotify"></use>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                        data-favorized-id="${element.properties.id}"
-                        fill="${element.properties.favorized ? "rgba(255, 2255, 255, 0.9)" : "rgba(255,255,255,0.0)"}"
-                        viewBox="0 0 24 24"
-                        class="air__stations-favorized-icon">
-                        <use xlink:href="#airSVGFavorize"></use>
-                        </svg>`,
-                    className: "air__stations-upperaustria-marker",
-                    iconSize: [40, 40],
-                    iconAnchor: [20, 40],
-                });
-            }
-
-            return (
-                <Marker
-                    key={element.properties.id}
-                    icon={marker}
-                    onClick={this.handleClickCircle(element.properties.provider, element.properties.id)}
-                    bubblingMouseEvents={false}
-                    position={[element.geometry.coordinates[0], element.geometry.coordinates[1]]}
-                    title={element.properties.name}
-                    stroke={false}
-                    fillOpacity={1} />
-            )
-        });
-
-        this.setState({ stationMarkers: stationMarkers });
-    }
-
-    updateStations = () => {
-        this.props.stations.features.forEach(station => {
-                let markerID = '[data-marker-id="' + station.properties.id + '"]';
-                let marker = document.querySelector(markerID);
-
-                if(marker) {
-                    marker.setAttribute("style", 'fill: ' + (station.properties.components.PM10.update ? station.properties.moodRGBA : "rgba(70,70,70,0.75)"));
-                }
-        })
-    }
-
-    updateFavorizedStations = () => {
-        this.props.stations.features.forEach(station => {
-            if (station.properties.favorized) {
-                let markerID = '[data-favorized-id="' + station.properties.id + '"]';
-                let marker = document.querySelector(markerID);
-
-                if (marker) {
-                    marker.setAttribute("style", "fill: rgba(255, 255, 255, 0.9)");
-                }
-            }
-            else {
-                let markerID = '[data-favorized-id="' + station.properties.id + '"]';
-                let marker = document.querySelector(markerID);
-
-                if (marker) {
-                    marker.setAttribute("style", "fill: rgba(255, 255, 255, 0)");
-                }
-            }
-        })
-    }
-
-    updateNotifiedStations = () => {
-        this.props.stations.features.forEach(station => {
-            if (station.properties.notify) {
-                let markerID = '[data-notify-id="' + station.properties.id + '"]';
-                let marker = document.querySelector(markerID);
-
-                if (marker) {
-                    marker.setAttribute("style", "fill: rgba(255, 255, 255, 0.9)");
-                }
-            }
-            else {
-                let markerID = '[data-notify-id="' + station.properties.id + '"]';
-                let marker = document.querySelector(markerID);
-
-                if (marker) {
-                    marker.setAttribute("style", "fill: rgba(255, 255, 255, 0)");
-                }
-            }
-        })
-    }
-
     render() {
         let location = null;
+        let hexbins = null;
+        let clusterBoard = null;
+
+        clusterBoard = <div className="air__site air__site--favboard">
+        <Dashboard 
+            stations={this.props.stations}
+            options={this.props.options}
+            onSet={this.props.onSetNoteboard}
+            onAdd={this.props.onNotifyStation}
+            onRemove={this.props.onUnnotifyStation}
+            
+            type = "notify" />
+        </div>;
+
+        if (this.props.stations.features.length) {
+            hexbins = <WrappedHexbinLayer 
+                data={this.props.stations}
+                updating={this.props.updating}
+                timestamp = {this.props.update.timestamp}
+                onClick={this.handleHexCLick}
+                {...options} />
+        }
 
         if (this.state.hasLocation && this.props.position) {
             let marker = L.divIcon({
@@ -248,14 +160,15 @@ class Stations extends Component {
             <React.Fragment>
                 <Map className="air__stations"
                     onClick={this.handleClickMap}
-                    onMovestart={this.handleClickMap}
+                    onMovestart={this.handleMoveStart}
                     // onMoveEnd={this.onMoveEnd}
                     center={this.props.position}
                     zoom={this.state.zoom}
-                    maxZoom={16}
+                    maxZoom={15}
+                    minZoom={2}
                     onZoom={this.onZoom}
                     // onZoomStart={this.onZoomStart}
-                    // onZoomEnd={this.onZoomEnd}
+                    onZoomEnd={this.onZoomEnd}
                     preferCanvas="true"
                     doubleClickZoom="false"
                     useFlyTo="true"
@@ -267,10 +180,20 @@ class Stations extends Component {
                         // url="https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png"
                         url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
                     />
-                    {this.state.stationMarkers}
                     {location}
+                    {hexbins}
                     {this.props.children}
                 </Map>
+
+                <CSSTransition
+                    in={this.state.clusterBoard}
+                    // in={this.props.media === "medium" ? true : false}
+                    classNames="air__animation-site-transition"
+                    timeout={300}
+                    mountOnEnter
+                    unmountOnExit>
+                    {clusterBoard}
+                </CSSTransition>
             </React.Fragment>
         )
     }

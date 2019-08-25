@@ -41,7 +41,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                             {
                                 type: "Point",
                                 coordinates:
-                                    [station.geoBreite, station.geoLaenge, 0]
+                                    [station.geoLaenge, station.geoBreite, 0]
                             },
                             {
                                 provider: provider,

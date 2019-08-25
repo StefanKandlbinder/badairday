@@ -62,6 +62,7 @@ import Updatebar from "../../components/UI/Updatebar/Updatebar";
 import './App.scss';
 
 let luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,50";
+// let luftdatenURL = "http://api.luftdaten.info/static/v2/data.dust.min.json";
 const luftdatenProvider = "luftdaten";
 const upperAustriaURL = "https://www2.land-oberoesterreich.gv.at/imm/jaxrs/messwerte/json?";
 const upperAustriaProvider = "upperaustria";
@@ -322,16 +323,6 @@ class App extends Component {
         : null
       }
       <Spacer className="air__bg-color-text" />
-      {/*<NavLink
-        className="air__tabbar-link air__button air__button--naked"
-        aria-label="Map"
-        activeClassName="air__button--active"
-        exact to={"/mapgl"}
-        onClick={() => this.props.history.location.pathname === "/mapgl" ? this.onUpdateStations() : this.props.onSetFavboard({ state: false, feature: STATIONS })}>
-        <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <use xlinkHref="#airSVGMap"></use>
-        </svg>
-      </NavLink>*/}
       {('Notification' in window && navigator.serviceWorker) ?
         <NavLink
           onClick={() => this.props.noteboard ? this.onUpdateStations() : this.props.onSetNoteboard({ state: true, feature: STATIONS })}
@@ -415,12 +406,14 @@ class App extends Component {
         <Stations stations={this.props.stations}
           options={this.props.options}
           update={this.props.update}
+          updating={this.props.updating}
           media={this.props.media}
           position={this.props.position}
           favboard={this.props.favboard}
           noteboard={this.props.noteboard}
           onSetFavboard={this.props.onSetFavboard}
-          onSetNoteboard={this.props.onSetNoteboard}/>
+          onSetNoteboard={this.props.onSetNoteboard}
+          onFetchStations={this.props.onFetchStations}/>
         <Route
           path="/station/:provider/:id"
           render={() =>
@@ -449,15 +442,6 @@ class App extends Component {
             unmountOnExit>
             {app}
           </CSSTransition>
-
-          {/*<CSSTransition
-            in={this.props.history.location.pathname === "/mapgl" ? true : false}
-            classNames="air__animation-site-transition"
-            timeout={300}
-            mountOnEnter
-            unmountOnExit>
-            {mapgl}
-          </CSSTransition>*/}
 
           <Media
             query="(min-width: 768px) and (orientation: landscape)"

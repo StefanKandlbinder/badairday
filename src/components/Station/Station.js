@@ -71,7 +71,7 @@ class Station extends Component {
         this.setState({ comps: this.getAirComps() })
 
         if (this.props.station.properties.provider === "upperaustria")
-            this.setState({ shape: circle })
+            this.setState({ shape: hexagon })
 
         if (this.props.station.properties.provider === "luftdaten")
             this.setState({ shape: hexagon })
@@ -89,13 +89,13 @@ class Station extends Component {
             this.setState({ comps: this.getAirComps() });
         }
 
-        if (this.props.station.properties.provider !== "luftdaten" && prevProps.station.properties.provider === "luftdaten") {
+        /* if (this.props.station.properties.provider !== "luftdaten" && prevProps.station.properties.provider === "luftdaten") {
             this.state.animationCircle.beginElement();
         }
 
         if (this.props.station.properties.provider !== "upperaustria" && prevProps.station.properties.provider === "upperaustria") {
             this.state.animationHexagon.beginElement();
-        }
+        } */
 
         if (this.props.station.properties.favorized !== prevProps.station.properties.favorized || this.props.station.properties.notify !== prevProps.station.properties.notify) {
             change.play();
@@ -248,7 +248,13 @@ class Station extends Component {
                 }
             });
 
-            return (compItems);
+            return (
+                <div className="air__comp air__station-dust-container" key="components">
+                    <div className="air__station-comp-container">
+                        {compItems}
+                    </div>
+                </div>
+            );
         }
     }
 

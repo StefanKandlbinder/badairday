@@ -43,6 +43,8 @@
     will-change: fill;
     transition: fill var(--air__animation-duration) var(--air__animation-timing);
     transform: scale(calc(600 / 590));
+    stroke: rgba(255, 255 , 255, 0.75);
+    stroke-width: 8px;
     /* clip-path: circle(180px); */
 }
 
@@ -94,14 +96,14 @@
     font-size: 12px;
     font-style: italic;
     color: var(--air__color-text);
-    margin-bottom: var(--air__margin);
     margin-top: -6px;
     order: 2;
     opacity: 0.8;
 }
 
 .air__station-dust-container {
-    order: 2;
+    margin-top: var(--air__margin--2);
+    order: 4;
     display: flex;
     align-items: center;
 }
@@ -122,7 +124,8 @@
 }
 
 .air__comp--dust {
-    letter-spacing: var(--air__letter-spacing--small)
+    letter-spacing: var(--air__letter-spacing--small);
+    min-width: 150px;
 }
 
 .air__comp--dust-NO2 {
@@ -130,23 +133,20 @@
 }
 
 .air__comp--dust-PM10 {
-    order: 4;
+    order: 1;
     font-size: 16px;
 }
 
 .air__comp--dust-PM25 {
-    order: 5;
-}
-
-.air__comp--temp {
-    order: 7;
+    order: 2;
 }
 
 .air__station-windtemp {
     display: flex;
-    order: 5;
+    order: 3;
     margin-top: var(--air__margin);
-    opacity: 0.9;
+    min-width: 130px;
+    justify-content: space-between;
 
     .air__comp--temp {
         margin-left: var(--air__margin--2);

@@ -22,6 +22,19 @@ const initState = {
     }
 };
 
+let updateCount = 0;
+
+let getCount = (payload) => {
+    if (payload) {
+        updateCount += 1;
+    }
+    else {
+        updateCount -= 1;
+    }
+
+    return updateCount === 0 ? false : true
+}
+
 export const uiReducer = (ui = initState, action) => {
     switch (true) {
 
@@ -29,7 +42,7 @@ export const uiReducer = (ui = initState, action) => {
             return { ...ui, loading: action.payload };
         
         case action.type.includes(SET_UPDATER):
-            return { ...ui, updating: action.payload };
+            return { ...ui, updating: getCount(action.payload) };
         
         case action.type.includes(SET_GEOLOCATION):
             return { ...ui, geolocation: action.payload };

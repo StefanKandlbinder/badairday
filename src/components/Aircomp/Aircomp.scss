@@ -1,13 +1,8 @@
 .air__comp {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     color: var(--air__color-text);
     line-height: 1.2;
-}
-
-.air__comp--dust .air__comp-title,
-.air__comp--dust .air__comp-value {
-    width: 90px;
 }
 
 .air__comp--dust .air__comp-title {
