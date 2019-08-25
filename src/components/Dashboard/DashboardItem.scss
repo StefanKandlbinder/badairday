@@ -34,6 +34,13 @@
     }
   } */
 
+  .air__dashboard-item-action {
+    display: flex;
+    flex-direction: column;
+    margin-right: var(--air__margin--2);
+    justify-content: center;
+  }
+
   .air__dashboard-item-container {
     display: flex;
   }

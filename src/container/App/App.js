@@ -181,7 +181,6 @@ class App extends Component {
     let optionsSheet = null;
     let shareSection = null;
     let favboard = null;
-    let noteboard = null;
     // let mapgl = null;
     let tabbar = null;
     let updateBar = null;
@@ -311,7 +310,7 @@ class App extends Component {
       {this.props.media === "small"
         ? <NavLink
           onClick={this.onSetFav}
-          className={`air__tabbar-link air__button air__button--label air__button--naked ${!getFavorizedStations(this.props.stations).length ? "air__button--inactive" : ""}`}
+          className={`air__tabbar-link air__button air__button--label air__button--naked ${!getFavorizedStations(this.props.stations).length ? "air__button--disabled" : ""}`}
           aria-label="List"
           activeClassName="air__button--active"
           to={"/favboard"}>
@@ -323,24 +322,6 @@ class App extends Component {
         : null
       }
       <Spacer className="air__bg-color-text" />
-      {('Notification' in window && navigator.serviceWorker) ?
-        <NavLink
-          onClick={() => this.props.noteboard ? this.onUpdateStations() : this.props.onSetNoteboard({ state: true, feature: STATIONS })}
-          className={`air__tabbar-link air__button air__button--label air__button--naked ${!getNotifiedStations(this.props.stations).length ? "air__button--inactive" : ""}`}
-          aria-label="List"
-          activeClassName="air__button--active"
-          to={"/noteboard"}>
-          <svg xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            className="air__button-icon"
-            stroke="rgba(255,255,255,0.9)"
-            strokeWidth="1">
-            <use xlinkHref="#airSVGNotify"></use>
-          </svg>
-          Push
-        </NavLink>
-        : null
-      }
       <NavLink
         className="air__tabbar-link air__button air__button--label air__button--naked"
         aria-label="Options Sheet"
@@ -364,22 +345,14 @@ class App extends Component {
       <Dashboard 
         stations={this.props.stations}
         options={this.props.options}
+        subscription={this.props.subscription}
         onSet={this.props.onSetFavboard}
-        onAdd={this.props.onFavorizeStation}
-        onRemove={this.props.onUnfavorizeStation}
+        onFavorizeStation={this.props.onFavorizeStation}
+        onUnfavorizeStation={this.props.onUnfavorizeStation}
+        onNotifyStation={this.props.onNotifyStation}
+        onUnnotifyStation={this.props.onUnnotifyStation}
         getActive={getFavorizedStations}
         type = "favorized" />
-    </div>;
-
-    noteboard = <div className="air__site air__site--favboard">
-      <Dashboard 
-        stations={this.props.stations}
-        options={this.props.options}
-        onSet={this.props.onSetNoteboard}
-        onAdd={this.props.onNotifyStation}
-        onRemove={this.props.onUnnotifyStation}
-        getActive={getNotifiedStations}
-        type = "notify" />
     </div>;
 
     /* mapgl = <div className="air__site">
@@ -460,16 +433,6 @@ class App extends Component {
             mountOnEnter
             unmountOnExit>
             {favboard}
-          </CSSTransition>
-
-          <CSSTransition
-            in={this.props.noteboard}
-            // in={this.props.media === "medium" ? true : false}
-            classNames="air__animation-site-transition"
-            timeout={300}
-            mountOnEnter
-            unmountOnExit>
-            {noteboard}
           </CSSTransition>
 
           <Button
@@ -557,6 +520,7 @@ const mapStateToProps = state => {
     media: state.ui.media,
     position: state.location,
     notifications: state.notifications,
+    subscription: state.subscription,
     update: state.update,
     stations: state.stations,
     options: state.options

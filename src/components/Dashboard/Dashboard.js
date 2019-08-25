@@ -49,10 +49,14 @@ class Dashboard extends Component {
                 {stations.map((station) =>
                     <DashboardItem
                         key={station.properties.id}
+                        stations={this.props.stations}
                         station={station}
+                        subscription={this.props.subscription}
                         reversegeo={this.props.options.reversegeo} 
-                        onAdd={this.props.onAdd} 
-                        onRemove={this.props.onRemove}
+                        onFavorizeStation={this.props.onFavorizeStation}
+                        onUnfavorizeStation={this.props.onUnfavorizeStation}
+                        onNotifyStation={this.props.onNotifyStation}
+                        onUnnotifyStation={this.props.onUnnotifyStation}
                         type={this.props.type} />
                 )}
                 <li className="air__spacer" style={moodStyle}></li>

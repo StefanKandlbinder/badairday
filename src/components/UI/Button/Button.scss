@@ -54,6 +54,8 @@
 .air__button--small:focus,
 .air__button--small:active {
     min-height: var(--air__button-height--small);
+    min-width: var(--air__button-height--small);
+    padding: 0;
 
     .air__button-icon {
         width: 16px;
@@ -64,11 +66,31 @@
 .air__button--inactive,
 .air__button--inactive:focus,
 .air__button--inactive:active {
+    .air__button-icon {
+        fill: var(--air__color-inactive);
+    }
+
+    &.air__button--negative {
+        .air__button-icon {
+            fill: rgba(255, 255, 255, 0);
+        }
+    }
+}
+
+.air__button--disabled,
+.air__button--disabled:focus,
+.air__button--disabled:active {
     color: var(--air__color-inactive) !important;
     pointer-events: none !important;
 
     .air__button-icon {
         fill: var(--air__color-inactive) !important;
+    }
+
+    &.air__button--negative {
+        .air__button-icon {
+            fill: rgba(255, 255, 255, 0);
+        }
     }
 }
 
@@ -106,5 +128,12 @@
     .air__button-icon {
         color: var(--air__color-primary--active);
         fill: var(--air__color-primary--active);
+    }
+
+    &.air__button--negative {
+        .air__button-icon {
+            color: var(--air__color-text);
+            fill: var(--air__color-text);
+        }
     }
 }
