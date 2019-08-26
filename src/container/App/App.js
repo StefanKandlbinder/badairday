@@ -34,7 +34,6 @@ import getWebShare from '../../services/getWebShare';
  * FILTERS
  */
 import { getActiveStations } from '../../redux/filters/getActiveStations';
-import { getFavorizedStations } from '../../redux/filters/getFavorizedStations';
 
 import SVGSprite from '../../components/UI/SVGSprite/SVGSprite';
 import Stations from '../../components/Stations/Stations';
@@ -79,7 +78,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    if (this.props.media === "medium" && getFavorizedStations(this.props.stations).length) {
+    if (this.props.media === "medium" && getActiveStations(this.props.stations).length) {
       this.props.onSetFavboard({ state: true, feature: STATIONS });
     }
 
@@ -103,7 +102,7 @@ class App extends Component {
     if (prevProps.media === "medium" && this.props.media === "small") {
       this.props.onSetFavboard({ state: false, feature: STATIONS });
     }
-    else if (this.props.media === "medium" && getFavorizedStations(this.props.stations).length) {
+    else if (this.props.media === "medium" && getActiveStations(this.props.stations).length) {
       this.props.onSetFavboard({ state: true, feature: STATIONS });
     }
   }
@@ -310,7 +309,7 @@ class App extends Component {
       {this.props.media === "small"
         ? <NavLink
           onClick={this.onSetFav}
-          className={`air__tabbar-link air__button air__button--label air__button--naked ${!getFavorizedStations(this.props.stations).length ? "air__button--disabled" : ""}`}
+          className={`air__tabbar-link air__button air__button--label air__button--naked ${!getActiveStations(this.props.stations).length ? "air__button--disabled" : ""}`}
           aria-label="List"
           activeClassName="air__button--active"
           to={"/favboard"}>
