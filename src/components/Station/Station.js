@@ -269,7 +269,7 @@ class Station extends Component {
 
         name = this.props.station.properties.name;
 
-        if (this.props.station.properties.provider === "luftdaten" && this.props.reversegeo) {
+        if (this.props.station.properties.provider === "luftdaten" && this.props.reversegeo && this.props.station.properties.name.search("Luftdatensensor")) {
             name = this.props.station.properties.reverseGeoName;
         }
 
