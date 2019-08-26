@@ -6,6 +6,7 @@
     font-size: 14px;
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     background-color: transparent;
     will-change: border-color, background-color;
     transition: background-color var(--air__animation-duration) var(--air__animation-timing) var(--air__animation-duration);

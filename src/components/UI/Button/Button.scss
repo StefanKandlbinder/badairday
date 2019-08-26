@@ -53,8 +53,8 @@
 .air__button--small,
 .air__button--small:focus,
 .air__button--small:active {
-    min-height: var(--air__button-height--small);
-    min-width: var(--air__button-height--small);
+    min-height: 28px;
+    min-width: 28px;
     padding: 0;
 
     .air__button-icon {
