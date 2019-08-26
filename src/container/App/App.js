@@ -33,8 +33,8 @@ import getWebShare from '../../services/getWebShare';
 /**
  * FILTERS
  */
+import { getActiveStations } from '../../redux/filters/getActiveStations';
 import { getFavorizedStations } from '../../redux/filters/getFavorizedStations';
-import { getNotifiedStations } from '../../redux/filters/getNotifiedStations';
 
 import SVGSprite from '../../components/UI/SVGSprite/SVGSprite';
 import Stations from '../../components/Stations/Stations';
@@ -351,7 +351,7 @@ class App extends Component {
         onUnfavorizeStation={this.props.onUnfavorizeStation}
         onNotifyStation={this.props.onNotifyStation}
         onUnnotifyStation={this.props.onUnnotifyStation}
-        getActive={getFavorizedStations}
+        getActive={getActiveStations}
         type = "favorized" />
     </div>;
 

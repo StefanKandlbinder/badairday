@@ -117,12 +117,13 @@ class DashboardItem extends Component {
         let wir = null;
         let wind = null;
         let temp = null;
+        let name = null;
         let notifyButton = null;
         let favorizeButton = null;
 
-        let name = this.props.station.properties.name;
+        name = this.props.station.properties.name;
 
-        if (this.props.station.properties.provider === "luftdaten" && this.props.reversegeo) {
+        if (this.props.station.properties.provider === "luftdaten" && this.props.reversegeo && this.props.station.properties.name.search("Luftdatensensor")) {
             name = this.props.station.properties.reverseGeoName;
         }
 
