@@ -61,7 +61,7 @@ class Dashboard extends Component {
                             className="air__button-icon air__dashboard-header-icon"
                             stroke="rgba(255,255,255,0.9)"
                             strokeWidth="1">
-                            <use xlinkHref="#airSVGChevronLeft"></use>
+                            <use xlinkHref="#airSVGBack"></use>
                         </svg>
                     </Button>
                     <div className="air__dahboard-header-title">{this.props.header}</div>
