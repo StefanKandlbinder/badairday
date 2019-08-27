@@ -109,6 +109,12 @@
     opacity: 0.8;
 }
 
+.air__station--upperaustria {
+    .air__station-date{
+        padding-left: 24px;
+    }
+}
+
 .air__station-dust-container {
     margin-top: var(--air__margin--2);
     order: 4;
