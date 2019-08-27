@@ -10,6 +10,7 @@
 }
 
 .air__dashboard-header {
+    font-weight: 500;
     color: var(--air__color-primary--active);
     min-height: 40px;
     display: flex;
@@ -20,6 +21,10 @@
     top: 0;
     font-size: 16px;
     z-index: 10;
+}
+
+.air__dashboard-header-icon {
+    stroke-width: 0px;
 }
 
 .air__dahboard-header-title {
