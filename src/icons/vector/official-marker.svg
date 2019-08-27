@@ -1,6 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" 
-    width="24" 
-    height="24" 
-    viewBox="0 0 24 24">
-    <path d="M5,300H5A295,295,0,0,0,152.5,555.48h0a295,295,0,0,0,295,0h0A295,295,0,0,0,595,300h0A295,295,0,0,0,447.5,44.52h0a295,295,0,0,0-295,0h0A295,295,0,0,0,5,300Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" id="airSVGOfficialAustria">
+    <rect fill="#ed2939" width="24" height="12"/>
+    <rect fill="#fff" y="4" width="24" height="4"/>
 </svg>

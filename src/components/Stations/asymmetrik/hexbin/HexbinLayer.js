@@ -331,6 +331,25 @@ L.HexbinLayer = L.SVG.extend({
 			.attr('class', 'air__stations-notified-icon')
 			.append('use')
 			.attr('xlink:href', '#airSVGNotify')
+		
+		enter.append('svg')
+			.attr('xmlns', 'http://www.w3.org/2000/svg')
+			.attr('viewBox', '0 0 24 12')
+			.attr("x", function (d) { return d.x - 18; })
+			.attr("y", function (d) { return d.y - 10; })
+			.attr('width', "12")
+			.attr('height', '6')
+			.attr('opacity', function(d) {
+				const found = d.filter(station => {
+					return station.o.properties.provider === "upperaustria"
+				})
+
+				console.info(found)
+
+				return found.length ? 0.75 : 0
+			})
+			.append('use')
+			.attr('xlink:href', '#airSVGOfficialAustria')
 
 		enter.append('text').attr('class', 'hexbin-text')
 			.attr("x", function (d) { return d.x; })
@@ -338,7 +357,7 @@ L.HexbinLayer = L.SVG.extend({
 			.attr("font-size", "10px")
 			.attr("font-weight", "700")
 			.attr('fill-opacity', 0.75)
-			.attr("fill", "white")
+			.attr('fill', 'white')
 			.append('tspan').attr('text-anchor', 'middle')
 			.text(function (d) { return d.length > 1 ? d.length : ""; })
 
@@ -366,7 +385,6 @@ L.HexbinLayer = L.SVG.extend({
 			.append('use')
 			.attr('xlink:href', '#airSVGFavorize')
 
-
 		// Grid
 		var gridEnter = enter.append('path').attr('class', 'hexbin-grid')
 			.attr('transform', function (d) {
@@ -376,8 +394,8 @@ L.HexbinLayer = L.SVG.extend({
 				return that._hexLayout.hexagon(that.options.radius);
 			})
 			.attr('fill', 'none')
-			.attr('stroke', 'none')
-			.style('pointer-events', that.options.pointerEvents);
+			.style('pointer-events', that.options.pointerEvents)
+
 
 		// Grid enter-update
 		gridEnter.merge(join.select('path.hexbin-grid'))
