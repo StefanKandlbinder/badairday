@@ -263,6 +263,7 @@ class Station extends Component {
         let dateElement = null;
         let button = null;
         let notifyButton = null;
+        let officialIcon = null;
         let name = "Station";
         let x = "center";
         let y = "center";
@@ -327,6 +328,13 @@ class Station extends Component {
             </Button>
         }
 
+        if (this.props.station.properties.provider === "upperaustria") {
+            officialIcon = <div className="air__station-official-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 12">
+                <use xlinkHref="#airSVGOfficialAustria"></use>
+            </svg></div>
+        }
+
         let popOriginStyle = {
             transformOrigin: x + " " + y
         }
@@ -363,7 +371,7 @@ class Station extends Component {
                                 to={hexagon} />
                         </path>
                     </svg>
-
+                    {officialIcon}
                     <h1 className="air__station-header">{name}</h1>
                     {dateElement}
                     {this.state.comps}

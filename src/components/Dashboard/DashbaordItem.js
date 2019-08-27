@@ -118,6 +118,7 @@ class DashboardItem extends Component {
         let wind = null;
         let temp = null;
         let name = null;
+        let officialIcon = null
         let notifyButton = null;
         let favorizeButton = null;
 
@@ -215,8 +216,17 @@ class DashboardItem extends Component {
             </svg>
         </Button>
 
+        if (this.props.station.properties.provider === "upperaustria") {
+            officialIcon = <div className="air__dashboard-item-official-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 12">
+                <use xlinkHref="#airSVGOfficialAustria"></use>
+            </svg></div>
+        }
+        
+
         return <li className={airStationClasses} style={moodStyle}>
             <div className="air__dashboard-item-action">
+                {officialIcon}
                 {notifyButton}
                 {favorizeButton}
             </div>

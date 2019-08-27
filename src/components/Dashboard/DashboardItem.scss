@@ -21,6 +21,7 @@
     overflow: hidden;
     position: relative;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.75);
   }
   
   /* @media (min-width: 530px) {
@@ -36,11 +37,20 @@
   } */
 
   .air__dashboard-item-action {
+    position: relative;
     display: flex;
     flex-direction: column;
     margin-right: var(--air__margin--2);
     justify-content: center;
+    align-items: center;
     height: 100%;
+  }
+
+  .air__dashboard-item-official-icon {
+    width: 16px;
+    height: 8px;
+    margin-bottom: var(--air__margin);
+    margin-top: -4px;
   }
 
   .air__dashboard-item-container {

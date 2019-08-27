@@ -84,6 +84,14 @@
     order: 1;
 }
 
+.air__station-official-icon {
+    position: absolute;
+    width: 24px;
+    height: 12px;
+    top:(calc(50% - 60px));
+    left: 20px;
+}
+
 .air__station--upperaustria {
     .air__station-header {
         overflow: hidden;
