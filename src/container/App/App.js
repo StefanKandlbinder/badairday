@@ -83,10 +83,10 @@ class App extends Component {
     }
 
     if (!this.props.stations.features.length) {
-      this.onFetchStations();
+      // this.onFetchStations();
     }
     else {
-      this.onUpdateStations();
+      // this.onUpdateStations();
     }
 
     this.setState({
@@ -343,6 +343,8 @@ class App extends Component {
       ref={this.favboard}>
       <Dashboard 
         stations={this.props.stations}
+        header="Favoriten"
+        onSetFavboard={this.props.onSetFavboard}
         options={this.props.options}
         subscription={this.props.subscription}
         onSet={this.props.onSetFavboard}
