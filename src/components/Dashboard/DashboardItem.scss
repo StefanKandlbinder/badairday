@@ -47,9 +47,11 @@
 
   .air__dashboard-item-official-icon {
     width: 16px;
-    height: 8px;
-    margin-bottom: var(--air__margin);
-    margin-top: -4px;
+    height: 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(-45deg) scaleX(3);
   }
 
   .air__dashboard-item-container {

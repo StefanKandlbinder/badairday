@@ -225,8 +225,8 @@ class DashboardItem extends Component {
         
 
         return <li className={airStationClasses} style={moodStyle}>
+            {officialIcon}
             <div className="air__dashboard-item-action">
-                {officialIcon}
                 {notifyButton}
                 {favorizeButton}
             </div>
