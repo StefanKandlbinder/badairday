@@ -344,8 +344,6 @@ L.HexbinLayer = L.SVG.extend({
 					return station.o.properties.provider === "upperaustria"
 				})
 
-				console.info(found)
-
 				return found.length ? 0.75 : 0
 			})
 			.append('use')
