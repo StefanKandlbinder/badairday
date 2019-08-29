@@ -328,12 +328,13 @@ class Station extends Component {
             </Button>
         }
 
-        if (this.props.station.properties.provider === "upperaustria") {
+        // if (this.props.station.properties.provider === "upperaustria") {
             officialIcon = <div className="air__station-official-icon"><svg xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 12">
+                viewBox="0 0 24 12"
+                className="air__station-official-icon-svg">
                 <use xlinkHref="#airSVGOfficialAustria"></use>
             </svg></div>
-        }
+        // }
 
         let popOriginStyle = {
             transformOrigin: x + " " + y

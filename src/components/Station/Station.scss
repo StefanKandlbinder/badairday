@@ -86,10 +86,19 @@
 
 .air__station-official-icon {
     position: absolute;
-    width: 24px;
-    height: 12px;
+    width: 30px;
+    height: 16px;
     top:(calc(50% - 60px));
     left: 20px;
+    overflow: hidden;
+}
+
+.air__station-official-icon-svg {
+    width: 24px;
+    height: 12px;
+    transform: translateX(-120%);
+    transition: transform var(--air__animation-duration-crunchy) var(--air__animation-timing);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .air__station--upperaustria {
@@ -97,6 +106,10 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+    }
+
+    .air__station-official-icon-svg {
+        transform: translateX(-4px);
     }
 }
 
