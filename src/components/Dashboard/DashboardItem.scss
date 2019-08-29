@@ -8,7 +8,7 @@
     justify-content: space-between;
     align-items: flex-start;
     background-color: transparent;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1), 0 1px 0px 1px rgba(0, 0, 0, 0.1);
+    // box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.5);
     will-change: border-color, background-color;
     transition: background-color var(--air__animation-duration) var(--air__animation-timing) var(--air__animation-duration);
     -webkit-user-select: none;  /* Chrome all / Safari all */
@@ -22,6 +22,22 @@
     overflow: hidden;
     position: relative;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+    &:after {
+      content: " ";
+      position: absolute;
+      top: -5px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.5);
+    }
+
+    &:nth-of-type(2) {
+      &:after {
+        display: none;
+      }
+    }
   }
   
   /* @media (min-width: 530px) {
