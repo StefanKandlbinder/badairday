@@ -53,7 +53,7 @@ class Dashboard extends Component {
         return (
             <ul className="air__dashboard">
                 <li className="air__dashboard-header">
-                    <Button
+                    {this.props.media === "small" ? <Button
                         clicked={this.onHandleBack}
                         className={`air__button air__button-icon air__button--small air__button--naked air__button--ghost air__button--active air__dashboard-header-button`}>
                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -63,11 +63,11 @@ class Dashboard extends Component {
                             strokeWidth="1">
                             <use xlinkHref="#airSVGBack"></use>
                         </svg>
-                    </Button>
+                    </Button> : null}
                     <div className="air__dahboard-header-title">{this.props.header}</div>
-                    <Button
+                    {this.props.media === "small" ? <Button
                         className={`air__button air__button-icon air__button--small air__button--naked air__button--ghost air__button--active air__dashboard-header-button`}>
-                    </Button>
+                    </Button> : null}
                 </li>
                 {stations.map((station) =>
                     <DashboardItem

@@ -16,19 +16,6 @@ class Sample extends Component {
 
 class DashboardItem extends Component {
 
-    onToggleFavorized = (id) => {
-        switch (this.props.type) {
-            case "favorized":
-                !this.props.station.properties.favorized ? this.props.onAdd(id) : this.props.onRemove(id);
-                break;
-            case "notify":
-                !this.props.station.properties.notify ? this.props.onAdd(id) : this.props.onRemove(id);
-                break;
-            default:
-                break;
-        }
-    }
-
     onAddStation = () => {
         this.props.onFavorizeStation(this.props.station.properties.id);
     }
@@ -180,13 +167,6 @@ class DashboardItem extends Component {
                     <span className="air__dashboard-item-temp-unit">{this.props.station.properties.components.TEMP.unit}</span>
                 </div>
             </div>
-        }
-
-        if (this.props.station.properties.favorized || this.props.station.properties.notify) {
-            airStationClasses += " air__dashboard-item--favorized";
-        }
-        else {
-            airStationClasses = "air__dashboard-item";
         }
 
         if ('Notification' in window && navigator.serviceWorker) {

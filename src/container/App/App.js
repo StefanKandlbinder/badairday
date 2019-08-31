@@ -346,6 +346,7 @@ class App extends Component {
         header="Favoriten"
         onSetFavboard={this.props.onSetFavboard}
         options={this.props.options}
+        media={this.props.media}
         subscription={this.props.subscription}
         onSet={this.props.onSetFavboard}
         onFavorizeStation={this.props.onFavorizeStation}
