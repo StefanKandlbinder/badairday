@@ -74,6 +74,10 @@
   transform: translate3d(0, 0, 0);
 }
 
+.air__site--cluster {
+  z-index: 200;
+}
+
 @media(min-width: 414px) {
   .air__site--favboard {
     max-width: 100%;

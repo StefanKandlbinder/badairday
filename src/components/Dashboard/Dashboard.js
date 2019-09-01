@@ -16,7 +16,9 @@ class Dashboard extends Component {
     }
 
     onHandleBack = () => {
-        this.props.onSetFavboard({ state: false, feature: STATIONS });
+        if (this.props.media === "small") {
+            this.props.onSetFavboard({ state: false, feature: STATIONS });
+        }
         this.props.onSetClusterboard({ state: false, feature: STATIONS });
         this.props.history.push("/");        
     }
@@ -69,9 +71,9 @@ class Dashboard extends Component {
         return (
             <ul className="air__dashboard">
                 <li className="air__dashboard-header">
-                    {this.props.media === "small" ? <Button
+                    {this.props.media === "small" || this.props.type === "cluster" ? <Button
                         clicked={this.onHandleBack}
-                        className={`air__button air__button-icon air__button--naked air__button--ghost air__button--active air__dashboard-header-button`}>
+                        className={`air__button air__button-icon air__button--small air__button--naked air__button--ghost air__button--active air__dashboard-header-button`}>
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             className="air__button-icon air__dashboard-header-icon"
@@ -82,7 +84,7 @@ class Dashboard extends Component {
                     </Button> : null}
                     <div className="air__dahboard-header-title">{this.props.header}</div>
                     {this.props.media === "small" ? <Button
-                        className={`air__button air__button-icon air__button--naked air__button--ghost air__button--active air__dashboard-header-button`}>
+                        className={`air__button air__button-icon air__button--small air__button--naked air__button--ghost air__button--active air__dashboard-header-button`}>
                     </Button> : null}
                 </li>
                 {stations.map((station) =>

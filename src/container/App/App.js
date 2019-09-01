@@ -87,10 +87,10 @@ class App extends Component {
     }
 
     if (!this.props.stations.features.length) {
-      this.onFetchStations();
+      // this.onFetchStations();
     }
     else {
-      this.onUpdateStations();
+      // this.onUpdateStations();
     }
 
     this.setState({
@@ -383,10 +383,9 @@ class App extends Component {
           update={this.props.update}
           updating={this.props.updating}
           media={this.props.media}
-          clusterboard={this.props.clusterboard}
           position={this.props.position}
           favboard={this.props.favboard}
-          noteboard={this.props.noteboard}
+          clusterboard={this.props.clusterboard}
           subscription={this.props.subscription}
           onFavorizeStation={this.props.onFavorizeStation}
           onUnfavorizeStation={this.props.onUnfavorizeStation}

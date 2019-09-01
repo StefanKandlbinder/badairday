@@ -65,9 +65,9 @@ class Stations extends Component {
             this.props.onSetFavboard({ state: false, feature: STATIONS });
         }
 
-        if (this.props.noteboard) {
+        if (this.props.clusterboard) {
             this.props.history.push("/");
-            this.props.onSetNoteboard({ state: false, feature: STATIONS });
+            this.props.onSetClusterboard({ state: false, feature: STATIONS });
         }
     }
 
@@ -149,7 +149,7 @@ class Stations extends Component {
         let hexbins = null;
         let clusterBoard = null;
 
-        clusterBoard = <div className="air__site air__site--favboard">
+        clusterBoard = <div className="air__site air__site--favboard air__site--cluster">
             <Dashboard 
                 stations={this.props.stations}
                 header="Cluster"

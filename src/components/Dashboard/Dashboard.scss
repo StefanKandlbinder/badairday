@@ -15,6 +15,7 @@
     min-height: 48px;
     display: flex;
     align-items: center;
+    padding: 0 var(--air__margin--2);   
     background: rgba(255, 255 ,255 ,1);   
     position: sticky;
     top: 0;
@@ -22,6 +23,24 @@
     z-index: 10;
 }
 
+.air__dashboard-header-icon {
+    stroke-width: 0;
+}
+
 .air__dahboard-header-title {
     flex-grow: 1
+}
+
+.air__dashboard-footer {
+    font-weight: 500;
+    color: var(--air__color-primary--active);
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background: rgba(255, 255 ,255 ,1);   
+    position: sticky;
+    bottom: 0;
+    font-size: 16px;
+    z-index: 10;
 }
