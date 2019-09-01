@@ -137,16 +137,12 @@ class App extends Component {
   }
 
   onSetFav = () => {
-    if (this.props.favboard && !this.props.noteboard) {
+    if (this.props.favboard) {
       this.onUpdateStations()
-      this.props.onSetNoteboard({ state: false, feature: STATIONS })
     }
-    if (this.props.noteboard) {
-      this.props.onSetNoteboard({ state: false, feature: STATIONS })
+    else {
+      this.props.onSetFavboard({ state: true, feature: STATIONS })
     }
-    
-    this.props.onSetFavboard({ state: true, feature: STATIONS })
-    
   }
 
   handleVisibilityChange = isVisible => {

@@ -62,11 +62,11 @@
   // padding-bottom: var(--air__button-height);
   top: 0;
   right: 0;
-  height: calc(100% - var(--air__button-height));
+  height: 100%;
   width: 100%;
   background: rgba(255, 255, 255, 1);
   will-change: transform;
-  z-index: 120;
+  z-index: 150;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;

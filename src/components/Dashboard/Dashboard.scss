@@ -12,19 +12,14 @@
 .air__dashboard-header {
     font-weight: 500;
     color: var(--air__color-primary--active);
-    min-height: 40px;
+    min-height: 48px;
     display: flex;
     align-items: center;
-    padding: 0 var(--air__margin--2);
     background: rgba(255, 255 ,255 ,1);   
     position: sticky;
     top: 0;
     font-size: 16px;
     z-index: 10;
-}
-
-.air__dashboard-header-icon {
-    stroke-width: 0px;
 }
 
 .air__dahboard-header-title {
