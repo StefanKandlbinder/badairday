@@ -69,8 +69,8 @@ class Dashboard extends Component {
         }
 
         return (
-            <ul className="air__dashboard">
-                <li className="air__dashboard-header">
+            <div className="air__dashboard">
+                <div className="air__dashboard-header">
                     {this.props.media === "small" || this.props.type === "cluster" ? <Button
                         clicked={this.onHandleBack}
                         className={`air__button air__button-icon air__button--small air__button--naked air__button--ghost air__button--active air__dashboard-header-button`}>
@@ -86,22 +86,25 @@ class Dashboard extends Component {
                     {this.props.media === "small" ? <Button
                         className={`air__button air__button-icon air__button--small air__button--naked air__button--ghost air__button--active air__dashboard-header-button`}>
                     </Button> : null}
-                </li>
-                {stations.map((station) =>
-                    <DashboardItem
-                        key={station.properties.id}
-                        stations={this.props.stations}
-                        station={station}
-                        subscription={this.props.subscription}
-                        reversegeo={this.props.options.reversegeo} 
-                        onFavorizeStation={this.props.onFavorizeStation}
-                        onUnfavorizeStation={this.props.onUnfavorizeStation}
-                        onNotifyStation={this.props.onNotifyStation}
-                        onUnnotifyStation={this.props.onUnnotifyStation}
-                        type={this.props.type} />
-                )}
-                <li className="air__spacer" style={moodStyle}></li>
-            </ul>
+                </div>
+                <ul className="air__dashboard-content">
+                    {stations.map((station) =>
+                        <DashboardItem
+                            key={station.properties.id}
+                            stations={this.props.stations}
+                            station={station}
+                            subscription={this.props.subscription}
+                            reversegeo={this.props.options.reversegeo} 
+                            onFavorizeStation={this.props.onFavorizeStation}
+                            onUnfavorizeStation={this.props.onUnfavorizeStation}
+                            onNotifyStation={this.props.onNotifyStation}
+                            onUnnotifyStation={this.props.onUnnotifyStation}
+                            type={this.props.type} />
+                    )}
+                    <li className="air__spacer" style={moodStyle}></li>
+                </ul>
+                
+            </div>
         );
     }
 }

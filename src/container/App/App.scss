@@ -65,13 +65,7 @@
   height: 100%;
   width: 100%;
   background: rgba(255, 255, 255, 1);
-  will-change: transform;
   z-index: 150;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  will-change: scroll-position;
-  transform: translate3d(0, 0, 0);
 }
 
 .air__site--cluster {

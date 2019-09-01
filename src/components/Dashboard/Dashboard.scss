@@ -1,10 +1,4 @@
 .air__dashboard {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
     height: 100%;
     width: 100%;
 }
@@ -30,6 +24,22 @@
 .air__dahboard-header-title {
     flex-grow: 1;
     letter-spacing: 1px;
+}
+
+.air__dashboard-content {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: calc(100% - 48px);
+    will-change: transform; 
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    will-change: scroll-position;
+    transform: translate3d(0, 0, 0);
 }
 
 .air__dashboard-footer {
