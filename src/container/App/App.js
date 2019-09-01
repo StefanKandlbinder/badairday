@@ -87,10 +87,10 @@ class App extends Component {
     }
 
     if (!this.props.stations.features.length) {
-      // this.onFetchStations();
+      this.onFetchStations();
     }
     else {
-      // this.onUpdateStations();
+      this.onUpdateStations();
     }
 
     this.setState({
