@@ -5,7 +5,7 @@ export const SET_GEOLOCATION = 'SET_GEOLOCATION';
 export const SET_SIDEBAR = 'SET_SIDEBAR';
 export const SET_BOTTOMSHEET = 'SET_BOTTOMSHEET';
 export const SET_FAVBOARD = 'SET_FAVBOARD';
-export const SET_NOTEBOARD = 'SET_NOTEBOARD';
+export const SET_CLUSTERBOARD = 'SET_CLUSTERBOARD';
 export const SET_MEDIA = 'SET_MEDIA';
 
 // action creators
@@ -45,8 +45,8 @@ export const setFavboard = ({ state, feature }) => ({
     meta: { feature }
 });
 
-export const setNoteboard = ({ state, feature }) => ({
-    type: `${feature} ${SET_NOTEBOARD}`,
+export const setClusterboard = ({ state, feature }) => ({
+    type: `${feature} ${SET_CLUSTERBOARD}`,
     payload: state,
     meta: { feature }
 });

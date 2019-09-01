@@ -24,7 +24,7 @@ class Stations extends Component {
             stationMarkers: [],
             polygons: null,
             hexToStation: [],
-            clusterBoard: false,
+            clusterIds: [],
             res: 9
         };
     }
@@ -40,13 +40,18 @@ class Stations extends Component {
     }
 
     handleHexCLick = (d, i, coords) => {
-        this.props.history.push({
-            pathname: "/station/" + d[0].o.properties.provider + "/" + d[0].o.properties.id,
-            state: {
-                x: coords[0],
-                y: coords[1]
-            }
-        });
+        if (d.length <= 1) {
+            this.props.history.push({
+                pathname: "/station/" + d[0].o.properties.provider + "/" + d[0].o.properties.id,
+                state: {
+                    x: coords[0],
+                    y: coords[1]
+                }
+            });
+        }
+        else {
+            this.getClusterIds(d);
+        }
     }
 
     // go back to the main route
@@ -121,20 +126,44 @@ class Stations extends Component {
         // console.log(bounds);
     }
 
+    getClusterIds(d) {
+        let ids = [];
+
+        d.forEach(d => {
+            this.props.stations.features.forEach(station => {
+                if (station.properties.id === d.o.properties.id) {
+                    ids.push(station.properties.id)
+                }
+            })
+        })
+
+        this.setState({
+            clusterIds: ids
+        }, () => {
+            this.props.onSetClusterboard({ state: true, feature: STATIONS });
+        })
+    }
+
     render() {
         let location = null;
         let hexbins = null;
         let clusterBoard = null;
 
         clusterBoard = <div className="air__site air__site--favboard">
-        <Dashboard 
-            stations={this.props.stations}
-            options={this.props.options}
-            onSet={this.props.onSetNoteboard}
-            onAdd={this.props.onNotifyStation}
-            onRemove={this.props.onUnnotifyStation}
-            
-            type = "notify" />
+            <Dashboard 
+                stations={this.props.stations}
+                header="Cluster"
+                options={this.props.options}
+                media={this.props.media}
+                subscription={this.props.subscription}
+                onSetFavboard={this.props.onSetFavboard}
+                onSetClusterboard={this.props.onSetClusterboard}
+                onFavorizeStation={this.props.onFavorizeStation}
+                onUnfavorizeStation={this.props.onUnfavorizeStation}
+                onNotifyStation={this.props.onNotifyStation}
+                onUnnotifyStation={this.props.onUnnotifyStation}
+                getActive={this.state.clusterIds}
+                type = "cluster" />
         </div>;
 
         if (this.props.stations.features.length) {
@@ -186,7 +215,7 @@ class Stations extends Component {
                 </Map>
 
                 <CSSTransition
-                    in={this.state.clusterBoard}
+                    in={this.props.clusterboard}
                     // in={this.props.media === "medium" ? true : false}
                     classNames="air__animation-site-transition"
                     timeout={300}

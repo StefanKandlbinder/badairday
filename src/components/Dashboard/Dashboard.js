@@ -10,18 +10,34 @@ import './Dashboard.scss';
 
 class Dashboard extends Component {
     componentDidUpdate(prevProps) {
-        if (!this.props.getActive(this.props.stations).length && this.props.getActive(prevProps.stations).length === 1) {
+        if (this.props.type !== "cluster" && !this.props.getActive(this.props.stations).length && this.props.getActive(prevProps.stations).length === 1) {
             this.props.history.push("/");
         }
     }
 
     onHandleBack = () => {
         this.props.onSetFavboard({ state: false, feature: STATIONS });
+        this.props.onSetClusterboard({ state: false, feature: STATIONS });
         this.props.history.push("/");        
+    }
+
+    getClusterStations(ids) {
+        let stations = [];
+
+        ids.forEach(id => {
+            this.props.stations.features.forEach(station => {
+                if (station.properties.id === id) {
+                    stations.push(station);
+                }
+            })
+        })
+        return stations;
     }
     
     render() {
-        let stations = this.props.getActive(this.props.stations);
+        let stations = this.props.type !== "cluster" ? 
+            this.props.getActive(this.props.stations) : 
+            this.getClusterStations(this.props.getActive);
 
         if (this.props.options.sort) {
           stations = sortBy(stations, ['properties.mood']).reverse();
@@ -47,7 +63,7 @@ class Dashboard extends Component {
         }
 
         else {
-            this.props.onSet({ state: false, feature: STATIONS });
+            this.props.onSetFavboard({ state: false, feature: STATIONS });
         }
 
         return (

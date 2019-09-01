@@ -5,7 +5,7 @@ import {
     SET_SIDEBAR, 
     SET_BOTTOMSHEET, 
     SET_FAVBOARD,
-    SET_NOTEBOARD,
+    SET_CLUSTERBOARD,
     SET_MEDIA 
 } from "../actions/ui";
 
@@ -16,7 +16,7 @@ const initState = {
     sidebar: false,
     bottomsheet: false,
     favboard: false,
-    noteboard: false,
+    clusterboard: false,
     media: {
         size: "small"
     }
@@ -56,8 +56,8 @@ export const uiReducer = (ui = initState, action) => {
         case action.type.includes(SET_FAVBOARD):
             return { ...ui, favboard: action.payload };
         
-        case action.type.includes(SET_NOTEBOARD):
-            return { ...ui, noteboard: action.payload };
+        case action.type.includes(SET_CLUSTERBOARD):
+            return { ...ui, clusterboard: action.payload };
         
         case action.type.includes(SET_MEDIA):
             return { ...ui, media: action.payload };

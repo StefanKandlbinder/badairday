@@ -12,7 +12,7 @@ import Media from 'react-media';
 import { STATIONS } from "../../redux/actions/stations";
 import { fetchStations, favorizeStation, unfavorizeStation, notifyStation, unnotifyStation } from "../../redux/actions/stations";
 import { setLocation } from "../../redux/actions/location";
-import { setGeoLocation, setBottomSheet, setFavboard, setNoteboard, setMedia } from "../../redux/actions/ui";
+import { setGeoLocation, setBottomSheet, setFavboard, setClusterboard, setMedia } from "../../redux/actions/ui";
 import { setNotification } from "../../redux/actions/notifications";
 import { setOptionAutoupdater } from "../../redux/actions/options";
 import { setOptionReverseGeo } from "../../redux/actions/options";
@@ -82,11 +82,15 @@ class App extends Component {
       this.props.onSetFavboard({ state: true, feature: STATIONS });
     }
 
+    if (this.props.clusterboard) {
+      this.props.onSetClusterboard({ state: false, feature: STATIONS });
+    }
+
     if (!this.props.stations.features.length) {
-      this.onFetchStations();
+      // this.onFetchStations();
     }
     else {
-      this.onUpdateStations();
+      // this.onUpdateStations();
     }
 
     this.setState({
@@ -129,7 +133,7 @@ class App extends Component {
 
   onResetPushFav = () => {
     this.props.onSetFavboard({ state: false, feature: STATIONS })
-    this.props.onSetNoteboard({ state: false, feature: STATIONS })
+    this.props.onSetClusterboard({ state: false, feature: STATIONS })
   }
 
   onSetFav = () => {
@@ -344,17 +348,17 @@ class App extends Component {
       <Dashboard 
         stations={this.props.stations}
         header="Favoriten"
-        onSetFavboard={this.props.onSetFavboard}
         options={this.props.options}
         media={this.props.media}
         subscription={this.props.subscription}
-        onSet={this.props.onSetFavboard}
+        onSetFavboard={this.props.onSetFavboard}
+        onSetClusterboard={this.props.onSetClusterboard}
         onFavorizeStation={this.props.onFavorizeStation}
         onUnfavorizeStation={this.props.onUnfavorizeStation}
         onNotifyStation={this.props.onNotifyStation}
         onUnnotifyStation={this.props.onUnnotifyStation}
         getActive={getActiveStations}
-        type = "favorized" />
+        type = "active" />
     </div>;
 
     /* mapgl = <div className="air__site">
@@ -383,11 +387,17 @@ class App extends Component {
           update={this.props.update}
           updating={this.props.updating}
           media={this.props.media}
+          clusterboard={this.props.clusterboard}
           position={this.props.position}
           favboard={this.props.favboard}
           noteboard={this.props.noteboard}
+          subscription={this.props.subscription}
+          onFavorizeStation={this.props.onFavorizeStation}
+          onUnfavorizeStation={this.props.onUnfavorizeStation}
+          onNotifyStation={this.props.onNotifyStation}
+          onUnnotifyStation={this.props.onUnnotifyStation}
           onSetFavboard={this.props.onSetFavboard}
-          onSetNoteboard={this.props.onSetNoteboard}
+          onSetClusterboard={this.props.onSetClusterboard}
           onFetchStations={this.props.onFetchStations}/>
         <Route
           path="/station/:provider/:id"
@@ -518,7 +528,7 @@ const mapStateToProps = state => {
     geolocation: state.ui.geolocation,
     bottomsheet: state.ui.bottomsheet,
     favboard: state.ui.favboard,
-    noteboard: state.ui.noteboard,
+    clusterboard: state.ui.clusterboard,
     media: state.ui.media,
     position: state.location,
     notifications: state.notifications,
@@ -541,7 +551,7 @@ const mapDispatchToProps = dispatch => {
     onSetBottomSheet: (bottomSheet) => dispatch(setBottomSheet(bottomSheet)),
     onSetMedia: (media) => dispatch(setMedia(media)),
     onSetFavboard: (favboard) => dispatch(setFavboard(favboard)),
-    onSetNoteboard: (noteboard) => dispatch(setNoteboard(noteboard)),
+    onSetClusterboard: (clusterboard) => dispatch(setClusterboard(clusterboard)),
     onSetOptionAutoupdater: (autoupdater) => dispatch(setOptionAutoupdater(autoupdater)),
     onSetOptionReverseGeo: (reversegeo) => dispatch(setOptionReverseGeo(reversegeo)),
     onSetOptionRunaways: (runaways) => dispatch(setOptionRunaways(runaways)),
