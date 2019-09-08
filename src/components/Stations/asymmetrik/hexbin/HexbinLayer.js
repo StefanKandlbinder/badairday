@@ -71,7 +71,7 @@ L.HexbinLayer = L.SVG.extend({
 		};
 
 		// Set up the Dispatcher for managing events and callbacks
-		this._dispatch = d3.dispatch('mouseover', 'mouseout', 'click');
+		this._dispatch = d3.dispatch('click');
 
 		// Create the hex layout
 		this._hexLayout = d3_hexbin()
@@ -217,7 +217,7 @@ L.HexbinLayer = L.SVG.extend({
 
 		// enter + update
 		var enterUpdate = enter.merge(join);
-
+			
 		// exit
 		join.exit().remove();
 
@@ -397,16 +397,12 @@ L.HexbinLayer = L.SVG.extend({
 
 		// Grid enter-update
 		gridEnter.merge(join.select('path.hexbin-grid'))
-			.on('mouseover', function (d, i) {
-				that._dispatch.call('mouseover', this, d, i);
-			})
-			.on('mouseout', function (d, i) {
-				that._dispatch.call('mouseout', this, d, i);
-			})
 			.on('click', function (d, i) {
 				let coords = [d3.event.pageX, d3.event.pageY]
 				that._dispatch.call('click', this, d, i, coords);
 			});
+
+		console.info("ENTER: ", gridEnter);
 
 
 		// Exit

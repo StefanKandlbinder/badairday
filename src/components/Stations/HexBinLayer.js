@@ -16,6 +16,10 @@ export default class HexbinLayer extends MapLayer {
 		if (toProps.data !== fromProps.data && !toProps.updating) {
 			this.leafletElement.data(toProps.data.features);
 			this.leafletElement.updateBins();
+			this.leafletElement.dispatch()
+			.on('click', (d, i, coords) => {
+				this.props.onClick(d, i, coords)
+			})
         }
 	}
 
