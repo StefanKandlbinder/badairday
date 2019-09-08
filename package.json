@@ -57,7 +57,7 @@
     "react-leaflet": "^2.1.2",
     "react-leaflet-d3": "^2.0.0",
     "react-map-gl": "^5.0.10",
-    "react-media": "^1.10.0-alpha.1",
+    "react-media": "^1.9.2",
     "react-page-visibility": "^4.1.1",
     "react-redux": "^7.1.0",
     "react-router": "^5.0.1",
