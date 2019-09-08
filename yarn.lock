@@ -8808,10 +8808,10 @@ react-map-gl@^5.0.10:
     react-virtualized-auto-sizer "^1.0.2"
     viewport-mercator-project "^6.1.0"
 
-react-media@^1.9.2:
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/react-media/-/react-media-1.9.2.tgz#423ee12f952e1d69f1b994a58d3cbed21a92b370"
-  integrity sha512-JUYECMcJIm0V61LSVKd1e+II4ZTYO0GuR7xtlvKETlmThZ416BqZjZdJ1uGqgmMAGFeJ3TG4TX/3Kg4qbR3EJw==
+react-media@^1.10.0-alpha.1:
+  version "1.10.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/react-media/-/react-media-1.10.0-alpha.1.tgz#cad4f8ed9191732571a0aa2595998f3638a5e040"
+  integrity sha512-uoQqsOXIj85EPcysH9/dBwyQ8yHGF+0Mr+ZJfoMY0d4cm1kLI9K8hYyE8FeNJ92SFsdld50M+DJ0rs+ATKA+lQ==
   dependencies:
     "@babel/runtime" "^7.2.0"
     invariant "^2.2.2"
