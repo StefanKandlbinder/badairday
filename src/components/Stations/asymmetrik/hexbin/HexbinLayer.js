@@ -402,8 +402,6 @@ L.HexbinLayer = L.SVG.extend({
 				that._dispatch.call('click', this, d, i, coords);
 			});
 
-		console.info("ENTER: ", gridEnter);
-
 
 		// Exit
 		var exit = join.exit();
