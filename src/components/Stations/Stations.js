@@ -141,6 +141,7 @@ class Stations extends Component {
             clusterIds: ids
         }, () => {
             this.props.onSetClusterboard({ state: true, feature: STATIONS });
+            this.props.history.push("/clusterboard");
         })
     }
 
