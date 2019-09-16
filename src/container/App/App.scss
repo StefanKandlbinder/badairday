@@ -88,8 +88,13 @@
   .air--favboard {
     .air__legend--horizontal,
     .air__tabbar,
-    .air__stations {
+    .air__stations,
+    .air__spinner {
       width: calc(100% - 320px);
+    }
+
+    .air__loading {
+      left: calc(50% - 240px);
     }
   }
 }
