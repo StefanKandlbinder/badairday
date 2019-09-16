@@ -474,14 +474,16 @@ L.HexbinLayer = L.SVG.extend({
 	},
 
 	_getMean: function (d) {
+		let sum = 0;
 		let mean = 0;
 		let index = 1;
 
 		d.forEach(station => {
-			mean += station.o.properties.mood;
-			mean = mean / index;
+			sum += station.o.properties.mood;
 			index++;
 		})
+
+		mean = sum / (index - 1);
 
 		return mean
 	},
