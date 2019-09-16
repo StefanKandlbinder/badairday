@@ -87,14 +87,11 @@
 @media(min-width: 761px) {
   .air--favboard {
     .air__legend--horizontal,
-    .air__tabbar {
+    .air__tabbar,
+    .air__stations {
       width: calc(100% - 320px);
     }
   }
-
-  .air__stations {
-    width: calc(100% - 320px);
-  } 
 }
 
 .air__options-sheet {  
