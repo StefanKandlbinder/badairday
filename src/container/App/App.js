@@ -103,7 +103,7 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if ((prevProps.media === "medium" && this.props.media === "small") || 
+    if ((prevProps.media === "medium" && this.props.media === "small") ||
       (this.props.media === "small" && !this.props.history.location.pathname.includes("favboard"))) {
       this.props.onSetFavboard({ state: false, feature: STATIONS });
     }
@@ -336,6 +336,14 @@ class App extends Component {
         </svg>
         Mehr
       </NavLink>
+      <Button
+        className="air__button air__button--naked air__button--fab air__button-location"
+        aria-label="Get Location"
+        clicked={() => this.handleLocation()}>
+        <svg className="air__color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <use xlinkHref="#airSVGLogoCool"></use>
+        </svg>
+      </Button>
     </Tabbar>
 
     favboard = <div className="air__site air__site--favboard"
@@ -346,7 +354,7 @@ class App extends Component {
         this.favboard.current.focus();
       }}
       ref={this.favboard}>
-      <Dashboard 
+      <Dashboard
         stations={this.props.stations}
         header="Favoriten"
         options={this.props.options}
@@ -359,7 +367,7 @@ class App extends Component {
         onNotifyStation={this.props.onNotifyStation}
         onUnnotifyStation={this.props.onUnnotifyStation}
         getActive={getActiveStations}
-        type = "active" />
+        type="active" />
     </div>;
 
     /* mapgl = <div className="air__site">
@@ -398,11 +406,11 @@ class App extends Component {
           onUnnotifyStation={this.props.onUnnotifyStation}
           onSetFavboard={this.props.onSetFavboard}
           onSetClusterboard={this.props.onSetClusterboard}
-          onFetchStations={this.props.onFetchStations}/>
+          onFetchStations={this.props.onFetchStations} />
         <Route
           path="/station/:provider/:id"
           render={() =>
-            <Station 
+            <Station
               media={this.props.media}
               favboard={this.props.favboard}
               noteboard={this.props.noteboard}
@@ -446,15 +454,6 @@ class App extends Component {
             unmountOnExit>
             {favboard}
           </CSSTransition>
-
-          <Button
-            className="air__button air__button--naked air__button--fab air__button-location"
-            aria-label="Get Location"
-            clicked={() => this.handleLocation()}>
-            <svg className="air__color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <use xlinkHref="#airSVGLogoCool"></use>
-            </svg>
-          </Button>
 
           <Legend className="air__legend--horizontal" />
 

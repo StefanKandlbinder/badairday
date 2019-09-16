@@ -44,7 +44,7 @@
 .air__button-location:active,
 .air__button-location:focus,
 .air__button-location:visited {
-  position: fixed;
+  position: absolute;
   right: calc(50% - var(--air__button-height) / 2 - 6px);
   bottom: 0;
   z-index: 140;
@@ -86,10 +86,15 @@
 
 @media(min-width: 761px) {
   .air--favboard {
-    .air__legend--horizontal {
+    .air__legend--horizontal,
+    .air__tabbar {
       width: calc(100% - 320px);
     }
   }
+
+  .air__stations {
+    width: calc(100% - 320px);
+  } 
 }
 
 .air__options-sheet {  
@@ -109,6 +114,7 @@
   .air__options-sheet {  
     left: auto;
     width: 414px;
+    right: calc(320px + var(--air__margin--4));
   }
 }
 
