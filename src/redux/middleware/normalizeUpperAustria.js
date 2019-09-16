@@ -108,17 +108,17 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
             switch (component.einheit) {
                 case "mg/m3":
                     unit = "µg/m³";
-                    value = parseFloat(component.messwert.replace(",", ".")) * 1000;
+                    value = parseFloat((parseFloat(component.messwert.replace(",", ".")) * 1000).toFixed(1));
                     break;
 
                 case "m/s":
                     unit = "km/h";
-                    value = parseFloat(component.messwert.replace(",", ".")) * 3.6;
+                    value = parseFloat((parseFloat(component.messwert.replace(",", ".")) * 3.6).toFixed(1));
                     break;
 
                 default:
                     unit = component.einheit;
-                    value = parseFloat(component.messwert.replace(",", "."));
+                    value = parseFloat(parseFloat(component.messwert.replace(",", ".")).toFixed(1));
             }
 
             components[type] = new Component(type, value, unit, update);

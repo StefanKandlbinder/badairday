@@ -126,7 +126,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
         element.forEach(component => {
             let type = component.value_type === "P1" ? "PM10" : "PM25";
 
-            components[type] = new Component(type, parseFloat(component.value), "µg/m³");
+            components[type] = new Component(type, parseFloat(parseFloat(component.value).toFixed(1)), "µg/m³");
         });
 
         return components;
