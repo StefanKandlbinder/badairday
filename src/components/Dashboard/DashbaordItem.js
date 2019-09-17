@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 
 import Button from '../../components/UI/Button/Button';
 import { getNotifiedStations } from '../../redux/filters/getNotifiedStations';
@@ -88,6 +89,18 @@ class DashboardItem extends Component {
         }
 
         delayedUpdate();
+    }
+
+    onHandleClick = (e) => {
+        e.preventDefault();
+        
+        this.props.history.push({
+            pathname: "/station/" + this.props.station.properties.provider + "/" + this.props.station.properties.id,
+            state: {
+                x: 0,
+                y: 0
+            }
+        });
     }
 
     render() {
@@ -209,7 +222,7 @@ class DashboardItem extends Component {
                 {notifyButton}
                 {favorizeButton}
             </div>
-            <div className="air__dashboard-item-content air__dashboard-item--description">
+            <div className="air__dashboard-item-content air__dashboard-item--description" onClick={this.onHandleClick}>
                 <div className="air__dashboard-item-name">
                     {name}
                 </div>
@@ -228,4 +241,4 @@ class DashboardItem extends Component {
     }
 }
 
-export default DashboardItem;
+export default withRouter(DashboardItem);

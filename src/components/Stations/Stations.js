@@ -18,6 +18,7 @@ class Stations extends Component {
     constructor(props) {
         super(props);
 
+        this.map = React.createRef();
         this.state = {
             hasLocation: false,
             zoom: 13,
@@ -30,7 +31,7 @@ class Stations extends Component {
     }
 
     componentDidMount() {
-        this.refs.map.leafletElement.zoomControl.setPosition("bottomleft");
+        this.map.current.leafletElement.zoomControl.setPosition("bottomleft");
     }
 
     componentDidUpdate(prevProps) {
@@ -51,6 +52,10 @@ class Stations extends Component {
         }
         else {
             this.getClusterIds(d);
+
+            this.setState({
+                
+            })
         }
     }
 
@@ -75,12 +80,12 @@ class Stations extends Component {
         this.setState({
             hasLocation: true
         }, () => {
-            this.refs.map.leafletElement.flyTo(this.props.position, this.state.zoom);
+            this.map.current.leafletElement.flyTo(this.props.position, this.state.zoom);
         })
     }
 
     onZoom = (e) => {
-        // let zoom = this.refs.map.leafletElement.getZoom();
+        // let zoom = this.map.current.leafletElement.getZoom();
     }
 
     onZoomStart = (e) => {
@@ -94,7 +99,7 @@ class Stations extends Component {
         // this.markerPane.style.animationDelay = "1s";
         // this.markerPane.style.opacity = 1;
         /* this.setState({
-            zoom: this.refs.map.leafletElement.getZoom()
+            zoom: this.map.current.leafletElement.getZoom()
         }, () => {
             this.setState({
                 res: this.setRes(this.state.zoom)
@@ -103,9 +108,9 @@ class Stations extends Component {
             })
 
         }) */
-        /* let bounds = this.refs.map.leafletElement.getBounds();
-        let center = this.refs.map.leafletElement.getCenter();
-        let distance = this.refs.map.leafletElement.distance(L.latLng(bounds._northEast.lat, bounds._northEast.lng),L.latLng(bounds._southWest.lat, bounds._southWest.lng));
+        /* let bounds = this.map.current.leafletElement.getBounds();
+        let center = this.map.current.leafletElement.getCenter();
+        let distance = this.map.current.leafletElement.distance(L.latLng(bounds._northEast.lat, bounds._northEast.lng),L.latLng(bounds._southWest.lat, bounds._southWest.lng));
 
         luftdatenURL += bounds._northEast.lat + "," + 
             bounds._northEast.lng + "," +
@@ -122,7 +127,7 @@ class Stations extends Component {
     }
 
     onMoveEnd = (e) => {
-        // let bounds = this.refs.map.leafletElement.getBounds();
+        // let bounds = this.map.current.leafletElement.getBounds();
         // console.log(bounds);
     }
 
@@ -202,7 +207,7 @@ class Stations extends Component {
                     preferCanvas="true"
                     doubleClickZoom="false"
                     useFlyTo="true"
-                    ref="map">
+                    ref={this.map} >
                     <TileLayer
                         // https://wiki.openstreetmap.org/wiki/Tile_servers
                         // https://leaflet-extras.github.io/leaflet-providers/preview/
