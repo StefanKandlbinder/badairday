@@ -64,8 +64,10 @@ class Aircomp extends Component {
                                 <path d="M132.595,169.042V69.924c0-4.142-3.357-7.5-7.5-7.5s-7.5,3.358-7.5,7.5v99.118c-10.104,3.183-17.43,12.622-17.43,23.783   c0,13.767,11.16,24.931,24.93,24.931c13.773,0,24.932-11.164,24.932-24.931C150.026,181.663,142.7,172.223,132.595,169.042z"/>
                             </g>
                         </svg>
-                        <div className="air__comp-value">{this.props.value.toFixed(1) || 0.0}</div>
-                        <div className="air__comp-unit">° C</div>
+                        <div>
+                            <div className="air__comp-value">{this.props.value.toFixed(1) || 0.0}°</div>
+                            <div className="air__comp-unit">Grad</div>
+                        </div>
                     </div>
                 )
                 break;
