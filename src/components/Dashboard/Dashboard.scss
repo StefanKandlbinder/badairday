@@ -40,6 +40,8 @@
     scroll-behavior: smooth;
     will-change: scroll-position;
     transform: translate3d(0, 0, 0);
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    border-bottom: 0;
 }
 
 .air__dashboard-footer {
