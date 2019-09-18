@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { Howl, Howler } from 'howler';
+// import { Howl, Howler } from 'howler';
 
 import { favorizeStation, unfavorizeStation, notifyStation, unnotifyStation } from "../../redux/actions/stations";
 import { setNotification } from '../../redux/actions/notifications';
@@ -18,12 +18,12 @@ import BadAirDayNotifications from '../../services/Notifications/BadAirDayNotifi
 import './Station.scss';
 
 // http://facebook.design/soundkit#scroll
-import soundMount from '../../audio/Tab 2.m4a';
+/* import soundMount from '../../audio/Tab 2.m4a';
 import soundUnmount from '../../audio/Tab 1.m4a';
-import soundChange from '../../audio/Button 7.m4a';
+import soundChange from '../../audio/Button 7.m4a'; */
 
 // howl
-const mount = new Howl({
+/* const mount = new Howl({
     src: [soundMount]
 });
 
@@ -33,11 +33,11 @@ const unmount = new Howl({
 
 const change = new Howl({
     src: [soundChange]
-});
+}); */
 
 let timeout;
 
-Howler.volume(0.15);
+// Howler.volume(0.15);
 
 const hexagon = "M41.59,163.45v273.1a21.91,21.91,0,0,0,10.95,19L289.05,592.07a21.91,21.91,0,0,0,21.9,0L547.46,455.52a21.91,21.91,0,0,0,10.95-19V163.45a21.91,21.91,0,0,0-10.95-19L311,7.93a21.91,21.91,0,0,0-21.9,0L52.54,144.48A21.91,21.91,0,0,0,41.59,163.45Z";
 const circle = "M5,300v.1a294.91,294.91,0,0,0,147.46,255.4l.08,0a294.93,294.93,0,0,0,294.92,0l.08,0A294.91,294.91,0,0,0,595,300.05V300A294.91,294.91,0,0,0,447.54,44.55l-.08,0a294.93,294.93,0,0,0-294.92,0l-.08,0A294.91,294.91,0,0,0,5,300Z";
@@ -60,7 +60,7 @@ class Station extends Component {
     componentWillUnmount() {
         this.setState({ isMounted: false })
 
-        unmount.play();
+        // unmount.play();
         window.clearTimeout(timeout);
     }
 
@@ -76,13 +76,13 @@ class Station extends Component {
         if (this.props.station.properties.provider === "luftdaten")
             this.setState({ shape: hexagon })
 
-        timeout = window.setTimeout(mount.play(), 50);
+        // timeout = window.setTimeout(mount.play(), 50);
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.station.properties.id !== prevProps.station.properties.id) {
             this.setState({ comps: this.getAirComps() });
-            change.play();
+            // change.play();
         }
 
         if (this.props.update.timestamp > prevProps.update.timestamp) {
@@ -98,7 +98,7 @@ class Station extends Component {
         } */
 
         if (this.props.station.properties.favorized !== prevProps.station.properties.favorized || this.props.station.properties.notify !== prevProps.station.properties.notify) {
-            change.play();
+            // change.play();
         }
     }
 

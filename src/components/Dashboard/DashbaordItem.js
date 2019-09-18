@@ -95,12 +95,14 @@ class DashboardItem extends Component {
         e.preventDefault();
         
         this.props.history.push({
-            pathname: "/station/" + this.props.station.properties.provider + "/" + this.props.station.properties.id,
+            pathname: "/station/" + this.props.station.properties.provider + "/" + this.props.station.properties.id + "/center",
             state: {
-                x: 0,
-                y: 0
+                x: "50%",
+                y: "50%"
             }
         });
+
+        this.props.onSetLocation({ lat: this.props.station.geometry.coordinates[0], lng: this.props.station.geometry.coordinates[1] });
     }
 
     render() {

@@ -26,6 +26,11 @@ class Stations extends Component {
             polygons: null,
             hexToStation: [],
             clusterIds: [],
+            centerTo: {
+                pathname: "",
+                state: {},
+                active: true
+            },
             res: 9
         };
     }
@@ -59,9 +64,31 @@ class Stations extends Component {
         }
     }
 
+    handleMouseDown = () => {
+        console.info("Mouse Down");
+
+        if (this.props.location.pathname === "/bottomsheet" || 
+            this.props.location.pathname.includes("/station")) {
+            this.props.history.push("/");
+        }
+
+        if (this.props.media === "small" && this.props.favboard) {
+            this.props.history.push("/");
+            this.props.onSetFavboard({ state: false, feature: STATIONS });
+        }
+
+        if (this.props.clusterboard) {
+            this.props.history.push("/");
+            this.props.onSetClusterboard({ state: false, feature: STATIONS });
+        }
+    }
+
     // go back to the main route
     handleMoveStart = () => {
-        if (this.props.location.pathname === "/bottomsheet" || this.props.location.pathname.includes("/station")) {
+        console.info("Move Start");
+
+        if (this.props.location.pathname === "/bottomsheet" || 
+            this.props.location.pathname.includes("/station")) {
             this.props.history.push("/");
         }
 
@@ -77,11 +104,30 @@ class Stations extends Component {
     }
 
     handleLocation = () => {
-        this.setState({
-            hasLocation: true
-        }, () => {
-            this.map.current.leafletElement.flyTo(this.props.position, this.state.zoom);
-        })
+        if (!this.props.location.pathname.includes("/center")) {
+            this.setState({
+                hasLocation: true
+            })
+        }
+        else {
+            this.setState({
+                hasLocation: false,
+                centerTo: {
+                    pathname: this.props.location.pathname
+                }
+            })
+        }
+    }
+
+    handleClickMap = () => {
+        if (this.props.location.pathname !== "/") {
+            console.info(this.props.location.pathname);
+            this.props.history.push("/");
+        }
+            
+        // this.props.onSetFavboard({ state: false, feature: STATIONS });
+
+        // console.info("CLICK");
     }
 
     onZoom = (e) => {
@@ -127,8 +173,25 @@ class Stations extends Component {
     }
 
     onMoveEnd = (e) => {
-        // let bounds = this.map.current.leafletElement.getBounds();
-        // console.log(bounds);
+        if (!this.state.centerTo.active) {
+            this.map.current.leafletElement.panBy([0, -70], { noMoveStart: true });
+
+            this.props.history.push({
+                pathname: this.state.centerTo.pathname,
+                state: {
+                    x: "50%",
+                    y: "50%"
+                }
+            });
+    
+            this.setState({
+                centerTo: {
+                    ...this.state.centerTo,
+                    active: true,
+                    pathname: "/"
+                }
+            })
+        }        
     }
 
     getClusterIds(d) {
@@ -168,6 +231,7 @@ class Stations extends Component {
                 onUnfavorizeStation={this.props.onUnfavorizeStation}
                 onNotifyStation={this.props.onNotifyStation}
                 onUnnotifyStation={this.props.onUnnotifyStation}
+                onSetLocation={this.props.onSetLocation}
                 getActive={this.state.clusterIds}
                 type = "cluster" />
         </div>;
@@ -194,19 +258,25 @@ class Stations extends Component {
         return (
             <React.Fragment>
                 <Map className="air__stations"
-                    onClick={this.handleClickMap}
+                    animate={true}
+                    duration={0.1}
+                    // onClick={this.handleClickMap}
+                    // onMouseDown={this.handleMouseDown}
+                    // onTouchstart={this.handleMouseDown}
                     onMovestart={this.handleMoveStart}
-                    // onMoveEnd={this.onMoveEnd}
+                    // noMoveStart={true}
+                    onMoveEnd={this.onMoveEnd}
                     center={this.props.position}
+                    // center={{lat: 48.32423, lng: 14.290745}}
                     zoom={this.state.zoom}
                     maxZoom={15}
                     minZoom={2}
-                    onZoom={this.onZoom}
+                    // onZoom={this.onZoom}
                     // onZoomStart={this.onZoomStart}
-                    onZoomEnd={this.onZoomEnd}
-                    preferCanvas="true"
-                    doubleClickZoom="false"
-                    useFlyTo="true"
+                    // onZoomEnd={this.onZoomEnd}
+                    preferCanvas={true}
+                    doubleClickZoom={false}
+                    useFlyTo={false}
                     ref={this.map} >
                     <TileLayer
                         // https://wiki.openstreetmap.org/wiki/Tile_servers

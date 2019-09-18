@@ -127,12 +127,12 @@ class App extends Component {
   }
 
   onFetchStations = () => {
-    this.props.onFetchStations(luftdatenURL, luftdatenProvider, "FETCH");
+    // this.props.onFetchStations(luftdatenURL, luftdatenProvider, "FETCH");
     this.props.onFetchStations(upperAustriaURL, upperAustriaProvider, "FETCH");
   }
 
   onUpdateStations = () => {
-    this.props.onFetchStations(luftdatenURL, luftdatenProvider, "UPDATE");
+    // this.props.onFetchStations(luftdatenURL, luftdatenProvider, "UPDATE");
     this.props.onFetchStations(upperAustriaURL, upperAustriaProvider, "UPDATE");
   }
 
@@ -366,6 +366,7 @@ class App extends Component {
         onUnfavorizeStation={this.props.onUnfavorizeStation}
         onNotifyStation={this.props.onNotifyStation}
         onUnnotifyStation={this.props.onUnnotifyStation}
+        onSetLocation={this.props.onSetLocation}
         getActive={getActiveStations}
         type="active" />
     </div>;
@@ -406,7 +407,8 @@ class App extends Component {
           onUnnotifyStation={this.props.onUnnotifyStation}
           onSetFavboard={this.props.onSetFavboard}
           onSetClusterboard={this.props.onSetClusterboard}
-          onFetchStations={this.props.onFetchStations} />
+          onFetchStations={this.props.onFetchStations} 
+          onSetLocation={this.props.onSetLocation}/>
         <Route
           path="/station/:provider/:id"
           render={() =>

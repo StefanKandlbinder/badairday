@@ -99,6 +99,7 @@ class Dashboard extends Component {
                             onUnfavorizeStation={this.props.onUnfavorizeStation}
                             onNotifyStation={this.props.onNotifyStation}
                             onUnnotifyStation={this.props.onUnnotifyStation}
+                            onSetLocation={this.props.onSetLocation}
                             type={this.props.type} />
                     )}
                     <li className="air__spacer" style={moodStyle}></li>
