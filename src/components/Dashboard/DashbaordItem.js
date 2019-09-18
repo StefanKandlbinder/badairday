@@ -102,7 +102,7 @@ class DashboardItem extends Component {
             }
         });
 
-        this.props.onSetLocation({ lat: this.props.station.geometry.coordinates[0], lng: this.props.station.geometry.coordinates[1] });
+        // this.props.onSetLocation({ lat: this.props.station.geometry.coordinates[0], lng: this.props.station.geometry.coordinates[1] });
     }
 
     render() {
