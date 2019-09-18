@@ -80,6 +80,7 @@ class Stations extends Component {
         this.setState({
             hasLocation: true
         }, () => {
+            this.props.history.push("/");
             this.map.current.leafletElement.setView(this.props.position, this.state.zoom);
         })
     }
