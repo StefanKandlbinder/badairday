@@ -111,6 +111,10 @@ class App extends Component {
     else if (this.props.media === "medium" && getActiveStations(this.props.stations).length) {
       this.props.onSetFavboard({ state: true, feature: STATIONS });
     }
+
+    if (!this.props.location.pathname.includes("clusterboard")) {
+      this.props.onSetClusterboard({ state: false, feature: STATIONS });
+    }
   }
 
   clearStorage() {
@@ -344,12 +348,6 @@ class App extends Component {
     </Tabbar>
 
     favboard = <div className="air__site air__site--favboard"
-      onTouchStart={(e) => {
-        if (this.props.media === "small") {
-          this.props.history.push("/favboard");
-        }
-        this.favboard.current.focus();
-      }}
       ref={this.favboard}>
       <Dashboard
         stations={this.props.stations}
