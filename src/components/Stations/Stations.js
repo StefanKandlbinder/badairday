@@ -65,10 +65,6 @@ class Stations extends Component {
         }
         else {
             this.getClusterIds(d);
-
-            this.setState({
-                
-            })
         }
     }
 

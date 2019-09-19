@@ -92,7 +92,7 @@ class DashboardItem extends Component {
     }
 
     onHandleClick = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         
         this.props.onSetCenter(this.props.station);
     }
