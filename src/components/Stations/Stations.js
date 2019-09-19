@@ -30,6 +30,7 @@ class Stations extends Component {
             hexToStation: [],
             clusterIds: [],
             zoomEnd: false,
+            moveEnd: false,
             res: 9
         };
     }
@@ -44,7 +45,11 @@ class Stations extends Component {
         }
 
         if (this.props.center !== prevProps.center) {
-            this.handleCenter();
+            this.posCenter();
+        }
+
+        if ((this.state.moveEnd || this.state.zoomEnd) && this.state.hasCenter) {
+            this.showCenter();
         }
     }
 
@@ -93,17 +98,34 @@ class Stations extends Component {
         })
     }
 
-    handleCenter = () => {
+    posCenter = () => {
         this.setState({
             hasCenter: true,
-            zoomEnd: false
+            zoomEnd: false,
+            moveEnd: false
         }, () => {
-            this.map.current.leafletElement.flyTo(
+            this.map.current.leafletElement.setView(
                 { lat: this.props.center.station.geometry.coordinates[0],
                   lng: this.props.center.station.geometry.coordinates[1] }, 
                   13
             );
             // this.map.current.leafletElement.panBy([0, 50]);
+        })
+    }
+
+    showCenter = () => {
+        this.centerTimeout = window.setTimeout(() => {
+            this.props.history.push({
+                pathname: "/station/" + this.props.center.station.properties.provider + "/" + this.props.center.station.properties.id + "/center",
+                state: {
+                    x: "50%",
+                    y: "50%"
+                }
+            });
+        }, 200);
+
+        this.setState({
+            hasCenter: false
         })
     }
 
@@ -113,7 +135,8 @@ class Stations extends Component {
 
     onZoomStart = (e) => {
         this.setState({
-            zoomEnd: false
+            zoomEnd: false,
+            zoomStart: true
         })
 
         this.markerPane = document.getElementsByClassName("leaflet-marker-pane")[0];
@@ -123,6 +146,10 @@ class Stations extends Component {
     }
 
     onZoomEnd = (e) => {
+        this.setState({
+            zoomStart: false,
+            zoomEnd: true
+        })
         // this.markerPane.style.animationDelay = "1s";
         // this.markerPane.style.opacity = 1;
         /* this.setState({
@@ -149,30 +176,14 @@ class Stations extends Component {
         console.info(url); */
             
         // this.props.onFetchStations(url, luftdatenProvider, "FETCH");
-        this.setState({
-            zoomEnd: true
-        }, () => {
-            if (this.state.hasCenter) {
-                this.props.history.push({
-                    pathname: "/station/" + this.props.center.station.properties.provider + "/" + this.props.center.station.properties.id + "/center",
-                    state: {
-                        x: "50%",
-                        y: "50%"
-                    }
-                });
-
-                this.setState({
-                    hasCenter: false
-                })
-            }
-        })
 
         console.log("Zoom ended!");
     }
 
     onMoveEnd = (e) => {
-        // let bounds = this.map.current.leafletElement.getBounds();
-        // console.log(bounds);
+        this.setState({
+            moveEnd: true
+        })
     }
 
     getClusterIds(d) {
@@ -252,7 +263,7 @@ class Stations extends Component {
                 <Map className="air__stations"
                     onClick={this.handleClickMap}
                     onMovestart={this.handleMoveStart}
-                    // onMoveEnd={this.onMoveEnd}
+                    onMoveEnd={this.onMoveEnd}
                     center={this.props.position}
                     zoom={this.state.zoom}
                     maxZoom={15}
