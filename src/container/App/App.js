@@ -128,12 +128,12 @@ class App extends Component {
   }
 
   onFetchStations = () => {
-    // this.props.onFetchStations(luftdatenURL, luftdatenProvider, "FETCH");
+    this.props.onFetchStations(luftdatenURL, luftdatenProvider, "FETCH");
     this.props.onFetchStations(upperAustriaURL, upperAustriaProvider, "FETCH");
   }
 
   onUpdateStations = () => {
-    // this.props.onFetchStations(luftdatenURL, luftdatenProvider, "UPDATE");
+    this.props.onFetchStations(luftdatenURL, luftdatenProvider, "UPDATE");
     this.props.onFetchStations(upperAustriaURL, upperAustriaProvider, "UPDATE");
   }
 
