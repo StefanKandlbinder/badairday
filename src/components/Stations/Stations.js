@@ -19,13 +19,17 @@ class Stations extends Component {
         super(props);
 
         this.map = React.createRef();
+        this.centerTimeout = null;
+
         this.state = {
             hasLocation: false,
+            hasCenter: false,
             zoom: 13,
             stationMarkers: [],
             polygons: null,
             hexToStation: [],
             clusterIds: [],
+            zoomEnd: false,
             res: 9
         };
     }
@@ -37,6 +41,10 @@ class Stations extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.position !== prevProps.position) {
             this.handleLocation();
+        }
+
+        if (this.props.center !== prevProps.center) {
+            this.handleCenter();
         }
     }
 
@@ -85,11 +93,29 @@ class Stations extends Component {
         })
     }
 
+    handleCenter = () => {
+        this.setState({
+            hasCenter: true,
+            zoomEnd: false
+        }, () => {
+            this.map.current.leafletElement.flyTo(
+                { lat: this.props.center.station.geometry.coordinates[0],
+                  lng: this.props.center.station.geometry.coordinates[1] }, 
+                  13
+            );
+            // this.map.current.leafletElement.panBy([0, 50]);
+        })
+    }
+
     onZoom = (e) => {
         // let zoom = this.map.current.leafletElement.getZoom();
     }
 
     onZoomStart = (e) => {
+        this.setState({
+            zoomEnd: false
+        })
+
         this.markerPane = document.getElementsByClassName("leaflet-marker-pane")[0];
         this.markerPane.style.animationDelay = "0s";
         this.markerPane.style.opacity = 0;
@@ -123,6 +149,23 @@ class Stations extends Component {
         console.info(url); */
             
         // this.props.onFetchStations(url, luftdatenProvider, "FETCH");
+        this.setState({
+            zoomEnd: true
+        }, () => {
+            if (this.state.hasCenter) {
+                this.props.history.push({
+                    pathname: "/station/" + this.props.center.station.properties.provider + "/" + this.props.center.station.properties.id + "/center",
+                    state: {
+                        x: "50%",
+                        y: "50%"
+                    }
+                });
+
+                this.setState({
+                    hasCenter: false
+                })
+            }
+        })
 
         console.log("Zoom ended!");
     }
@@ -153,6 +196,7 @@ class Stations extends Component {
 
     render() {
         let location = null;
+        let center = null;
         let hexbins = null;
         let clusterBoard = null;
 
@@ -169,6 +213,7 @@ class Stations extends Component {
                 onUnfavorizeStation={this.props.onUnfavorizeStation}
                 onNotifyStation={this.props.onNotifyStation}
                 onUnnotifyStation={this.props.onUnnotifyStation}
+                onSetCenter={this.props.onSetCenter}
                 getActive={this.state.clusterIds}
                 type = "cluster" />
         </div>;
@@ -192,6 +237,16 @@ class Stations extends Component {
             location = <Marker icon={marker} position={this.props.position}></Marker>
         }
 
+        /* if (this.state.hasCenter) {
+            let marker = L.divIcon({
+                hmtl: "",
+                className: "air__icon-center",
+                iconSize: [12, 12]
+            });
+
+            center = <Marker icon={marker} position={this.props.center}></Marker>
+        } */
+
         return (
             <React.Fragment>
                 <Map className="air__stations"
@@ -202,7 +257,7 @@ class Stations extends Component {
                     zoom={this.state.zoom}
                     maxZoom={15}
                     minZoom={2}
-                    onZoom={this.onZoom}
+                    // onZoom={this.onZoom}
                     // onZoomStart={this.onZoomStart}
                     onZoomEnd={this.onZoomEnd}
                     preferCanvas="true"
@@ -217,6 +272,7 @@ class Stations extends Component {
                         url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
                     />
                     {location}
+                    {center}
                     {hexbins}
                     {this.props.children}
                 </Map>

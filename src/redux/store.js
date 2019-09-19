@@ -10,6 +10,7 @@ import { apiMiddleware } from './middleware/api';
 import { uiReducer } from "./reducers/uiReducer";
 import { updateReducer } from "./reducers/updateReducer";
 import { locationReducer } from "./reducers/locationReducer";
+import { centerReducer } from "./reducers/centerReducer";
 import { subscriptionReducer } from "./reducers/subscriptionReducer";
 import { optionsReducer } from "./reducers/optionsReducer";
 import { tokensReducer } from "./reducers/tokensReducer";
@@ -28,6 +29,7 @@ const configureStore = () => {
         notifications: notificationsReducer,
         update: updateReducer,
         location: locationReducer,
+        center: centerReducer,
         subscription: subscriptionReducer,
         options: optionsReducer,
         tokens: tokensReducer

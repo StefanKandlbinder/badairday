@@ -12,6 +12,7 @@ import Media from 'react-media';
 import { STATIONS } from "../../redux/actions/stations";
 import { fetchStations, favorizeStation, unfavorizeStation, notifyStation, unnotifyStation } from "../../redux/actions/stations";
 import { setLocation } from "../../redux/actions/location";
+import { setCenter } from "../../redux/actions/center";
 import { setGeoLocation, setBottomSheet, setFavboard, setClusterboard, setMedia } from "../../redux/actions/ui";
 import { setNotification } from "../../redux/actions/notifications";
 import { setOptionAutoupdater } from "../../redux/actions/options";
@@ -366,7 +367,7 @@ class App extends Component {
         onUnfavorizeStation={this.props.onUnfavorizeStation}
         onNotifyStation={this.props.onNotifyStation}
         onUnnotifyStation={this.props.onUnnotifyStation}
-        onSetLocation={this.props.onSetLocation}
+        onSetCenter={this.props.onSetCenter}
         getActive={getActiveStations}
         type="active" />
     </div>;
@@ -398,6 +399,7 @@ class App extends Component {
           updating={this.props.updating}
           media={this.props.media}
           position={this.props.position}
+          center={this.props.center}
           favboard={this.props.favboard}
           clusterboard={this.props.clusterboard}
           subscription={this.props.subscription}
@@ -408,7 +410,7 @@ class App extends Component {
           onSetFavboard={this.props.onSetFavboard}
           onSetClusterboard={this.props.onSetClusterboard}
           onFetchStations={this.props.onFetchStations} 
-          onSetLocation={this.props.onSetLocation}/>
+          onSetCenter={this.props.onSetCenter}/>
         <Route
           path="/station/:provider/:id"
           render={() =>
@@ -532,6 +534,7 @@ const mapStateToProps = state => {
     clusterboard: state.ui.clusterboard,
     media: state.ui.media,
     position: state.location,
+    center: state.center,
     notifications: state.notifications,
     subscription: state.subscription,
     update: state.update,
@@ -544,6 +547,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onFetchStations: (url, luftdatenProvider, method) => dispatch(fetchStations(url, luftdatenProvider, method)),
     onSetLocation: (location) => dispatch(setLocation(location)),
+    onSetCenter: (center) => dispatch(setCenter(center)),
     onFavorizeStation: (id) => dispatch(favorizeStation(id)),
     onUnfavorizeStation: (id) => dispatch(unfavorizeStation(id)),
     onNotifyStation: (id) => dispatch(notifyStation(id)),
