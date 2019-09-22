@@ -206,8 +206,6 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
             );
         });
 
-        console.info(stations);
-
         updateStations(stations, action.meta.provider, action.meta.url);
     } else {
         next(action);
