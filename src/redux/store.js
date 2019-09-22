@@ -78,8 +78,8 @@ const configureStore = () => {
             update: store.getState().update,
             location: store.getState().location,
             options: store.getState().options,
-            subscription: store.getState().subscription
-
+            subscription: store.getState().subscription,
+            tokens: store.getState().tokens
         });
     }, 1000))
 

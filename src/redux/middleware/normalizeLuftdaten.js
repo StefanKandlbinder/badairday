@@ -28,7 +28,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
     const updateStations = (stations, provider) => {
         if (stations) {
             // get the latest
-            stations = unionBy(stations.reverse(), 'sensor.id');
+            let uniqueStations = unionBy(stations.reverse(), 'sensor.id');
 
             if (getState().tokens.reversegeo.timestamp + 7200 > Date.now() || getState().tokens.reversegeo.timestamp === undefined) {
                 getArcgisToken()
@@ -45,7 +45,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                 });
             }
 
-            stations.map(station => {
+            uniqueStations.map(station => {
                 let components = normalizeComponents(station.sensordatavalues);
 
                 let stationModel = new Station(
@@ -64,7 +64,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                         moodRGBA: "rgba(70, 70, 70, 0.75)",
                     })
 
-                let filteredStation = getState().stations.features.filter(station => station.properties.id === stationModel.properties.id)
+                let filteredStation = getState().stations.features.filter(filteredStation => filteredStation.properties.id === station.sensor.id.toString())
 
                 if (filteredStation.length) {
                     if (getState().options.reversegeo && 
@@ -194,7 +194,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
             );
         });
 
-        addStations(stations, action.meta.provider, action.meta.url);
+        addStations(stations, action.meta.provider);
     }
 
     else if (action.type.includes(UPDATE_STATIONS) && action.meta.provider === "luftdaten") {
@@ -206,7 +206,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
             );
         });
 
-        updateStations(stations, action.meta.provider, action.meta.url);
+        updateStations(stations, action.meta.provider);
     } else {
         next(action);
     }
