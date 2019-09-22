@@ -62,7 +62,7 @@ import Updatebar from "../../components/UI/Updatebar/Updatebar";
 import './App.scss';
 
 // let luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,50";
-let luftdatenURL = "http://api.luftdaten.info/static/v2/data.dust.min.json";
+let luftdatenURL = "https://api.luftdaten.info/static/v2/data.dust.min.json";
 const luftdatenProvider = "luftdaten";
 const upperAustriaURL = "https://www2.land-oberoesterreich.gv.at/imm/jaxrs/messwerte/json?";
 const upperAustriaProvider = "upperaustria";
