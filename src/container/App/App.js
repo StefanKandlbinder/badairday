@@ -106,14 +106,14 @@ class App extends Component {
   componentDidUpdate(prevProps) {
     if ((prevProps.media === "medium" && this.props.media === "small") ||
       (this.props.media === "small" && !this.props.history.location.pathname.includes("favboard"))) {
-      this.props.onSetFavboard({ state: false, feature: STATIONS });
+      // this.props.onSetFavboard({ state: false, feature: STATIONS });
     }
     else if (this.props.media === "medium" && getActiveStations(this.props.stations).length) {
-      this.props.onSetFavboard({ state: true, feature: STATIONS });
+      // this.props.onSetFavboard({ state: true, feature: STATIONS });
     }
 
     if (!this.props.location.pathname.includes("clusterboard")) {
-      this.props.onSetClusterboard({ state: false, feature: STATIONS });
+      // this.props.onSetClusterboard({ state: false, feature: STATIONS });
     }
   }
 

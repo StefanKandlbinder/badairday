@@ -190,7 +190,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
             return isPointWithinRadius(
                 { latitude: station.location.latitude, longitude: station.location.longitude },
                 action.meta.location,
-                50000
+                radius
             );
         });
 
@@ -205,6 +205,8 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
                 radius
             );
         });
+
+        console.info(stations);
 
         updateStations(stations, action.meta.provider, action.meta.url);
     } else {

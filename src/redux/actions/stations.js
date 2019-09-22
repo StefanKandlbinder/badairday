@@ -28,10 +28,10 @@ export const setStations = ({ stations, provider }) => ({
     meta: { feature: STATIONS, provider: provider }
 });
 
-export const addStations = ({ stations, provider }) => ({
+export const addStations = ({ stations, provider, location }) => ({
     type: ADD_STATIONS,
     payload: stations,
-    meta: { feature: STATIONS, provider: provider }
+    meta: { feature: STATIONS, provider: provider, location: location }
 });
 
 export const updateStations = ({ stations, provider, location }) => ({
