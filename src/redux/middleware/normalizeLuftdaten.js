@@ -8,9 +8,12 @@ import { setTokenReverseGeo } from "../actions/tokens";
 import getStringDateLuftdaten from '../../utilities/getStringDateLuftdaten';
 import getUnixDateFromLuftdaten from '../../utilities/getUnixDateFromLuftdaten';
 import getArcgisToken from '../../services/getArcgisToken';
+import { isPointWithinRadius } from 'geolib';
 
 import Station from "../models/station";
 import Component from "../models/component";
+
+const radius = 50000; // search radius in meter
 
 export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) => (action) => {
     const addStations = (stations, provider) => {
@@ -183,11 +186,27 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }) => (next) =
 
     // filter both by action type and metadata content
     if (action.type.includes(ADD_STATIONS) && action.meta.provider === "luftdaten") {
-        addStations(action.payload, action.meta.provider);
+        const stations = action.payload.filter(station => {
+            return isPointWithinRadius(
+                { latitude: station.location.latitude, longitude: station.location.longitude },
+                action.meta.location,
+                50000
+            );
+        });
+
+        addStations(stations, action.meta.provider, action.meta.url);
     }
 
     else if (action.type.includes(UPDATE_STATIONS) && action.meta.provider === "luftdaten") {
-        updateStations(action.payload, action.meta.provider);
+        const stations = action.payload.filter(station => {
+            return isPointWithinRadius(
+                { latitude: station.location.latitude, longitude: station.location.longitude },
+                action.meta.location,
+                radius
+            );
+        });
+
+        updateStations(stations, action.meta.provider, action.meta.url);
     } else {
         next(action);
     }

@@ -61,8 +61,8 @@ import Updatebar from "../../components/UI/Updatebar/Updatebar";
 
 import './App.scss';
 
-let luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,50";
-// let luftdatenURL = "http://api.luftdaten.info/static/v2/data.dust.min.json";
+// let luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,50";
+let luftdatenURL = "http://api.luftdaten.info/static/v2/data.dust.min.json";
 const luftdatenProvider = "luftdaten";
 const upperAustriaURL = "https://www2.land-oberoesterreich.gv.at/imm/jaxrs/messwerte/json?";
 const upperAustriaProvider = "upperaustria";
@@ -128,13 +128,13 @@ class App extends Component {
   }
 
   onFetchStations = () => {
-    this.props.onFetchStations(luftdatenURL, luftdatenProvider, "FETCH");
-    this.props.onFetchStations(upperAustriaURL, upperAustriaProvider, "FETCH");
+    this.props.onFetchStations(luftdatenURL, luftdatenProvider, "FETCH", this.props.position);
+    this.props.onFetchStations(upperAustriaURL, upperAustriaProvider, "FETCH", this.props.position);
   }
 
   onUpdateStations = () => {
-    this.props.onFetchStations(luftdatenURL, luftdatenProvider, "UPDATE");
-    this.props.onFetchStations(upperAustriaURL, upperAustriaProvider, "UPDATE");
+    this.props.onFetchStations(luftdatenURL, luftdatenProvider, "UPDATE", this.props.position);
+    this.props.onFetchStations(upperAustriaURL, upperAustriaProvider, "UPDATE", this.props.position);
   }
 
   onResetPushFav = () => {
@@ -539,7 +539,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchStations: (url, luftdatenProvider, method) => dispatch(fetchStations(url, luftdatenProvider, method)),
+    onFetchStations: (url, luftdatenProvider, method, location) => dispatch(fetchStations(url, luftdatenProvider, method, location)),
     onSetLocation: (location) => dispatch(setLocation(location)),
     onSetCenter: (center) => dispatch(setCenter(center)),
     onFavorizeStation: (id) => dispatch(favorizeStation(id)),

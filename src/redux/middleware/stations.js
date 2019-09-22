@@ -12,14 +12,14 @@ export const stationsMiddleware = () => (next) => (action) => {
 
         case FETCH_STATIONS + " FETCH":
             next([
-                apiRequest({ body: null, method: 'GET', url: action.payload, feature: STATIONS, provider: action.meta.provider, update: action.meta.method }),
+                apiRequest({ body: null, method: 'GET', url: action.payload, feature: STATIONS, provider: action.meta.provider, update: action.meta.method, location: action.meta.location }),
                 setLoader({ state: true, feature: STATIONS })
             ]);
             break;
         
         case FETCH_STATIONS + " UPDATE":
             next([
-                apiRequest({ body: null, method: 'GET', url: action.payload, feature: STATIONS, provider: action.meta.provider, update: action.meta.method }),
+                apiRequest({ body: null, method: 'GET', url: action.payload, feature: STATIONS, provider: action.meta.provider, update: action.meta.method, location: action.meta.location }),
                 setUpdater({ state: true, feature: STATIONS })
             ]);
             break;
@@ -32,14 +32,14 @@ export const stationsMiddleware = () => (next) => (action) => {
 
         case `${STATIONS} ${API_SUCCESS} FETCH`:
             next([
-                addStations({ stations: action.payload, provider: action.meta.provider }),
+                addStations({ stations: action.payload, provider: action.meta.provider, location: action.meta.location }),
                 setLoader({ state: false, feature: STATIONS })
             ]);
             break;
         
         case `${STATIONS} ${API_SUCCESS} UPDATE`:
             next([
-                updateStations({ stations: action.payload, provider: action.meta.provider }),
+                updateStations({ stations: action.payload, provider: action.meta.provider, location: action.meta.location }),
                 setUpdater({ state: false, feature: STATIONS }),
                 setUpdate({ update: Date.now() })
             ]);

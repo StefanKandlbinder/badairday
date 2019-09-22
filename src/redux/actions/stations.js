@@ -16,10 +16,10 @@ export const NOTIFY_STATION = `${STATIONS} NOTIFY`;
 export const UNNOTIFY_STATION = `${STATIONS} UNNOTIFY`;
 
 // action creators
-export const fetchStations = (url, provider, method) => ({
+export const fetchStations = (url, provider, method, location) => ({
     type: FETCH_STATIONS + " " + method,
     payload: url,
-    meta: { feature: STATIONS, provider: provider, method: method }
+    meta: { feature: STATIONS, provider: provider, method: method, location:location }
 });
 
 export const setStations = ({ stations, provider }) => ({
@@ -34,10 +34,10 @@ export const addStations = ({ stations, provider }) => ({
     meta: { feature: STATIONS, provider: provider }
 });
 
-export const updateStations = ({ stations, provider }) => ({
+export const updateStations = ({ stations, provider, location }) => ({
     type: UPDATE_STATIONS,
     payload: stations,
-    meta: { feature: STATIONS, provider: provider }
+    meta: { feature: STATIONS, provider: provider, location: location }
 });
 
 export const addStation = ({ station, provider }) => ({

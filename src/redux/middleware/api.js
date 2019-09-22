@@ -5,11 +5,11 @@ export const apiMiddleware = ({ dispatch }) => (next) => (action) => {
     next(action);
 
     if (action.type.includes(API_REQUEST) && action.meta.provider === "luftdaten") {
-        const { body, url, method, feature, provider, update } = action.meta;
+        const { body, url, method, feature, provider, update, location } = action.meta;
 
         fetch(url, { body, method })
             .then(handleResponse)
-            .then(response => dispatch(apiSuccess({ response, feature, provider, update })))
+            .then(response => dispatch(apiSuccess({ response, feature, provider, update, location })))
             .catch(error => dispatch(apiError({ error: error, feature, provider })))
     }
 
