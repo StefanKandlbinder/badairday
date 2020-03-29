@@ -5,7 +5,7 @@ export default function getStringDateLuftdaten(date) {
     var newDate = getUnixDateFromLuftdaten(date);
     
     // add 1 hour because of timezone
-    newDate += 7200;
+    newDate += 3600;
 
     return getStringDate(newDate * 1000);
 }
