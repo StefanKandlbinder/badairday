@@ -11,7 +11,7 @@ import { getStationByID } from "../../redux/filters/getStationByID";
 import { getNotifiedStations } from '../../redux/filters/getNotifiedStations';
 
 import Aircomp from '../../components/Aircomp/Aircomp';
-import Compass from '../../components/Compass/Compass';
+// import Compass from '../../components/Compass/Compass';
 import Button from '../../components/UI/Button/Button';
 import BadAirDayNotifications from '../../services/Notifications/BadAirDayNotifications';
 
