@@ -11,8 +11,8 @@ export default class GetDateFromTo {
         this.dateTo.setHours(this.dateTo.getHours() - 1);
 
         // Wintertime
-        // this.dateFrom.setMinutes(this.dateFrom.getMinutes() - DELAY);
-        this.dateTo.setHours(this.dateTo.getHours());
+        this.dateFrom.setMinutes(this.dateFrom.getMinutes() - DELAY);
+        // this.dateTo.setHours(this.dateTo.getHours());
 
         // 40 minutes delay
 
