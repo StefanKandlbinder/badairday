@@ -1,5 +1,5 @@
 export default function getStringDate(date) {
-    // date += 60* 60 * 1000; // SUMMERTIME
+    date += 60* 60 * 1000; // SUMMERTIME
     let tmpDate = new Date(date);
     let year = tmpDate.getFullYear();
     let month = (tmpDate.getMonth() + 1);
