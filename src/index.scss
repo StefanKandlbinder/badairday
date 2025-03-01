@@ -1,8 +1,12 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,500&display=swap");
+
 html {
   box-sizing: border-box;
   overflow: hidden;
 }
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-user-select: none;
@@ -27,8 +31,7 @@ body {
   text-align: center;
   /* font-family: 'Roboto Slab', serif; */
   /* font-family: 'Open Sans', sans-serif; */
-  @import url('https://fonts.googleapis.com/css?family=Raleway:400,500&display=swap');
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   /* font-family: 'Josefin Sans', sans-serif; */
   background: white;
 }

@@ -1,179 +1,195 @@
+@import url("https://unpkg.com/leaflet@1.2.0/dist/leaflet.css");
+
 .air__stations {
-    height: 100vh;
-    z-index: 50;
-    @import url("https://unpkg.com/leaflet@1.2.0/dist/leaflet.css");
-    /* filter: grayscale(0.6); */
+  height: 100vh;
+  z-index: 50;
+  /* filter: grayscale(0.6); */
 }
 
 .air__stations-marker-cluster {
-    background: var(--air__color-secondary--weak);
-    border-radius: 50%;
-    color: #ededed;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    width: 40px;
-    box-sizing: border-box;
-    font-family: "Open Sans", sans-serif;
+  background: var(--air__color-secondary--weak);
+  border-radius: 50%;
+  color: #ededed;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  width: 40px;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
 }
 
 .air__stations-upperaustria-marker-wrapper {
-    border: 0;
-    background: transparent;
+  border: 0;
+  background: transparent;
 }
 
 .air__stations-upperaustria-marker {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
 }
 
 .air__stations-upperaustria-marker,
 .air__stations-luftdaten-marker {
-    position: relative;
+  position: relative;
 
-    svg {
-        transition: fill var(--air__animation-duration) var(--air__animation-timing) var(--air__animation-duration);
-    }
+  svg {
+    transition: fill var(--air__animation-duration) var(--air__animation-timing)
+      var(--air__animation-duration);
+  }
 
-    .air__stations-favorized-icon {
-        position: absolute;
-        bottom: 6px;
-        left: calc(50% - 4px);
-        width: 8px;
-        height: 8px;
-    }
+  .air__stations-favorized-icon {
+    position: absolute;
+    bottom: 6px;
+    left: calc(50% - 4px);
+    width: 8px;
+    height: 8px;
+  }
 
-    .air__stations-notified-icon {
-        position: absolute;
-        top: 5px;
-        left: calc(50% - 5px);
-        width: 10px;
-        height: 10px;
-    }
+  .air__stations-notified-icon {
+    position: absolute;
+    top: 5px;
+    left: calc(50% - 5px);
+    width: 10px;
+    height: 10px;
+  }
 }
 
 .air__station-button-location svg {
-    fill: var(--air__color-primary);
+  fill: var(--air__color-primary);
 }
 
 .air__icon-location {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    z-index: 9999 !important;
-    position: relative;
-    line-height: 0;
-    font-size: 0;
-    animation: pulse 2000ms infinite;
-    will-change: box-shadow;
-  }
-  
-  .air__icon-location:before {
-    position: absolute;
-    left: 0;
-    top: 0;
-    line-height: 0;
-    font-size: 0;
-    content: " ";
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--air__color-secondary);
-    box-shadow: 0 0 0 2px white;
-    animation: air-location 2000ms infinite;
-    will-change: transform;
-    display: inline-block;
-  }
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  z-index: 9999 !important;
+  position: relative;
+  line-height: 0;
+  font-size: 0;
+  animation: pulse 2000ms infinite;
+  will-change: box-shadow;
+}
 
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 var(--air__color-secondary--weak); }
-    70% { box-shadow: 0 0 0 20px var(--air__color-secondary--gone); }
-    100% { box-shadow: 0 0 0 0 var(--air__color-secondary--gone); }
+.air__icon-location:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  line-height: 0;
+  font-size: 0;
+  content: " ";
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--air__color-secondary);
+  box-shadow: 0 0 0 2px white;
+  animation: air-location 2000ms infinite;
+  will-change: transform;
+  display: inline-block;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--air__color-secondary--weak);
   }
-  
-  @keyframes air-location {
-    0%   { transform: scale(1); }
-    70% { transform: scale(1.2); }
-    100% { transform: scale(1); }
+  70% {
+    box-shadow: 0 0 0 20px var(--air__color-secondary--gone);
   }
+  100% {
+    box-shadow: 0 0 0 0 var(--air__color-secondary--gone);
+  }
+}
+
+@keyframes air-location {
+  0% {
+    transform: scale(1);
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
 /* ------- */
 /* LEAFLET */
 /* ------- */
 
 .leaflet-tile-pane {
-    opacity: 0.75;
+  opacity: 0.75;
 }
 
 .leaflet-marker-pane {
-    will-change: opacity;
-    transition: opacity var(--air__animation-duration) var(--air__animation-timing);
-    opacity: 1;
+  will-change: opacity;
+  transition: opacity var(--air__animation-duration)
+    var(--air__animation-timing);
+  opacity: 1;
 }
 
 .leaflet-left {
-    position: fixed;
-    bottom: 54px;
-    left: 2px;
+  position: fixed;
+  bottom: 54px;
+  left: 2px;
 }
 
-.leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 0;
-    background: transparent;
-    /* box-shadow: 2px 4px 12px var(--air__color-shadow); */
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  /* box-shadow: 2px 4px 12px var(--air__color-shadow); */
 }
 
 a.leaflet-control-zoom-in.leaflet-disabled,
 a.leaflet-control-zoom-out.leaflet-disabled {
-    pointer-events: none;
-    filter: grayscale(100%);
+  pointer-events: none;
+  filter: grayscale(100%);
 }
 
 .leaflet-touch .leaflet-bar a {
-    width: 32px;
-    height: 32px;
-    line-height: 32px;
-    background-color: var(--air__color-text);
-    color: transparent;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  background-color: var(--air__color-text);
+  color: transparent;
 }
 
 .leaflet-touch .leaflet-bar a:first-child {
-    border-top-left-radius: var(--air__border-radius);
-    border-top-right-radius: var(--air__border-radius);
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJub25lIiBkPSJNMCAwaDI0djI0SDBWMHoiLz48cGF0aCBmaWxsPSJyZ2JhKDAsIDEyMSwgMTA3LCAwLjc1KSIgZD0iTTE5IDEzaC02djZoLTJ2LTZINXYtMmg2VjVoMnY2aDZ2MnoiLz48L3N2Zz4=');
+  border-top-left-radius: var(--air__border-radius);
+  border-top-right-radius: var(--air__border-radius);
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJub25lIiBkPSJNMCAwaDI0djI0SDBWMHoiLz48cGF0aCBmaWxsPSJyZ2JhKDAsIDEyMSwgMTA3LCAwLjc1KSIgZD0iTTE5IDEzaC02djZoLTJ2LTZINXYtMmg2VjVoMnY2aDZ2MnoiLz48L3N2Zz4=");
 }
 
 .leaflet-touch .leaflet-bar a:last-child {
-    border-bottom-left-radius: var(--air__border-radius);
-    border-bottom-right-radius: var(--air__border-radius);
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJub25lIiBkPSJNMCAwaDI0djI0SDBWMHoiLz48cGF0aCBmaWxsPSJyZ2JhKDAsIDEyMSwgMTA3LCAwLjc1KSIgZD0iTTE5IDEzSDV2LTJoMTR2MnoiLz48L3N2Zz4=');
+  border-bottom-left-radius: var(--air__border-radius);
+  border-bottom-right-radius: var(--air__border-radius);
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJub25lIiBkPSJNMCAwaDI0djI0SDBWMHoiLz48cGF0aCBmaWxsPSJyZ2JhKDAsIDEyMSwgMTA3LCAwLjc1KSIgZD0iTTE5IDEzSDV2LTJoMTR2MnoiLz48L3N2Zz4=");
 }
 
 .leaflet-control-attribution {
-    position: fixed;
-    top: 24px;
-    right: -16px;
-    background: rgba(255,255,255,0.5);
-    transform: rotate(-90deg);
-    transform-origin: bottom right;
-    text-align: right;
+  position: fixed;
+  top: 24px;
+  right: -16px;
+  background: rgba(255, 255, 255, 0.5);
+  transform: rotate(-90deg);
+  transform-origin: bottom right;
+  text-align: right;
 }
 
 .leaflet-control-attribution a {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .hexbin-container {
-    // transform: translateX(-11px);
+  // transform: translateX(-11px);
 }
 
 .hexbin-hexagon {
-	stroke: rgb(255, 255, 255);
-    stroke-width: 2px;
-    opacity: 0.9;
+  stroke: rgb(255, 255, 255);
+  stroke-width: 2px;
+  opacity: 0.9;
 }
