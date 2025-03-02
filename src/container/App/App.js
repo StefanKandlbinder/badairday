@@ -72,8 +72,7 @@ import Legend from "../../components/UI/Legend/Legend";
 import Updatebar from "../../components/UI/Updatebar/Updatebar";
 import "./App.scss";
 
-const REACT_APP_BADAIRDAY_VERSION =
-  process.env.REACT_APP_BADAIRDAY_VERSION || "0.0.0";
+const REACT_APP_VERSION = process.env.REACT_APP_VERSION || "0.0.0";
 
 // let luftdatenURL = "https://api.luftdaten.info/v1/filter/type=SDS011&area=48.323368,14.298756,50";
 let luftdatenURL = "https://api.luftdaten.info/static/v2/data.dust.min.json";
@@ -352,7 +351,7 @@ class App extends Component {
               BadAirDay
             </h3>
             <Flex className="air__flex air__color-primary air__flex-grow--1 air__flex--justify-content-flex-end">
-              v{REACT_APP_BADAIRDAY_VERSION}
+              v{REACT_APP_VERSION}
             </Flex>
           </Flex>
           <ListHeader className="air__list-header air__list-header--sticky air__color-primary--active air__border-radius-top--2">
