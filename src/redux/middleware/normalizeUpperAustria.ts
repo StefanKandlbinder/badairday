@@ -108,7 +108,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }: Middlewa
 
         const stationModel = createStation(
           'Feature',
-          { type: 'Point', coordinates: [station.geoLaenge, station.geoBreite, 0] },
+          { type: 'Point', coordinates: [station.geoBreite, station.geoLaenge, 0] },
           {
             provider,
             id: latest[0].station,

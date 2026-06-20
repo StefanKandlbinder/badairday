@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from './container/App/App';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import buildStore from './redux/store';
 import 'leaflet/dist/leaflet.css';
 
@@ -24,7 +25,9 @@ if (!rootElement) throw new Error('Root element not found');
 createRoot(rootElement).render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
     </BrowserRouter>
   </Provider>
 );
