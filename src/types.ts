@@ -84,6 +84,7 @@ export interface OptionsState {
   autoupdating: boolean;
   runaways: boolean;
   sort: boolean;
+  darkMode: boolean;
 }
 
 export interface TokenState {

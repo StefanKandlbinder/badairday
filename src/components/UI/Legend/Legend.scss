@@ -62,6 +62,12 @@
     width: 3.5rem;
     padding-left: 0.25rem;
     background: rgba(255,255,255,0.75);
+    color: #1a1a1a;
+}
+
+[data-theme="dark"] .air__legend-scale {
+    background: rgba(22, 32, 48, 0.85);
+    color: var(--air__color-fg);
 }
 
 .air__legend--horizontal .air__legend-scale {

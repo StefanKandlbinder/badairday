@@ -1,10 +1,15 @@
 .air__list-header {
     letter-spacing: 1px;
     padding: var(--air__margin--5) var(--air__margin--3) var(--air__margin--2);
-    background-color: white;
+    background-color: var(--air__color-surface);
     text-align: left;
     font-size: 0.875rem;
     flex: 0 0 auto;
+}
+
+[data-theme="dark"] .air__list-header {
+    background-color: var(--air__color-surface);
+    color: var(--air__color-fg);
 }
 
 .air__list-header--sticky {

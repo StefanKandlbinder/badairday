@@ -1,3 +1,19 @@
+.air__svg-logo-cool-bkg {
+    fill: var(--air__color-primary);
+}
+
+[data-theme="dark"] .air__svg-logo-cool-bkg {
+    fill: var(--air__color-surface);
+}
+
+.air__svg-logo-cool-accent {
+    fill: #6AB789;
+}
+
+[data-theme="dark"] .air__svg-logo-cool-accent {
+    fill: var(--air__color-surface);
+}
+
 .air__svg-logo-cool-simple-bkg {
     fill: var(--air__color-primary);
 }
@@ -9,11 +25,19 @@
 .air__svg-logo-cool-simple--inverse {
     .air__svg-logo-cool-simple-bkg {
         fill: var(--air__color-text);
-    }    
+    }
 }
 
 .air__svg-logo-cool-simple--inverse {
     .air__svg-logo-cool-simple-arrow {
         fill: var(--air__color-primary);
     }
+}
+
+[data-theme="dark"] .air__svg-logo-cool-simple-bkg {
+    fill: var(--air__color-surface);
+}
+
+[data-theme="dark"] .air__svg-logo-cool-simple-arrow {
+    fill: var(--air__color-fg);
 }

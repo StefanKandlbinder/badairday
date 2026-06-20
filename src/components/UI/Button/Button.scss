@@ -10,7 +10,7 @@
     min-width: var(--air__button-width);
     border: 1px solid var(--air__color-primary);
     border-radius: 0.375rem;
-    background: var(--air__color-text);
+    background: var(--air__color-surface);
     font-size: 0.75rem;
     font-weight: bold;
     color: var(--air__color-primary--weak);
@@ -135,5 +135,25 @@
             color: var(--air__color-text);
             fill: var(--air__color-text);
         }
+    }
+}
+
+[data-theme="dark"] .air__button {
+    color: var(--air__color-fg);
+
+    .air__button-icon {
+        fill: var(--air__color-fg);
+    }
+}
+
+[data-theme="dark"] .air__button:not(.air__button--naked) {
+    border-color: var(--air__color-fg);
+}
+
+[data-theme="dark"] .air__button--active {
+    color: var(--air__color-fg);
+
+    .air__button-icon {
+        fill: var(--air__color-fg);
     }
 }

@@ -1,4 +1,3 @@
-import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -18,6 +17,17 @@ import './scss/07-trumps/layout.scss';
 import './index.scss';
 
 const store = buildStore();
+
+// Apply dark mode before first render to avoid flash of wrong theme
+try {
+  const persisted = localStorage.getItem('state');
+  if (persisted) {
+    const parsed = JSON.parse(persisted);
+    if (parsed?.options?.darkMode) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  }
+} catch { /* ignore */ }
 
 const rootElement = document.getElementById('root');
 if (!rootElement) throw new Error('Root element not found');

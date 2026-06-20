@@ -8,3 +8,7 @@
     color: var(--air__color-primary--active);
     justify-content: space-between;
 }
+
+[data-theme="dark"] .air__list-item {
+    color: var(--air__color-fg);
+}
