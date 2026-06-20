@@ -3,7 +3,7 @@
     box-sizing: border-box;
     text-align: left;
     color: rgba(255, 255, 255, 1);
-    font-size: 14px;
+    font-size: 0.875rem;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -14,7 +14,7 @@
     user-select: none;
     flex-grow: 0;
     flex-shrink: 0;
-    min-height: 80px;
+    min-height: 5rem;
     width: 100%;
     overflow: hidden;
     position: relative;
@@ -60,8 +60,8 @@
   }
 
   .air__dashboard-item-official-icon {
-    width: 16px;
-    height: 12px;
+    width: 1rem;
+    height: 0.75rem;
     position: absolute;
     top: 0;
     left: 0;
@@ -77,7 +77,7 @@
   }
 
   .air__dashboard-item-name {
-    font-size: 16px;
+    font-size: 1rem;
     width: 100%;
     letter-spacing: 1.5px;
   }
@@ -105,8 +105,8 @@
   }
 
   .air__dashboard-item-marker {
-    width: 18px;
-    height: 18px;
+    width: 1.125rem;
+    height: 1.125rem;
     fill: none;
     stroke: rgba(255,255,255,0.9);
     stroke-width: 2px;
@@ -116,19 +116,19 @@
 
   .air__dashboard-item-marker--official {
     fill: rgba(255, 255, 255, 0.3);
-    width: 16px;
-    height: 16px;
+    width: 1rem;
+    height: 1rem;
     flex-shrink: 0;
   }
 
   .air__dashboard-item-date {
     display: flex;
     align-items: flex-start;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 300;
     color: rgba(255, 255, 255, 0.9);
     margin-right: var(--air__margin--2);
-    width: 65px;
+    width: 4.0625rem;
     margin-top: var(--air__margin);
   }
 
@@ -159,18 +159,18 @@
   }
 
   .air__dashboard-item-wiv-value {
-    font-size: 12px;
+    font-size: 0.75rem;
     letter-spacing: 1px;
   }
 
   .air__dashboard-item-wiv-unit {
-    font-size: 11px;
+    font-size: 0.6875rem;
     margin-top: calc(var(--air__margin)/2);
   }
 
   .air__dashboard-item-wir {
-    width: 21px;
-    height: 21px;
+    width: 1.3125rem;
+    height: 1.3125rem;
     display: flex;
     justify-content: center;
     align-self: center;
@@ -180,8 +180,8 @@
   }
 
   .air__dashboard-item-wir-svg {
-    width: 17px;
-    height: 17px;
+    width: 1.0625rem;
+    height: 1.0625rem;
   }
 
   .air__dashboard--description {
@@ -200,18 +200,18 @@
   }
 
   .air__dashboard-item-temp-value {
-    font-size: 12px;
+    font-size: 0.75rem;
     letter-spacing: 1px;
   }
 
   .air__dashboard-item-temp-unit {
-    font-size: 11px;
+    font-size: 0.6875rem;
     margin-top: calc(var(--air__margin)/2);
   }
 
   .air__dashboard-item-temp-svg {
-    width: 18px;
-    height: 18px;
+    width: 1.125rem;
+    height: 1.125rem;
     fill: white;
     margin-right: calc(var(--air__margin)/2);
     align-self: center;
@@ -221,7 +221,7 @@
     display: flex;
     flex-direction: column;
     text-align: right;
-    min-width: 100px;
+    min-width: 6.25rem;
   }
 
   .air__dashboard-item-component {
@@ -235,5 +235,5 @@
   }
 
   .air__dashboard-component-content--main {
-    font-size: 16px;
+    font-size: 1rem;
   }

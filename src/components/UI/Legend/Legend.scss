@@ -16,15 +16,15 @@
     --color-stop-5: #dd2c00;
     --color-stop-6: #8c0084;
 
-    --height: 250px;
+    --height: 15.625rem;
     
     
-    width: 12px;
+    width: 0.75rem;
     height: var(--height);
     display: block;
     position: fixed;
-    bottom: 64px;
-    left: 12px;
+    bottom: 4rem;
+    left: 0.75rem;
     z-index: 50;
     opacity: 0.75;
     background: linear-gradient(to top, 
@@ -41,7 +41,7 @@
 .air__legend--horizontal {
     left: 0;
     top: 0;
-    height: 12px;
+    height: 0.75rem;
     width: 100%;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
     background: linear-gradient(to right, 
@@ -57,30 +57,30 @@
 .air__legend-scale {
     position: absolute;
     bottom: 0;
-    left: 12px;
+    left: 0.75rem;
     height: 100%;
-    width: 56px;
-    padding-left: 4px;
+    width: 3.5rem;
+    padding-left: 0.25rem;
     background: rgba(255,255,255,0.75);
 }
 
 .air__legend--horizontal .air__legend-scale {
-    bottom: -20px;
+    bottom: -1.25rem;
     left: 0;
     width: 100%;
-    height: 20px;
+    height: 1.25rem;
     // background: transparent;
 }
 
 .air__legend-scale-stop {
     position: absolute;
-    font-size: 12px;
+    font-size: 0.75rem;
     text-align: left;
-    bottom: 4px;
+    bottom: 0.25rem;
 }
 
 .air__legend--horizontal .air__legend-scale-stop {
-    bottom: 2px;
+    bottom: 0.125rem;
     text-indent: -5px;
 }
 
@@ -88,18 +88,18 @@
     content: "";
     background: rgba(0, 0, 0, 0.75);
     position: absolute;
-    width: 12px;
+    width: 0.75rem;
     height: 1px;
-    left: -16px;
+    left: -1rem;
     bottom: 0;
 }
 
 .air__legend--horizontal .air__legend-scale-stop:after {
     background: rgba(255, 255, 255, 0.75);
-    height: 12px;
+    height: 0.75rem;
     width: 2px;
     left: 0;
-    bottom: 18px;
+    bottom: 1.125rem;
 }
 
 .air__legend-scale-stop:first-child:after,
@@ -113,7 +113,7 @@
 }
 
 .air__legend--horizontal .air__legend-scale-stop--0 {
-    left: 4px;
+    left: 0.25rem;
     text-indent: 0;
 }
 
@@ -152,11 +152,11 @@
 }
 
 .air__legend-scale-stop--5 {
-    bottom: calc(100% - 12px);
+    bottom: calc(100% - 0.75rem);
 }
 
 .air__legend--horizontal .air__legend-scale-stop--5 {
-    right: 4px;
+    right: 0.25rem;
     text-indent: 0;
 }
 
@@ -167,7 +167,7 @@
 
 .air__legend-scale--limit-text {
     position: absolute;
-    top: -14px;
+    top: -0.875rem;
 }
 
 .air__legend--horizontal .air__legend-scale--limit-text {
@@ -178,13 +178,13 @@
 .air__legend-scale--limit.air__legend-scale-stop:after {
     background: rgba(255, 0, 0, 1);
     height: 2px;
-    left: -18px;
-    width: 16px;
+    left: -1.125rem;
+    width: 1rem;
 }
 
 .air__legend--horizontal .air__legend-scale--limit.air__legend-scale-stop:after {
     // background: rgba(255,255,255,0.75);
-    height: 12px;
+    height: 0.75rem;
     width: 3px;
     left: -1px;
 }

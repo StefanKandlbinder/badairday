@@ -23,15 +23,15 @@
     /* border-radius: 50%; */
     width: 100%;
     /* height: 280px; */
-    padding: 8px;
+    padding: 0.5rem;
     background-color: rgba(255, 0, 0, 0.7);
     box-shadow: 5px 10px 30px var(--air__color-shadow);
     color: white;
 }
 
 .air__snackbar-cta {
-    padding: 8px 16px;
-    margin-top: 12px;
+    padding: 0.5rem 1rem;
+    margin-top: 0.75rem;
     border: 1px solid white;
-    border-radius: 6px;
+    border-radius: 0.375rem;
 }

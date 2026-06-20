@@ -9,10 +9,10 @@
   background: var(--air__color-secondary--weak);
   border-radius: 50%;
   color: #ededed;
-  height: 40px;
-  line-height: 40px;
+  height: 2.5rem;
+  line-height: 2.5rem;
   text-align: center;
-  width: 40px;
+  width: 2.5rem;
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
 }
@@ -39,18 +39,18 @@
 
   .air__stations-favorized-icon {
     position: absolute;
-    bottom: 6px;
-    left: calc(50% - 4px);
-    width: 8px;
-    height: 8px;
+    bottom: 0.375rem;
+    left: calc(50% - 0.25rem);
+    width: 0.5rem;
+    height: 0.5rem;
   }
 
   .air__stations-notified-icon {
     position: absolute;
-    top: 5px;
-    left: calc(50% - 5px);
-    width: 10px;
-    height: 10px;
+    top: 0.3125rem;
+    left: calc(50% - 0.3125rem);
+    width: 0.625rem;
+    height: 0.625rem;
   }
 }
 
@@ -59,8 +59,8 @@
 }
 
 .air__icon-location {
-  width: 12px;
-  height: 12px;
+  width: 0.75rem;
+  height: 0.75rem;
   border-radius: 50%;
   z-index: 9999 !important;
   position: relative;
@@ -77,8 +77,8 @@
   line-height: 0;
   font-size: 0;
   content: " ";
-  width: 12px;
-  height: 12px;
+  width: 0.75rem;
+  height: 0.75rem;
   border-radius: 50%;
   background: var(--air__color-secondary);
   box-shadow: 0 0 0 2px white;
@@ -148,9 +148,9 @@ a.leaflet-control-zoom-out.leaflet-disabled {
 }
 
 .leaflet-touch .leaflet-bar a {
-  width: 32px;
-  height: 32px;
-  line-height: 32px;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
   background-color: var(--air__color-text);
   color: transparent;
 }
@@ -169,8 +169,8 @@ a.leaflet-control-zoom-out.leaflet-disabled {
 
 .leaflet-control-attribution {
   position: fixed;
-  top: 24px;
-  right: -16px;
+  top: 1.5rem;
+  right: -1rem;
   background: rgba(255, 255, 255, 0.5);
   transform: rotate(-90deg);
   transform-origin: bottom right;
@@ -178,7 +178,7 @@ a.leaflet-control-zoom-out.leaflet-disabled {
 }
 
 .leaflet-control-attribution a {
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 .hexbin-container {

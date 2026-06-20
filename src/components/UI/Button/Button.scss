@@ -9,9 +9,9 @@
     min-height: var(--air__button-height);
     min-width: var(--air__button-width);
     border: 1px solid var(--air__color-primary);
-    border-radius: 6px;
+    border-radius: 0.375rem;
     background: var(--air__color-text);
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: bold;
     color: var(--air__color-primary--weak);
     box-shadow: 0;
@@ -20,8 +20,8 @@
     transition: color var(--air__animation-duration) var(--air__animation-timing);
 
     .air__button-icon {
-        width: 24px;
-        height: 24px;
+        width: 1.5rem;
+        height: 1.5rem;
         fill: var(--air__color-primary--weak);
         transition: fill var(--air__animation-duration) var(--air__animation-timing);
     }
@@ -29,7 +29,7 @@
     &.air__button--label {
         flex-direction: column;
         text-decoration: none;
-        font-size: 11px;
+        font-size: 0.6875rem;
     }
 }
 
@@ -97,8 +97,8 @@
 .air__button--fab,
 .air__button--fab:focus,
 .air__button--fab:active {
-    min-width: 44px;
-    min-height: 44px;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
     border-radius: 50%;
     padding: 0;
     display: flex;
@@ -110,13 +110,13 @@
 .air__button--small,
 .air__button--small:focus,
 .air__button--small:active {
-    min-height: 28px;
-    min-width: 28px;
+    min-height: 1.75rem;
+    min-width: 1.75rem;
     padding: 0;
 
     .air__button-icon {
-        width: 16px;
-        height: 16px;;
+        width: 1rem;
+        height: 1rem;
     }
 }
 

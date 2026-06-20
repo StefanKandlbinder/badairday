@@ -18,12 +18,12 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.2);
   left: 0;
-  top: 0px;
+  top: 0;
 }
 
 .air__spinner__bounce {
-  width: 18px;
-  height: 18px;
+  width: 1.125rem;
+  height: 1.125rem;
   background-color: var(--air__color-text);
   opacity: 0.7;
   border-radius: 100%;

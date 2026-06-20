@@ -6,14 +6,14 @@
 .air__dashboard-header {
     font-weight: 500;
     color: var(--air__color-primary--active);
-    min-height: 48px;
+    min-height: 3rem;
     display: flex;
     align-items: center;
     padding: 0 var(--air__margin--2);   
     background: rgba(255, 255 ,255 ,1);   
     position: sticky;
     top: 0;
-    font-size: 16px;
+    font-size: 1rem;
     z-index: 10;
 }
 
@@ -33,7 +33,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    height: calc(100% - 48px);
+    height: calc(100% - 3rem);
     will-change: scroll-position;
     overflow-y: auto;
     scroll-behavior: smooth;
@@ -44,13 +44,13 @@
 .air__dashboard-footer {
     font-weight: 500;
     color: var(--air__color-primary--active);
-    min-height: 40px;
+    min-height: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     background: rgba(255, 255 ,255 ,1);   
     position: sticky;
     bottom: 0;
-    font-size: 16px;
+    font-size: 1rem;
     z-index: 10;
 }
