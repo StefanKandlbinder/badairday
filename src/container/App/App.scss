@@ -1,8 +1,15 @@
 .air {
-  height: inherit;
-  width: inherit;
-  /* padding-top: 32px; */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
+}
+
+.air__map-container {
+  flex: 1;
+  min-height: 0;
+  position: relative;
 }
 
 .air__logo {
@@ -85,10 +92,16 @@
 }
 
 @media(min-width: 761px) {
+  .air__legend--horizontal,
+  .air__tabbar,
+  .air__spinner,
+  .air__notifications {
+    transition: width 0.15s cubic-bezier(0.53, 0.04, 0.83, 0.88);
+  }
+
   .air--favboard {
     .air__legend--horizontal,
     .air__tabbar,
-    .air__stations,
     .air__spinner,
     .air__notifications {
       width: calc(100% - 320px);
@@ -123,9 +136,6 @@ a[aria-label="Options Sheet"] {
     width: min(414px, calc(100vw - 2 * var(--air__margin--3)));
   }
 
-  &.air__animation-bottom-sheet-exit-active {
-    transform: translateY(calc(100% + var(--air__margin--4)));
-  }
 }
 
 .air__options-sheet-scroll-container {

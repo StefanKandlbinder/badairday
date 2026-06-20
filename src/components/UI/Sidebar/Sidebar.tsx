@@ -3,6 +3,8 @@ import './Sidebar.scss';
 
 type Props = React.HTMLAttributes<HTMLDivElement>;
 
-export default function Sidebar({ children, ...rest }: Props) {
-  return <div className="air__sidebar" {...rest}>{children}</div>;
-}
+const Sidebar = React.forwardRef<HTMLDivElement, Props>(({ children, ...rest }, ref) => {
+  return <div ref={ref} className="air__sidebar" {...rest}>{children}</div>;
+});
+Sidebar.displayName = 'Sidebar';
+export default Sidebar;

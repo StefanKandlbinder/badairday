@@ -48,24 +48,6 @@
     /* clip-path: circle(180px); */
 }
 
-.a-station-enter {
-    /* opacity: 0; */
-    transform: scale(0);
-}
-
-.a-station-enter-active {
-    /* opacity: 1; */
-    transform: scale(1);
-    transition: transform var(--air__animation-duration-crunchy) var(--air__animation-timing), opacity var(--air__animation-duration-crunchy) var(--air__animation-timing)
-}
-
-.a-station-exit {
-    opacity: 1;
-}
-
-.a-station-exit-active {
-    transition: opacity var(--air__animation-duration) var(--air__animation-timing);
-}
 
 .air__station-header {
     /* background: rgba(0, 0, 0, 0.75); */

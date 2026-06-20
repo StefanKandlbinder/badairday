@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { CSSTransition } from 'react-transition-group';
+import { motion } from 'motion/react';
 
 import { favorizeStation, unfavorizeStation, notifyStation, unnotifyStation } from '../../redux/actions/stations';
 import { setSubscription } from '../../redux/actions/subscription';
@@ -40,14 +40,6 @@ export default function Station({ media, favboard }: Props) {
   const update = useSelector((s: RootState) => s.update);
   const reversegeo = useSelector((s: RootState) => s.options.reversegeo);
   const subscription = useSelector((s: RootState) => s.subscription);
-
-  const [isMounted, setIsMounted] = useState(false);
-  const nodeRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setIsMounted(true);
-    return () => setIsMounted(false);
-  }, []);
 
   // update.timestamp is read to trigger re-renders when data refreshes
   void update.timestamp;
@@ -149,12 +141,13 @@ export default function Station({ media, favboard }: Props) {
   };
 
   return (
-    <CSSTransition in={isMounted} classNames="a-station" timeout={300} nodeRef={nodeRef}>
-      <div
-        ref={nodeRef}
-        className={`air__station air__station--${station.properties.provider} air__station--favboard-${favboard}`}
-        style={{ transformOrigin: `${x} ${y}` }}
-      >
+    <motion.div
+      className={`air__station air__station--${station.properties.provider} air__station--favboard-${favboard}`}
+      style={{ transformOrigin: `${x} ${y}` }}
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{ duration: 0.2, ease: [0.17, 0.67, 0.39, 0.96] }}
+    >
         <svg xmlns="http://www.w3.org/2000/svg" style={moodStyle} className="air__station-background" viewBox="0 0 600 600" filter="drop-shadow(rgba(0,0,0,.5) 10px 10px 20px)">
           <path d={hexagon}>
             <animate id="animation-to-circle" begin="animation-to-hexagon.end" restart="always" fill="freeze" attributeName="d" dur="200ms" to={circle} />
@@ -191,7 +184,6 @@ export default function Station({ media, favboard }: Props) {
             </Button>
           )}
         </div>
-      </div>
-    </CSSTransition>
+    </motion.div>
   );
 }

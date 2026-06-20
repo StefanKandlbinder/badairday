@@ -1,7 +1,7 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation, Route, Routes, NavLink } from 'react-router-dom';
-import { CSSTransition } from 'react-transition-group';
+import { AnimatePresence, motion } from 'motion/react';
 
 import { STATIONS } from '../../redux/actions/stations';
 import { fetchStations, favorizeStation, unfavorizeStation, notifyStation, unnotifyStation } from '../../redux/actions/stations';
@@ -38,6 +38,9 @@ import Updatebar from '../../components/UI/Updatebar/Updatebar';
 import './App.scss';
 
 const REACT_APP_VERSION = import.meta.env.VITE_APP_VERSION ?? '0.0.0';
+
+const MotionBottomSheet = motion(BottomSheet);
+const MotionSidebar = motion(Sidebar);
 
 const luftdatenURL = 'https://api.luftdaten.info/static/v2/data.dust.min.json';
 const luftdatenProvider = 'luftdaten';
@@ -147,16 +150,7 @@ export default function App() {
     else dispatch(setFavboard({ state: true, feature: STATIONS }));
   }, [favboard, dispatch, onUpdateStations]);
 
-  const stationsRef = useRef<HTMLDivElement>(null);
-  const favboardRef = useRef<HTMLDivElement>(null);
-  const sidebarRef = useRef<HTMLDivElement>(null);
-  const bottomSheetRef = useRef<HTMLDivElement>(null);
-  const spinnerUpdatingRef = useRef<HTMLDivElement>(null);
-  const spinnerLoadingRef = useRef<HTMLDivElement>(null);
-  const loadingGeoRef = useRef<HTMLDivElement>(null);
-  const notificationsRef = useRef<HTMLDivElement>(null);
-
-  const shareSection = navigator.share ? (
+  const shareSection = typeof navigator.share === 'function' ? (
     <>
       <ListHeader className="air__list-header air__list-header--sticky air__color-primary--active air__border-radius-top--2">Social</ListHeader>
       <List className="air__list air__border-radius-top--2">
@@ -177,8 +171,11 @@ export default function App() {
     <div className={favboard ? 'air air--favboard' : 'air'}>
       <SVGSprite />
 
-      <CSSTransition nodeRef={stationsRef} in={!!stations.features} timeout={300} classNames="air__animation-fade" mountOnEnter unmountOnExit>
-        <div ref={stationsRef}>
+      <motion.div
+        className="air__map-container"
+        animate={{ width: favboard && media === 'medium' ? 'calc(100% - 320px)' : '100%' }}
+        transition={{ duration: 0.15, ease: [0.53, 0.04, 0.83, 0.88] }}
+      >
           {stations.features && (
             <Stations
               stations={stations}
@@ -208,29 +205,36 @@ export default function App() {
             />
             <Route path="*" element={null} />
           </Routes>
-        </div>
-      </CSSTransition>
+        </motion.div>
 
-      <CSSTransition nodeRef={favboardRef} in={favboard} classNames="air__animation-site-transition" timeout={300} mountOnEnter unmountOnExit>
-        <div ref={favboardRef} className="air__site air__site--favboard">
-          <Dashboard
-            stations={stations}
-            header="Favoriten"
-            options={options}
-            media={media}
-            subscription={subscription}
-            onSetFavboard={(p) => dispatch(setFavboard(p))}
-            onSetClusterboard={(p) => dispatch(setClusterboard(p))}
-            onFavorizeStation={(id) => dispatch(favorizeStation(id))}
-            onUnfavorizeStation={(id) => dispatch(unfavorizeStation(id))}
-            onNotifyStation={(id) => dispatch(notifyStation(id))}
-            onUnnotifyStation={(id) => dispatch(unnotifyStation(id))}
-            onSetCenter={(s: Station) => dispatch(setCenter(s))}
-            getActive={getActiveStations}
-            type="active"
-          />
-        </div>
-      </CSSTransition>
+      <AnimatePresence>
+        {favboard && (
+          <motion.div
+            className="air__site air__site--favboard"
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ duration: 0.15, ease: [0.53, 0.04, 0.83, 0.88] }}
+          >
+            <Dashboard
+              stations={stations}
+              header="Favoriten"
+              options={options}
+              media={media}
+              subscription={subscription}
+              onSetFavboard={(p) => dispatch(setFavboard(p))}
+              onSetClusterboard={(p) => dispatch(setClusterboard(p))}
+              onFavorizeStation={(id) => dispatch(favorizeStation(id))}
+              onUnfavorizeStation={(id) => dispatch(unfavorizeStation(id))}
+              onNotifyStation={(id) => dispatch(notifyStation(id))}
+              onUnnotifyStation={(id) => dispatch(unnotifyStation(id))}
+              onSetCenter={(s: Station) => dispatch(setCenter(s))}
+              getActive={getActiveStations}
+              type="active"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Legend className="air__legend--horizontal" />
 
@@ -284,22 +288,33 @@ export default function App() {
         </Button>
       </Tabbar>
 
-      <CSSTransition nodeRef={sidebarRef} in={location.pathname === '/sidebar'} classNames="air__animation-sidebar" timeout={300} mountOnEnter unmountOnExit>
-        <div ref={sidebarRef}>
-          <Sidebar>
+      <AnimatePresence>
+        {location.pathname === '/sidebar' && (
+          <MotionSidebar
+            initial={{ x: '-100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '-100%' }}
+            transition={{ duration: 0.15, ease: [0.53, 0.04, 0.83, 0.88] }}
+          >
             <Spacer />
             <Button className="air__button air__button--naked air__button--ghost" clicked={onUpdateStations}>
               <svg className="air__color-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path d="M11 8v5l4.25 2.52.77-1.28-3.52-2.09V8zm10 2V3l-2.64 2.64C16.74 4.01 14.49 3 12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9h-2c0 3.86-3.14 7-7 7s-7-3.14-7-7 3.14-7 7-7c1.93 0 3.68.79 4.95 2.05L14 10h7z" />
               </svg>
             </Button>
-          </Sidebar>
-        </div>
-      </CSSTransition>
+          </MotionSidebar>
+        )}
+      </AnimatePresence>
 
-      <CSSTransition nodeRef={bottomSheetRef} in={location.pathname === '/bottomsheet'} classNames="air__animation-bottom-sheet" timeout={300} mountOnEnter unmountOnExit>
-        <div ref={bottomSheetRef}>
-          <BottomSheet className="air__options-sheet">
+      <AnimatePresence>
+        {location.pathname === '/bottomsheet' && (
+          <MotionBottomSheet
+            className="air__options-sheet"
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            transition={{ duration: 0.15, ease: [0.53, 0.04, 0.83, 0.88] }}
+          >
             <div className="air__options-sheet-scroll-container">
               <Flex className="air__flex air__flex--align-items-center air__padding-left--3 air__padding-right--3 air__padding-top--4 air__padding-bottom air__border-radius-top--2">
                 <svg className="air__color-text air__margin-right" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -356,27 +371,43 @@ export default function App() {
                 </ListItem>
               </List>
             </div>
-          </BottomSheet>
-        </div>
-      </CSSTransition>
+          </MotionBottomSheet>
+        )}
+      </AnimatePresence>
 
       {options.autoupdating && <Updatebar interval={60 * 3 * 1000} update={onUpdateStations} />}
 
-      <CSSTransition nodeRef={spinnerUpdatingRef} in={updating} classNames="air__animation-fade" timeout={300} mountOnEnter unmountOnExit>
-        <div ref={spinnerUpdatingRef}><Spinner /></div>
-      </CSSTransition>
+      <AnimatePresence>
+        {updating && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3, ease: 'easeOut' }}>
+            <Spinner />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      <CSSTransition nodeRef={spinnerLoadingRef} in={loading} classNames="air__animation-fade-crunchy" timeout={300} mountOnEnter unmountOnExit>
-        <div ref={spinnerLoadingRef}><Spinner /></div>
-      </CSSTransition>
+      <AnimatePresence>
+        {loading && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15, ease: 'easeOut' }}>
+            <Spinner />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      <CSSTransition nodeRef={loadingGeoRef} in={geolocation} classNames="air__animation-fade-crunchy" timeout={150} mountOnEnter unmountOnExit>
-        <div ref={loadingGeoRef}><Loading>Geolocation</Loading></div>
-      </CSSTransition>
+      <AnimatePresence>
+        {geolocation && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15, ease: 'easeOut' }}>
+            <Loading>Geolocation</Loading>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      <CSSTransition nodeRef={notificationsRef} in={notifications.length > 0} classNames="air__animation-notification" timeout={300} mountOnEnter unmountOnExit>
-        <div ref={notificationsRef}><Notifications notifications={notifications} /></div>
-      </CSSTransition>
+      <AnimatePresence>
+        {notifications.length > 0 && (
+          <motion.div initial={{ y: '-100%' }} animate={{ y: 0 }} exit={{ y: '-100%' }} transition={{ duration: 0.15, ease: [0.53, 0.04, 0.83, 0.88] }}>
+            <Notifications notifications={notifications} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

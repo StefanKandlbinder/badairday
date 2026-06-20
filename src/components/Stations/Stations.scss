@@ -1,7 +1,6 @@
-@import url("https://unpkg.com/leaflet@1.2.0/dist/leaflet.css");
 
 .air__stations {
-  height: 100vh;
+  height: 100%;
   z-index: 50;
   /* filter: grayscale(0.6); */
 }
@@ -128,8 +127,6 @@
 }
 
 .leaflet-left {
-  position: fixed;
-  bottom: 54px;
   left: 2px;
 }
 

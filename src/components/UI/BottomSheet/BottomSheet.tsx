@@ -5,10 +5,12 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
-export default function BottomSheet({ className, children, ...rest }: Props) {
+const BottomSheet = React.forwardRef<HTMLDivElement, Props>(({ className, children, ...rest }, ref) => {
   return (
-    <div className={`air__bottom-sheet ${className ?? ''}`} {...rest}>
+    <div ref={ref} className={`air__bottom-sheet ${className ?? ''}`} {...rest}>
       {children}
     </div>
   );
-}
+});
+BottomSheet.displayName = 'BottomSheet';
+export default BottomSheet;

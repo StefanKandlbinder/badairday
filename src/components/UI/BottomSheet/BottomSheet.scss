@@ -12,30 +12,6 @@
     flex-direction: column;
 }
 
-.air__animation-bottom-sheet-enter {
-    transform: translateY(100%);
-}
-  
-.air__animation-bottom-sheet-enter-active {
-    transform: translateY(0);
-    transition: transform var(--air__animation-duration-crunchy) var(--air__animation-timing-sidebar);
-}
-  
-.air__animation-bottom-sheet-exit {
-    transform: translateY(0);
-}
-  
-.air__animation-bottom-sheet-exit-active {
-    transform: translateY(100%);
-    transition: transform var(--air__animation-duration-crunchy) var(--air__animation-timing-sidebar);
-}
-
-.air__bottom-sheet--medium {
-    &.air__animation-bottom-sheet-exit-active {
-        transform: translateY(calc(100% + 8px));
-    }
-}
-
 .air__bottom-sheet-button {
     .air__bottom-sheet-button-icon {
         fill: var(--air__color-primary--active);

@@ -1,15 +1,29 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { CSSTransition } from 'react-transition-group';
-import L from 'leaflet';
-import { MapContainer, TileLayer, Marker, useMap, useMapEvents } from 'react-leaflet';
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "motion/react";
+import L from "leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  useMap,
+  useMapEvents,
+} from "react-leaflet";
 
-import { STATIONS } from '../../redux/actions/stations';
-import { Station, StationsCollection, OptionsState, UpdateState, SubscriptionState, CenterState, LatLng } from '../../types';
-import './Stations.scss';
+import { STATIONS } from "../../redux/actions/stations";
+import {
+  Station,
+  StationsCollection,
+  OptionsState,
+  UpdateState,
+  SubscriptionState,
+  CenterState,
+  LatLng,
+} from "../../types";
+import "./Stations.scss";
 
-import HexbinLayer from './HexBinLayer';
-import Dashboard from '../Dashboard/Dashboard';
+import HexbinLayer from "./HexBinLayer";
+import Dashboard from "../Dashboard/Dashboard";
 
 interface MapControllerProps {
   position: LatLng | null;
@@ -19,14 +33,26 @@ interface MapControllerProps {
   onZoomEnd: () => void;
 }
 
-function MapController({ position, center, onMoveStart, onMoveEnd, onZoomEnd }: MapControllerProps) {
+function MapController({
+  position,
+  center,
+  onMoveStart,
+  onMoveEnd,
+  onZoomEnd,
+}: MapControllerProps) {
   const map = useMap();
   const prevPositionRef = useRef<LatLng | null>(null);
   const prevCenterRef = useRef<CenterState | null>(null);
 
-  useMapEvents({ movestart: onMoveStart, moveend: onMoveEnd, zoomend: onZoomEnd });
+  useMapEvents({
+    movestart: onMoveStart,
+    moveend: onMoveEnd,
+    zoomend: onZoomEnd,
+  });
 
-  useEffect(() => { map.zoomControl.setPosition('bottomleft'); }, [map]);
+  useEffect(() => {
+    map.zoomControl.setPosition("bottomleft");
+  }, [map]);
 
   useEffect(() => {
     if (position && position !== prevPositionRef.current) {
@@ -39,8 +65,11 @@ function MapController({ position, center, onMoveStart, onMoveEnd, onZoomEnd }: 
     if (center?.station && center !== prevCenterRef.current) {
       prevCenterRef.current = center;
       map.setView(
-        { lat: center.station.geometry.coordinates[0], lng: center.station.geometry.coordinates[1] },
-        13
+        {
+          lat: center.station.geometry.coordinates[0],
+          lng: center.station.geometry.coordinates[1],
+        },
+        13,
       );
     }
   }, [center, map]);
@@ -69,7 +98,12 @@ interface Props {
   onUnnotifyStation: (id: string) => void;
   onSetFavboard: (p: { state: boolean; feature: string }) => void;
   onSetClusterboard: (p: { state: boolean; feature: string }) => void;
-  onFetchStations: (url: string, provider: string, method: string, loc: LatLng) => void;
+  onFetchStations: (
+    url: string,
+    provider: string,
+    method: string,
+    loc: LatLng,
+  ) => void;
   onSetCenter: (station: Station) => void;
   children?: React.ReactNode;
 }
@@ -83,7 +117,6 @@ export default function Stations(props: Props) {
   const [moveEnd, setMoveEnd] = useState(false);
   const [hasCenterPending, setHasCenterPending] = useState(false);
 
-  const clusterBoardRef = useRef<HTMLDivElement>(null);
   const centerTimeoutRef = useRef<number>(0);
   const prevPositionRef = useRef<LatLng | null>(null);
   const prevCenterRef = useRef<CenterState | null>(null);
@@ -91,7 +124,7 @@ export default function Stations(props: Props) {
   useEffect(() => {
     if (props.position && props.position !== prevPositionRef.current) {
       prevPositionRef.current = props.position;
-      navigate('/');
+      navigate("/");
     }
   }, [props.position, navigate]);
 
@@ -108,49 +141,86 @@ export default function Stations(props: Props) {
     if (hasCenterPending && (moveEnd || zoomEnd) && props.center?.station) {
       centerTimeoutRef.current = window.setTimeout(() => {
         const { provider, id } = props.center.station!.properties;
-        navigate(`/station/${provider}/${id}/center`, { state: { x: '50%', y: '50%' } });
+        navigate(`/station/${provider}/${id}/center`, {
+          state: { x: "50%", y: "50%" },
+        });
         setHasCenterPending(false);
       }, 200);
     }
     return () => window.clearTimeout(centerTimeoutRef.current);
   }, [hasCenterPending, moveEnd, zoomEnd]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const { stations, media, favboard, clusterboard, onSetFavboard, onSetClusterboard } = props;
+  const {
+    stations,
+    media,
+    favboard,
+    clusterboard,
+    onSetFavboard,
+    onSetClusterboard,
+  } = props;
 
-  const handleHexClick = useCallback((d: HexbinDatum[], _i: number, coords: [number, number]) => {
-    if (d.length <= 1) {
-      navigate(`/station/${d[0].o.properties.provider}/${d[0].o.properties.id}`, {
-        state: { x: coords[0], y: coords[1] },
-      });
-    } else {
-      const ids = d
-        .map((item) => stations.features.find((s) => s.properties.id === item.o.properties.id))
-        .filter(Boolean)
-        .map((s) => s!.properties.id);
-      setClusterIds(ids);
-      onSetClusterboard({ state: true, feature: STATIONS });
-      navigate('/clusterboard');
-    }
-  }, [navigate, stations, onSetClusterboard]);
+  const handleHexClick = useCallback(
+    (d: HexbinDatum[], _i: number, coords: [number, number]) => {
+      if (d.length <= 1) {
+        navigate(
+          `/station/${d[0].o.properties.provider}/${d[0].o.properties.id}`,
+          {
+            state: { x: coords[0], y: coords[1] },
+          },
+        );
+      } else {
+        const ids = d
+          .map((item) =>
+            stations.features.find(
+              (s) => s.properties.id === item.o.properties.id,
+            ),
+          )
+          .filter(Boolean)
+          .map((s) => s!.properties.id);
+        setClusterIds(ids);
+        onSetClusterboard({ state: true, feature: STATIONS });
+        navigate("/clusterboard");
+      }
+    },
+    [navigate, stations, onSetClusterboard],
+  );
   const handleMoveStart = useCallback(() => {
-    if (location.pathname === '/bottomsheet' || location.pathname.includes('/station')) navigate('/');
-    if (media === 'small' && favboard) {
-      navigate('/');
+    if (
+      location.pathname === "/bottomsheet" ||
+      location.pathname.includes("/station")
+    )
+      navigate("/");
+    if (media === "small" && favboard) {
+      navigate("/");
       onSetFavboard({ state: false, feature: STATIONS });
     }
     if (clusterboard) {
-      navigate('/');
+      navigate("/");
       onSetClusterboard({ state: false, feature: STATIONS });
     }
-  }, [location.pathname, navigate, media, favboard, clusterboard, onSetFavboard, onSetClusterboard]);
+  }, [
+    location.pathname,
+    navigate,
+    media,
+    favboard,
+    clusterboard,
+    onSetFavboard,
+    onSetClusterboard,
+  ]);
 
   const handleMoveEnd = useCallback(() => setMoveEnd(true), []);
   const handleZoomEnd = useCallback(() => setZoomEnd(true), []);
 
-  const locationMarker = props.position ? (() => {
-    const icon = L.divIcon({ html: '', className: 'air__icon-location', iconSize: [12, 12] });
-    return <Marker icon={icon} position={props.position} />;
-  })() : null;
+  const locationMarker = props.position
+    ? (() => {
+        const icon = L.divIcon({
+          html: "",
+          className: "air__icon-location",
+          iconSize: [12, 12],
+        });
+        return <Marker icon={icon} position={props.position} />;
+      })()
+    : null;
 
   const hexbins = props.stations.features.length ? (
     <HexbinLayer
@@ -167,7 +237,15 @@ export default function Stations(props: Props) {
 
   return (
     <>
-      <MapContainer className="air__stations" center={initialCenter} zoom={13} maxZoom={15} minZoom={2} preferCanvas doubleClickZoom={false}>
+      <MapContainer
+        className="air__stations"
+        center={initialCenter}
+        zoom={13}
+        maxZoom={15}
+        minZoom={2}
+        preferCanvas
+        doubleClickZoom={false}
+      >
         <MapController
           position={props.position}
           center={props.center}
@@ -184,26 +262,34 @@ export default function Stations(props: Props) {
         {props.children}
       </MapContainer>
 
-      <CSSTransition in={props.clusterboard} classNames="air__animation-site-transition" timeout={300} mountOnEnter unmountOnExit nodeRef={clusterBoardRef}>
-        <div ref={clusterBoardRef} className="air__site air__site--favboard air__site--cluster">
-          <Dashboard
-            stations={props.stations}
-            header="Cluster"
-            options={props.options}
-            media={props.media}
-            subscription={props.subscription}
-            onSetFavboard={props.onSetFavboard}
-            onSetClusterboard={props.onSetClusterboard}
-            onFavorizeStation={props.onFavorizeStation}
-            onUnfavorizeStation={props.onUnfavorizeStation}
-            onNotifyStation={props.onNotifyStation}
-            onUnnotifyStation={props.onUnnotifyStation}
-            onSetCenter={props.onSetCenter}
-            getActive={clusterIds}
-            type="cluster"
-          />
-        </div>
-      </CSSTransition>
+      <AnimatePresence>
+        {props.clusterboard && (
+          <motion.div
+            className="air__site air__site--favboard air__site--cluster"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.15, ease: [0.53, 0.04, 0.83, 0.88] }}
+          >
+            <Dashboard
+              stations={props.stations}
+              header="Cluster"
+              options={props.options}
+              media={props.media}
+              subscription={props.subscription}
+              onSetFavboard={props.onSetFavboard}
+              onSetClusterboard={props.onSetClusterboard}
+              onFavorizeStation={props.onFavorizeStation}
+              onUnfavorizeStation={props.onUnfavorizeStation}
+              onNotifyStation={props.onNotifyStation}
+              onUnnotifyStation={props.onUnnotifyStation}
+              onSetCenter={props.onSetCenter}
+              getActive={clusterIds}
+              type="cluster"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

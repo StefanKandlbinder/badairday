@@ -10,21 +10,3 @@
     display: flex;
     flex-direction: column;
 }
-
-.air__animation-sidebar-enter {
-    transform: translateX(-273px);
-}
-  
-.air__animation-sidebar-enter-active {
-    transform: translateX(0);
-    transition: transform var(--air__animation-duration-crunchy) var(--air__animation-timing-sidebar);
-}
-  
-.air__animation-sidebar-exit {
-    transform: translateX(0);
-}
-  
-.air__animation-sidebar-exit-active {
-    transform: translateX(-273px);
-    transition: transform var(--air__animation-duration-crunchy) var(--air__animation-timing-sidebar);
-}
