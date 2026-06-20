@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation, Route, Routes, NavLink } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
@@ -78,10 +78,15 @@ export default function App() {
   const options = useSelector((s: RootState) => s.options);
 
   const isMedium = useMediaQuery('(min-width: 768px) and (orientation: landscape)');
+  const [mapNarrow, setMapNarrow] = useState(false);
 
   useEffect(() => {
     dispatch(setMedia({ state: isMedium ? 'medium' : 'small', feature: STATIONS }));
   }, [isMedium, dispatch]);
+
+  useEffect(() => {
+    if (!favboard) setMapNarrow(false);
+  }, [favboard]);
 
   useEffect(() => {
     const handler = () => { if (!document.hidden) onUpdateStations(); };
@@ -173,7 +178,7 @@ export default function App() {
 
       <motion.div
         className="air__map-container"
-        animate={{ width: favboard && media === 'medium' ? 'calc(100% - 320px)' : '100%' }}
+        animate={{ width: mapNarrow && media === 'medium' ? 'calc(100% - 320px)' : '100%' }}
         transition={{ duration: 0.15, ease: [0.53, 0.04, 0.83, 0.88] }}
       >
           {stations.features && (
@@ -215,6 +220,7 @@ export default function App() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ duration: 0.15, ease: [0.53, 0.04, 0.83, 0.88] }}
+            onAnimationStart={() => { if (favboard) setMapNarrow(true); }}
           >
             <Dashboard
               stations={stations}
