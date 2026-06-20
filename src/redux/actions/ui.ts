@@ -1,0 +1,19 @@
+export const SET_LOADER = 'SET_LOADER';
+export const SET_UPDATER = 'SET_UPDATER';
+export const SET_GEOLOCATION = 'SET_GEOLOCATION';
+export const SET_SIDEBAR = 'SET_SIDEBAR';
+export const SET_BOTTOMSHEET = 'SET_BOTTOMSHEET';
+export const SET_FAVBOARD = 'SET_FAVBOARD';
+export const SET_CLUSTERBOARD = 'SET_CLUSTERBOARD';
+export const SET_MEDIA = 'SET_MEDIA';
+
+interface UIActionInput { state: unknown; feature: string }
+
+export const setLoader = ({ state, feature }: UIActionInput) => ({ type: `${feature} ${SET_LOADER}`, payload: state, meta: { feature } });
+export const setUpdater = ({ state, feature }: UIActionInput) => ({ type: `${feature} ${SET_UPDATER}`, payload: state, meta: { feature } });
+export const setGeoLocation = ({ state, feature }: UIActionInput) => ({ type: `${feature} ${SET_GEOLOCATION}`, payload: state, meta: { feature } });
+export const setSidebar = ({ state, feature }: UIActionInput) => ({ type: `${feature} ${SET_SIDEBAR}`, payload: state, meta: { feature } });
+export const setBottomSheet = ({ state, feature }: UIActionInput) => ({ type: `${feature} ${SET_BOTTOMSHEET}`, payload: state, meta: { feature } });
+export const setFavboard = ({ state, feature }: UIActionInput) => ({ type: `${feature} ${SET_FAVBOARD}`, payload: state, meta: { feature } });
+export const setClusterboard = ({ state, feature }: UIActionInput) => ({ type: `${feature} ${SET_CLUSTERBOARD}`, payload: state, meta: { feature } });
+export const setMedia = ({ state, feature }: UIActionInput) => ({ type: `${feature} ${SET_MEDIA}`, payload: state, meta: { feature } });

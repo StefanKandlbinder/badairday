@@ -100,24 +100,31 @@
   }
 }
 
-.air__options-sheet {  
+// Anchor the "Mehr" trigger so the bottomsheet can position relative to it
+a[aria-label="Options Sheet"] {
+  anchor-name: --air__options-trigger;
+}
+
+.air__options-sheet {
   max-height: 268px;
   max-width: 414px;
+  overflow: hidden;
+
+  // Fallback for browsers without CSS Anchor Positioning
   bottom: 64px;
   right: var(--air__margin--3);
   left: var(--air__margin--3);
-  overflow: hidden;
+
+  @supports (anchor-name: --test) {
+    position-anchor: --air__options-trigger;
+    bottom: calc(anchor(top) + var(--air__margin--3));
+    right: calc(anchor(right) + var(--air__margin--3));
+    left: auto;
+    width: min(414px, calc(100vw - 2 * var(--air__margin--3)));
+  }
 
   &.air__animation-bottom-sheet-exit-active {
     transform: translateY(calc(100% + var(--air__margin--4)));
-  }
-}
-
-@media (min-width: 415px) {
-  .air__options-sheet {  
-    left: auto;
-    width: 414px;
-    right: calc(320px + var(--air__margin--4));
   }
 }
 

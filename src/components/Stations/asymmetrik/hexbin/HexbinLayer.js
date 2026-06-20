@@ -18,7 +18,7 @@ var d3_hexbin = d3Hexbin.hexbin;
  * L is defined by the Leaflet library, see git://github.com/Leaflet/Leaflet.git for documentation
  * We extend L.SVG to take advantage of built-in zoom animations.
  */
-L.HexbinLayer = L.SVG.extend({
+const HexbinLayer = L.SVG.extend({
 	includes: L.Evented || L.Mixin.Events,
 
 	/**
@@ -397,9 +397,9 @@ L.HexbinLayer = L.SVG.extend({
 
 		// Grid enter-update
 		gridEnter.merge(join.select('path.hexbin-grid'))
-			.on('click', function (d, i) {
-				let coords = [d3.event.pageX, d3.event.pageY]
-				that._dispatch.call('click', this, d, i, coords);
+			.on('click', function (event, d) {
+				let coords = [event.pageX, event.pageY];
+				that._dispatch.call('click', this, d, 0, coords);
 			});
 
 
@@ -635,6 +635,8 @@ L.HexbinLayer = L.SVG.extend({
 
 });
 
-L.hexbinLayer = function (options) {
-	return new L.HexbinLayer(options);
-};
+export function hexbinLayer(options) {
+	return new HexbinLayer(options);
+}
+
+export { HexbinLayer };
