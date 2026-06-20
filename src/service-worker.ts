@@ -8,6 +8,14 @@ import { ExpirationPlugin } from 'workbox-expiration';
 
 declare const self: ServiceWorkerGlobalScope;
 
+// Immediately take control when a new SW version is installed.
+// This pairs with clientsClaim() so the new SW serves all open tabs right away.
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
+
 clientsClaim();
 
 // Precache all static assets injected by vite-plugin-pwa
