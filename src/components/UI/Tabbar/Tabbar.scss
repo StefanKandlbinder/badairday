@@ -1,26 +1,27 @@
 .air__tabbar {
-    display: flex;
-    justify-content: flex-end;
-    position: relative;
-    z-index: 130;
-    width: 100%;
-    background: var(--air__color-surface);
-    border-top: 1px solid var(--air__color-surface-border);
+  display: flex;
+  min-height: 4rem;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 130;
+  width: 100%;
+  background: var(--air__color-surface);
+  border-top: 1px solid var(--air__color-surface-border);
 }
 
 [data-theme="dark"] .air__tabbar {
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 [data-theme="dark"] .air__tabbar-link {
-    background: transparent;
+  background: transparent;
 }
 
 [data-theme="dark"] .air__tabbar .air__bg-color-text {
-    background-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .air__tabbar-link {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
