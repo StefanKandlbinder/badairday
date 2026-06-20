@@ -19,3 +19,9 @@
   display: inline-block;
   z-index: 100;
 }
+
+[data-theme="dark"] .air__loading {
+  background-color: var(--air__color-surface);
+  border-color: var(--air__color-surface-border);
+  color: var(--air__color-fg);
+}
