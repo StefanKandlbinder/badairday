@@ -21,6 +21,11 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
         }
     }
 
+    const latestEntries = (element) => {
+        const maxZeitpunkt = Math.max(...element.map(e => e.zeitpunkt));
+        return element.filter(e => e.zeitpunkt === maxZeitpunkt);
+    }
+
     const updateStations = (stations, provider) => {
         if (stations) {
             let filteredStations = null;
@@ -32,9 +37,10 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
             filteredStations = groupBy(filteredStations, 'station');
 
             Object.values(filteredStations).forEach(element => {
+                const latest = latestEntries(element);
                 stationsObject.stationen.forEach(station => {
-                    if (station.code === element[0].station) {
-                        let components = normalizeComponents(element);
+                    if (station.code === latest[0].station) {
+                        let components = normalizeComponents(latest);
 
                         let stationModel = new Station(
                             "Feature",
@@ -45,9 +51,9 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                             },
                             {
                                 provider: provider,
-                                id: element[0].station,
+                                id: latest[0].station,
                                 name: station.kurzname,
-                                date: getStringDate(element[0].zeitpunkt),
+                                date: getStringDate(latest[0].zeitpunkt),
                                 components: components,
                                 mood: (components.PM10 ? components.PM10.value : 0),
                             })
@@ -150,9 +156,10 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
         filteredStations = groupBy(filteredStations, 'station');
 
         Object.values(filteredStations).forEach(element => {
+            const latest = latestEntries(element);
             stationsObject.stationen.forEach(station => {
-                if (station.code === element[0].station) {
-                    let components = normalizeComponents(element);
+                if (station.code === latest[0].station) {
+                    let components = normalizeComponents(latest);
 
                     let stationModel = new Station(
                         "Feature",
@@ -163,9 +170,9 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }) => (next
                         },
                         {
                             provider: provider,
-                            id: element[0].station,
+                            id: latest[0].station,
                             name: station.kurzname,
-                            date: getStringDate(element[0].zeitpunkt),
+                            date: getStringDate(latest[0].zeitpunkt),
                             components: components,
                             mood: (components.PM10 ? components.PM10.value : 0),
                             moodRGBA: "rgba(70, 70, 70, 0.75)",

@@ -9,7 +9,7 @@ export default function getUpperAustriaURL(url) {
     stringDateFrom = getDateFromTo.stringDateFrom();
     stringDateTo = getDateFromTo.stringDateTo();
 
-    url = url + "datvon=" + stringDateFrom + "&datbis=" + stringDateTo;
+    url = url + "datvon=" + stringDateFrom.replace(' ', '%20') + "&datbis=" + stringDateTo.replace(' ', '%20');
 
     return url;
 }
