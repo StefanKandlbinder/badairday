@@ -105,10 +105,14 @@ export default function App() {
       dispatch(setFavboard(true));
     } else if (media === 'medium' && !getActiveStations(stations).length) {
       dispatch(setFavboard(false));
-    } else if (media === 'small' && !location.pathname.includes('favboard')) {
-      dispatch(setFavboard(false));
     }
   }, [media, stations]); // eslint-disable-line
+
+  useEffect(() => {
+    if (media === 'small') {
+      dispatch(setFavboard(location.pathname.includes('favboard')));
+    }
+  }, [location.pathname, media, dispatch]);
 
   useEffect(() => {
     if (!location.pathname.includes('clusterboard')) {
