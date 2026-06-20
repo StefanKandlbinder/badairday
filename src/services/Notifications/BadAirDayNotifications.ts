@@ -24,7 +24,7 @@ export default class BadAirDayNotifications {
     return navigator.serviceWorker.ready.then((registration) =>
       registration.pushManager.subscribe({
         userVisibleOnly: true,
-        applicationServerKey: this.convertedVapidKey,
+        applicationServerKey: this.convertedVapidKey.buffer as ArrayBuffer,
       })
     );
   }

@@ -1,110 +1,57 @@
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { Station, StationsCollection } from '../../types';
-import {
-  SET_STATIONS, ADD_STATION, UPDATE_STATION, UPDATE_STATION_NAME,
-  FAVORIZE_STATION, UNFAVORIZE_STATION, NOTIFY_STATION, UNNOTIFY_STATION,
-} from '../actions/stations';
 
-const initState: StationsCollection = {
-  type: 'FeatureCollection',
-  features: [],
-};
+const initialState: StationsCollection = { type: 'FeatureCollection', features: [] };
 
-interface Action {
-  type: string;
-  payload: StationsCollection | Station | string;
-}
+const stationsSlice = createSlice({
+  name: 'stations',
+  initialState,
+  reducers: {
+    setStations(_, action: PayloadAction<StationsCollection>) {
+      return action.payload;
+    },
+    addStation(state, action: PayloadAction<Station>) {
+      state.features.push(action.payload);
+    },
+    updateStation(state, action: PayloadAction<Station>) {
+      const u = action.payload;
+      const s = state.features.find((f) => f.properties.id === u.properties.id);
+      if (!s) return;
+      s.properties.date = u.properties.date;
+      s.properties.mood = u.properties.mood;
+      s.properties.moodRGBA = u.properties.moodRGBA;
+      if (u.properties.name) s.properties.name = u.properties.name;
+      Object.assign(s.properties.components, u.properties.components);
+    },
+    updateStationName(state, action: PayloadAction<Station>) {
+      const u = action.payload;
+      const s = state.features.find((f) => f.properties.id === u.properties.id);
+      if (!s) return;
+      s.properties.reverseGeoName = u.properties.reverseGeoName ?? s.properties.name;
+    },
+    favorizeStation(state, action: PayloadAction<string>) {
+      const s = state.features.find((f) => f.properties.id === action.payload);
+      if (s) s.properties.favorized = true;
+    },
+    unfavorizeStation(state, action: PayloadAction<string>) {
+      const s = state.features.find((f) => f.properties.id === action.payload);
+      if (s) s.properties.favorized = false;
+    },
+    notifyStation(state, action: PayloadAction<string>) {
+      const s = state.features.find((f) => f.properties.id === action.payload);
+      if (s) s.properties.notify = true;
+    },
+    unnotifyStation(state, action: PayloadAction<string>) {
+      const s = state.features.find((f) => f.properties.id === action.payload);
+      if (s) s.properties.notify = false;
+    },
+  },
+});
 
-export const stationsReducer = (stations: StationsCollection = initState, action: Action): StationsCollection => {
-  switch (action.type) {
-    case SET_STATIONS:
-      return action.payload as StationsCollection;
+export const {
+  setStations, addStation, updateStation, updateStationName,
+  favorizeStation, unfavorizeStation, notifyStation, unnotifyStation,
+} = stationsSlice.actions;
 
-    case ADD_STATION:
-      return { ...stations, features: [...stations.features, action.payload as Station] };
-
-    case UPDATE_STATION: {
-      const updated = action.payload as Station;
-      return {
-        ...stations,
-        features: stations.features.map((s) =>
-          s.properties.id === updated.properties.id
-            ? {
-                ...s,
-                properties: {
-                  ...s.properties,
-                  date: updated.properties.date,
-                  mood: updated.properties.mood,
-                  moodRGBA: updated.properties.moodRGBA,
-                  name: updated.properties.name !== null ? updated.properties.name : s.properties.name,
-                  components: { ...s.properties.components, ...updated.properties.components },
-                },
-              }
-            : s
-        ),
-      };
-    }
-
-    case UPDATE_STATION_NAME: {
-      const updated = action.payload as Station;
-      return {
-        ...stations,
-        features: stations.features.map((s) =>
-          s.properties.id === updated.properties.id
-            ? {
-                ...s,
-                properties: {
-                  ...s.properties,
-                  reverseGeoName: updated.properties.reverseGeoName !== null
-                    ? updated.properties.reverseGeoName
-                    : s.properties.name,
-                },
-              }
-            : s
-        ),
-      };
-    }
-
-    case FAVORIZE_STATION:
-      return {
-        ...stations,
-        features: stations.features.map((s) =>
-          s.properties.id === action.payload
-            ? { ...s, properties: { ...s.properties, favorized: true } }
-            : s
-        ),
-      };
-
-    case UNFAVORIZE_STATION:
-      return {
-        ...stations,
-        features: stations.features.map((s) =>
-          s.properties.id === action.payload
-            ? { ...s, properties: { ...s.properties, favorized: false } }
-            : s
-        ),
-      };
-
-    case NOTIFY_STATION:
-      return {
-        ...stations,
-        features: stations.features.map((s) =>
-          s.properties.id === action.payload
-            ? { ...s, properties: { ...s.properties, notify: true } }
-            : s
-        ),
-      };
-
-    case UNNOTIFY_STATION:
-      return {
-        ...stations,
-        features: stations.features.map((s) =>
-          s.properties.id === action.payload
-            ? { ...s, properties: { ...s.properties, notify: false } }
-            : s
-        ),
-      };
-
-    default:
-      return stations;
-  }
-};
+export const { reducer: stationsReducer } = stationsSlice;

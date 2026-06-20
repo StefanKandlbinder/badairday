@@ -1,8 +1,9 @@
 import ReverseGeocode from 'esri-leaflet-geocoder';
 
 import { dataNormalized } from '../actions/data';
-import { addStation, updateStation, updateStationName, ADD_STATIONS, UPDATE_STATIONS, STATIONS } from '../actions/stations';
-import { setTokenReverseGeo } from '../actions/tokens';
+import { ADD_STATIONS, UPDATE_STATIONS, STATIONS } from '../actions/stations';
+import { addStation, updateStation, updateStationName } from '../reducers/stationsReducer';
+import { setTokenReversegeo } from '../reducers/tokensReducer';
 import getStringDateLuftdaten from '../../utilities/getStringDateLuftdaten';
 import getUnixDateFromLuftdaten from '../../utilities/getUnixDateFromLuftdaten';
 import getArcgisToken from '../../services/getArcgisToken';
@@ -27,11 +28,14 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }: MiddlewareA
 
   const dedupeByStation = (stations: LuftdatenStation[]): LuftdatenStation[] => {
     const seen = new Set<number>();
-    return [...stations].reverse().filter(s => {
-      if (seen.has(s.sensor.id)) return false;
-      seen.add(s.sensor.id);
-      return true;
-    });
+    const result: LuftdatenStation[] = [];
+    for (let i = stations.length - 1; i >= 0; i--) {
+      if (!seen.has(stations[i].sensor.id)) {
+        seen.add(stations[i].sensor.id);
+        result.push(stations[i]);
+      }
+    }
+    return result;
   };
 
   const getStations = (stations: LuftdatenStation[], provider: string, update: boolean): void => {
@@ -60,9 +64,9 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }: MiddlewareA
       const persisted = getState().stations.features;
       if (persisted.length) {
         if (persisted.find(s => s.properties.id === stationModel.properties.id) !== undefined || stationModel.properties.mood > 1900) return;
-        dispatch(addStation({ station: stationModel, provider }));
+        dispatch(addStation(stationModel));
       } else if (!update) {
-        dispatch(addStation({ station: stationModel, provider }));
+        dispatch(addStation(stationModel));
       }
     });
   };
@@ -76,7 +80,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }: MiddlewareA
     if ((tokens.reversegeo.timestamp ?? 0) + 7200 > Date.now() || tokens.reversegeo.timestamp === undefined) {
       getArcgisToken()
         .then((res) => {
-          dispatch(setTokenReverseGeo({ state: { token: res.access_token, timestamp: Date.now() }, feature: STATIONS }));
+          dispatch(setTokenReversegeo({ token: res.access_token, timestamp: Date.now() }));
         })
         .catch(() => {});
     }
@@ -108,6 +112,7 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }: MiddlewareA
           tokens.reversegeo.timestamp &&
           filtered[0].properties.reverseGeoName.includes('Luftdatensensor')
         ) {
+          // @ts-expect-error esri-leaflet-geocoder typings require unnecessary args
           ReverseGeocode.geocodeService().reverse()
             .token(tokens.reversegeo.token ?? '')
             .latlng([station.location.latitude, station.location.longitude])
@@ -129,12 +134,12 @@ export const normalizeLuftdatenMiddleware = ({ dispatch, getState }: MiddlewareA
                   notify: false,
                 }
               );
-              dispatch(updateStationName({ station: named, provider }));
+              dispatch(updateStationName(named));
             });
         }
 
         if (getUnixDateFromLuftdaten(filtered[0].properties.date) < getUnixDateFromLuftdaten(stationModel.properties.date)) {
-          dispatch(updateStation({ station: stationModel, provider }));
+          dispatch(updateStation(stationModel));
         }
       } else {
         getStations(stations, provider, true);

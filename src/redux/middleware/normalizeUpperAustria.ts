@@ -1,5 +1,6 @@
 import { dataNormalized } from '../actions/data';
-import { addStation, updateStation, ADD_STATIONS, UPDATE_STATIONS } from '../actions/stations';
+import { ADD_STATIONS, UPDATE_STATIONS } from '../actions/stations';
+import { addStation, updateStation } from '../reducers/stationsReducer';
 
 import * as stationsObject from './stations.json';
 import getStringDate from '../../utilities/getStringDate';
@@ -87,9 +88,9 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }: Middlewa
         const persisted = getState().stations.features;
         if (persisted.length) {
           if (persisted.find(s => s.properties.id === stationModel.properties.id) !== undefined) return;
-          dispatch(addStation({ station: stationModel, provider }));
+          dispatch(addStation(stationModel));
         } else if (!update) {
-          dispatch(addStation({ station: stationModel, provider }));
+          dispatch(addStation(stationModel));
         }
       });
     });
@@ -121,7 +122,7 @@ export const normalizeUpperAustriaMiddleware = ({ dispatch, getState }: Middlewa
 
         const filteredStation = getState().stations.features.filter((s) => s.properties.id === stationModel.properties.id);
         if (filteredStation.length) {
-          dispatch(updateStation({ station: stationModel, provider }));
+          dispatch(updateStation(stationModel));
         } else {
           getStations(stations, provider, true);
         }

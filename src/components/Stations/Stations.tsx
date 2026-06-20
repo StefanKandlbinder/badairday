@@ -10,7 +10,6 @@ import {
   useMapEvents,
 } from "react-leaflet";
 
-import { STATIONS } from "../../redux/actions/stations";
 import {
   Station,
   StationsCollection,
@@ -96,8 +95,8 @@ interface Props {
   onUnfavorizeStation: (id: string) => void;
   onNotifyStation: (id: string) => void;
   onUnnotifyStation: (id: string) => void;
-  onSetFavboard: (p: { state: boolean; feature: string }) => void;
-  onSetClusterboard: (p: { state: boolean; feature: string }) => void;
+  onSetFavboard: (state: boolean) => void;
+  onSetClusterboard: (state: boolean) => void;
   onFetchStations: (
     url: string,
     provider: string,
@@ -178,7 +177,7 @@ export default function Stations(props: Props) {
           .filter(Boolean)
           .map((s) => s!.properties.id);
         setClusterIds(ids);
-        onSetClusterboard({ state: true, feature: STATIONS });
+        onSetClusterboard(true);
         navigate("/clusterboard");
       }
     },
@@ -192,11 +191,11 @@ export default function Stations(props: Props) {
       navigate("/");
     if (media === "small" && favboard) {
       navigate("/");
-      onSetFavboard({ state: false, feature: STATIONS });
+      onSetFavboard(false);
     }
     if (clusterboard) {
       navigate("/");
-      onSetClusterboard({ state: false, feature: STATIONS });
+      onSetClusterboard(false);
     }
   }, [
     location.pathname,

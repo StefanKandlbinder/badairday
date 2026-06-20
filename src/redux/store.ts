@@ -1,4 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, Tuple } from '@reduxjs/toolkit';
+import type { Middleware } from '@reduxjs/toolkit';
+import type { RootState } from '../types';
 
 import { stationsReducer } from './reducers/stationsReducer';
 import { loadState, saveState } from './localStorage';
@@ -14,7 +16,6 @@ import { tokensReducer } from './reducers/tokensReducer';
 import { notificationsReducer } from './reducers/notificationsReducer';
 import { normalizeLuftdatenMiddleware } from './middleware/normalizeLuftdaten';
 import { normalizeUpperAustriaMiddleware } from './middleware/normalizeUpperAustria';
-import { notificationMiddleware } from './middleware/notifications';
 import { actionSplitterMiddleware } from './middleware/actionSplitter';
 
 const buildStore = () => {
@@ -32,7 +33,6 @@ const buildStore = () => {
     apiMiddleware,
     normalizeLuftdatenMiddleware,
     normalizeUpperAustriaMiddleware,
-    notificationMiddleware,
   ];
 
   const store = configureStore({
@@ -47,9 +47,8 @@ const buildStore = () => {
       options: optionsReducer,
       tokens: tokensReducer,
     },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    middleware: () => middleware as any,
-    preloadedState: persistedState,
+    middleware: () => new Tuple(...(middleware as Middleware[])),
+    preloadedState: persistedState as RootState | undefined,
     devTools: { maxAge: 150 },
   });
 

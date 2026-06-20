@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { STATIONS } from '../../redux/actions/stations';
 import DashboardItem from './DashbaordItem';
 import Button from '../UI/Button/Button';
 import { Station, StationsCollection, SubscriptionState, OptionsState } from '../../types';
@@ -13,8 +12,8 @@ interface Props {
   options: OptionsState;
   media: string;
   subscription: SubscriptionState;
-  onSetFavboard: (p: { state: boolean; feature: string }) => void;
-  onSetClusterboard: (p: { state: boolean; feature: string }) => void;
+  onSetFavboard: (state: boolean) => void;
+  onSetClusterboard: (state: boolean) => void;
   onFavorizeStation: (id: string) => void;
   onUnfavorizeStation: (id: string) => void;
   onNotifyStation: (id: string) => void;
@@ -35,8 +34,8 @@ export default function Dashboard(props: Props) {
   }, [type, stations, navigate]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onHandleBack = () => {
-    if (media === 'small') props.onSetFavboard({ state: false, feature: STATIONS });
-    props.onSetClusterboard({ state: false, feature: STATIONS });
+    if (media === 'small') props.onSetFavboard(false);
+    props.onSetClusterboard(false);
     navigate('/');
   };
 
@@ -63,7 +62,7 @@ export default function Dashboard(props: Props) {
       ? { backgroundColor: 'rgba(70, 70, 70, 0.75)' }
       : { backgroundColor: last.properties.moodRGBA };
   } else {
-    props.onSetFavboard({ state: false, feature: STATIONS });
+    props.onSetFavboard(false);
   }
 
   const showBackButton = media === 'small' || type === 'cluster';

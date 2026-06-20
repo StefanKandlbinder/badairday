@@ -1,15 +1,16 @@
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { UpdateState } from '../../types';
-import { SET_UPDATE } from '../actions/update';
 
-const initState: UpdateState = { timestamp: Date.now() };
+const updateSlice = createSlice({
+  name: 'update',
+  initialState: { timestamp: Date.now() } as UpdateState,
+  reducers: {
+    setUpdate(state, action: PayloadAction<number>) {
+      state.timestamp = action.payload;
+    },
+  },
+});
 
-interface Action { type: string; payload: unknown }
-
-export const updateReducer = (update: UpdateState = initState, action: Action): UpdateState => {
-  switch (action.type) {
-    case SET_UPDATE:
-      return { ...update, timestamp: action.payload as number };
-    default:
-      return update;
-  }
-};
+export const { setUpdate } = updateSlice.actions;
+export const { reducer: updateReducer } = updateSlice;

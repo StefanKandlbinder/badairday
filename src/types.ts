@@ -96,15 +96,9 @@ export interface TokensState {
 }
 
 export interface Notification {
-  type: string;
-  payload: {
-    id: number;
-    message: string;
-  };
-  meta: {
-    type: string;
-    feature: string;
-  };
+  id: number;
+  message: string;
+  type: 'error' | 'info' | 'success';
 }
 
 // ─── Root state ───────────────────────────────────────────────────────────────

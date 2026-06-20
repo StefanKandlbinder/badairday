@@ -1,20 +1,20 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { useNavigate, useLocation, Route, Routes, NavLink } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
 
-import { STATIONS } from '../../redux/actions/stations';
-import { fetchStations, favorizeStation, unfavorizeStation, notifyStation, unnotifyStation } from '../../redux/actions/stations';
-import { setLocation } from '../../redux/actions/location';
-import { setCenter } from '../../redux/actions/center';
-import { setGeoLocation, setFavboard, setClusterboard, setMedia } from '../../redux/actions/ui';
-import { setNotification } from '../../redux/actions/notifications';
-import { setOptionAutoupdater, setOptionReverseGeo, setOptionRunaways, setOptionSort } from '../../redux/actions/options';
+import { fetchStations } from '../../redux/actions/stations';
+import { favorizeStation, unfavorizeStation, notifyStation, unnotifyStation } from '../../redux/reducers/stationsReducer';
+import { setLocation } from '../../redux/reducers/locationReducer';
+import { setCenter } from '../../redux/reducers/centerReducer';
+import { setGeolocation, setFavboard, setClusterboard, setMedia } from '../../redux/reducers/uiReducer';
+import { addNotification } from '../../redux/reducers/notificationsReducer';
+import { setOptionReversegeo, setOptionAutoupdating, setOptionRunaways, setOptionSort } from '../../redux/reducers/optionsReducer';
 import { clearState } from '../../redux/localStorage';
 import getGeoLocation from '../../services/getGeoLocation';
 import getWebShare from '../../services/getWebShare';
 import { getActiveStations } from '../../redux/filters/getActiveStations';
-import { RootState, Station } from '../../types';
+import { Station } from '../../types';
 
 import SVGSprite from '../../components/UI/SVGSprite/SVGSprite';
 import Stations from '../../components/Stations/Stations';
@@ -59,29 +59,29 @@ function useMediaQuery(query: string): boolean {
 }
 
 export default function App() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const stations = useSelector((s: RootState) => s.stations);
-  const loading = useSelector((s: RootState) => s.ui.loading);
-  const updating = useSelector((s: RootState) => s.ui.updating);
-  const geolocation = useSelector((s: RootState) => s.ui.geolocation);
-  const favboard = useSelector((s: RootState) => s.ui.favboard);
-  const clusterboard = useSelector((s: RootState) => s.ui.clusterboard);
-  const media = useSelector((s: RootState) => s.ui.media);
-  const position = useSelector((s: RootState) => s.location);
-  const center = useSelector((s: RootState) => s.center);
-  const notifications = useSelector((s: RootState) => s.notifications);
-  const subscription = useSelector((s: RootState) => s.subscription);
-  const update = useSelector((s: RootState) => s.update);
-  const options = useSelector((s: RootState) => s.options);
+  const stations     = useAppSelector((s) => s.stations);
+  const loading      = useAppSelector((s) => s.ui.loading);
+  const updating     = useAppSelector((s) => s.ui.updating);
+  const geolocation  = useAppSelector((s) => s.ui.geolocation);
+  const favboard     = useAppSelector((s) => s.ui.favboard);
+  const clusterboard = useAppSelector((s) => s.ui.clusterboard);
+  const media        = useAppSelector((s) => s.ui.media);
+  const position     = useAppSelector((s) => s.location);
+  const center       = useAppSelector((s) => s.center);
+  const notifications = useAppSelector((s) => s.notifications);
+  const subscription = useAppSelector((s) => s.subscription);
+  const update       = useAppSelector((s) => s.update);
+  const options      = useAppSelector((s) => s.options);
 
   const isMedium = useMediaQuery('(min-width: 768px) and (orientation: landscape)');
   const [mapNarrow, setMapNarrow] = useState(false);
 
   useEffect(() => {
-    dispatch(setMedia({ state: isMedium ? 'medium' : 'small', feature: STATIONS }));
+    dispatch(setMedia(isMedium ? 'medium' : 'small'));
   }, [isMedium, dispatch]);
 
   useEffect(() => {
@@ -97,22 +97,22 @@ export default function App() {
   useEffect(() => {
     if (!stations.features.length) onFetchStations();
     else onUpdateStations();
-    if (clusterboard) dispatch(setClusterboard({ state: false, feature: STATIONS }));
+    if (clusterboard) dispatch(setClusterboard(false));
   }, []); // eslint-disable-line
 
   useEffect(() => {
     if (media === 'medium' && getActiveStations(stations).length) {
-      dispatch(setFavboard({ state: true, feature: STATIONS }));
+      dispatch(setFavboard(true));
     } else if (media === 'medium' && !getActiveStations(stations).length) {
-      dispatch(setFavboard({ state: false, feature: STATIONS }));
+      dispatch(setFavboard(false));
     } else if (media === 'small' && !location.pathname.includes('favboard')) {
-      dispatch(setFavboard({ state: false, feature: STATIONS }));
+      dispatch(setFavboard(false));
     }
   }, [media, stations]); // eslint-disable-line
 
   useEffect(() => {
     if (!location.pathname.includes('clusterboard')) {
-      dispatch(setClusterboard({ state: false, feature: STATIONS }));
+      dispatch(setClusterboard(false));
     }
   }, [location.pathname, dispatch]);
 
@@ -127,22 +127,22 @@ export default function App() {
   }, [dispatch, position]);
 
   const handleLocation = useCallback(() => {
-    dispatch(setGeoLocation({ state: true, feature: STATIONS }));
+    dispatch(setGeolocation(true));
     getGeoLocation()
       .then((success) => {
-        dispatch(setGeoLocation({ state: false, feature: STATIONS }));
+        dispatch(setGeolocation(false));
         dispatch(setLocation(success));
         onUpdateStations();
       })
       .catch((e: Error) => {
-        dispatch(setGeoLocation({ state: false, feature: STATIONS }));
-        dispatch(setNotification({ message: e.message, feature: STATIONS, type: 'info' }));
+        dispatch(setGeolocation(false));
+        dispatch(addNotification(e.message, 'info'));
       });
   }, [dispatch, onUpdateStations]);
 
   const handleShare = useCallback(() => {
     getWebShare('BadAirday', 'Verfolgen Sie die aktuelle Luftqualität in ihrer Nähe', 'https://badairday.netlify.com/')
-      .catch((error: Error) => dispatch(setNotification({ message: error.message, feature: STATIONS, type: 'info' })));
+      .catch((error: Error) => dispatch(addNotification(error.message, 'info')));
   }, [dispatch]);
 
   const clearStorage = useCallback(() => {
@@ -152,7 +152,7 @@ export default function App() {
 
   const onSetFav = useCallback(() => {
     if (favboard) onUpdateStations();
-    else dispatch(setFavboard({ state: true, feature: STATIONS }));
+    else dispatch(setFavboard(true));
   }, [favboard, dispatch, onUpdateStations]);
 
   const shareSection = typeof navigator.share === 'function' ? (
@@ -197,8 +197,8 @@ export default function App() {
               onUnfavorizeStation={(id) => dispatch(unfavorizeStation(id))}
               onNotifyStation={(id) => dispatch(notifyStation(id))}
               onUnnotifyStation={(id) => dispatch(unnotifyStation(id))}
-              onSetFavboard={(p) => dispatch(setFavboard(p))}
-              onSetClusterboard={(p) => dispatch(setClusterboard(p))}
+              onSetFavboard={(v) => dispatch(setFavboard(v))}
+              onSetClusterboard={(v) => dispatch(setClusterboard(v))}
               onFetchStations={(url, provider, method, loc) => dispatch(fetchStations(url, provider, method, loc))}
               onSetCenter={(s: Station) => dispatch(setCenter(s))}
             />
@@ -228,8 +228,8 @@ export default function App() {
               options={options}
               media={media}
               subscription={subscription}
-              onSetFavboard={(p) => dispatch(setFavboard(p))}
-              onSetClusterboard={(p) => dispatch(setClusterboard(p))}
+              onSetFavboard={(v) => dispatch(setFavboard(v))}
+              onSetClusterboard={(v) => dispatch(setClusterboard(v))}
               onFavorizeStation={(id) => dispatch(favorizeStation(id))}
               onUnfavorizeStation={(id) => dispatch(unfavorizeStation(id))}
               onNotifyStation={(id) => dispatch(notifyStation(id))}
@@ -252,7 +252,7 @@ export default function App() {
           aria-label="Map"
           end
           to="/"
-          onClick={() => location.pathname === '/' ? onUpdateStations() : dispatch(setFavboard({ state: false, feature: STATIONS }))}
+          onClick={() => location.pathname === '/' ? onUpdateStations() : dispatch(setFavboard(false))}
         >
           <svg className="air__button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <use xlinkHref="#airSVGMap" />
@@ -335,25 +335,25 @@ export default function App() {
               <List className="air__list air__border-radius-top--2">
                 <ListItem className="air__list-item air__flex--justify-content-space-between">
                   <Toggle className={`air__toggle ${options.reversegeo ? 'air__toggle--active' : 'air__toggle--inactive'}`}
-                    clicked={() => dispatch(setOptionReverseGeo({ state: !options.reversegeo, feature: STATIONS }))}>
+                    clicked={() => dispatch(setOptionReversegeo(!options.reversegeo))}>
                     ReverseGeo<small>Umwandlung der GPS-Daten in reale Adresse.</small>
                   </Toggle>
                 </ListItem>
                 <ListItem className="air__list-item air__flex--justify-content-space-between">
                   <Toggle className={`air__toggle ${options.runaways ? 'air__toggle--active' : 'air__toggle--inactive'}`}
-                    clicked={() => dispatch(setOptionRunaways({ state: !options.runaways, feature: STATIONS }))}>
+                    clicked={() => dispatch(setOptionRunaways(!options.runaways))}>
                     Runaways<small>Ausreißer (PM10 &gt;= 1999) werden ausgeblendet.</small>
                   </Toggle>
                 </ListItem>
                 <ListItem className="air__list-item air__flex--justify-content-space-between">
                   <Toggle className={`air__toggle ${options.sort ? 'air__toggle--active' : 'air__toggle--inactive'}`}
-                    clicked={() => dispatch(setOptionSort({ state: !options.sort, feature: STATIONS }))}>
+                    clicked={() => dispatch(setOptionSort(!options.sort))}>
                     Sort<small>Sortierung anhand des PM10 Wertes.</small>
                   </Toggle>
                 </ListItem>
                 <ListItem className="air__list-item air__flex--justify-content-space-between">
                   <Toggle className={`air__toggle ${options.autoupdating ? 'air__toggle--active' : 'air__toggle--inactive'}`}
-                    clicked={() => dispatch(setOptionAutoupdater({ state: !options.autoupdating, feature: STATIONS }))}>
+                    clicked={() => dispatch(setOptionAutoupdating(!options.autoupdating))}>
                     Autoupdater<small>Alle 5 Minuten erfolgt automatisch ein Update.</small>
                   </Toggle>
                 </ListItem>

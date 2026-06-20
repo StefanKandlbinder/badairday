@@ -1,15 +1,16 @@
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { TokensState, TokenState } from '../../types';
-import { SET_TOKEN_REVERSEGEO } from '../actions/tokens';
 
-const initState: TokensState = { reversegeo: {} };
+const tokensSlice = createSlice({
+  name: 'tokens',
+  initialState: { reversegeo: {} } as TokensState,
+  reducers: {
+    setTokenReversegeo(state, action: PayloadAction<TokenState>) {
+      state.reversegeo = action.payload;
+    },
+  },
+});
 
-interface Action { type: string; payload: unknown }
-
-export const tokensReducer = (tokens: TokensState = initState, action: Action): TokensState => {
-  switch (true) {
-    case action.type.includes(SET_TOKEN_REVERSEGEO):
-      return { ...tokens, reversegeo: action.payload as TokenState };
-    default:
-      return tokens;
-  }
-};
+export const { setTokenReversegeo } = tokensSlice.actions;
+export const { reducer: tokensReducer } = tokensSlice;

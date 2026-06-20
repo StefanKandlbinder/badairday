@@ -1,13 +1,12 @@
 import React from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { motion } from 'motion/react';
 
-import { favorizeStation, unfavorizeStation, notifyStation, unnotifyStation } from '../../redux/actions/stations';
-import { setSubscription } from '../../redux/actions/subscription';
+import { favorizeStation, unfavorizeStation, notifyStation, unnotifyStation } from '../../redux/reducers/stationsReducer';
+import { setSubscription } from '../../redux/reducers/subscriptionReducer';
 import { getStationByID } from '../../redux/filters/getStationByID';
 import { updateNotifiedStations } from '../../utilities/updateNotifiedStations';
-import { RootState } from '../../types';
 
 import Aircomp from '../Aircomp/Aircomp';
 import Button from '../UI/Button/Button';
@@ -33,13 +32,13 @@ interface LocationState {
 export default function Station({ media, favboard }: Props) {
   const { id = '' } = useParams<{ id: string }>();
   const location = useLocation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const stations = useSelector((s: RootState) => s.stations);
-  const station = useSelector((s: RootState) => getStationByID(s.stations, id));
-  const update = useSelector((s: RootState) => s.update);
-  const reversegeo = useSelector((s: RootState) => s.options.reversegeo);
-  const subscription = useSelector((s: RootState) => s.subscription);
+  const stations     = useAppSelector((s) => s.stations);
+  const station      = useAppSelector((s) => getStationByID(s.stations, id));
+  const update       = useAppSelector((s) => s.update);
+  const reversegeo   = useAppSelector((s) => s.options.reversegeo);
+  const subscription = useAppSelector((s) => s.subscription);
 
   // update.timestamp is read to trigger re-renders when data refreshes
   void update.timestamp;
@@ -67,7 +66,7 @@ export default function Station({ media, favboard }: Props) {
 
   const onRemoveNotify = () => {
     dispatch(unnotifyStation(station.properties.id));
-    updateNotifiedStations(subscription.id.toString());
+    updateNotifiedStations(subscription.id.toString(), stations);
   };
 
   const getAirComps = () => {
